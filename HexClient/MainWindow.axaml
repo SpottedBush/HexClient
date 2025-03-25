@@ -1,0 +1,12 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="HexClient.MainWindow"
+        Title="API Test"
+        Width="400" Height="200">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Content="Fetch API" Click="OnFetchApiClick"/>
+        <TextBlock x:Name="ApiResponseText" Text="Click the button to get data"
+                   TextWrapping="Wrap" Margin="10"/>
+    </StackPanel>
+</Window>
