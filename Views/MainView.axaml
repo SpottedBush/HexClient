@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HexClient.Views.MainView"
+             x:DataType="vm:MainViewModel"
+             xmlns:vm="clr-namespace:HexClient.ViewModels">
+    
+    <Grid>
+        <Button Content="Play" Width="150" Height="50"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding NavigateToGameModeSelection}"/>
+    </Grid>
+</UserControl>

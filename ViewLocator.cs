@@ -1,31 +1,20 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using HexClient.ViewModels;
+using System;
 
-namespace HexClient;
-
-public class ViewLocator : IDataTemplate
+namespace HexClient
 {
-
-    public Control? Build(object? param)
+    public class ViewLocator : IDataTemplate
     {
-        if (param is null)
-            return null;
-        
-        var name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-        var type = Type.GetType(name);
-
-        if (type != null)
+        public Control Build(object? data)
         {
-            return (Control)Activator.CreateInstance(type)!;
-        }
-        
-        return new TextBlock { Text = "Not Found: " + name };
-    }
+            var name = data?.GetType().FullName!.Replace("ViewModel", "View");
+            var type = Type.GetType(name!);
 
-    public bool Match(object? data)
-    {
-        return data is ViewModelBase;
+            return type != null ? (Control)Activator.CreateInstance(type)! : new TextBlock { Text = "View Not Found" };
+        }
+
+        public bool Match(object? data) => data is ViewModelBase;
     }
 }
