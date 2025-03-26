@@ -8,23 +8,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c0d187e-7ee8-4885-9df6-700cbb410b99" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MainWindow.axaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MainWindow.axaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/GameMode.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/LobbyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/SummonerInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ViewModels/GameModeSelectionViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/GameModeSelectionView.axaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/GameModeSelectionView.axaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/MainView.axaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/MainView.axaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App.axaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HexClient.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/HexClient.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewLocator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewLocator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ViewModels/ViewModelBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/ViewModelBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/MainWindow.axaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HexClient/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HexClient/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.axaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.axaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/avalonia-logo.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HexClient.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HexClient.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HexClient.sln.DotSettings.user" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.axaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.axaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/GameMode.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/LobbyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/SummonerInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewLocator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/GameModeSelectionViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MainViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/ViewModelBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/GameModeSelectionView.axaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/GameModeSelectionView.axaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainView.axaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MainView.axaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.manifest" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,24 +42,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "SpottedBush"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SpottedBush&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:SpottedBush/HexClient.git",
-    "accountId": "221895b5-eb63-4224-b655-4c35c3649afb"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:SpottedBush/HexClient.git&quot;,
+    &quot;accountId&quot;: &quot;221895b5-eb63-4224-b655-4c35c3649afb&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b43e34dbb1d64f6783fcd004ccbd0af16600/34/39735cae/ILeagueClient.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b43e34dbb1d64f6783fcd004ccbd0af16600/dc/2775c9d6/LeagueClient.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -67,27 +73,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.HexClient.executor": "Run",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/vincent/Desktop/gitwork",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.HexClient.executor&quot;: &quot;Run&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ui__dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/vincent/Desktop/gitwork/HexClient&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="HexClient" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -117,7 +123,8 @@
       <option name="presentableId" value="Default" />
       <updated>1742904711448</updated>
       <workItem from="1742904712567" duration="3501000" />
-      <workItem from="1742980097506" duration="6458000" />
+      <workItem from="1742980097506" duration="10478000" />
+      <workItem from="1742991292291" duration="134000" />
     </task>
     <servers />
   </component>
