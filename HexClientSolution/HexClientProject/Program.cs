@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace HexClient;
+namespace HexClientProject;
 
 sealed class Program
 {

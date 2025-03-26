@@ -1,7 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using ReactiveUI;
 
-namespace HexClientProject.ViewModels;
-
-public class ViewModelBase : ObservableObject
+namespace HexClientProject.ViewModels
 {
+    public class ViewModelBase : ReactiveObject
+    {
+    }
 }

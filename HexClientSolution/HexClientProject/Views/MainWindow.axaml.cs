@@ -1,11 +1,18 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 
-namespace HexClientProject.Views;
-
-public partial class MainWindow : Window
+namespace HexClientProject
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void OnPlayButtonClick(object? sender, RoutedEventArgs e)
+        {
+            Content = new Views.GameModeSelectionView();
+        }
     }
 }

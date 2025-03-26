@@ -1,8 +1,9 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using HexClientProject.Views;
 
-namespace HexClient
+namespace HexClientProject
 {
     public partial class App : Application
     {

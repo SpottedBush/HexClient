@@ -1,12 +1,12 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="HexClient.App"
-             xmlns:local="using:HexClient"
+             x:Class="HexClientProject.App"
+             xmlns:hexClientProject1="clr-namespace:HexClientProject"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <hexClientProject1:ViewLocator/>
     </Application.DataTemplates>
   
     <Application.Styles>

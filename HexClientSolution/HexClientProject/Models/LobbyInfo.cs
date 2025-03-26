@@ -1,6 +1,6 @@
 using System;
 
-namespace HexClient.Models;
+namespace HexClientProject.Models;
 
 public static class LobbyInfo
 {

@@ -1,4 +1,4 @@
-namespace HexClient.Models;
+namespace HexClienT.Models;
 
 public static class SummonerInfo
 {

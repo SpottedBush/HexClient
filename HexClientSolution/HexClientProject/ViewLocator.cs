@@ -3,7 +3,7 @@ using Avalonia.Controls.Templates;
 using HexClientProject.ViewModels;
 using System;
 
-namespace HexClient
+namespace HexClientProject
 {
     public class ViewLocator : IDataTemplate
     {

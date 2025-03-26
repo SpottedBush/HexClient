@@ -24,5 +24,12 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
+        <PackageReference Include="ReactiveUI" Version="20.2.45" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="tmpHexClient\Views\GameModeSelectionView.axaml" />
+      <UpToDateCheckInput Remove="tmpHexClient\Views\MainView.axaml" />
+      <UpToDateCheckInput Remove="tmpHexClient\Views\MainWindow.axaml" />
     </ItemGroup>
 </Project>

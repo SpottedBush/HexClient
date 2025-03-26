@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HexClient.Models;
+namespace HexClientProject.Models;
 
 public class GameMode
 {
