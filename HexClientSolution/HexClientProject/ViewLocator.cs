@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using HexClient.ViewModels;
+using HexClientProject.ViewModels;
 using System;
 
 namespace HexClient

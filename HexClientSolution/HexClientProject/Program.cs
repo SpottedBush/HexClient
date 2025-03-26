@@ -1,7 +1,5 @@
 ﻿using Avalonia;
 using System;
-using Avalonia.Controls.ApplicationLifetimes;
-using HexClient.ViewModels;
 
 namespace HexClient;
 
