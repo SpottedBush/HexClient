@@ -3,6 +3,8 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Skia;
 using HttpMethod = LcuApi.HttpMethod;
+using HexClientProject.Models;
+
 namespace HexClientProject
 {
     public partial class MainWindow : Window
@@ -15,6 +17,7 @@ namespace HexClientProject
         private void OnPlayButtonClick(object? sender, RoutedEventArgs e)
         {
             Content = new Views.GameModeSelectionView();
+
         }
 
         private async void OnDebugClick(object? sender, RoutedEventArgs e)
