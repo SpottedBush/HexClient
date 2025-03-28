@@ -9,6 +9,8 @@
         </Border>
         <TextBlock Text="Welcome to HexClient !" FontSize="16" Margin="0,0,0,10"/>
         <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OnPlayButtonClick"/>
+		<Button x:Name="DebugButton" Content="APIDebug" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OnDebugClick"/>
+		<TextBlock x:Name="DebugTXT" Text="..." />
     </StackPanel>
     <!-- <Grid> -->
     <!--      -->

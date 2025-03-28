@@ -3,7 +3,6 @@ using System.Net.Http;
 using LcuApi;
 using LcuApi.DataObjects;
 using Newtonsoft.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LcuApi;
 
