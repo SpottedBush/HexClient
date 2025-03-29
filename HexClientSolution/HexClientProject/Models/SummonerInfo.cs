@@ -35,7 +35,6 @@ public static class SummonerInfo
         _summonerLevel = jsonObject.summonerLevel;
         _xpSinceLastLevel = jsonObject.xpSinceLastLevel;
         _xpUntilNextLevel = jsonObject.xpUntilNextLevel;
-        Console.WriteLine(jsonObject.ToString());
     }
  
 }
