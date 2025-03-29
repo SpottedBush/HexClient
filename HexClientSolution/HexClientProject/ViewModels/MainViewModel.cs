@@ -1,25 +1,25 @@
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
-using HexClientProject.ViewModels;
 using HexClientProject.Views;
 
-public class MainViewModel : ObservableObject
-{
-    private object _leftPanelView;
-    public object LeftPanelView
-    {
-        get => _leftPanelView;
-        set => SetProperty(ref _leftPanelView, value);
-    }
+namespace HexClientProject.ViewModels;
 
+public partial class MainViewModel : ObservableObject
+{
+    [ObservableProperty]
+    private UserControl _leftPanelContent;
+    
     public MainViewModel()
     {
-        var gameModeVM = new GameModeSelectionViewModel();
-        gameModeVM.RequestLobbyView += SwitchToLobby;
-        LeftPanelView = new GameModeSelectionView { DataContext = gameModeVM };
+        LeftPanelContent = new GameModeSelectionView(this);
     }
-
-    public void SwitchToLobby()
+    
+    public void SwitchToGameModeSelection()
     {
-        LeftPanelView = new LobbyView { };
+        LeftPanelContent = new GameModeSelectionView(this);
+    }
+    public void SwitchToLobbyView()
+    {
+        LeftPanelContent = new LobbyView(this);
     }
 }

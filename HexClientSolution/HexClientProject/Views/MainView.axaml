@@ -1,14 +1,14 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HexClientProject.Views.MainView"
-             x:DataType="global:MainViewModel"
-             xmlns:vm="clr-namespace:HexClientProject.ViewModels"
+             x:DataType="viewModels:MainViewModel"
              xmlns:views="clr-namespace:HexClientProject.Views"
-             xmlns:global="clr-namespace:">
+             xmlns:global="clr-namespace:"
+             xmlns:viewModels="clr-namespace:HexClientProject.ViewModels">
     
     <Grid ColumnDefinitions="3*,1*">
         <!-- Left Panel (Dynamic) -->
-        <ContentControl Grid.Column="0" Content="{Binding LeftPanelView}"/>
+        <ContentControl Grid.Column="0" Content="{Binding LeftPanelContent}"/>
 
         <!-- Right Panel -->
         <views:SummonerInfoView Grid.Column="1"/>

@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels
 {
@@ -22,12 +23,15 @@ namespace HexClientProject.ViewModels
 
         public ICommand AssignRole1Command { get; set; }
         public ICommand AssignRole2Command { get; set; }
-        
+        public ICommand ReturnToGameModeCommand { get; }
+
         [ObservableProperty]
         private ObservableCollection<SummonerViewModel> _summoners;
 
-        public LobbyViewModel()
+        public LobbyViewModel(MainViewModel mainViewModel)
         {
+            ReturnToGameModeCommand = new RelayCommand(mainViewModel.SwitchToGameModeSelection);
+
             AssignRole1Command = new RelayCommand<string>(role =>
             {
                 SelectedRole1 = role;

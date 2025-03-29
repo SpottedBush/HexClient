@@ -1,15 +1,22 @@
-using System;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels;
 
-public partial class GameModeSelectionViewModel : ViewModelBase
+public class GameModeSelectionViewModel : ObservableObject
 {
-    public event Action? RequestLobbyView; // Event to notify MainViewModel
+    private readonly MainViewModel _mainViewModel;
 
-    [RelayCommand]
-    public void SwitchToLobby()
+    public ICommand SwitchToLobby { get; }
+
+    public GameModeSelectionViewModel(MainViewModel mainViewModel)
     {
-        RequestLobbyView?.Invoke(); // Trigger event
+        _mainViewModel = mainViewModel;
+        SwitchToLobby = new RelayCommand(() =>
+        {
+            _mainViewModel.LeftPanelContent = new LobbyView(_mainViewModel); // Switch the view
+        });
     }
 }

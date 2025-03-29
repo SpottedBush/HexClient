@@ -11,10 +11,10 @@ namespace HexClientProject.Views
     public partial class LobbyView : UserControl
     {
         
-
-        public LobbyView()
+        
+        public LobbyView(ViewModels.MainViewModel mainViewModel)
         {
-            DataContext = new LobbyViewModel();
+            DataContext = new LobbyViewModel(mainViewModel);
             InitializeComponent();
         }
 

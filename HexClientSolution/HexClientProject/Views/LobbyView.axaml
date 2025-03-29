@@ -12,6 +12,8 @@
 
         <!-- Header Section -->
         <StackPanel Grid.Row="0" Margin="5">
+            <Button Content="Change GameMode" Command="{Binding ReturnToGameModeCommand}" HorizontalAlignment="Left" Margin="10"/>
+
             <TextBlock Text="Lobby :" Foreground="White" FontSize="16"/>
             <TextBlock Text="Gamemode" Foreground="White" FontSize="14"/>
         </StackPanel>

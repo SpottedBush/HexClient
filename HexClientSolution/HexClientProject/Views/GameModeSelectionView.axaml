@@ -3,9 +3,6 @@
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
              x:Class="HexClientProject.Views.GameModeSelectionView"
              x:DataType="vm:GameModeSelectionViewModel">
-    <UserControl.DataContext>
-        <vm:GameModeSelectionViewModel/>
-    </UserControl.DataContext>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock Text="Gamemode selection:" FontSize="16" Margin="10"/>
