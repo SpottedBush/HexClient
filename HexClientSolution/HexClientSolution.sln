@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexClientProject", "HexClientProject\HexClientProject.csproj", "{003D9A54-56D5-4913-A133-982122E9983B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LcuApi", "LcuApi\LcuApi.csproj", "{535BDEF0-EDBE-4588-91A9-FA679E0C3DDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{003D9A54-56D5-4913-A133-982122E9983B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{003D9A54-56D5-4913-A133-982122E9983B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{003D9A54-56D5-4913-A133-982122E9983B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{535BDEF0-EDBE-4588-91A9-FA679E0C3DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{535BDEF0-EDBE-4588-91A9-FA679E0C3DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{535BDEF0-EDBE-4588-91A9-FA679E0C3DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{535BDEF0-EDBE-4588-91A9-FA679E0C3DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0083A233-ECCE-4FE8-B5B1-840E61D9ADF9}
 	EndGlobalSection
 EndGlobal
