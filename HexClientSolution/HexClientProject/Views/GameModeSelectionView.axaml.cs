@@ -1,8 +1,6 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using HexClientProject.Models;
-using Tmds.DBus.Protocol;
 
 namespace HexClientProject.Views
 {
