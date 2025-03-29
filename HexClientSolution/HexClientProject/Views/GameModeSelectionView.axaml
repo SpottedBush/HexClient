@@ -6,7 +6,7 @@
         <vm:GameModeSelectionViewModel/>
     </UserControl.DataContext>
 
-    <StackPanel>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock Text="Gamemode selection:" FontSize="16" Margin="10"/>
         <Button x:Name="qp" Content="Quickplay" Click="SelectGameMode" />
         <Button x:Name="sd" Content="Ranked solo/duo" Click="SelectGameMode" />

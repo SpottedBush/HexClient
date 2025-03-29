@@ -1,12 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="HexClientProject.MainWindow">
+        x:Class="HexClientProject.Views.MainWindow">
     
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <!-- Sidebar Panel (Always Visible) -->
-        <Border Background="Gray" Width="200" DockPanel.Dock="Left">
-            <TextBlock Text="Persistent Panel" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+        
         <TextBlock Text="Welcome to HexClient !" FontSize="16" Margin="0,0,0,10"/>
         <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OnPlayButtonClick"/>
     </StackPanel>

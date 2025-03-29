@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
-namespace HexClientProject
+namespace HexClientProject.Views
 {
     public partial class MainWindow : Window
     {
@@ -12,7 +12,7 @@ namespace HexClientProject
 
         private void OnPlayButtonClick(object? sender, RoutedEventArgs e)
         {
-            Content = new Views.GameModeSelectionView();
+            Content = new MainView();
         }
     }
 }
