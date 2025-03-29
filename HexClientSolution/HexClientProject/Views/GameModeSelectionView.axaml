@@ -1,9 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
-             xmlns:global="clr-namespace:"
              x:Class="HexClientProject.Views.GameModeSelectionView"
-             x:DataType="global:MainViewModel">
+             x:DataType="vm:GameModeSelectionViewModel">
     <UserControl.DataContext>
         <vm:GameModeSelectionViewModel/>
     </UserControl.DataContext>
