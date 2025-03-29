@@ -19,6 +19,21 @@ namespace HexClientProject.Models
             }
             return responseStr;
         }
+
+        // TOTEST
+        public static async System.Threading.Tasks.Task<string> GetLobbyInfos()
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-lobby/v2/lobby");
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot get current summoner - Return code: " + response.StatusCode + " | " + responseStr);
+            }
+            return responseStr;
+        }
+
         public static async void CreateLobby(string gameId)
         {
             ILeagueClient api = await LeagueClient.Connect();
