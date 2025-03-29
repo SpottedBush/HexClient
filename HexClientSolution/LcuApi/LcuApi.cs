@@ -1,17 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
+﻿using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace LcuApi;
-
 public class LeagueClient : ILeagueClient
 {
     private string ApiUri;

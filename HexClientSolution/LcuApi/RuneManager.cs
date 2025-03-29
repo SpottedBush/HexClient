@@ -1,7 +1,4 @@
 ﻿using System.Net;
-using System.Net.Http;
-using LcuApi;
-using LcuApi.DataObjects;
 using Newtonsoft.Json;
 
 namespace LcuApi;

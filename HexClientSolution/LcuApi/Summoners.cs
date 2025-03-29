@@ -1,4 +1,4 @@
-﻿using LcuApi.DataObjects;
+﻿using LcuApi;
 
 namespace LcuApi;
 
