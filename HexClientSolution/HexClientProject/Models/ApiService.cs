@@ -15,7 +15,7 @@ namespace HexClientProject.Models
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception("Err: Cannot get current summoner - Return code: " + response.StatusCode);
+                throw new Exception("Err: Cannot get current summoner - Return code: " + response.StatusCode + " | " + responseStr);
             }
             return responseStr;
         }
@@ -28,7 +28,7 @@ namespace HexClientProject.Models
             
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception("Err: Cannot create the lobby " + GameMode.GetGameModeFromGameId(gameId) + " - Return code: " + response.StatusCode);
+                throw new Exception("Err: Cannot create the lobby " + GameMode.GetGameModeFromGameId(gameId) + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
         }
 
@@ -37,6 +37,7 @@ namespace HexClientProject.Models
 
         }
 
+        // TOTEST
         public static async void SetPrefPositions(string pos1, string pos2)
         {
             ILeagueClient api = await LeagueClient.Connect();
@@ -48,7 +49,35 @@ namespace HexClientProject.Models
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception("Err: Cannot set positions " + pos1 + " and " + pos2 + " - Return code: " + response.StatusCode);
+                throw new Exception("Err: Cannot set positions " + pos1 + " and " + pos2 + " - Return code: " + response.StatusCode + " | " + responseStr);
+            }
+        }
+
+        // TOTEST
+        public static async void SendLobbyInvitation(long summonerIdToInvite)
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/lobby/members/"+ summonerIdToInvite + "/grant-invite");
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot invite summoner: " + summonerIdToInvite + " - Return code: " + response.StatusCode + " | " + responseStr);
+            }
+        }
+
+        // TOTEST
+        public static async void RevokeLobbyInvitation(long summonerIdToRevoke)
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/lobby/members/"+ summonerIdToRevoke + "/revoke-invite");
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot invite summoner: " + summonerIdToRevoke + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
         }
     }
