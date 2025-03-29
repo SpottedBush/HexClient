@@ -9,6 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Folder Include="Assets\ranks\" />
+        <Folder Include="Assets\roles\" />
         <Folder Include="Models\" />
         <AvaloniaResource Include="Assets\**" />
     </ItemGroup>
@@ -30,7 +32,7 @@
     <ItemGroup>
         <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
     </ItemGroup>
-    
+
     <ItemGroup>
       <UpToDateCheckInput Remove="tmpHexClient\Views\GameModeSelectionView.axaml" />
       <UpToDateCheckInput Remove="tmpHexClient\Views\MainView.axaml" />

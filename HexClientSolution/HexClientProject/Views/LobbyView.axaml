@@ -24,12 +24,93 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Summoner name and rank" Margin="5" VerticalAlignment="Center"/>
+            <TextBlock Text="Summoner name and rank" Margin="5" VerticalAlignment="Center" Foreground="Black"/>
 
-            <Button Grid.Column="1" Content="Top" Margin="5" Background="Gray" Foreground="White"/>
-                    <!-- Command="{Binding AssignRoleCommand}" CommandParameter="Top"/> -->
-            <Button Grid.Column="2" Content="Mid" Margin="5" Background="Gray" Foreground="White"/>
-                    <!-- Command="{Binding AssignRoleCommand}" CommandParameter="Mid"/> -->
+            <Button Grid.Column="1" Margin="10" Background="Gray" Foreground="White"
+                    Click="ShowRoleMenu1">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Image Source="{Binding SelectedRole1Image}" Width="50" Height="50"/>
+                        <TextBlock Text="{Binding SelectedRole1Image}" Foreground="White"/> 
+                    </StackPanel>
+                </Button.Content>
+                <Button.ContextMenu>
+                    <ContextMenu x:Name="RoleMenu1">
+                        <MenuItem Header="Top" Command="{Binding AssignRole1Command}" CommandParameter="top">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/top_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Jungle" Command="{Binding AssignRole1Command}" CommandParameter="jungle">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/jungle_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Mid" Command="{Binding AssignRole1Command}" CommandParameter="mid">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/mid_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Adc" Command="{Binding AssignRole1Command}" CommandParameter="adc">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/adc_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Support" Command="{Binding AssignRole1Command}" CommandParameter="support">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/support_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Autofill" Command="{Binding AssignRole1Command}" CommandParameter="autofill">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/autofill_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button Grid.Column="2" Margin="5" Background="Gray" Foreground="White"
+                    Click="ShowRoleMenu2">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Image Source="{Binding SelectedRole2Image}" Width="50" Height="50"/>
+                    </StackPanel>
+                </Button.Content>
+                <Button.ContextMenu>
+                    <ContextMenu x:Name="RoleMenu2">
+                        <MenuItem Header="Top" Command="{Binding AssignRole2Command}" CommandParameter="top">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/top_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Jungle" Command="{Binding AssignRole2Command}" CommandParameter="jungle">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/jungle_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Mid" Command="{Binding AssignRole2Command}" CommandParameter="mid">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/mid_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Adc" Command="{Binding AssignRole2Command}" CommandParameter="adc">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/adc_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Support" Command="{Binding AssignRole2Command}" CommandParameter="support">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/support_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Autofill" Command="{Binding AssignRole2Command}" CommandParameter="autofill">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/roles/autofill_icon.png" Width="50" Height="50"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
         </Grid>
 
         <!-- Summoner List -->

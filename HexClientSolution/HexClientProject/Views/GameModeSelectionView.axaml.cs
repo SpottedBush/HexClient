@@ -10,13 +10,5 @@ namespace HexClientProject.Views
         {
             InitializeComponent();
         }
-        public void SelectGameMode(object sender, RoutedEventArgs e)
-        {
-            Button clickedButton = e.Source as Button;
-            LobbyInfo.CurrSelectedGameMode = new GameMode(clickedButton.Name);
-
-            ApiService.CreateLobby(GameMode.GetGameIdFromGameMode(clickedButton.Name));
-            // Content = new LobbyView();
-        }
     }
 }

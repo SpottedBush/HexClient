@@ -1,6 +1,5 @@
 using System;
 using CommunityToolkit.Mvvm.Input;
-using HexClientProject.Models;
 
 namespace HexClientProject.ViewModels;
 

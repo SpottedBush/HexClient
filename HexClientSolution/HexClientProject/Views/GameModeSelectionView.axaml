@@ -9,8 +9,8 @@
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock Text="Gamemode selection:" FontSize="16" Margin="10"/>
-        <Button x:Name="qp" Content="Quickplay" Command="{Binding SwitchToLobby}"/>
-        <Button x:Name="sd" Content="Ranked solo/duo" Command="{Binding SwitchToLobby}"/>
-        <Button x:Name="f" Content="Ranked flex" Command="{Binding SwitchToLobby}"/>
+        <Button x:Name="qp" Content="Quickplay" Command="{Binding SwitchToLobby}" CommandParameter="{Binding Name, ElementName=qp}"/>
+        <Button x:Name="sd" Content="Ranked solo/duo" Command="{Binding SwitchToLobby}" CommandParameter="{Binding Name, ElementName=sd}"/>
+        <Button x:Name="f" Content="Ranked flex" Command="{Binding SwitchToLobby}" CommandParameter="{Binding Name, ElementName=f}"/>
     </StackPanel>
 </UserControl>

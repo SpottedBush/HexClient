@@ -13,13 +13,13 @@ public class MainViewModel : ObservableObject
 
     public MainViewModel()
     {
-        var gameModeVM = new HexClientProject.ViewModels.GameModeSelectionViewModel();
+        var gameModeVM = new GameModeSelectionViewModel();
         gameModeVM.RequestLobbyView += SwitchToLobby;
         LeftPanelView = new GameModeSelectionView { DataContext = gameModeVM };
     }
 
     public void SwitchToLobby()
     {
-        LeftPanelView = new LobbyView { DataContext = new LobbyViewModel() };
+        LeftPanelView = new LobbyView { };
     }
 }
