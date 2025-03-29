@@ -10,13 +10,5 @@ namespace HexClientProject.Views
         {
             InitializeComponent();
         }
-
-        private void OnPlayButtonClick(object? sender, RoutedEventArgs e)
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.NavigateToGameModeSelection();
-            }
-        }
     }
 }

@@ -16,6 +16,7 @@ namespace HexClientProject.Views
             LobbyInfo.CurrSelectedGameMode = new GameMode(clickedButton.Name);
 
             ApiService.CreateLobby(GameMode.GetGameIdFromGameMode(clickedButton.Name));
+            // Content = new LobbyView();
         }
     }
 }

@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HexClientProject.Views.LobbyView">
+    <Grid Background="Black" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <StackPanel Grid.Row="0" Margin="5" HorizontalAlignment="Left">
+            <TextBlock Text="Lobby :" Foreground="White" FontSize="16"/>
+            <TextBlock Text="Gamemode" Foreground="White" FontSize="14"/>
+        </StackPanel>
+
+        <!-- Summoner Details -->
+        <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Summoner name and rank" Margin="5" VerticalAlignment="Center"/>
+
+            <Button Grid.Column="1" Content="Top" Margin="5" Background="Gray" Foreground="White"/> 
+                    <!-- Command="{Binding AssignRoleCommand}" CommandParameter="Top"/> -->
+            <Button Grid.Column="2" Content="Mid" Margin="5" Background="Gray" Foreground="White" />
+                    <!-- Command="{Binding AssignRoleCommand}" CommandParameter="Mid"/> -->
+        </Grid>
+
+        <!-- Rows -->
+        <!-- <ItemsControl Grid.Row="2" Items="{Binding Summoners}"> -->
+        <!--     <ItemsControl.ItemTemplate> -->
+        <!--         <DataTemplate> -->
+        <!--             <Border Background="{Binding RowColor}" Height="30" BorderBrush="Black" BorderThickness="1"> -->
+        <!--                 <TextBlock Text="{Binding Name}" Margin="10" VerticalAlignment="Center"/> -->
+        <!--             </Border> -->
+        <!--         </DataTemplate> -->
+        <!--     </ItemsControl.ItemTemplate> -->
+        <!-- </ItemsControl> -->
+    </Grid>
+</UserControl>
