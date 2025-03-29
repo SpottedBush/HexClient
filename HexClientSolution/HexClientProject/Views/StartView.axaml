@@ -1,0 +1,9 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HexClientProject.Views.StartView"
+             xmlns:vm="clr-namespace:HexClientProject.ViewModels"
+             x:DataType="vm:MainWindowViewModel">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Button Content="Open MainView" Command="{Binding OpenMainViewCommand}"/>
+    </Grid>
+</UserControl>

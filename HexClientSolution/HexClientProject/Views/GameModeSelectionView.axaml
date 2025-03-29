@@ -1,15 +1,17 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
-             x:Class="HexClientProject.Views.GameModeSelectionView">
+             xmlns:global="clr-namespace:"
+             x:Class="HexClientProject.Views.GameModeSelectionView"
+             x:DataType="global:MainViewModel">
     <UserControl.DataContext>
         <vm:GameModeSelectionViewModel/>
     </UserControl.DataContext>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock Text="Gamemode selection:" FontSize="16" Margin="10"/>
-        <Button x:Name="qp" Content="Quickplay" Click="SelectGameMode" />
-        <Button x:Name="sd" Content="Ranked solo/duo" Click="SelectGameMode" />
-        <Button x:Name="f" Content="Ranked flex" Click="SelectGameMode" />
+        <Button x:Name="qp" Content="Quickplay" Command="{Binding SwitchToLobby}"/>
+        <Button x:Name="sd" Content="Ranked solo/duo" Command="{Binding SwitchToLobby}"/>
+        <Button x:Name="f" Content="Ranked flex" Command="{Binding SwitchToLobby}"/>
     </StackPanel>
 </UserControl>

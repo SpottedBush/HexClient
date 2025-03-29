@@ -1,5 +1,5 @@
 using Avalonia.Controls;
-using Avalonia.Interactivity;
+using HexClientProject.ViewModels;
 
 namespace HexClientProject.Views
 {
@@ -8,11 +8,7 @@ namespace HexClientProject.Views
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void OnPlayButtonClick(object? sender, RoutedEventArgs e)
-        {
-            Content = new MainView();
+            DataContext = new MainWindowViewModel();
         }
     }
 }

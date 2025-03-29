@@ -1,24 +1,29 @@
-﻿using ReactiveUI;
+﻿using Avalonia.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public partial class MainWindowViewModel : ObservableObject
     {
-        private ViewModelBase _currentView;
-        public ViewModelBase CurrentView
-        {
-            get => _currentView;
-            set => this.RaiseAndSetIfChanged(ref _currentView, value);
-        }
+        [ObservableProperty]
+        private UserControl? _currentView;
 
         public MainWindowViewModel()
         {
-            CurrentView = new MainViewModel(this); // Set default view
+            // Show StartView initially
+            CurrentView = new StartView();
         }
 
-        public void NavigateToGameModeSelection()
+        [RelayCommand]
+        private void OpenMainView()
         {
-            CurrentView = new GameModeSelectionViewModel();
+            var mainView = new MainView
+            {
+                DataContext = new MainViewModel() // Ensure it has a ViewModel
+            };
+            CurrentView = mainView;
         }
     }
 }

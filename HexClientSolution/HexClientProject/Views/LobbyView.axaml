@@ -1,7 +1,9 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="HexClientProject.Views.LobbyView">
-    <Grid Background="Black" Margin="10">
+             x:Class="HexClientProject.Views.LobbyView"
+             xmlns:vm="clr-namespace:HexClientProject.ViewModels"
+             x:DataType="vm:LobbyViewModel">
+    <Grid Background="Black" Margin="10" ColumnDefinitions="*">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -9,13 +11,13 @@
         </Grid.RowDefinitions>
 
         <!-- Header Section -->
-        <StackPanel Grid.Row="0" Margin="5" HorizontalAlignment="Left">
+        <StackPanel Grid.Row="0" Margin="5">
             <TextBlock Text="Lobby :" Foreground="White" FontSize="16"/>
             <TextBlock Text="Gamemode" Foreground="White" FontSize="14"/>
         </StackPanel>
 
         <!-- Summoner Details -->
-        <Grid Grid.Row="1" Background="White">
+        <Grid Grid.Row="1" Background="LightGray">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -24,13 +26,13 @@
 
             <TextBlock Text="Summoner name and rank" Margin="5" VerticalAlignment="Center"/>
 
-            <Button Grid.Column="1" Content="Top" Margin="5" Background="Gray" Foreground="White"/> 
+            <Button Grid.Column="1" Content="Top" Margin="5" Background="Gray" Foreground="White"/>
                     <!-- Command="{Binding AssignRoleCommand}" CommandParameter="Top"/> -->
-            <Button Grid.Column="2" Content="Mid" Margin="5" Background="Gray" Foreground="White" />
+            <Button Grid.Column="2" Content="Mid" Margin="5" Background="Gray" Foreground="White"/>
                     <!-- Command="{Binding AssignRoleCommand}" CommandParameter="Mid"/> -->
         </Grid>
 
-        <!-- Rows -->
+        <!-- Summoner List -->
         <!-- <ItemsControl Grid.Row="2" Items="{Binding Summoners}"> -->
         <!--     <ItemsControl.ItemTemplate> -->
         <!--         <DataTemplate> -->

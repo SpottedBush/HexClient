@@ -1,19 +1,25 @@
-using ReactiveUI;
-using System;
-using System.Reactive;
+using CommunityToolkit.Mvvm.ComponentModel;
+using HexClientProject.ViewModels;
+using HexClientProject.Views;
 
-namespace HexClientProject.ViewModels
+public class MainViewModel : ObservableObject
 {
-    public class MainViewModel : ViewModelBase
+    private object _leftPanelView;
+    public object LeftPanelView
     {
-        private readonly MainWindowViewModel _mainWindowViewModel;
+        get => _leftPanelView;
+        set => SetProperty(ref _leftPanelView, value);
+    }
 
-        public ReactiveCommand<Unit, Unit> NavigateToGameModeCommand { get; }
+    public MainViewModel()
+    {
+        var gameModeVM = new HexClientProject.ViewModels.GameModeSelectionViewModel();
+        gameModeVM.RequestLobbyView += SwitchToLobby;
+        LeftPanelView = new GameModeSelectionView { DataContext = gameModeVM };
+    }
 
-        public MainViewModel(MainWindowViewModel mainWindowViewModel)
-        {
-            _mainWindowViewModel = mainWindowViewModel;
-            NavigateToGameModeCommand = ReactiveCommand.Create(() => _mainWindowViewModel.NavigateToGameModeSelection());
-        }
+    public void SwitchToLobby()
+    {
+        LeftPanelView = new LobbyView { DataContext = new LobbyViewModel() };
     }
 }

@@ -1,13 +1,14 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HexClientProject.Views.MainView"
-             x:DataType="vm:MainWindowViewModel"
+             x:DataType="global:MainViewModel"
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
-             xmlns:views="clr-namespace:HexClientProject.Views">
+             xmlns:views="clr-namespace:HexClientProject.Views"
+             xmlns:global="clr-namespace:">
     
     <Grid ColumnDefinitions="3*,1*">
-        <!-- Left Panel -->
-        <views:GameModeSelectionView Grid.Column="0"/>
+        <!-- Left Panel (Dynamic) -->
+        <ContentControl Grid.Column="0" Content="{Binding LeftPanelView}"/>
 
         <!-- Right Panel -->
         <views:SummonerInfoView Grid.Column="1"/>
