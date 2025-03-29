@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HexClienT.Models;
 using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels
@@ -23,6 +24,7 @@ namespace HexClientProject.ViewModels
             {
                 DataContext = new MainViewModel() // Ensure it has a ViewModel
             };
+            SummonerInfo.SetSummonerInfo();
             CurrentView = mainView;
         }
     }
