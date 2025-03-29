@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace HexClientProject.Models;
 
@@ -53,4 +54,33 @@ public static class LobbyInfo
         get => _currSelectedGameMode;
         set => _currSelectedGameMode = value ?? throw new ArgumentNullException(nameof(value));
     }
+
+    public static async void SetLobbyInfo()
+    {
+        string response = await ApiService.GetLobbyInfos();
+        dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response);
+
+        if (jsonObject == null)
+        {
+            throw new Exception("Set lobby infos: Json error");
+        }
+
+        _lobbyName = jsonObject.gameConfig.customLobbyName;
+        _lobbyPassword = "IDKLOL";
+        
+        foreach (var m in jsonObject.members) 
+        {
+            if (m.isLeader)
+            {
+                _hostName = (m.summonerId).ToString();
+                break;
+            }
+
+        }
+
+        _nbPlayers = jsonObject["members"].Count();
+        _maxPlayersLimit = jsonObject.gameConfig.maxLobbySize;
+        _canQueue = jsonObject.canStartActivity;
+        _currSelectedGameMode = new GameMode(GameMode.GetGameModeFromGameId(jsonObject.gameConfig.queueId));
+    } 
 }

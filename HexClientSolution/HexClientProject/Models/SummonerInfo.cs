@@ -24,7 +24,7 @@ public static class SummonerInfo
 
         if (jsonObject == null)
         {
-            throw new Exception("");
+            throw new Exception("Set summoner infos: Json error");
         }
 
         _puuid = jsonObject.puuid;

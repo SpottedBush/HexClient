@@ -1,5 +1,6 @@
 using System;
 using CommunityToolkit.Mvvm.Input;
+using HexClientProject.Models;
 
 namespace HexClientProject.ViewModels;
 
@@ -11,5 +12,6 @@ public partial class GameModeSelectionViewModel : ViewModelBase
     public void SwitchToLobby()
     {
         RequestLobbyView?.Invoke(); // Trigger event
+        LobbyInfo.SetLobbyInfo();
     }
 }
