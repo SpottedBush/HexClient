@@ -80,6 +80,51 @@ namespace HexClientProject.Models
                 throw new Exception("Err: Cannot invite summoner: " + summonerIdToRevoke + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
         }
+
+        // /!\ Need to store intation ids
+        public static async void GetLobbyInvitations()
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-lobby/v2/received-invitations");
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot get lobby invitations - Return code: " + response.StatusCode + " | " + responseStr);
+            }
+        }
+
+        // TOTEST
+        // /!\ Need to store intation ids
+        public static async void AcceptLobbyInvitation(string invitationId)
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/received-invitations/"+invitationId+"/accept");
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot accept lobby invitation: " + invitationId + " - Return code: " + response.StatusCode + " | " + responseStr);
+            }
+        }
+
+
+        // TOTEST
+        // /!\ Need to store intation ids
+        public static async void DeclineLobbyInvitation(string invitationId)
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/received-invitations/" + invitationId + "/decline");
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot decline lobby invitation: " + invitationId + " - Return code: " + response.StatusCode + " | " + responseStr);
+            }
+        }
     }
     
 
