@@ -14,6 +14,7 @@ namespace HexClientProject.Views
         {
             Button clickedButton = e.Source as Button;
             LobbyInfo.CurrSelectedGameMode = new GameMode(clickedButton.Name);
+            // Content = new LobbyView();
         }
     }
 }
