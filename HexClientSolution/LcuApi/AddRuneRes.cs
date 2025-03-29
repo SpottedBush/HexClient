@@ -1,4 +1,4 @@
-﻿namespace LcuApi.DataObjects;
+﻿namespace LcuApi;
 
 public enum AddRuneResult
 {

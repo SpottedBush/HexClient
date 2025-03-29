@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace LcuApi.DataObjects;
+namespace LcuApi;
 
 public class RunePage
 {

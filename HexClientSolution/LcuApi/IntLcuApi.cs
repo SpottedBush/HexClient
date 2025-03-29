@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace LcuApi;
+﻿namespace LcuApi;
 
 public interface ILeagueClient
 {

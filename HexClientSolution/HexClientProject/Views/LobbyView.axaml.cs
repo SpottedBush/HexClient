@@ -1,6 +1,14 @@
-namespace HexClientProject.Views;
+using Avalonia.Controls;
+using HexClientProject.ViewModels;
 
-public partial class LobbyView
+namespace HexClientProject.Views
 {
-    
+    public partial class LobbyView : UserControl
+    {
+        public LobbyView()
+        {
+            InitializeComponent();
+            DataContext = new LobbyViewModel(); // Ensure it has a ViewModel
+        }
+    }
 }
