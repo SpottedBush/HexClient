@@ -25,6 +25,15 @@
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="ReactiveUI" Version="20.2.45" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <UpToDateCheckInput Remove="tmpHexClient\Views\GameModeSelectionView.axaml" />
+      <UpToDateCheckInput Remove="tmpHexClient\Views\MainView.axaml" />
+      <UpToDateCheckInput Remove="tmpHexClient\Views\MainWindow.axaml" />
     </ItemGroup>
 </Project>
