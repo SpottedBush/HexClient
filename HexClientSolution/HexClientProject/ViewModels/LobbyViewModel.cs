@@ -30,7 +30,7 @@ namespace HexClientProject.ViewModels
         [ObservableProperty]
         private string _summonerDivision = SummonerInfoViewModel.RankDivisions[StateManager.SummonerInfo.RankId];
 
-        public string DisplayText => $"{SummonerName} (Level {SummonerLevel}) Rank: {SummonerRank}{SummonerDivision}";
+        public string DisplayText => $"{SummonerName} (Level {SummonerLevel}) Rank: {SummonerRank} {SummonerDivision}";
 
         partial void OnSummonerNameChanged(string value) => OnPropertyChanged(nameof(DisplayText));
         partial void OnSummonerLevelChanged(int value) => OnPropertyChanged(nameof(DisplayText));

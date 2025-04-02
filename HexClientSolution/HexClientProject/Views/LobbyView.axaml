@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="{Binding SummonerName}" Margin="5" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBlock Text="{Binding DisplayText}" Margin="5" VerticalAlignment="Center" Foreground="Black"/>
 
             <Button Grid.Column="1" Margin="10" Background="Gray" Foreground="White"
                     Click="ShowRoleMenu1">
