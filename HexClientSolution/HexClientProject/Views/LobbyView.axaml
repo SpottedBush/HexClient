@@ -14,8 +14,8 @@
         <StackPanel Grid.Row="0" Margin="5">
             <Button Content="Change GameMode" Command="{Binding ReturnToGameModeCommand}" HorizontalAlignment="Left" Margin="10"/>
 
-            <TextBlock Text="Lobby :" Foreground="White" FontSize="16"/>
-            <TextBlock Text="Gamemode" Foreground="White" FontSize="14"/>
+            <TextBlock Text="{Binding LobbyName}" Foreground="White" FontSize="16"/>
+            <TextBlock Text="{Binding GameModeName}" Foreground="White" FontSize="14"/>
         </StackPanel>
 
         <!-- Summoner Details -->
@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Summoner name and rank" Margin="5" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBlock Text="{Binding SummonerName}" Margin="5" VerticalAlignment="Center" Foreground="Black"/>
 
             <Button Grid.Column="1" Margin="10" Background="Gray" Foreground="White"
                     Click="ShowRoleMenu1">

@@ -1,25 +1,31 @@
+using System;
 using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
+using HexClientProject.Models;
 using HexClientProject.Views;
+using ReactiveUI;
 
 namespace HexClientProject.ViewModels;
 
-public partial class MainViewModel : ObservableObject
-{
-    [ObservableProperty]
-    private UserControl _leftPanelContent;
+public class MainViewModel : ReactiveObject{
+    private readonly StateManager _stateManager;
+
+    public UserControl LeftPanelContent => _stateManager.LeftPanelContent;
     
     public MainViewModel()
     {
-        LeftPanelContent = new GameModeSelectionView(this);
+        _stateManager = StateManager.Instance;
+        this.WhenAnyValue(x => x._stateManager.LeftPanelContent)
+            .Subscribe(_ => this.RaisePropertyChanged(nameof(LeftPanelContent)));
+        
+        SwitchToGameModeSelection();
     }
     
     public void SwitchToGameModeSelection()
     {
-        LeftPanelContent = new GameModeSelectionView(this);
+        _stateManager.LeftPanelContent = new GameModeSelectionView(this);
     }
     public void SwitchToLobbyView()
     {
-        LeftPanelContent = new LobbyView(this);
+        _stateManager.LeftPanelContent = new LobbyView(this);
     }
 }

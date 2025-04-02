@@ -3,7 +3,6 @@
              x:Class="HexClientProject.Views.MainView"
              x:DataType="viewModels:MainViewModel"
              xmlns:views="clr-namespace:HexClientProject.Views"
-             xmlns:global="clr-namespace:"
              xmlns:viewModels="clr-namespace:HexClientProject.ViewModels">
     
     <Grid ColumnDefinitions="3*,1*">

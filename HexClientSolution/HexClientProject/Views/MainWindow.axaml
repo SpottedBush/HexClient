@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:HexClientProject.ViewModels"
         x:DataType="vm:MainWindowViewModel"
         Title="Main Window"
-        Width="400" Height="200">
+        Width="1920" Height="1080">
     
     <Grid>
         <ContentControl Content="{Binding CurrentView}"/>

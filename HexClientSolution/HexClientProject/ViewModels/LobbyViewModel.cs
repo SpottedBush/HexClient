@@ -3,12 +3,38 @@ using System.Windows.Input;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HexClientProject.Models;
 using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels
 {
     public partial class LobbyViewModel : ObservableObject
     {
+        private static readonly StateManager StateManager = StateManager.Instance;
+        
+        [ObservableProperty]
+        private string _gameModeName = StateManager.LobbyInfo.CurrSelectedGameModeModel.GameModeDescription;
+
+        [ObservableProperty]
+        private string _lobbyName = StateManager.LobbyInfo.LobbyName;
+
+        [ObservableProperty]
+        private string _summonerName = StateManager.SummonerInfo.GameName;
+        
+        [ObservableProperty]
+        private int _summonerLevel = StateManager.SummonerInfo.SummonerLevel;
+
+        [ObservableProperty]
+        private string _summonerRank = SummonerInfoViewModel.RankStrings[StateManager.SummonerInfo.RankId];
+        
+        [ObservableProperty]
+        private string _summonerDivision = SummonerInfoViewModel.RankDivisions[StateManager.SummonerInfo.RankId];
+
+        public string DisplayText => $"{SummonerName} (Level {SummonerLevel}) Rank: {SummonerRank}{SummonerDivision}";
+
+        partial void OnSummonerNameChanged(string value) => OnPropertyChanged(nameof(DisplayText));
+        partial void OnSummonerLevelChanged(int value) => OnPropertyChanged(nameof(DisplayText));
+        
         [ObservableProperty]
         private string _selectedRole1 = "autofill"; // Default role
 

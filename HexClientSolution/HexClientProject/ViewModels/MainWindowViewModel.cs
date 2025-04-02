@@ -1,13 +1,14 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using HexClienT.Models;
+using HexClientProject.Models;
 using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
     {
+        private readonly StateManager _stateManager = StateManager.Instance;
         [ObservableProperty]
         private UserControl? _currentView;
 
@@ -20,12 +21,9 @@ namespace HexClientProject.ViewModels
         [RelayCommand]
         private void OpenMainView()
         {
-            var mainView = new MainView
-            {
-                DataContext = new MainViewModel() // Ensure it has a ViewModel
-            };
-            SummonerInfo.SetSummonerInfo();
-            CurrentView = mainView;
+            MainViewModel mainViewModel = new MainViewModel();
+            _stateManager.MockSetSummonerInfo();
+            CurrentView = new MainView { DataContext = mainViewModel };
         }
     }
 }

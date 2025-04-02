@@ -1,22 +1,27 @@
+using System;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HexClientProject.Models;
 using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels;
 
 public class GameModeSelectionViewModel : ObservableObject
 {
-    private readonly MainViewModel _mainViewModel;
-
+    private readonly StateManager _stateManager = StateManager.Instance;
     public ICommand SwitchToLobby { get; }
 
     public GameModeSelectionViewModel(MainViewModel mainViewModel)
     {
-        _mainViewModel = mainViewModel;
-        SwitchToLobby = new RelayCommand(() =>
+        SwitchToLobby = new RelayCommand<object>((param) =>
         {
-            _mainViewModel.LeftPanelContent = new LobbyView(_mainViewModel); // Switch the view
+
+            if (param is string gameModeName)
+            {
+                _stateManager.MockCreateLobby(gameModeName);
+            }
+            _stateManager.LeftPanelContent = new LobbyView(mainViewModel); // Switch the view
         });
     }
 }

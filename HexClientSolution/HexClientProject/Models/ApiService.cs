@@ -43,7 +43,7 @@ namespace HexClientProject.Models
             
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception("Err: Cannot create the lobby " + GameMode.GetGameModeFromGameId(gameId) + " - Return code: " + response.StatusCode + " | " + responseStr);
+                throw new Exception("Err: Cannot create the lobby " + GameModeModel.GetGameModeFromGameId(gameId) + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
         }
 
