@@ -1,7 +1,6 @@
 # HexClient
 
-**HexClient** is an open-source alternative to the official League of Legends client. Built using the modern [Avalonia UI](https://avaloniaui.net/) framework and following the MVVM architecture pattern, HexClient aims to be a lightweight, fast, and responsive launcher for (addicted) League players.
-
+**HexClient** is an open-source alternative to the official League of Legends client. Built using the modern [Avalonia UI](https://avaloniaui.net/) framework, HexClient aims to be a lightweight, fast, and responsive launcher for (addicted) League players.
 
 ---
 
@@ -21,9 +20,9 @@ This version does not have a usable binary yet, we are working on it, please wai
 
 To build and run HexClient:
 
-1. Clone this repository
-2. Ensure you have [.NET 9](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) installed
-3. Run the solution using your favorite IDE (e.g., Rider, Visual Studio, VS Code)
+1. Ensure you have [.NET 9](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) installed
+2. Clone this repository
+3. Run the solution using your favorite IDE (e.g. Rider, Visual Studio, ...)
 4. Launch the client from the `HexClientProject` folder
 
 ```bash
@@ -47,25 +46,25 @@ HexClient was born from the desire to enhance the player experience by building 
 
 We love League of Legends and are not affiliated with Riot Games in any way. This is a **non-commercial, open-source project** and is created purely for learning and fun. We **do not condone cheating, data scraping beyond what Riot allows**, or any activity that would violate the [Riot Games Terms of Service](https://www.riotgames.com/en/terms-of-service). We want to be **transparent, respectful**, and **never want anyone to be banned** due to our launcher.
 
-We’re a small team of 3 french developers that loves to play League of Legends. This project started as an alternative to the current buggy client to improve our own experience with the game.
+We’re a small team of 3 French developers that loves to play League of Legends. This project started as an alternative to the current buggy client to improve our own experience with the game.
 
 Vincent – Project lead, MVVM architecture wizard, client optimisation
 
 Louis – API Logic and LCU integration into the client
 
-Matteo – UI/UX designer
+Matteo – UI/UX design and implementation
 
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the [MIT License](LICENSE).  
 You are free to use, copy, modify, merge, publish, and distribute the software—provided that you include proper attribution and keep the license in your version.
 
 Please note:
 - This project is **not affiliated with or endorsed by Riot Games, Inc.**  
-- All **trademarks, service marks, and game assets** related to League of Legends are the property of Riot Games.  
+- All **trademarks, service marks, and game assets** related to League of Legends are the property of Riot Games.
 - Use responsibly and at your own risk.
 
 ---
