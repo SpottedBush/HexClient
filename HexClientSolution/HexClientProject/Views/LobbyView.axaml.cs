@@ -1,9 +1,5 @@
-using System;
-using System.ComponentModel;
-using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using CommunityToolkit.Mvvm.Input;
 using HexClientProject.ViewModels;
 
 namespace HexClientProject.Views
@@ -12,10 +8,10 @@ namespace HexClientProject.Views
     {
         
         
-        public LobbyView(ViewModels.MainViewModel mainViewModel)
+        public LobbyView(MainViewModel mainViewModel)
         {
-            DataContext = new LobbyViewModel(mainViewModel);
             InitializeComponent();
+            DataContext = new LobbyViewModel(mainViewModel);
         }
 
         private void ShowRoleMenu1(object sender, RoutedEventArgs e)

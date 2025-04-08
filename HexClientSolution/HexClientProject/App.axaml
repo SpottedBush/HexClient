@@ -2,13 +2,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HexClientProject.App"
              xmlns:hexClientProject1="clr-namespace:HexClientProject"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
         <hexClientProject1:ViewLocator/>
     </Application.DataTemplates>
-  
+     <Application.Resources>
+        <x:String x:Key="AutofillIcon">/Assets/roles/autofill_icon.png</x:String>
+         <Bitmap x:Key="TopIcon">
+             <x:Arguments>
+                 <x:String>/Assets/roles/top_icon.png</x:String>
+             </x:Arguments>
+         </Bitmap>
+         <Bitmap x:Key="JglIcon">
+             <x:Arguments>
+                 <x:String>/Assets/roles/jungle_icon.png</x:String>
+             </x:Arguments>
+         </Bitmap>
+         <Bitmap x:Key="MidIcon">
+             <x:Arguments>
+                 <x:String>/Assets/roles/mid_icon.png</x:String>
+             </x:Arguments>
+         </Bitmap>
+         <Bitmap x:Key="AdcIcon">
+             <x:Arguments>
+                 <x:String>/Assets/roles/adc_icon.png</x:String>
+             </x:Arguments>
+         </Bitmap>
+         <Bitmap x:Key="SupportIcon">
+             <x:Arguments>
+                 <x:String>/Assets/roles/support_icon.png</x:String>
+             </x:Arguments>
+         </Bitmap>
+     </Application.Resources>
+             
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>

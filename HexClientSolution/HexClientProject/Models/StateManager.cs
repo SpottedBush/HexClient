@@ -45,7 +45,40 @@ namespace HexClientProject.Models
                 NbPlayers = 2, // Hey, I have a friend !
                 MaxPlayersLimit = 5,
                 CanQueue = true,
-                CurrSelectedGameModeModel = new GameModeModel(gameModeName)
+                CurrSelectedGameModeModel = new GameModeModel(gameModeName),
+                LeaderName = "TouDansLTrou",
+                Summoners = [Instance.SummonerInfo,
+                    new SummonerInfoModel
+                    {
+                        Puuid = "2e63341a-e627-48ac-bb1a-9d56e2e9cc4f",
+                        SummonerId = 015205,
+                        GameName = "TouDansLTrou(le2)",
+                        ProfileIconId = 1,
+                        TagLine = "CACA",
+                        SummonerLevel = 31,
+                        XpSinceLastLevel = 2000,
+                        XpUntilNextLevel = 4000,
+                        RankId = 1,
+                        DivisionId = 2,
+                        Lp = 47,
+                        Region = "EUW"
+                    },
+                    new SummonerInfoModel
+                    {
+                        Puuid = "2e63341a-e627-48ac-bb1a-9d56e2e9cc4f",
+                        SummonerId = 015205,
+                        GameName = "TouDansLTrou(le3)",
+                        ProfileIconId = 1,
+                        TagLine = "CACA",
+                        SummonerLevel = 31,
+                        XpSinceLastLevel = 2000,
+                        XpUntilNextLevel = 4000,
+                        RankId = 1,
+                        DivisionId = 2,
+                        Lp = 47,
+                        Region = "EUW"
+                    }
+                    ]
             };
 
             // Notify subscribers that the state has changed

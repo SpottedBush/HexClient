@@ -1,0 +1,17 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:HexClientProject.ViewModels"
+    x:Class="HexClientProject.Controls.PlayerLineControl"
+    x:DataType="vm:PlayerLineViewModel">
+
+    <StackPanel Orientation="Horizontal" Spacing="10">
+        <!-- <Image Source="{Binding RoleIcon1}" Width="24" Height="24"/> -->
+        <TextBlock Text="{Binding DisplayText}" VerticalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Right">
+            <Image Source="{Binding RoleIcon1}" Width="50" Height="50"/>
+            <Image Source="{Binding RoleIcon2}" Width="50" Height="50"/>
+        </StackPanel>
+        <!-- <Image Source="{Binding RoleIcon2}" Width="24" Height="24"/> -->
+    </StackPanel>
+</UserControl>

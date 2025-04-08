@@ -1,10 +1,11 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HexClientProject.Models;
-using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels
 {
@@ -29,7 +30,9 @@ namespace HexClientProject.ViewModels
         
         [ObservableProperty]
         private string _summonerDivision = SummonerInfoViewModel.RankDivisions[StateManager.SummonerInfo.RankId];
-
+        
+        public ObservableCollection<PlayerLineViewModel> Summoners { get; set; } = new();
+        
         public string DisplayText => $"{SummonerName} (Level {SummonerLevel}) Rank: {SummonerRank} {SummonerDivision}";
 
         partial void OnSummonerNameChanged(string value) => OnPropertyChanged(nameof(DisplayText));
@@ -42,54 +45,57 @@ namespace HexClientProject.ViewModels
         private string _selectedRole2 = "autofill"; // Default role
 
         [ObservableProperty]
-        private string _selectedRole1Image = "/Assets/roles/autofill_icon.png";
+        private Bitmap _selectedRole1Image = new Bitmap(AssetLoader.Open(new Uri("avares://HexClientProject/Assets/roles/autofill_icon.png")));
 
         [ObservableProperty]
-        private string _selectedRole2Image = "/Assets/roles/autofill_icon.png";
+        private Bitmap _selectedRole2Image = new Bitmap(AssetLoader.Open(new Uri("avares://HexClientProject/Assets/roles/autofill_icon.png")));
 
         public ICommand AssignRole1Command { get; set; }
         public ICommand AssignRole2Command { get; set; }
         public ICommand ReturnToGameModeCommand { get; }
-
-        [ObservableProperty]
-        private ObservableCollection<SummonerViewModel> _summoners;
+        public ICommand StartQueueCommand { get; }
 
         public LobbyViewModel(MainViewModel mainViewModel)
         {
+            for (int i = 1; i < StateManager.Instance.LobbyInfo.Summoners!.Count; i++) // Skipping curr player
+            {
+                Summoners.Add(new PlayerLineViewModel(i));
+            }
             ReturnToGameModeCommand = new RelayCommand(mainViewModel.SwitchToGameModeSelection);
 
             AssignRole1Command = new RelayCommand<string>(role =>
             {
-                SelectedRole1 = role;
-                SelectedRole1Image = $"/Assets/roles/{role}_icon.png";
+                if (role == _selectedRole2) // Role swapping
+                {
+                    SelectedRole2 = _selectedRole1;
+                    SelectedRole2Image = SelectedRole1Image;
+                    SelectedRole1 = role;
+                }
+                else
+                    SelectedRole1 = role;
+                SelectedRole1Image = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role}_icon.png")));
+
             });
 
             AssignRole2Command = new RelayCommand<string>(role =>
             {
-                SelectedRole2 = role;
-                SelectedRole2Image = $"/Assets/roles/{role}_icon.png";
+                if (role == _selectedRole1)
+                {
+                    SelectedRole1 = _selectedRole2;
+                    SelectedRole1Image = SelectedRole2Image;
+                    SelectedRole2 = role;
+                }
+                else
+                    SelectedRole2 = role;
+                SelectedRole2Image = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role}_icon.png")));
+                
             });
-           
-            Summoners = new ObservableCollection<SummonerViewModel>
+            [RelayCommand]
+            void StartQueueCommand()
             {
-                new SummonerViewModel("Player 1", Brushes.LightGray),
-                new SummonerViewModel("Player 2", Brushes.Black),
-                new SummonerViewModel("Player 3", Brushes.LightGray),
-                new SummonerViewModel("Player 4", Brushes.Black),
-                new SummonerViewModel("Player 5", Brushes.LightGray)
-            };
-        }
-    }
-
-    public class SummonerViewModel : ObservableObject
-    {
-        public string Name { get; }
-        public IBrush RowColor { get; }
-
-        public SummonerViewModel(string name, IBrush rowColor)
-        {
-            Name = name;
-            RowColor = rowColor;
+                // Your logic here
+                Console.WriteLine("Starting the queue...");
+            }
         }
     }
 }

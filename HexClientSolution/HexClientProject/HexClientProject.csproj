@@ -11,8 +11,10 @@
     <ItemGroup>
         <Folder Include="Assets\ranks\" />
         <Folder Include="Assets\roles\" />
-        <Folder Include="Models\" />
         <AvaloniaResource Include="Assets\**" />
+        <AvaloniaResource Include="Assets/**" />
+        <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
+        
     </ItemGroup>
 
     <ItemGroup>
@@ -30,10 +32,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <UpToDateCheckInput Remove="tmpHexClient\Views\GameModeSelectionView.axaml" />
       <UpToDateCheckInput Remove="tmpHexClient\Views\MainView.axaml" />
       <UpToDateCheckInput Remove="tmpHexClient\Views\MainWindow.axaml" />
@@ -41,5 +39,16 @@
 
     <ItemGroup>
       <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Templates\SummonerLobbyTemplate.axaml.cs">
+        <DependentUpon>SummonerLobbyTemplate.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\PlayerLineControl.axaml.cs">
+        <DependentUpon>PlayerLineControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>

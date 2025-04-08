@@ -90,7 +90,7 @@ public class SummonerInfoModel
         _tagLine = jsonObject.tagLine;
         _summonerLevel = jsonObject.summonerLevel;
         _xpSinceLastLevel = jsonObject.xpSinceLastLevel;
-        _xpUntilNextLevel = jsonObject.xpUntilNextLevel;
+        _xpUntilNextLevel = jsonObject.xpUntilNextLevel; //TODO Louis: Add those attributes _rankId;_divisionId; _lp; _region;
     }
  
 }
