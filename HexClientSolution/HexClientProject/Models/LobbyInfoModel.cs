@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using HexClienT.Models;
+using HexClientProject.ApiServices;
 using Newtonsoft.Json;
 
 namespace HexClientProject.Models;
@@ -72,7 +73,7 @@ public class LobbyInfoModel()
 
     public async void SetLobbyInfo()
     {
-        string response = await ApiService.GetLobbyInfos();
+        string response = await ApiServices.ApiServices.GetLobbyInfos();
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
         if (jsonObject == null)

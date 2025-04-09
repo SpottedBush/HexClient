@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using HexClientProject.Models;
-
+using HexClientProject.ApiServices;
 using Newtonsoft.Json;
 
 
@@ -75,7 +74,7 @@ public class SummonerInfoModel
     }
     public async void SetSummonerInfo()
     {
-        string response = await ApiService.GetSummonerInfos();
+        string response = await ApiServices.GetSummonerInfos();
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response);
 
         if (jsonObject == null)
