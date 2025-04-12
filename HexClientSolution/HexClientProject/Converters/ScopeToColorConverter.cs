@@ -15,7 +15,7 @@ public class ScopeToColorConverter : IValueConverter
             {
                 ChatScope.Global => Brushes.Cyan,
                 ChatScope.Party => Brushes.Green,
-                ChatScope.Private => Brushes.MediumPurple,
+                ChatScope.Whisper => Brushes.MediumPurple,
                 ChatScope.Guild => Brushes.Lime,
                 _ => Brushes.White
             };

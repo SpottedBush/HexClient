@@ -13,6 +13,7 @@
         <StackPanel Grid.Column="1" Spacing="20" Margin="10">
             <views:SummonerInfoView />
             <views:FriendsListView />
+            <views:ChatBoxView VerticalAlignment="Bottom"/>
         </StackPanel>
     </Grid>
 </UserControl>

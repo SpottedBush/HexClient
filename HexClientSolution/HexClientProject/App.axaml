@@ -41,7 +41,6 @@
          </Bitmap>
          <converters:SenderToPaddingConverter x:Key="SenderToPaddingConverter" />
          <converters:ScopeToColorConverter x:Key="ScopeToColorConverter"/>
-         <!-- <converters:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter" /> -->
      </Application.Resources>
              
     <Application.Styles>

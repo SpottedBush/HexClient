@@ -92,7 +92,7 @@ public class FriendsListViewModel : ViewModelBase
             var message = new MessageModel
             {
                 Sender = _stateManager.SummonerInfo.GameName,
-                Text = NewMessageText,
+                Content = NewMessageText,
                 Timestamp = DateTime.Now
             };
 
@@ -111,7 +111,7 @@ public class FriendsListViewModel : ViewModelBase
         var reply = new MessageModel
         {
             Sender = friend.Username,
-            Text = "Got your message!",
+            Content = "Got your message!",
             Timestamp = DateTime.Now
         };
         friend.Messages.Add(reply);
