@@ -25,8 +25,8 @@ namespace HexClientProject.Models
         public SummonerInfoModel SummonerInfo { get; set; } = null!;
         
         private ObservableCollection<FriendModel> _friends = new();
-        public ReadOnlyCollection<FriendModel> Friends { get; set; }
-
+        public ReadOnlyObservableCollection<FriendModel> Friends { get; set; }
+        public ChatBoxViewModel ChatBoxViewModel { get; set; } = null!;
         public event Action LobbyStateChanged = null!;
         public event Action SummonerStateChanged = null!;
 
@@ -38,7 +38,7 @@ namespace HexClientProject.Models
             get
             {
                 _instance ??= new StateManager();
-                _instance.Friends = new ReadOnlyCollection<FriendModel>(_instance._friends);
+                _instance.Friends = new ReadOnlyObservableCollection<FriendModel>(_instance._friends);
                 return _instance;
             }
         }
@@ -68,18 +68,6 @@ namespace HexClientProject.Models
 
             // Notify subscribers that the state has changed
             SummonerStateChanged?.Invoke();
-        }
-
-        public void ReplaceFriends(List<FriendModel> newFriends)
-        {
-            _friends.Clear();
-            foreach (var friend in newFriends)
-                _friends.Add(friend);
-        }
-
-        public void AddFriend(FriendModel newFriend)
-        {
-            _friends.Add(newFriend);
         }
 
         public Task<List<FriendModel>> GetFriendsAsync()

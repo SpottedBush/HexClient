@@ -11,20 +11,7 @@ using ReactiveUI;
 public class FriendsListViewModel : ViewModelBase
 {
     public ObservableCollection<FriendModel> Friends { get; } = new();
-    public ObservableCollection<MessageModel> ChatMessages { get; } = new();
-
     private readonly StateManager _stateManager = StateManager.Instance;
-    private string _newMessageText;
-    public string NewMessageText
-    {
-        get => _newMessageText;
-        set => this.RaiseAndSetIfChanged(ref _newMessageText, value);
-    }
-
-    public ReactiveCommand<Unit, Unit> SendMessageCommand { get; }
-    
-    public ReactiveCommand<Unit, Unit> CloseChatCommand { get; }
-
     public ReactiveCommand<Unit, Unit> AddFriendCommand { get; }
     public string NewFriendUsername { get; set; }
     private FriendModel _selectedFriend;
@@ -34,27 +21,10 @@ public class FriendsListViewModel : ViewModelBase
         get => _selectedFriend;
         set => this.RaiseAndSetIfChanged(ref _selectedFriend, value);
     }
-
-    private FriendModel? _selectedChatFriend;
-    public FriendModel? SelectedChatFriend
-    {
-        get => _selectedChatFriend;
-        set => this.RaiseAndSetIfChanged(ref _selectedChatFriend, value);
-    }
-
-    private bool _isChatOpen;
-    public bool IsChatOpen
-    {
-        get => _isChatOpen;
-        set => this.RaiseAndSetIfChanged(ref _isChatOpen, value);
-    }
     
     public FriendsListViewModel()
     {
         AddFriendCommand = ReactiveCommand.CreateFromTask(AddFriendAsync);
-        CloseChatCommand = ReactiveCommand.Create(CloseChat);
-        SendMessageCommand = ReactiveCommand.Create(SendMessage, 
-            this.WhenAnyValue(x => x.SelectedChatFriend).Select(friend => friend != null));
         LoadFriendsAsync().ConfigureAwait(true);
     }
 
@@ -74,46 +44,11 @@ public class FriendsListViewModel : ViewModelBase
             await LoadFriendsAsync(); // Refresh the list
         }
     }
-    public void OpenChatWith(FriendModel? friend)
+    public void WhisperTo(string username)
     {
-        SelectedChatFriend = friend;
-        IsChatOpen = true;
+        Console.WriteLine($"Whispering to {username}");
+        _stateManager.ChatBoxViewModel.SelectedScope = ChatScope.Whisper;
+        _stateManager.ChatBoxViewModel.MessageInput = $"/mp <{username}>";
     }
 
-    public void CloseChat()
-    {
-        IsChatOpen = false;
-        SelectedChatFriend = null;
-    }
-    private void SendMessage()
-    {
-        if (!string.IsNullOrWhiteSpace(NewMessageText) && SelectedChatFriend != null)
-        {
-            var message = new MessageModel
-            {
-                Sender = _stateManager.SummonerInfo.GameName,
-                Content = NewMessageText,
-                Timestamp = DateTime.Now
-            };
-
-            SelectedChatFriend.Messages.Add(message);
-            ChatMessages.Add(message);
-            NewMessageText = string.Empty;
-
-            // Simulate reply
-            SimulateReply(SelectedChatFriend);
-        }
-    }
-
-    private async void SimulateReply(FriendModel? friend)
-    {
-        await Task.Delay(1000);
-        var reply = new MessageModel
-        {
-            Sender = friend.Username,
-            Content = "Got your message!",
-            Timestamp = DateTime.Now
-        };
-        friend.Messages.Add(reply);
-    }
 }

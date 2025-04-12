@@ -16,11 +16,16 @@ namespace HexClientProject.Views
         {
             if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed)
             {
-                if (sender is Border border && border.DataContext is FriendModel friend)
+                var border = sender as Border;
+                if (border != null)
                 {
-                    if (DataContext is FriendsListViewModel vm)
+                    var friend = border.DataContext as FriendModel;
+                    if (friend != null)
                     {
-                        vm.OpenChatWith(friend);
+                        if (DataContext is FriendsListViewModel vm)
+                        {
+                            vm.WhisperTo(friend.Username);
+                        }
                     }
                 }
             }

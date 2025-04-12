@@ -1,33 +1,51 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:viewModels="clr-namespace:HexClientProject.ViewModels"
+             xmlns:global="clr-namespace:"
              x:Class="HexClientProject.Views.ChatBoxView"
-             x:DataType="viewModels:ChatBoxViewModel">
-    
+             x:DataType="global:ChatBoxViewModel">
+
     <UserControl.DataContext>
-        <viewModels:ChatBoxViewModel/>
+        <global:ChatBoxViewModel/>
     </UserControl.DataContext>
+    
+    <StackPanel Margin="10" Spacing="10">
 
-    <StackPanel Margin="10">
-
-        <!-- Scope Selector -->
-        <ComboBox ItemsSource="{Binding Scopes}"
-                  SelectedItem="{Binding SelectedScope}"
-                  Margin="0 0 0 5"/>
+        <!-- Filter Dropdown (top right) -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Text="Filter: " VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <ComboBox ItemsSource="{Binding FilterOptions}"
+                      SelectedItem="{Binding SelectedFilter}"
+                      Width="120"/>
+        </StackPanel>
 
         <!-- Messages List -->
-        <ListBox ItemsSource="{Binding Messages}" Height="200">
+        <ListBox ItemsSource="{Binding FilteredMessages}" Height="200">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Content}" />
+                    <TextBlock Text="{Binding Content}" Foreground="{Binding Scope, Converter={StaticResource ScopeToColorConverter}}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        
+        <!-- Input area -->
+        <StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Stretch">
 
-        <!-- Input + Send -->
-        <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-            <TextBox Width="200" Text="{Binding MessageInput}" />
-            <Button Content="Send" Command="{Binding SendMessageCommand}" Margin="5 0 0 0"/>
+            <!-- Scope Selector -->
+            <ComboBox ItemsSource="{Binding Scopes}"
+                      SelectedItem="{Binding SelectedScope}"
+                      Width="100"
+                      Margin="0 0 0 5"/>
+            
+            <!-- Input Box -->
+            <TextBox Width="200"
+                     Text="{Binding MessageInput}"
+                     KeyDown="MessageInput_KeyDown"
+                     Watermark="Type your message..."/>
+
+            <!-- Send Button -->
+            <Button Content="Send"
+                    Command="{Binding SendMessageCommand}"
+                    MinWidth="60"/>
         </StackPanel>
 
     </StackPanel>

@@ -5,7 +5,47 @@ namespace HexClientProject.Models
         Global,
         Party,
         Whisper,
-        System,
-        Guild
+        Guild,
+        System
+    }
+
+    public static class ChatScopeExtensions
+    {
+        public static ChatScope IntToScopeConverter(int scope)
+        {
+            switch (scope)
+            {
+                case 0:
+                    return ChatScope.Global;
+                case 1:
+                    return ChatScope.Party;
+                case 2:
+                    return ChatScope.Whisper;
+                case 3:
+                    return ChatScope.Guild;
+                case 4:
+                    return ChatScope.System;
+                default:
+                    return ChatScope.Global;
+            }
+        }
+        public static int ScopeToIntConverter(ChatScope scope)
+        {
+            switch (scope)
+            {
+                case ChatScope.Global:
+                    return 0;
+                case ChatScope.Party:
+                    return 1;
+                case ChatScope.Whisper:
+                    return 2;
+                case ChatScope.Guild:
+                    return 3;
+                case ChatScope.System:
+                    return 4;
+                default:
+                    return -1;
+            }
+        }
     }
 }

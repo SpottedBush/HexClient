@@ -3,8 +3,7 @@
         x:Class="HexClientProject.Views.MainWindow"
         xmlns:vm="clr-namespace:HexClientProject.ViewModels"
         x:DataType="vm:MainWindowViewModel"
-        Title="Main Window"
-        Width="1920" Height="1080">
+        Title="HexClient">
     <Grid>
         <ContentControl Content="{Binding CurrentView}"/>
     </Grid>

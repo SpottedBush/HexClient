@@ -7,4 +7,6 @@ public class MessageModel
     public string Content { get; set; }
     public DateTime Timestamp { get; set; }
     public ChatScope Scope { get; set; }
+    public string SenderIcon { get; set; } // Rank Icon
+    public string WhisperingTo { get; set; }
 }

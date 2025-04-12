@@ -39,7 +39,6 @@
                  <x:String>/Assets/roles/support_icon.png</x:String>
              </x:Arguments>
          </Bitmap>
-         <converters:SenderToPaddingConverter x:Key="SenderToPaddingConverter" />
          <converters:ScopeToColorConverter x:Key="ScopeToColorConverter"/>
      </Application.Resources>
              
