@@ -39,16 +39,16 @@ namespace HexClientProject.ViewModels
         partial void OnSummonerLevelChanged(int value) => OnPropertyChanged(nameof(DisplayText));
         
         [ObservableProperty]
-        private string _selectedRole1 = "autofill"; // Default role
+        private string _selectedRole1 = "none"; // Default role
 
         [ObservableProperty]
-        private string _selectedRole2 = "autofill"; // Default role
+        private string _selectedRole2 = "none"; // Default role
 
         [ObservableProperty]
-        private Bitmap _selectedRole1Image = new Bitmap(AssetLoader.Open(new Uri("avares://HexClientProject/Assets/roles/autofill_icon.png")));
+        private Bitmap _selectedRole1Image = new Bitmap(AssetLoader.Open(new Uri("avares://HexClientProject/Assets/roles/none_icon.png")));
 
         [ObservableProperty]
-        private Bitmap _selectedRole2Image = new Bitmap(AssetLoader.Open(new Uri("avares://HexClientProject/Assets/roles/autofill_icon.png")));
+        private Bitmap _selectedRole2Image = new Bitmap(AssetLoader.Open(new Uri("avares://HexClientProject/Assets/roles/none_icon.png")));
 
         public ICommand AssignRole1Command { get; set; }
         public ICommand AssignRole2Command { get; set; }

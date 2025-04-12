@@ -1,13 +1,16 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HexClientProject.App"
-             xmlns:hexClientProject1="clr-namespace:HexClientProject"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             RequestedThemeVariant="Default">
+             xmlns:viewModels="clr-namespace:HexClientProject.ViewModels"
+             xmlns:views="clr-namespace:HexClientProject.Views"
+             xmlns:converters="clr-namespace:HexClientProject.Converters"
+             RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        <hexClientProject1:ViewLocator/>
+        <DataTemplate DataType="{x:Type viewModels:FriendViewModel}">
+            <views:FriendView/>
+        </DataTemplate>
     </Application.DataTemplates>
      <Application.Resources>
         <x:String x:Key="AutofillIcon">/Assets/roles/autofill_icon.png</x:String>
@@ -36,6 +39,9 @@
                  <x:String>/Assets/roles/support_icon.png</x:String>
              </x:Arguments>
          </Bitmap>
+         <converters:SenderToPaddingConverter x:Key="SenderToPaddingConverter" />
+         <converters:ScopeToColorConverter x:Key="ScopeToColorConverter"/>
+         <!-- <converters:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter" /> -->
      </Application.Resources>
              
     <Application.Styles>

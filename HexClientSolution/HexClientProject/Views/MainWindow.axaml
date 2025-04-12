@@ -5,7 +5,6 @@
         x:DataType="vm:MainWindowViewModel"
         Title="Main Window"
         Width="1920" Height="1080">
-    
     <Grid>
         <ContentControl Content="{Binding CurrentView}"/>
     </Grid>

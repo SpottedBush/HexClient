@@ -9,11 +9,13 @@ namespace HexClientProject.Controls
 {
     public partial class PlayerLineControl : UserControl
     {
-        public PlayerLineControl(int playerId)
+        private PlayerLineViewModel vm;
+
+        private PlayerLineControl(int playerId)
         {
             InitializeComponent();
 
-            var vm = new PlayerLineViewModel(playerId);
+            vm = new PlayerLineViewModel(playerId);
 
             var stateManager = StateManager.Instance;
 
@@ -24,9 +26,6 @@ namespace HexClientProject.Controls
             int summonerLevel = currSummoner.SummonerLevel;
             string summonerRank = SummonerInfoViewModel.RankStrings[currSummoner.RankId];
             string summonerDivision = SummonerInfoViewModel.RankDivisions[currSummoner.DivisionId];
-
-            vm.RoleIcon1 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/autofill_icon.png")));
-            vm.RoleIcon2 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/autofill_icon.png")));
             vm.DisplayText = $"{summonerName} (Level {summonerLevel}) Rank: {summonerRank} {summonerDivision}";
 
             DataContext = vm;

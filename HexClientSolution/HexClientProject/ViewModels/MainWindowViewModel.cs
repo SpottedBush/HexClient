@@ -22,7 +22,7 @@ namespace HexClientProject.ViewModels
         private void OpenMainView()
         {
             MainViewModel mainViewModel = new MainViewModel();
-            _stateManager.MockSetSummonerInfo();
+            MockingApiService.MockSetSummonerInfo();
             CurrentView = new MainView { DataContext = mainViewModel };
         }
     }

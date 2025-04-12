@@ -74,7 +74,7 @@ public class SummonerInfoModel
     }
     public async void SetSummonerInfo()
     {
-        string response = await ApiServices.GetSummonerInfos();
+        string response = await SummonerService.GetSummonerInfos();
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response);
 
         if (jsonObject == null)

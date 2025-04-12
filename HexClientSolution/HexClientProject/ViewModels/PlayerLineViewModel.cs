@@ -8,13 +8,13 @@ namespace HexClientProject.ViewModels
 {
     public partial class PlayerLineViewModel : ObservableObject
     {
-        [ObservableProperty] private int playerId;
+        [ObservableProperty] private int _playerId;
 
-        [ObservableProperty] private string displayText;
+        [ObservableProperty] private string _displayText;
 
-        [ObservableProperty] private Bitmap roleIcon1;
+        [ObservableProperty] private Bitmap _roleIcon1;
 
-        [ObservableProperty] private Bitmap roleIcon2;
+        [ObservableProperty] private Bitmap _roleIcon2;
 
         public PlayerLineViewModel(int playerId)
         {
@@ -27,8 +27,13 @@ namespace HexClientProject.ViewModels
                           $"Rank: {SummonerInfoViewModel.RankStrings[summoner.RankId]} " +
                           $"{SummonerInfoViewModel.RankDivisions[summoner.DivisionId]}";
 
-            RoleIcon1 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/autofill_icon.png")));
-            RoleIcon2 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/autofill_icon.png")));
+            RoleIcon1 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/none_icon.png")));
+            RoleIcon2 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/none_icon.png")));
+        }
+        public void SetPlayerRole(string role1, string role2)
+        {
+            RoleIcon1 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role1}_icon.png")));
+            RoleIcon2 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role2}_icon.png")));
         }
     }
 }

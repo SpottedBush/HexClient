@@ -10,6 +10,9 @@
         <ContentControl Grid.Column="0" Content="{Binding LeftPanelContent}"/>
 
         <!-- Right Panel -->
-        <views:SummonerInfoView Grid.Column="1"/>
+        <StackPanel Grid.Column="1" Spacing="20" Margin="10">
+            <views:SummonerInfoView />
+            <views:FriendsListView />
+        </StackPanel>
     </Grid>
 </UserControl>

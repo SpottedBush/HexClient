@@ -115,7 +115,7 @@
             </Button>
         </Grid>
         <ScrollViewer Grid.Row="2">
-            <StackPanel Margin="20" Spacing="10">
+            <StackPanel Margin="30" Spacing="60">
                 <!-- ItemsControl will instantiate a PlayerLineControl for each ViewModel -->
                 <ItemsControl ItemsSource="{Binding Summoners}">
                     <ItemsControl.ItemTemplate>

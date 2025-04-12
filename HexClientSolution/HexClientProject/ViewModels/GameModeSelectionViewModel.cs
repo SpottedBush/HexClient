@@ -19,7 +19,7 @@ public class GameModeSelectionViewModel : ObservableObject
 
             if (param is string gameModeName)
             {
-                _stateManager.MockCreateLobby(gameModeName);
+                MockingApiService.MockCreateLobby(gameModeName);
             }
             _stateManager.LeftPanelContent = new LobbyView(mainViewModel); // Switch the view
         });

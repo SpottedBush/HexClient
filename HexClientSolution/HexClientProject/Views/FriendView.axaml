@@ -1,0 +1,36 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:HexClientProject.ViewModels"
+    x:Class="HexClientProject.Views.FriendView"
+    x:DataType="vm:FriendViewModel">
+
+    <StackPanel Margin="20" Spacing="15">
+        <TextBlock Text="Friend Details" FontSize="20" />
+
+        <StackPanel>
+            <TextBlock Text="Username:" FontWeight="Bold" />
+            <TextBlock Text="{Binding SelectedFriend.Username}" />
+
+            <TextBlock Text="Status:" FontWeight="Bold" />
+            <TextBlock Text="{Binding SelectedFriend.Status}" />
+
+            <TextBlock Text="Online:" FontWeight="Bold" />
+            <TextBlock Text="{Binding SelectedFriend.IsOnline}" />
+        </StackPanel>
+
+        <TextBlock Text="Chat" FontSize="18" Margin="0,10,0,0" />
+        <ItemsControl ItemsSource="{Binding ChatMessages}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <TextBox Width="250" Watermark="Type message..." Text="{Binding ChatMessage}" />
+            <Button Content="Send" Command="{Binding SendMessageCommand}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

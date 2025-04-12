@@ -73,7 +73,7 @@ public class LobbyInfoModel()
 
     public async void SetLobbyInfo()
     {
-        string response = await ApiServices.ApiServices.GetLobbyInfos();
+        string response = await LobbyService.GetLobbyInfos();
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
         if (jsonObject == null)

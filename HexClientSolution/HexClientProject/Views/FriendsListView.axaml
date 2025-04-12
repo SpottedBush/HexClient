@@ -1,0 +1,87 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="clr-namespace:HexClientProject.Models"
+    xmlns:global="clr-namespace:"
+    x:Class="HexClientProject.Views.FriendsListView"
+    x:DataType="global:FriendsListViewModel">
+
+    <StackPanel Margin="20" Spacing="10">
+
+        <!-- Search box -->
+        <!-- <TextBox Watermark="Search..." Width="200" Text="{Binding}"/> -->
+
+        <!-- Add friend section -->
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <TextBox Width="200" Watermark="Enter friend to add name..." Text="{Binding NewFriendUsername}" />
+            <Button Content="Add Friend" Command="{Binding AddFriendCommand}" />
+        </StackPanel>
+
+        <!-- Remove friend section -->
+        <!-- <StackPanel Orientation="Horizontal" Spacing="10"> -->
+        <!--     <TextBox Width="200" Watermark="Enter name to remove..." Text="{Binding RemoveFriendCommand}" /> -->
+        <!--     <Button Content="Remove Friend" Command="{Binding RemoveFriendCommand}" /> -->
+        <!-- </StackPanel> -->
+
+        <!-- Friend list -->
+        <ListBox ItemsSource="{Binding Friends}" SelectedItem="{Binding SelectedFriend}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="Transparent" PointerPressed="OnFriendClicked" Padding="5">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Username}" FontWeight="Bold"/>
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <TextBlock Text="Status:" Grid.Column="0" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Status}" Grid.Column="1"/>
+                            </Grid>
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <TextBlock Text="Level:" Grid.Column="0" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Level}" Grid.Column="1"/>
+                                <TextBlock Text="{Binding RankDisplay}" Grid.Column="2" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <!-- Chat Window -->
+        <Border Background="Transparent"
+                CornerRadius="8"
+                Padding="10"
+                Width="250"
+                Height="300"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="10"
+                IsVisible="{Binding IsChatOpen}">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="-" HorizontalAlignment="Right" Margin="0,5,5,0"
+                        Command="{Binding CloseChatCommand}" />
+                </StackPanel>
+                <TextBlock Text="{Binding SelectedChatFriend.Username}" FontWeight="Bold" />
+                <ScrollViewer Height="200">
+                    <ItemsControl ItemsSource="{Binding ChatMessages}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,5">
+                                    <TextBlock Text="{Binding Sender}" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:T}'}" FontSize="10" Foreground="Gray"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <!-- Message Input + Send Button -->
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBox Width="170" Text="{Binding NewMessageText, Mode=TwoWay}" />
+                    <Button Content="Send" Command="{Binding SendMessageCommand}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
+
