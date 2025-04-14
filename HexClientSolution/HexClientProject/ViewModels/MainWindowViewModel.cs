@@ -19,8 +19,17 @@ namespace HexClientProject.ViewModels
         }
 
         [RelayCommand]
-        private void OpenMainView()
+        private void OpenLocalMainView()
         {
+            _stateManager.IsOnlineMode = false;
+            MainViewModel mainViewModel = new MainViewModel();
+            MockingApiService.MockSetSummonerInfo();
+            CurrentView = new MainView { DataContext = mainViewModel };
+        }
+        [RelayCommand]
+        private void OpenOnlineMainView()
+        {
+            _stateManager.IsOnlineMode = true;
             MainViewModel mainViewModel = new MainViewModel();
             MockingApiService.MockSetSummonerInfo();
             CurrentView = new MainView { DataContext = mainViewModel };

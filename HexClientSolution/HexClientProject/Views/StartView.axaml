@@ -4,6 +4,7 @@
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
              x:DataType="vm:MainWindowViewModel">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Button Content="Open MainView" Command="{Binding OpenMainViewCommand}"/>
+        <Button Content="Open Online Mode" Command="{Binding OpenOnlineMainView}"/>
+        <Button Content="Open Local Mode" Command="{Binding OpenLocalMainView}"/>
     </Grid>
 </UserControl>

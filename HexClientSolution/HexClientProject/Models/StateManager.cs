@@ -21,6 +21,7 @@ namespace HexClientProject.Models
             set => this.RaiseAndSetIfChanged(ref _leftPanelContent, value);
         }
 
+        public bool IsOnlineMode;
         public LobbyInfoModel LobbyInfo { get; set; } = null!;
         public SummonerInfoModel SummonerInfo { get; set; } = null!;
         
