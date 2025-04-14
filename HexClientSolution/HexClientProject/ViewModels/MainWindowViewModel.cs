@@ -19,7 +19,7 @@ namespace HexClientProject.ViewModels
         }
 
         [RelayCommand]
-        private void OpenLocalMainView()
+        public void OpenLocalMainView()
         {
             _stateManager.IsOnlineMode = false;
             MainViewModel mainViewModel = new MainViewModel();
@@ -27,7 +27,7 @@ namespace HexClientProject.ViewModels
             CurrentView = new MainView { DataContext = mainViewModel };
         }
         [RelayCommand]
-        private void OpenOnlineMainView()
+        public void OpenOnlineMainView()
         {
             _stateManager.IsOnlineMode = true;
             MainViewModel mainViewModel = new MainViewModel();

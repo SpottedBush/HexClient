@@ -46,7 +46,6 @@ public class FriendsListViewModel : ViewModelBase
     }
     public void WhisperTo(string username)
     {
-        Console.WriteLine($"Whispering to {username}");
         _stateManager.ChatBoxViewModel.SelectedScope = ChatScope.Whisper;
         _stateManager.ChatBoxViewModel.MessageInput = $"/mp <{username}>";
     }
