@@ -73,31 +73,5 @@ public class LobbyInfoModel()
 
     public async void SetLobbyInfo()
     {
-        string response = await LobbyService.GetLobbyInfos();
-        dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
-
-        if (jsonObject == null)
-        {
-            throw new Exception("Set lobby infos: Json error");
-        }
-
-        _lobbyName = jsonObject.gameConfig.customLobbyName;
-        _lobbyPassword = "IDKLOL"; //TODO Louis Change this password I beg you...
-        
-        foreach (var m in jsonObject.members) 
-        {
-            if (m.isLeader)
-            {
-                _leaderName = (m.summonerId).ToString();
-                break;
-            }
-
-        }
-
-        _nbPlayers = jsonObject["members"].Count();
-        _maxPlayersLimit = jsonObject.gameConfig.maxLobbySize;
-        _canQueue = jsonObject.canStartActivity;
-        _currSelectedGameModeModel = new GameModeModel(GameModeModel.GetGameModeFromGameId(jsonObject.gameConfig.queueId));
-        _summoners = new List<SummonerInfoModel>(jsonObject.members); //TODO Louis -> Parse this logic
     } 
 }

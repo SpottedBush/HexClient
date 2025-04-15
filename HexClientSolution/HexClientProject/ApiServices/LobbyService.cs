@@ -20,7 +20,7 @@ namespace HexClientProject.ApiServices
             return responseStr;
         }
 
-        public static async void CreateLobby(string gameId)
+        public static async System.Threading.Tasks.Task<bool> CreateLobby(string gameId)
         {
             ILeagueClient api = await LeagueClient.Connect();
             var body = new { queueId = gameId };
@@ -31,6 +31,8 @@ namespace HexClientProject.ApiServices
             {
                 throw new Exception("Err: Cannot create the lobby " + GameModeModel.GetGameModeFromGameId(gameId) + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
+
+            return true;
         }
 
         public async void CreateCustomLobby()
@@ -39,7 +41,7 @@ namespace HexClientProject.ApiServices
         }
 
         // TOTEST
-        public static async void SetPrefPositions(string pos1, string pos2)
+        public static async System.Threading.Tasks.Task<bool> SetPrefPositions(string pos1, string pos2)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -52,10 +54,12 @@ namespace HexClientProject.ApiServices
             {
                 throw new Exception("Err: Cannot set positions " + pos1 + " and " + pos2 + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
+
+            return true;
         }
 
         // TOTEST
-        public static async void SendLobbyInvitation(long summonerIdToInvite)
+        public static async System.Threading.Tasks.Task<bool> SendLobbyInvitation(long summonerIdToInvite)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -66,10 +70,12 @@ namespace HexClientProject.ApiServices
             {
                 throw new Exception("Err: Cannot invite summoner: " + summonerIdToInvite + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
+
+            return true;
         }
 
         // TOTEST
-        public static async void RevokeLobbyInvitation(long summonerIdToRevoke)
+        public static async System.Threading.Tasks.Task<bool> RevokeLobbyInvitation(long summonerIdToRevoke)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -80,10 +86,12 @@ namespace HexClientProject.ApiServices
             {
                 throw new Exception("Err: Cannot invite summoner: " + summonerIdToRevoke + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
+
+            return true;
         }
 
         // TOTEST
-        public static async void KickPlayerFromLobby(long summonerIdToKick)
+        public static async System.Threading.Tasks.Task<bool> KickPlayerFromLobby(long summonerIdToKick)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -94,10 +102,12 @@ namespace HexClientProject.ApiServices
             {
                 throw new Exception("Err: Cannot kick summoner: " + summonerIdToKick + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
+
+            return true;
         }
 
         // TOTEST
-        public static async void PromotePlayer(long summonerIdToPromote)
+        public static async System.Threading.Tasks.Task<bool> PromotePlayer(long summonerIdToPromote)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -108,6 +118,8 @@ namespace HexClientProject.ApiServices
             {
                 throw new Exception("Err: Cannot kick summoner: " + summonerIdToPromote + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
+
+            return true;
         }
 
         // /!\ Need to store intation ids
@@ -128,7 +140,7 @@ namespace HexClientProject.ApiServices
 
         // TOTEST
         // /!\ Need to store invitation ids
-        public static async void AcceptLobbyInvitation(string invitationId)
+        public static async System.Threading.Tasks.Task<bool> AcceptLobbyInvitation(string invitationId)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -139,12 +151,14 @@ namespace HexClientProject.ApiServices
             {
                 throw new Exception("Err: Cannot accept lobby invitation: " + invitationId + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
+
+            return true;
         }
 
 
         // TOTEST
         // /!\ Need to store invitation ids
-        public static async void RejectLobbyInvitation(string invitationId)
+        public static async System.Threading.Tasks.Task<bool> RejectLobbyInvitation(string invitationId)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -155,6 +169,8 @@ namespace HexClientProject.ApiServices
             {
                 throw new Exception("Err: Cannot decline lobby invitation: " + invitationId + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
+
+            return true;
         }
 
         public static async void IsLobbyOpen(string invitationId)

@@ -74,22 +74,6 @@ public class SummonerInfoModel
     }
     public async void SetSummonerInfo()
     {
-        string response = await SummonerService.GetSummonerInfos();
-        dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response);
-
-        if (jsonObject == null)
-        {
-            throw new Exception("Set summoner infos: Json error");
-        }
-
-        _puuid = jsonObject.puuid;
-        _summonerId = jsonObject.summonerId;
-        _gameName = jsonObject.gameName;
-        _profileIconId = jsonObject.profileIconId;
-        _tagLine = jsonObject.tagLine;
-        _summonerLevel = jsonObject.summonerLevel;
-        _xpSinceLastLevel = jsonObject.xpSinceLastLevel;
-        _xpUntilNextLevel = jsonObject.xpUntilNextLevel; //TODO Louis: Add those attributes _rankId;_divisionId; _lp; _region;
     }
  
 }

@@ -76,7 +76,7 @@ namespace HexClientProject.ApiServices
             return JsonConvert.SerializeObject(jsonObject);
         }
 
-        public static async void SendFriendRequest(string gameName, string gameTag)
+        public static async System.Threading.Tasks.Task<bool> SendFriendRequest(string gameName, string gameTag)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -88,10 +88,13 @@ namespace HexClientProject.ApiServices
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot send friend request to" + gameName + "#" + gameTag + " - Return code: " + response.StatusCode + " | " + responseStr);
+                return false;
             }
+
+            return true;
         }
 
-        public static async void AcceptFriendRequest(string requestId)
+        public static async System.Threading.Tasks.Task<bool> AcceptFriendRequest(string requestId)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -101,10 +104,13 @@ namespace HexClientProject.ApiServices
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot accept friend request: " + requestId + " - Return code: " + response.StatusCode + " | " + responseStr);
+                return false;
             }
+
+            return true;
         }
 
-        public static async void RejectFriendRequest(string requestId)
+        public static async System.Threading.Tasks.Task<bool> RejectFriendRequest(string requestId)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -114,7 +120,10 @@ namespace HexClientProject.ApiServices
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot reject friend request: " + requestId + " - Return code: " + response.StatusCode + " | " + responseStr);
+                return false;
             }
+
+            return true;
         }
     }
 }
