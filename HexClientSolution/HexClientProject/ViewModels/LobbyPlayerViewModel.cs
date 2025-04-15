@@ -6,7 +6,7 @@ using HexClientProject.Models;
 
 namespace HexClientProject.ViewModels
 {
-    public partial class PlayerLineViewModel : ObservableObject
+    public partial class LobbyPlayerViewModel : ObservableObject
     {
         [ObservableProperty] private int _playerId;
 
@@ -16,7 +16,7 @@ namespace HexClientProject.ViewModels
 
         [ObservableProperty] private Bitmap _roleIcon2;
 
-        public PlayerLineViewModel(int playerId)
+        public LobbyPlayerViewModel(int playerId)
         {
             if (playerId >= StateManager.Instance.LobbyInfo.Summoners!.Count)
                 return;

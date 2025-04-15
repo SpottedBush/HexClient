@@ -9,6 +9,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <!-- Header Section -->
@@ -116,27 +117,42 @@
         </Grid>
         <ScrollViewer Grid.Row="2">
             <StackPanel Margin="30" Spacing="60">
-                <!-- ItemsControl will instantiate a PlayerLineControl for each ViewModel -->
+                <!-- ItemsControl will instantiate a LobbyPlayerControl for each ViewModel -->
                 <ItemsControl ItemsSource="{Binding Summoners}">
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="vm:PlayerLineViewModel">
-                            <controls:PlayerLineControl/>
+                        <DataTemplate x:DataType="vm:LobbyPlayerViewModel">
+                            <controls:LobbyPlayerControl/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+            <!-- Matchmaking Button -->
+            <Button Content="Start a queue"
+                    Width="200"
+                    Height="40"
+                    Background="#FFB3B3B3"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    CornerRadius="4"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding StartQueueCommand}"/>
 
-
-        <!-- Summoner List -->
-        <!-- <ItemsControl Grid.Row="2" Items="{Binding Summoners}"> -->
-        <!--     <ItemsControl.ItemTemplate> -->
-        <!--         <DataTemplate> -->
-        <!--             <Border Background="{Binding RowColor}" Height="30" BorderBrush="Black" BorderThickness="1"> -->
-        <!--                 <TextBlock Text="{Binding Name}" Margin="10" VerticalAlignment="Center"/> -->
-        <!--             </Border> -->
-        <!--         </DataTemplate> -->
-        <!--     </ItemsControl.ItemTemplate> -->
-        <!-- </ItemsControl> -->
+            <!-- Cross Button -->
+            <Button Content="✕"
+                    Width="40"
+                    Height="40"
+                    Background="#FFB3B3B3"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    CornerRadius="4"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding StopQueueCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -47,5 +47,41 @@ namespace HexClientProject.Models
                     return -1;
             }
         }
+        public static ChatScope StringToScopeConverter(string scopeString)
+        {
+            switch (scopeString)
+            {
+                case "Global":
+                    return ChatScope.Global;
+                case "Party":
+                    return ChatScope.Party;
+                case "Whisper":
+                    return ChatScope.Whisper;
+                case "Guild":
+                    return ChatScope.Guild;
+                case "System":
+                    return ChatScope.System;
+                default:
+                    return ChatScope.Global;
+            }
+        }
+        public static string ScopeToStringConverter(ChatScope scope)
+        {
+            switch (scope)
+            {
+                case ChatScope.Global:
+                    return "Global";
+                case ChatScope.Party:
+                    return "Party";
+                case ChatScope.Whisper:
+                    return "Whisper";
+                case ChatScope.Guild:
+                    return "Guild";
+                case ChatScope.System:
+                    return "System";
+                default:
+                    return "Global";
+            }
+        }
     }
 }

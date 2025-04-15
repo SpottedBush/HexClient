@@ -7,15 +7,15 @@ using HexClientProject.ViewModels;
 
 namespace HexClientProject.Controls
 {
-    public partial class PlayerLineControl : UserControl
+    public partial class LobbyPlayerControl : UserControl
     {
-        private PlayerLineViewModel vm;
+        private LobbyPlayerViewModel vm;
 
-        private PlayerLineControl(int playerId)
+        private LobbyPlayerControl(int playerId)
         {
             InitializeComponent();
 
-            vm = new PlayerLineViewModel(playerId);
+            vm = new LobbyPlayerViewModel(playerId);
 
             var stateManager = StateManager.Instance;
 
@@ -31,15 +31,15 @@ namespace HexClientProject.Controls
             DataContext = vm;
         }
 
-        public PlayerLineControl()
+        public LobbyPlayerControl()
         {
             InitializeComponent();
-            var playerLineControl = new PlayerLineControl(StateManager.Instance.LobbyInfo.NbPlayers - 1);
+            var LobbyPlayerControl = new LobbyPlayerControl(StateManager.Instance.LobbyInfo.NbPlayers - 1);
         }
 
-        public PlayerLineViewModel ViewModel
+        public LobbyPlayerViewModel ViewModel
         {
-            get => (PlayerLineViewModel)DataContext;
+            get => (LobbyPlayerViewModel)DataContext;
             set => DataContext = value;
         }
     }

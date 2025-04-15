@@ -2,8 +2,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:global="clr-namespace:"
+    xmlns:viewModels="clr-namespace:HexClientProject.ViewModels"
     x:Class="HexClientProject.Views.FriendsListView"
-    x:DataType="global:FriendsListViewModel">
+    x:DataType="viewModels:FriendsListViewModel">
 
     <StackPanel Margin="20" Spacing="10">
 
