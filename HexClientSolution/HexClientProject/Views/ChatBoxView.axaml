@@ -13,16 +13,23 @@
         <!-- Filter Dropdown (top right) -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Filter: " VerticalAlignment="Center" Margin="0,0,5,0"/>
-            <ComboBox ItemsSource="{Binding FilterOptions}"
+            <ComboBox ItemsSource="{Binding FilteringScopes}"
                       SelectedItem="{Binding SelectedFilter}"
-                      Width="120"/>
+                      Width="120">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+                                   Foreground="{Binding Converter={StaticResource ScopeToColorConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
 
         <!-- Messages List -->
-        <ListBox ItemsSource="{Binding FilteredMessages}" Height="200">
+        <ListBox x:Name="ChatListBox" ItemsSource="{Binding FilteredMessages, Mode=TwoWay}" Height="200">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Content}" Foreground="{Binding Scope, Converter={StaticResource ScopeToColorConverter}}"/>
+                    <ContentControl Content="{Binding DisplayTextBlock}"></ContentControl>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -32,16 +39,38 @@
 
             <!-- Scope Selector -->
             <ComboBox ItemsSource="{Binding Scopes}"
-                      SelectedItem="{Binding SelectedScope}"
+                      SelectedItem="{Binding SelectedScope, Mode=TwoWay}"
                       Width="100"
-                      Margin="0 0 0 5"/>
+                      Margin="0 0 0 5"
+                      PointerPressed="OnScopeClicked">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+                                   Foreground="{Binding Converter={StaticResource ScopeToColorConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             
             <!-- Input Box -->
             <TextBox Width="200"
-                     Text="{Binding MessageInput}"
+                     Text="{Binding MessageInput, Mode=TwoWay}"
                      KeyDown="MessageInput_KeyDown"
                      Watermark="Type your message..."/>
-
+            
+            <!-- Autocomplete suggestion box -->
+            <!-- <Popup Name="SuggestionsPopup" -->
+            <!--        PlacementTarget="{Binding MessageInput}" -->
+            <!--        Placement="Bottom" -->
+            <!--        IsOpen="{Binding IsSuggestionOpen}" -->
+            <!--        LostFocus="MessageInput_LostFocus"> -->
+            <!--     <Border Background="White" BorderBrush="Gray" BorderThickness="1"> -->
+            <!--         <ListBox ItemsSource="{Binding FilteredFriendSuggestions}" -->
+            <!--                  SelectedItem="{Binding SelectedSuggestion}" -->
+            <!--                  SelectionChanged="OnSuggestionSelected" -->
+            <!--         /> -->
+            <!--     </Border> -->
+            <!-- </Popup> -->
+            
             <!-- Send Button -->
             <Button Content="Send"
                     Command="{Binding SendMessageCommand}"

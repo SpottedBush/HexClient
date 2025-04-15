@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Threading;
 using HexClienT.Models;
 using ReactiveUI;
 
@@ -50,7 +49,6 @@ namespace HexClientProject.Models
             set => this.RaiseAndSetIfChanged(ref _api, value);
         }
 
-
         public void UpdateLobbyInfos()
         {
             Debug.Assert(_instance != null, nameof(_instance) + " != null");
@@ -71,9 +69,19 @@ namespace HexClientProject.Models
             SummonerStateChanged?.Invoke();
         }
 
-        public Task<List<FriendModel>> GetFriendsAsync()
+        public async Task LoadFriendsAsync()
         {
-            return Task.Run(MockingApiService.GetFriends);
+            Task<List<FriendModel>> taskFriends;
+            if (_instance is { IsOnlineMode: false })
+            {
+                taskFriends = Task.Run(MockingApiService.GetFriends);
+            }
+            else
+            {
+                taskFriends = Task.Run(MockingApiService.GetFriends); // TODO LOUIS: Add API Logic
+            }
+            _friends = new ObservableCollection<FriendModel>(await taskFriends);
+            Friends = new ReadOnlyObservableCollection<FriendModel>(_friends);
         }
 
         public Task<bool> AddFriendAsync(string username)

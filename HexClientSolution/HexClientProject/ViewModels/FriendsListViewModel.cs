@@ -30,9 +30,9 @@ public class FriendsListViewModel : ViewModelBase
 
     private async Task LoadFriendsAsync()
     {
-        var loaded = await _stateManager.GetFriendsAsync();
+        await _stateManager.LoadFriendsAsync();
         Friends.Clear();
-        foreach (var f in loaded)
+        foreach (var f in _stateManager.Friends)
             Friends.Add(f);
     }
 
@@ -47,7 +47,8 @@ public class FriendsListViewModel : ViewModelBase
     public void WhisperTo(string username)
     {
         _stateManager.ChatBoxViewModel.SelectedScope = ChatScope.Whisper;
-        _stateManager.ChatBoxViewModel.MessageInput = $"/mp <{username}>";
+        _stateManager.ChatBoxViewModel.SelectedWhisperTarget = username;
+        _stateManager.ChatBoxViewModel.MessageInput = $"/mp <{username}> ";
+        _stateManager.ChatBoxViewModel.ApplyFilterToWhisper(username);
     }
-
 }
