@@ -167,7 +167,6 @@ public class ChatBoxViewModel : ReactiveObject
     public void ApplyFilterToWhisper(string username)
     {
         FilteredMessages.Clear();
-        Console.WriteLine(SelectedScope);
         var filtered = Messages.Where(msg =>
             msg.Scope == SelectedFilter && 
             (msg.Sender == username 

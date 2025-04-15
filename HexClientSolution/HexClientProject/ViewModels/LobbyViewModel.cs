@@ -11,25 +11,25 @@ namespace HexClientProject.ViewModels
 {
     public partial class LobbyViewModel : ObservableObject
     {
-        private static readonly StateManager StateManager = StateManager.Instance;
+        private readonly StateManager _stateManager = StateManager.Instance;
         
         [ObservableProperty]
-        private string _gameModeName = StateManager.LobbyInfo.CurrSelectedGameModeModel.GameModeDescription;
+        private string _gameModeName;
 
         [ObservableProperty]
-        private string _lobbyName = StateManager.LobbyInfo.LobbyName;
+        private string _lobbyName;
 
         [ObservableProperty]
-        private string _summonerName = StateManager.SummonerInfo.GameName;
+        private string _summonerName;
         
         [ObservableProperty]
-        private int _summonerLevel = StateManager.SummonerInfo.SummonerLevel;
+        private int _summonerLevel;
 
         [ObservableProperty]
-        private string _summonerRank = SummonerInfoViewModel.RankStrings[StateManager.SummonerInfo.RankId];
+        private string _summonerRank;
         
         [ObservableProperty]
-        private string _summonerDivision = SummonerInfoViewModel.RankDivisions[StateManager.SummonerInfo.RankId];
+        private string _summonerDivision;
         
         public ObservableCollection<PlayerLineViewModel> Summoners { get; set; } = new();
         
@@ -54,15 +54,28 @@ namespace HexClientProject.ViewModels
         public ICommand AssignRole2Command { get; set; }
         public ICommand ReturnToGameModeCommand { get; }
         public ICommand StartQueueCommand { get; }
+        public ICommand StopQueueCommand { get; }
 
         public LobbyViewModel(MainViewModel mainViewModel)
         {
-            for (int i = 1; i < StateManager.Instance.LobbyInfo.Summoners!.Count; i++) // Skipping curr player
+            for (int i = 1; i < _stateManager.LobbyInfo.Summoners!.Count; i++) // Skipping curr player
             {
                 Summoners.Add(new PlayerLineViewModel(i));
             }
-            ReturnToGameModeCommand = new RelayCommand(mainViewModel.SwitchToGameModeSelection);
 
+            _gameModeName = _stateManager.LobbyInfo.CurrSelectedGameModeModel.GameModeDescription;
+            _lobbyName = _stateManager.LobbyInfo.LobbyName;
+            _summonerName = _stateManager.SummonerInfo.GameName;
+            _summonerLevel = _stateManager.SummonerInfo.SummonerLevel;
+            _summonerRank = SummonerInfoViewModel.RankStrings[_stateManager.SummonerInfo.RankId];
+            _summonerDivision = SummonerInfoViewModel.RankDivisions[_stateManager.SummonerInfo.RankId];
+            ReturnToGameModeCommand = new RelayCommand(mainViewModel.SwitchToGameModeSelection);
+            StartQueueCommand = new RelayCommand(()=>
+                Console.WriteLine("Start queue command")
+            );
+            StopQueueCommand = new RelayCommand(() =>
+                Console.WriteLine("Stop queue command")
+            );
             AssignRole1Command = new RelayCommand<string>(role =>
             {
                 if (role == _selectedRole2) // Role swapping
@@ -90,12 +103,6 @@ namespace HexClientProject.ViewModels
                 SelectedRole2Image = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role}_icon.png")));
                 
             });
-            [RelayCommand]
-            void StartQueueCommand()
-            {
-                // Your logic here
-                Console.WriteLine("Starting the queue...");
-            }
         }
     }
 }

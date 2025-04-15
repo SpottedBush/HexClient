@@ -16,7 +16,7 @@ namespace HexClientProject.Models
         public int Level { get; set; }
 
         public bool IsOnline { get; set; }
-        public ObservableCollection<MessageModel> Messages { get; set; } = new();
+        public ObservableCollection<MessageModel> ChatMessages { get; set; } = new();
 
         public FriendModel()
         {
