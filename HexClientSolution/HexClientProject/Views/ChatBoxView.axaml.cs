@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using HexClientProject.Models;
+using HexClientProject.ViewModels;
 
 namespace HexClientProject.Views
 {
@@ -69,7 +70,7 @@ namespace HexClientProject.Views
 
             if ((e.Key == Key.Return || e.Key == Key.Enter) && DataContext is ChatBoxViewModel vm)
             {
-                vm.SendMessageCommand.Execute(textbox).Subscribe();
+                vm.SendMessageCommand.Execute().Subscribe();
                 e.Handled = true;
             }
         }

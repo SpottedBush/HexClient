@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using HexClientProject.Models;
+using HexClientProject.ViewModels;
 
 namespace HexClientProject.Views
 {

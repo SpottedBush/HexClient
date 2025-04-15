@@ -1,22 +1,21 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Avalonia.Threading;
 using HexClientProject.Models;
-using HexClientProject.ViewModels;
 using ReactiveUI;
+
+namespace HexClientProject.ViewModels;
 
 public class FriendsListViewModel : ViewModelBase
 {
     public ObservableCollection<FriendModel> Friends { get; } = new();
     private readonly StateManager _stateManager = StateManager.Instance;
     public ReactiveCommand<Unit, Unit> AddFriendCommand { get; }
-    public string NewFriendUsername { get; set; }
-    private FriendModel _selectedFriend;
+    public string? NewFriendUsername { get; set; }
+    private FriendModel? _selectedFriend;
 
-    public FriendModel SelectedFriend
+    public FriendModel? SelectedFriend
     {
         get => _selectedFriend;
         set => this.RaiseAndSetIfChanged(ref _selectedFriend, value);

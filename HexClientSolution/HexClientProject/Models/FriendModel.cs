@@ -7,12 +7,12 @@ namespace HexClientProject.Models
     public class FriendModel: SummonerInfoModel
     {
         public int IconId { get; set; }
-        public required string Username { get; set; }
+        public required string? Username { get; set; }
         public required string Status { get; set; }
-        public int RankId { get; set; }
+        public new int RankId { get; init; }
         public string RankDisplay { get; set; }
 
-        public int DivisionId { get; set; }
+        public new int DivisionId { get; init; }
         public int Level { get; set; }
 
         public bool IsOnline { get; set; }

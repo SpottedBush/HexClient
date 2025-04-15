@@ -9,6 +9,17 @@ public class ScopeToColorConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
+        if (value is string s)
+            return s switch
+            {
+                "Global" => Brushes.Cyan,
+                "Party" => Brushes.Green,
+                "Whisper" => Brushes.MediumPurple,
+                "Guild" => Brushes.Lime,
+                "System" => Brushes.Red,
+                _ => Brushes.MediumPurple // Default, corresponds to conversations with friends
+            };
+        
         if (value is ChatScope scope)
         {
             return scope switch

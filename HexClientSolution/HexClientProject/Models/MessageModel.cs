@@ -13,7 +13,7 @@ public class MessageModel
     public DateTime Timestamp { get; set; }
     public ChatScope Scope { get; set; }
     public string SenderIcon { get; set; } // Rank Icon
-    public string WhisperingTo { get; set; }
+    public string? WhisperingTo { get; set; }
 
     public TextBlock DisplayTextBlock
     {

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using HexClienT.Models;
+using HexClientProject.ViewModels;
 using ReactiveUI;
 
 namespace HexClientProject.Models
@@ -84,7 +85,7 @@ namespace HexClientProject.Models
             Friends = new ReadOnlyObservableCollection<FriendModel>(_friends);
         }
 
-        public Task<bool> AddFriendAsync(string username)
+        public Task<bool> AddFriendAsync(string? username)
         {
             return Task.Run(() => MockingApiService.AddFriend(new FriendModel
             {
