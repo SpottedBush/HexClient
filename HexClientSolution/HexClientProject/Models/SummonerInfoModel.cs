@@ -75,5 +75,4 @@ public class SummonerInfoModel
     public async void SetSummonerInfo()
     {
     }
- 
 }

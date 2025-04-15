@@ -132,15 +132,12 @@ public class ChatBoxViewModel : ReactiveObject
         switch (SelectedFilter)
         {
             case "Global":
-                filtered = filtered.Where(msg => msg.Scope is ChatScope.Global or ChatScope.System);
                 break;
             case "Party":
                 filtered = filtered.Where(msg => msg.Scope is ChatScope.Party or ChatScope.System);
                 break;
             case "Whisper":
-                filtered = filtered.Where(msg =>
-                    (msg.Sender == _stateManager.SummonerInfo.GameName && msg.WhisperingTo == SelectedWhisperTarget)
-                    || msg.Sender == SelectedWhisperTarget && msg.WhisperingTo == _stateManager.SummonerInfo.GameName);
+                filtered = filtered.Where(msg =>(msg.Scope is ChatScope.Whisper or ChatScope.System));
                 break;
             case "Guild":
                 filtered = filtered.Where(msg => msg.Scope is ChatScope.Guild or ChatScope.System);
@@ -150,8 +147,8 @@ public class ChatBoxViewModel : ReactiveObject
                 break;
             default:
                 filtered = filtered.Where(msg => (msg.Scope is ChatScope.Whisper &&
-                                                  msg.Sender == SelectedFilter || msg.WhisperingTo == SelectedFilter)
-                                                 || msg.Scope == ChatScope.System);
+                                                  (msg.Sender == SelectedFilter || msg.WhisperingTo == SelectedFilter)
+                                                 || msg.Scope == ChatScope.System));
                 break;
         }
         foreach (var msg in filtered)

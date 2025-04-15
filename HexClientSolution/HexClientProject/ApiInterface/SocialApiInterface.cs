@@ -54,17 +54,13 @@ namespace HexClientProject.ApiInterface
 
             // Get friend summoner infos models
             List<SummonerInfoModel> friendSummonerModelList = SummonerApiInterface.CreateSummonerInfoList(friendPuuidList);
-            if (friendSummonerModelList == null)
-            {
-                throw new Exception("Set lobby infos: Json error");
-                return null;
-            }
 
             // Create friend models and fill the list
             foreach (var friend in jsonObject)
             {
                 friendModelList.Add(new FriendModel
                 {
+                    Puuid = friend.puuid,
                     Username = friendSummonerModelList[count].GameName,
                     Status = friend.statusMessage,
                     RankId = friendSummonerModelList[count].RankId,
