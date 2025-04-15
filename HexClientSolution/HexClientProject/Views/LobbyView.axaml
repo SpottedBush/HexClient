@@ -117,11 +117,11 @@
         </Grid>
         <ScrollViewer Grid.Row="2">
             <StackPanel Margin="30" Spacing="60">
-                <!-- ItemsControl will instantiate a PlayerLineControl for each ViewModel -->
+                <!-- ItemsControl will instantiate a LobbyPlayerControl for each ViewModel -->
                 <ItemsControl ItemsSource="{Binding Summoners}">
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="vm:PlayerLineViewModel">
-                            <controls:PlayerLineControl/>
+                        <DataTemplate x:DataType="vm:LobbyPlayerViewModel">
+                            <controls:LobbyPlayerControl/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

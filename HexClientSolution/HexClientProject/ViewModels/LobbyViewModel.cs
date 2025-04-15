@@ -31,7 +31,7 @@ namespace HexClientProject.ViewModels
         [ObservableProperty]
         private string _summonerDivision;
         
-        public ObservableCollection<PlayerLineViewModel> Summoners { get; set; } = new();
+        public ObservableCollection<LobbyPlayerViewModel> Summoners { get; set; } = new();
         
         public string DisplayText => $"{SummonerName} (Level {SummonerLevel}) Rank: {SummonerRank} {SummonerDivision}";
 
@@ -60,7 +60,7 @@ namespace HexClientProject.ViewModels
         {
             for (int i = 1; i < _stateManager.LobbyInfo.Summoners!.Count; i++) // Skipping curr player
             {
-                Summoners.Add(new PlayerLineViewModel(i));
+                Summoners.Add(new LobbyPlayerViewModel(i));
             }
 
             _gameModeName = _stateManager.LobbyInfo.CurrSelectedGameModeModel.GameModeDescription;

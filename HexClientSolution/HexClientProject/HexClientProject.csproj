@@ -47,8 +47,8 @@
         <DependentUpon>SummonerLobbyTemplate.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\PlayerLineControl.axaml.cs">
-        <DependentUpon>PlayerLineControl.axaml</DependentUpon>
+      <Compile Update="Views\LobbyPlayerControl.axaml.cs">
+        <DependentUpon>LobbyPlayerControl.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
