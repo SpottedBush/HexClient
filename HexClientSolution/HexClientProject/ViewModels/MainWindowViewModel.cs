@@ -1,38 +1,45 @@
 ﻿using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using ReactiveUI;
+using System.Reactive;
 using HexClientProject.Models;
 using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels
 {
-    public partial class MainWindowViewModel : ObservableObject
+    public class MainWindowViewModel : ReactiveObject
     {
         private readonly StateManager _stateManager = StateManager.Instance;
-        [ObservableProperty]
+
         private UserControl? _currentView;
+        public UserControl? CurrentView
+        {
+            get => _currentView;
+            set => this.RaiseAndSetIfChanged(ref _currentView, value);
+        }
+
+        public ReactiveCommand<Unit, Unit> OpenLocalMainView { get; }
+        public ReactiveCommand<Unit, Unit> OpenOnlineMainView { get; }
 
         public MainWindowViewModel()
         {
             // Show StartView initially
             CurrentView = new StartView();
-        }
 
-        [RelayCommand]
-        public void OpenLocalMainView()
-        {
-            _stateManager.IsOnlineMode = false;
-            MainViewModel mainViewModel = new MainViewModel();
-            MockingApiService.MockSetSummonerInfo();
-            CurrentView = new MainView { DataContext = mainViewModel };
-        }
-        [RelayCommand]
-        public void OpenOnlineMainView()
-        {
-            _stateManager.IsOnlineMode = true;
-            MainViewModel mainViewModel = new MainViewModel();
-            MockingApiService.MockSetSummonerInfo();
-            CurrentView = new MainView { DataContext = mainViewModel };
+            OpenLocalMainView = ReactiveCommand.Create(() =>
+            {
+                _stateManager.IsOnlineMode = false;
+                var mainViewModel = new MainViewModel();
+                MockingApiService.MockSetSummonerInfo();
+                CurrentView = new MainView { DataContext = mainViewModel };
+            });
+
+            OpenOnlineMainView = ReactiveCommand.Create(() =>
+            {
+                _stateManager.IsOnlineMode = true;
+                var mainViewModel = new MainViewModel();
+                MockingApiService.MockSetSummonerInfo();
+                CurrentView = new MainView { DataContext = mainViewModel };
+            });
         }
     }
 }

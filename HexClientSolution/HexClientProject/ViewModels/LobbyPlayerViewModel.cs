@@ -3,18 +3,39 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using HexClientProject.Models;
+using ReactiveUI;
 
 namespace HexClientProject.ViewModels
 {
-    public partial class LobbyPlayerViewModel : ObservableObject
+    public class LobbyPlayerViewModel : ReactiveObject
     {
-        [ObservableProperty] private int _playerId;
+        private int _playerId;
+        public int PlayerId
+        {
+            get => _playerId;
+            set => this.RaiseAndSetIfChanged(ref _playerId, value);
+        }
 
-        [ObservableProperty] private string _displayText;
+        private string _displayText;
+        public string DisplayText
+        {
+            get => _displayText;
+            set => this.RaiseAndSetIfChanged(ref _displayText, value);
+        }
+        private Bitmap _roleIcon1;
 
-        [ObservableProperty] private Bitmap _roleIcon1;
+        public Bitmap RoleIcon1
+        {
+            get => _roleIcon1;
+            set => this.RaiseAndSetIfChanged(ref _roleIcon1, value);
+        }
 
-        [ObservableProperty] private Bitmap _roleIcon2;
+        private Bitmap _roleIcon2;
+        public Bitmap RoleIcon2
+        {
+            get => _roleIcon2;
+            set => this.RaiseAndSetIfChanged(ref _roleIcon2, value);
+        }
 
         public LobbyPlayerViewModel(int playerId)
         {

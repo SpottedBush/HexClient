@@ -10,13 +10,8 @@ public class SummonerInfoModel
 {
     
     private string _puuid;
-    private long _summonerId;
     private string _gameName;
-    private int _profileIconId;
     private string _tagLine;
-    private int _summonerLevel;
-    private int _xpSinceLastLevel;
-    private int _xpUntilNextLevel;
     private int _rankId;
     private int _divisionId;
     private int _lp;
@@ -31,11 +26,7 @@ public class SummonerInfoModel
         set => _puuid = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public long SummonerId
-    {
-        get => _summonerId;
-        set => _summonerId = value;
-    }
+    public long SummonerId { get; set; }
 
     public string GameName
     {
@@ -43,11 +34,7 @@ public class SummonerInfoModel
         set => _gameName = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public int ProfileIconId
-    {
-        get => _profileIconId;
-        set => _profileIconId = value;
-    }
+    public int ProfileIconId { get; set; }
 
     public string TagLine
     {
@@ -55,24 +42,9 @@ public class SummonerInfoModel
         set => _tagLine = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public int SummonerLevel
-    {
-        get => _summonerLevel;
-        set => _summonerLevel = value;
-    }
+    public int SummonerLevel { get; set; }
 
-    public int XpSinceLastLevel
-    {
-        get => _xpSinceLastLevel;
-        set => _xpSinceLastLevel = value;
-    }
+    public int XpSinceLastLevel { get; set; }
 
-    public int XpUntilNextLevel
-    {
-        get => _xpUntilNextLevel;
-        set => _xpUntilNextLevel = value;
-    }
-    public async void SetSummonerInfo()
-    {
-    }
+    public int XpUntilNextLevel { get; set; }
 }

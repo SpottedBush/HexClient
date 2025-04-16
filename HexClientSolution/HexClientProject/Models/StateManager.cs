@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using HexClienT.Models;
@@ -28,8 +26,6 @@ namespace HexClientProject.Models
         private ObservableCollection<FriendModel> _friends = new();
         public ReadOnlyObservableCollection<FriendModel> Friends { get; set; }
         public ChatBoxViewModel ChatBoxViewModel { get; set; } = null!;
-        public event Action LobbyStateChanged = null!;
-        public event Action SummonerStateChanged = null!;
 
         private static StateManager? _instance;
 
@@ -43,33 +39,6 @@ namespace HexClientProject.Models
                 return _instance;
             }
         }
-
-        public LcuApi.ILeagueClient Api
-        {
-            get => _api;
-            set => this.RaiseAndSetIfChanged(ref _api, value);
-        }
-
-        public void UpdateLobbyInfos()
-        {
-            Debug.Assert(_instance != null, nameof(_instance) + " != null");
-            _instance.LobbyInfo = new LobbyInfoModel();
-            _instance.LobbyInfo.SetLobbyInfo();
-
-            // Notify subscribers that the state has changed
-            LobbyStateChanged?.Invoke();
-        }
-
-        public void SetSummonerInfo()
-        {
-            Debug.Assert(_instance != null, nameof(_instance) + " != null");
-            _instance.SummonerInfo = new SummonerInfoModel();
-            _instance.SummonerInfo.SetSummonerInfo();
-
-            // Notify subscribers that the state has changed
-            SummonerStateChanged?.Invoke();
-        }
-
         public async Task LoadFriendsAsync()
         {
             Task<List<FriendModel>> taskFriends;
