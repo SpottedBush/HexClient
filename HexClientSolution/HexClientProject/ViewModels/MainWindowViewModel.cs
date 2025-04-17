@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using Avalonia.Controls;
 using ReactiveUI;
 using System.Reactive;
 using HexClientProject.Models;
@@ -25,21 +26,18 @@ namespace HexClientProject.ViewModels
             // Show StartView initially
             CurrentView = new StartView();
 
-            OpenLocalMainView = ReactiveCommand.Create(() =>
-            {
-                _stateManager.IsOnlineMode = false;
-                var mainViewModel = new MainViewModel();
-                MockingApiService.MockSetSummonerInfo();
-                CurrentView = new MainView { DataContext = mainViewModel };
-            });
+            OpenLocalMainView = ReactiveCommand.Create(OpenMainView(false));
 
-            OpenOnlineMainView = ReactiveCommand.Create(() =>
+            OpenOnlineMainView = ReactiveCommand.Create(OpenMainView(true));
+        }
+        Action OpenMainView(bool isOnline)
+        {
+            return () =>
             {
-                _stateManager.IsOnlineMode = true;
-                var mainViewModel = new MainViewModel();
-                MockingApiService.MockSetSummonerInfo();
-                CurrentView = new MainView { DataContext = mainViewModel };
-            });
+                _stateManager.IsOnlineMode = isOnline;
+            var mainViewModel = new MainViewModel();
+            CurrentView = new MainView { DataContext = mainViewModel };
+            };
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using LcuApi;
 
-namespace HexClientProject.ApiServices
+namespace HexClientProject.Services.Api
 {
-    public class SummonerService
+    public static class SummonerService
     {
         public static async System.Threading.Tasks.Task<string> GetCurrentSummonerInfos()
         {

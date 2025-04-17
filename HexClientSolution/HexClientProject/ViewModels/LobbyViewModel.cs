@@ -203,7 +203,7 @@ namespace HexClientProject.ViewModels
             _summonerLevel = _stateManager.SummonerInfo.SummonerLevel;
             _summonerRank = SummonerInfoViewModel.RankStrings[_stateManager.SummonerInfo.RankId];
             _summonerDivision = SummonerInfoViewModel.RankDivisions[_stateManager.SummonerInfo.RankId];
-            ReturnToGameModeCommand = ReactiveCommand.Create(mainViewModel.SwitchToGameModeSelection);
+            ReturnToGameModeCommand = ReactiveCommand.Create(() => { _stateManager.LeftPanelContent = new GameModeSelectionView(mainViewModel);});
             StartQueueCommand = ReactiveCommand.Create(StartQueue);
             LeaveQueueCommand = ReactiveCommand.Create(LeaveQueue);
             AssignRole1Command = ReactiveCommand.Create<string>(role =>

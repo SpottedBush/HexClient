@@ -2,7 +2,7 @@
 using LcuApi;
 using Newtonsoft.Json;
 
-namespace HexClientProject.ApiServices
+namespace HexClientProject.Services.Api
 {
     public class SocialService
     {

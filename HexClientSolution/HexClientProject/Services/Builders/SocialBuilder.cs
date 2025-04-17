@@ -1,37 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HexClienT.Models;
+using HexClientProject.Interfaces;
 using HexClientProject.Models;
+using HexClientProject.Services.Api;
 using HexClientProject.ViewModels;
 using Newtonsoft.Json;
 
-namespace HexClientProject.ApiInterface
+namespace HexClientProject.Services.Builders
 {
-    public class SocialApiInterface
+    public class SocialBuilder
     {
-        public static FriendModel CreateFriendModel(string puuid)
+        public static FriendModel? CreateFriendModel(string puuid)
         { 
-            string response = ApiServices.SocialService.GetFriends().Result;
+            string response = SocialService.GetFriends().Result;
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
             foreach (var friend in jsonObject) 
             {
                 if (friend.puuid == puuid)
                 {
-                    string responseSIR = ApiServices.SummonerService.GetSummonerRankedInfos(puuid).Result;
-                    dynamic jsonObjectSIR = JsonConvert.DeserializeObject<dynamic>(responseSIR);
-                    Func<dynamic, bool> filterCondition = x => x.queueType == "RANKED_SOLO_5x5";
-                    dynamic queueStatsList = jsonObjectSIR.Filter(filterCondition);
+                    string responseSiR = SummonerService.GetSummonerRankedInfos(puuid).Result;
+                    dynamic? jsonObjectSiR = JsonConvert.DeserializeObject<dynamic>(responseSiR);
+                    bool FilterCondition(dynamic x) => x.queueType == "RANKED_SOLO_5x5";
+                    if (jsonObjectSiR != null)
+                    {
+                        dynamic queueStatsList = jsonObjectSiR.Filter((Func<dynamic, bool>)FilterCondition);
 
-                    return new FriendModel { 
-                        Username = friend.gameName,
-                        Status = friend.statusMessage,
-                        RankId = SummonerInfoViewModel.RankStrings.Find(queueStatsList[0].tier),
-                        DivisionId = SummonerInfoViewModel.RankStrings.Find(queueStatsList[0].tier) 
-                    };
+                        return new FriendModel { 
+                            Username = friend.gameName,
+                            Status = friend.statusMessage,
+                            RankId = SummonerInfoViewModel.RankStrings.Find(queueStatsList[0].tier),
+                            DivisionId = SummonerInfoViewModel.RankStrings.Find(queueStatsList[0].tier) 
+                        };
+                    }
                 }
             }
             return null;
@@ -42,7 +44,7 @@ namespace HexClientProject.ApiInterface
             List<FriendModel> friendModelList = new List<FriendModel>();
 
             // Get api response
-            string response = ApiServices.SocialService.GetFriends().Result;
+            string response = SocialService.GetFriends().Result;
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
             // Get friend puuids
@@ -53,7 +55,7 @@ namespace HexClientProject.ApiInterface
             }
 
             // Get friend summoner infos models
-            List<SummonerInfoModel> friendSummonerModelList = SummonerApiInterface.CreateSummonerInfoList(friendPuuidList);
+            List<SummonerInfoModel> friendSummonerModelList = SummonerBuilder.CreateSummonerInfoList(friendPuuidList);
 
             // Create friend models and fill the list
             foreach (var friend in jsonObject)

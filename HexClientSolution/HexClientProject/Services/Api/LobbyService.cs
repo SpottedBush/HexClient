@@ -2,7 +2,7 @@
 using HexClientProject.Models;
 using LcuApi;
 
-namespace HexClientProject.ApiServices
+namespace HexClientProject.Services.Api
 {
     public class LobbyService
     {

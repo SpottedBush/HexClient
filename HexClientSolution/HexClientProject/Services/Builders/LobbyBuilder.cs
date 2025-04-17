@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using HexClienT.Models;
+using HexClientProject.Interfaces;
 using HexClientProject.Models;
+using HexClientProject.Services.Api;
 using Newtonsoft.Json;
 
-namespace HexClientProject.ApiInterface
+namespace HexClientProject.Services.Builders
 {
-    public class LobbyApiInterface
+    public class LobbyBuilder
     {
         public static LobbyInfoModel CreateLobbyInfoModel()
         {
             LobbyInfoModel lobbyInfoModel = new LobbyInfoModel();
 
-            string response = ApiServices.LobbyService.GetLobbyInfos().Result;
+            string response = LobbyService.GetLobbyInfos().Result;
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
             if (jsonObject == null)
             {
                 throw new Exception("Set lobby infos: Json error");
-                return null;
             }
 
             lobbyInfoModel.LobbyName = jsonObject.gameConfig.customLobbyName;
@@ -46,12 +47,11 @@ namespace HexClientProject.ApiInterface
                 sumPuuidList.Add(m.puuid);
             }
 
-            List<SummonerInfoModel> sumList = SummonerApiInterface.CreateSummonerInfoList(sumPuuidList);
+            List<SummonerInfoModel> sumList = SummonerBuilder.CreateSummonerInfoList(sumPuuidList);
             
             if (sumList == null)
             {
                 throw new Exception("Set lobby infos: Json error");
-                return null;
             }
 
             lobbyInfoModel.Summoners = sumList;
