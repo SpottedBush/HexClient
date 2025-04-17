@@ -3,7 +3,7 @@ using LcuApi;
 
 namespace HexClientProject.Services.Api
 {
-    public static class SummonerService
+    public static class SummonerApi
     {
         public static async System.Threading.Tasks.Task<string> GetCurrentSummonerInfos()
         {

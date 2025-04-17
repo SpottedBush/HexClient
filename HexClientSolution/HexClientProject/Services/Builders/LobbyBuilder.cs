@@ -8,13 +8,14 @@ using Newtonsoft.Json;
 
 namespace HexClientProject.Services.Builders
 {
-    public class LobbyBuilder
+    public class LobbyBuilder : ILobbyService
     {
-        public static LobbyInfoModel CreateLobbyInfoModel()
+        private readonly SummonerBuilder _summonerBuilder = new SummonerBuilder();
+        public LobbyInfoModel CreateLobbyInfoModel()
         {
             LobbyInfoModel lobbyInfoModel = new LobbyInfoModel();
 
-            string response = LobbyService.GetLobbyInfos().Result;
+            string response = LobbyApi.GetLobbyInfos().Result;
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
             if (jsonObject == null)
@@ -47,7 +48,7 @@ namespace HexClientProject.Services.Builders
                 sumPuuidList.Add(m.puuid);
             }
 
-            List<SummonerInfoModel> sumList = SummonerBuilder.CreateSummonerInfoList(sumPuuidList);
+            List<SummonerInfoModel> sumList = _summonerBuilder.GetSummonerInfoList(sumPuuidList);
             
             if (sumList == null)
             {

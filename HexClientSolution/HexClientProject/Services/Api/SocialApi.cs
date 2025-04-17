@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace HexClientProject.Services.Api
 {
-    public class SocialService
+    public static class SocialApi
     {
         public static async System.Threading.Tasks.Task<string> GetFriends()
         {

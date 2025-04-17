@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using HexClienT.Models;
+using HexClientProject.Interfaces;
 using HexClientProject.Services.Api;
 using HexClientProject.ViewModels;
 using Newtonsoft.Json;
 
-namespace HexClientProject.Interfaces
+namespace HexClientProject.Services.Builders
 {
-    public interface SummonerBuilder
+    public class SummonerBuilder : ISummonerService
     {
-        public static SummonerInfoModel GetCurrentSummonerInfoModel()
+        public SummonerInfoModel GetCurrentSummonerInfoModel()
         {
             SummonerInfoModel summonerInfoModel = new SummonerInfoModel();
 
-            string responseSi = SummonerService.GetCurrentSummonerInfos().Result;
+            string responseSi = SummonerApi.GetCurrentSummonerInfos().Result;
             dynamic jsonObjectSi = JsonConvert.DeserializeObject<dynamic>(responseSi)
                                    ?? throw new InvalidOperationException("Could not get current summoner infos");
 
-            string responseSiR = SummonerService.GetSummonerRankedInfos(jsonObjectSi.puuid).Result;
+            string responseSiR = SummonerApi.GetSummonerRankedInfos(jsonObjectSi.puuid).Result;
             dynamic jsonObjectSiR = JsonConvert.DeserializeObject<dynamic>(responseSiR)
                                     ?? throw new InvalidOperationException("Could not get current summoner ranked infos");
 
@@ -46,13 +47,13 @@ namespace HexClientProject.Interfaces
         }
 
 
-        private static SummonerInfoModel CreateSummonerInfoModel(string puuid)
+        public SummonerInfoModel GetSummonerInfoModel(string puuid)
         {
             SummonerInfoModel summonerInfoModel = new SummonerInfoModel();
-            string responseSi = SummonerService.GetSummonerInfos(puuid).Result;
+            string responseSi = SummonerApi.GetSummonerInfos(puuid).Result;
             dynamic? jsonObjectSi = JsonConvert.DeserializeObject<dynamic>(responseSi);
 
-            string responseSiR = SummonerService.GetSummonerRankedInfos(puuid).Result;
+            string responseSiR = SummonerApi.GetSummonerRankedInfos(puuid).Result;
             dynamic? jsonObjectSiR = JsonConvert.DeserializeObject<dynamic>(responseSiR);
 
             if (jsonObjectSi == null || jsonObjectSiR == null)
@@ -79,13 +80,13 @@ namespace HexClientProject.Interfaces
             return summonerInfoModel;
         }
 
-        public static List<SummonerInfoModel> CreateSummonerInfoList(List<string> puuidList)
+        public List<SummonerInfoModel> GetSummonerInfoList(List<string> puuidList)
         {
             List<SummonerInfoModel> summonerInfoModelList = new List<SummonerInfoModel>();
 
             foreach (string puuid in puuidList)
             {
-                var summonerInfoModel = CreateSummonerInfoModel(puuid);
+                var summonerInfoModel = GetSummonerInfoModel(puuid);
 
                 summonerInfoModelList.Add(summonerInfoModel);
             }

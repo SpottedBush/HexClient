@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Threading.Tasks;
 using HexClientProject.Models;
+using HexClientProject.Services.Providers;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels;
@@ -23,25 +24,27 @@ public class FriendsListViewModel : ViewModelBase
     
     public FriendsListViewModel()
     {
-        AddFriendCommand = ReactiveCommand.CreateFromTask(AddFriendAsync);
-        LoadFriendsAsync().ConfigureAwait(true);
+        AddFriendCommand = ReactiveCommand.Create(AddFriend);
+        LoadFriends();
     }
 
-    private async Task LoadFriendsAsync()
+    private void LoadFriends()
     {
-        await _stateManager.LoadFriendsAsync();
+        _stateManager.Friends = new ObservableCollection<FriendModel>(ApiProvider.SocialService.GetFriendModelList());
         Friends.Clear();
         foreach (var f in _stateManager.Friends)
             Friends.Add(f);
     }
 
-    private async Task AddFriendAsync()
+    private void AddFriend()
     {
-        bool success = await _stateManager.AddFriendAsync(NewFriendUsername);
-        if (success)
+        ApiProvider.SocialService.AddFriend(new FriendModel
         {
-            await LoadFriendsAsync(); // Refresh the list
-        }
+            Username = NewFriendUsername,
+            Status = "RIVEN OTP",
+            RankId = 1,
+            DivisionId = 2
+        });
     }
     public void WhisperTo(string username)
     {

@@ -9,18 +9,19 @@ using Newtonsoft.Json;
 
 namespace HexClientProject.Services.Builders
 {
-    public class SocialBuilder
+    public class SocialBuilder : ISocialService
     {
-        public static FriendModel? CreateFriendModel(string puuid)
+        private readonly SummonerBuilder _summonerBuilder = new SummonerBuilder();
+        public FriendModel? GetFriendModel(string puuid)
         { 
-            string response = SocialService.GetFriends().Result;
+            string response = SocialApi.GetFriends().Result;
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
             foreach (var friend in jsonObject) 
             {
                 if (friend.puuid == puuid)
                 {
-                    string responseSiR = SummonerService.GetSummonerRankedInfos(puuid).Result;
+                    string responseSiR = SummonerApi.GetSummonerRankedInfos(puuid).Result;
                     dynamic? jsonObjectSiR = JsonConvert.DeserializeObject<dynamic>(responseSiR);
                     bool FilterCondition(dynamic x) => x.queueType == "RANKED_SOLO_5x5";
                     if (jsonObjectSiR != null)
@@ -38,13 +39,13 @@ namespace HexClientProject.Services.Builders
             }
             return null;
         }
-        public static List<FriendModel> CreateFriendModelList()
+        public List<FriendModel> GetFriendModelList()
         {
             int count = 0;
             List<FriendModel> friendModelList = new List<FriendModel>();
 
             // Get api response
-            string response = SocialService.GetFriends().Result;
+            string response = SocialApi.GetFriends().Result;
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
             // Get friend puuids
@@ -55,7 +56,7 @@ namespace HexClientProject.Services.Builders
             }
 
             // Get friend summoner infos models
-            List<SummonerInfoModel> friendSummonerModelList = SummonerBuilder.CreateSummonerInfoList(friendPuuidList);
+            List<SummonerInfoModel> friendSummonerModelList = _summonerBuilder.GetSummonerInfoList(friendPuuidList);
 
             // Create friend models and fill the list
             foreach (var friend in jsonObject)
@@ -72,6 +73,16 @@ namespace HexClientProject.Services.Builders
             }
 
             return friendModelList;
+        }
+
+        public bool AddFriend(FriendModel friend)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveFriend(string usernameToRemove)
+        {
+            throw new NotImplementedException();
         }
     }
 }

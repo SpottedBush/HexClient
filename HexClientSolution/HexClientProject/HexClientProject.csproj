@@ -13,8 +13,6 @@
         <Folder Include="Assets\roles\" />
         <AvaloniaResource Include="Assets\**" />
         <AvaloniaResource Include="Assets/**" />
-        <Folder Include="Interfaces\" />
-        <Folder Include="Services\Mocks\" />
         <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
         
     </ItemGroup>

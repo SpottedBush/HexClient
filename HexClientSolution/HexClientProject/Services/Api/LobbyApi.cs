@@ -4,7 +4,7 @@ using LcuApi;
 
 namespace HexClientProject.Services.Api
 {
-    public class LobbyService
+    public static class LobbyApi
     {
         // TOTEST
         public static async System.Threading.Tasks.Task<string> GetLobbyInfos()
@@ -35,7 +35,7 @@ namespace HexClientProject.Services.Api
             return true;
         }
 
-        public async void CreateCustomLobby()
+        public static async void CreateCustomLobby()
         {
 
         }
