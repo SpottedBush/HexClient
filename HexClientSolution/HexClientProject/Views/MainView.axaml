@@ -9,11 +9,14 @@
         <!-- Left Panel (Dynamic) -->
         <ContentControl Grid.Column="0" Content="{Binding LeftPanelContent}"/>
 
+    
+        <Border Grid.Column="1" Background="Gray" Width="10" HorizontalAlignment="Left"/>
+
         <!-- Right Panel -->
-        <StackPanel Grid.Column="1" Spacing="20" Margin="10">
-            <views:SummonerInfoView />
-            <views:FriendsListView />
-            <views:ChatBoxView/>
-        </StackPanel>
+        <Grid Grid.Column="1" Margin="10" RowDefinitions="Auto,*,Auto">
+            <views:SummonerInfoView Grid.Row="0" />
+            <views:FriendsListView Grid.Row="1" />
+            <views:ChatBoxView Grid.Row="2" />
+        </Grid>
     </Grid>
 </UserControl>

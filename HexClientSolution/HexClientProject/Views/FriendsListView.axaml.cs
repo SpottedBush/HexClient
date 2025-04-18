@@ -31,5 +31,16 @@ namespace HexClientProject.Views
                 }
             }
         }
+        private void TextBox_OnKeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (DataContext is FriendsListViewModel vm)
+                {
+                    vm.AddFriendCommand.Execute().Subscribe();
+                }
+            }
+        }
+
     }
 }

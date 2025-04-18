@@ -75,7 +75,7 @@ namespace HexClientProject.Services.Builders
             return friendModelList;
         }
 
-        public bool AddFriend(FriendModel friend)
+        public bool AddFriend(string newFriendUsername)
         {
             throw new NotImplementedException();
         }

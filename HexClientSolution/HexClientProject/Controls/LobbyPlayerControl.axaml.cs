@@ -1,7 +1,4 @@
-using System;
 using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using HexClientProject.Models;
 using HexClientProject.ViewModels;
 
@@ -9,13 +6,11 @@ namespace HexClientProject.Controls
 {
     public partial class LobbyPlayerControl : UserControl
     {
-        private LobbyPlayerViewModel vm;
-
         private LobbyPlayerControl(int playerId)
         {
             InitializeComponent();
 
-            vm = new LobbyPlayerViewModel(playerId);
+            var vm = new LobbyPlayerViewModel(playerId);
 
             var stateManager = StateManager.Instance;
 
@@ -34,13 +29,7 @@ namespace HexClientProject.Controls
         public LobbyPlayerControl()
         {
             InitializeComponent();
-            var LobbyPlayerControl = new LobbyPlayerControl(StateManager.Instance.LobbyInfo.NbPlayers - 1);
-        }
-
-        public LobbyPlayerViewModel ViewModel
-        {
-            get => (LobbyPlayerViewModel)DataContext;
-            set => DataContext = value;
+            var lobbyPlayerControl = new LobbyPlayerControl(StateManager.Instance.LobbyInfo.NbPlayers - 1);
         }
     }
 }

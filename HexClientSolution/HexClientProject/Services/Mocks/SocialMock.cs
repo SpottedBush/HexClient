@@ -7,12 +7,12 @@ namespace HexClientProject.Services.Mocks;
 
 public class SocialMock : ISocialService
 {
-    private static readonly List<FriendModel> MockFriends = new()
-    {
-        new FriendModel { Username = "AhriBot", Status = "Coucou les zamis", RankId = 1, DivisionId = 2 },
-        new FriendModel { Username = "HerMain", Status = "J'aime beaucoup les", RankId = 1, DivisionId = 2 },
-        new FriendModel { Username = "HisRiven", Status = "RIVEN OTP", RankId = 1, DivisionId = 2 }
-    };
+    private static readonly List<FriendModel> MockFriends =
+    [
+        new() { Username = "AhriBot", Status = "Coucou les zamis", RankId = 1, DivisionId = 2 },
+        new() { Username = "HerMain", Status = "J'aime beaucoup les", RankId = 1, DivisionId = 2 },
+        new() { Username = "HisRiven", Status = "RIVEN OTP", RankId = 1, DivisionId = 2 }
+    ];
     
     public FriendModel? GetFriendModel(string puuid)
     {
@@ -24,9 +24,16 @@ public class SocialMock : ISocialService
         return MockFriends;
     }
 
-    public bool AddFriend(FriendModel friend)
+    public bool AddFriend(string newFriendUsername)
     {
-        if (MockFriends.All(f => f.Username != friend.Username)) // If friend does not already exist
+        FriendModel friend = new FriendModel
+        {
+            Username = newFriendUsername,
+            Status = "RIVEN OTP",
+            RankId = 1,
+            DivisionId = 2
+        };
+        if (MockFriends.All(f => f.Username != friend.Username)) // If the friend does not already exist
         {
             MockFriends.Add(friend);
             return true;

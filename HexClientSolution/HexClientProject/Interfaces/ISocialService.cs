@@ -7,6 +7,6 @@ public interface ISocialService
 {
     FriendModel? GetFriendModel(string puuid);
     List<FriendModel> GetFriendModelList();
-    bool AddFriend(FriendModel friend);
+    bool AddFriend(string newFriendUsername);
     bool RemoveFriend(string usernameToRemove);
 }

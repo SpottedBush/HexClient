@@ -19,7 +19,7 @@ namespace HexClientProject.Models
         public bool IsOnlineMode;
         public LobbyInfoModel LobbyInfo { get; set; } = null!;
         public SummonerInfoModel SummonerInfo { get; set; } = null!;
-        public ObservableCollection<FriendModel> Friends { get; set; }
+        public ObservableCollection<FriendModel> Friends { get; } = new();
         public ChatBoxViewModel ChatBoxViewModel { get; set; } = null!;
 
         private static StateManager? _instance;
