@@ -43,6 +43,10 @@
                                                 Command="{Binding ParentViewModel.InviteToLobbyCommand}" 
                                                 CommandParameter="{Binding .}"
                                                 Click="Popup_Click"/>
+                                        <Button Content="Mute Friend"
+                                                Command="{Binding ParentViewModel.MuteUserCommand}" 
+                                                CommandParameter="{Binding .}"
+                                                Click="Popup_Click"/>
                                         <Button Content="Remove Friend"
                                                 Command="{Binding ParentViewModel.RemoveFriendCommand}" 
                                                 CommandParameter="{Binding .}"

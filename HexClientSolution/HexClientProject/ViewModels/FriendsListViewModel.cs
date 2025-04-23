@@ -94,18 +94,16 @@ public class FriendsListViewModel : ViewModelBase
     
     private void BlockFriend(string username)
     {
-        _stateManager.MutedUsernames.Add(username);
         bool success = ApiProvider.SocialService.BlockFriend(username);
         if (success)
-            LoadFriends();
+            LoadFriendsAndMutedUsers();
     }
 
     private void UnblockFriend(string username)
     {
-        _stateManager.MutedUsernames.Remove(username);
         bool success = ApiProvider.SocialService.UnblockFriend(username);
         if (success)
-            LoadFriends();
+            LoadMutedUsers();
     }
     
     public void WhisperTo(string username)
