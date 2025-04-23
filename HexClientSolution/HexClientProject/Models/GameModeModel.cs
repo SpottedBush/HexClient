@@ -14,8 +14,7 @@ public class GameModeModel
 
     private string _gameModeName;
     private string _gameModeDescription;
-    private int _gameModeIconId;
-    private string _gameModeId;
+
     public string GameModeName
     {
         get => _gameModeName;
@@ -28,17 +27,9 @@ public class GameModeModel
         set => _gameModeDescription = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public int GameModeIconId
-    {
-        get => _gameModeIconId;
-        set => _gameModeIconId = value;
-    }
+    public int GameModeIconId { get; set; }
 
-    public string GameModeId
-    {
-        get => _gameModeId;
-        set => _gameModeId = value;
-    }
+    public string GameModeId { get; set; }
 
     public GameModeModel(string gameModeName)
     {
@@ -47,11 +38,11 @@ public class GameModeModel
             int index = GameModes.IndexOf(gameModeName);
             _gameModeName = gameModeName;
             _gameModeDescription = GameDescriptions[index];
-            _gameModeIconId = GameIconIds[index];
-            _gameModeId = GameModeIds[index];
+            GameModeIconId = GameIconIds[index];
+            GameModeId = GameModeIds[index];
         }
         else
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
     }
 
     public static string GetGameModeFromGameId(string gameId)

@@ -241,7 +241,7 @@ namespace HexClientProject.ViewModels
             {
                 // TODO LOUIS: Get Match found signal if online mode
             }
-            if (_secondsElapsed == 2 || _secondsElapsed == 8) 
+            if (_secondsElapsed == 2 || _secondsElapsed == 8) // Mock
             {
                 ShowMatchFoundPopup();
                 _timer.Stop();

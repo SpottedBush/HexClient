@@ -15,6 +15,9 @@ public class SocialMock : ISocialService
         new() { Username = "HerMain", Status = "J'aime beaucoup les", RankId = 1, DivisionId = 2 },
         new() { Username = "HisRiven", Status = "RIVEN OTP", RankId = 1, DivisionId = 2 }
     ];
+
+    private static readonly List<string> MockMutedUsers =
+    ["Dushyanth", "Jidiano"];
     
     public FriendModel? GetFriendModel(string puuid)
     {
@@ -25,7 +28,12 @@ public class SocialMock : ISocialService
     {
         return MockFriends;
     }
-
+    
+    public List<string> GetMutedUserList()
+    {
+        return MockMutedUsers;
+    }
+    
     public bool AddFriend(string newFriendUsername)
     {
         FriendModel friend = new FriendModel
@@ -35,23 +43,17 @@ public class SocialMock : ISocialService
             RankId = 1,
             DivisionId = 2
         };
-        if (MockFriends.All(f => f.Username != friend.Username)) // If the friend does not already exist
-        {
-            MockFriends.Add(friend);
-            return true;
-        }
-        return false;
+        if (MockFriends.Any(f => f.Username == friend.Username)) return false; // If the friend does not already exist
+        MockFriends.Add(friend);
+        return true;
     }
 
     public bool RemoveFriend(string usernameToRemove)
     {
         var existing = MockFriends.FirstOrDefault(f => f.Username == usernameToRemove);
-        if (existing != null)
-        {
-            MockFriends.Remove(existing);
-            return true;
-        }
-        return false;
+        if (existing == null) return false;
+        MockFriends.Remove(existing);
+        return true;
     }
 
     public bool PostInviteToLobby(FriendModel friend)
@@ -66,16 +68,26 @@ public class SocialMock : ISocialService
 
     public bool BlockFriend(string usernameToBlock)
     {
+        if (MockMutedUsers.Contains(usernameToBlock)) return false; // Already blocked
+        MockMutedUsers.Add(usernameToBlock);
         return RemoveFriend(usernameToBlock);
     }
 
     public bool UnblockFriend(string usernameToBlock)
     {
-        throw new System.NotImplementedException();
+        return MockMutedUsers.Remove(usernameToBlock);
     }
 
+    public bool MuteUser(string usernameToMute)
+    {
+        if (MockMutedUsers.Contains(usernameToMute)) return false;
+        MockMutedUsers.Add(usernameToMute);
+        return true;
+    }
     public void SendMessage(MessageModel message)
     {
         throw new System.NotImplementedException();
     }
+    
+    
 }

@@ -74,6 +74,11 @@ namespace HexClientProject.Services.Builders
             return friendModelList;
         }
 
+        public List<string> GetMutedUserList()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddFriend(string newFriendUsername)
         {
             throw new NotImplementedException();
@@ -95,6 +100,11 @@ namespace HexClientProject.Services.Builders
         }
 
         public bool UnblockFriend(string usernameToBlock)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MuteUser(string usernameToMute)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using HexClientProject.Models;
@@ -33,7 +32,7 @@ public class FriendsListViewModel : ViewModelBase
     
     public FriendsListViewModel()
     {
-        NewFriendUsername = String.Empty;
+        NewFriendUsername = string.Empty;
         AddFriendCommand = ReactiveCommand.Create(AddFriend);
         RemoveFriendCommand = ReactiveCommand.Create<FriendModel>(friend => RemoveFriend(friend.Username));
         BlockFriendCommand = ReactiveCommand.Create<FriendModel>(friend => BlockFriend(friend.Username));
@@ -43,6 +42,22 @@ public class FriendsListViewModel : ViewModelBase
         LoadFriends();
     }
 
+    private void LoadFriendsAndMutedUsers()
+    {
+        LoadFriends();
+        LoadMutedUsers();
+    }
+    
+    private void LoadMutedUsers()
+    {
+        var mutedUserList = ApiProvider.SocialService.GetMutedUserList();
+        _stateManager.MutedUsernames.Clear();
+        foreach (var friend in mutedUserList)
+        {
+            _stateManager.MutedUsernames.Add(friend);
+        }
+    }
+    
     private void LoadFriends()
     {
         var newFriends = ApiProvider.SocialService.GetFriendModelList();
@@ -56,12 +71,12 @@ public class FriendsListViewModel : ViewModelBase
 
     private void AddFriend()
     {
-        if (NewFriendUsername == String.Empty)
+        if (NewFriendUsername == string.Empty)
             return;
         bool success = ApiProvider.SocialService.AddFriend(NewFriendUsername);
         if (success)
             LoadFriends();
-        NewFriendUsername = String.Empty; // Clear the textbox
+        NewFriendUsername = string.Empty; // Clear the textbox
     }
     private void RemoveFriend(string username)
     {
@@ -72,7 +87,9 @@ public class FriendsListViewModel : ViewModelBase
 
     private void MuteUser(string username)
     {
-        _stateManager.MutedUsernames.Add(username);
+        bool success = ApiProvider.SocialService.MuteUser(username);
+        if (success)
+            LoadMutedUsers();
     }
     
     private void BlockFriend(string username)
