@@ -1,20 +1,14 @@
 using System;
 using System.Collections.Generic;
-using HexClienT.Models;
-using Newtonsoft.Json;
 
 namespace HexClientProject.Models;
 
-public class LobbyInfoModel()
+public class LobbyInfoModel
 {
     private string? _lobbyName;
     private string? _lobbyPassword;
     private string? _leaderName;
-    private int _nbPlayers;
-    private int _maxPlayersLimit;
-    private bool _canQueue;
     private GameModeModel? _currSelectedGameModeModel;
-    private List<SummonerInfoModel>? _summoners;
 
     public string? LeaderName
     {
@@ -22,11 +16,7 @@ public class LobbyInfoModel()
         set => _leaderName = value;
     }
 
-    public List<SummonerInfoModel>? Summoners
-    {
-        get => _summoners;
-        set => _summoners = value;
-    }
+    public List<SummonerInfoModel> Summoners { get; set; } = new();
 
     public string LobbyName
     {
@@ -46,31 +36,13 @@ public class LobbyInfoModel()
         set => _leaderName = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public int NbPlayers
-    {
-        get => _nbPlayers;
-        set => _nbPlayers = value;
-    }
+    public int NbPlayers { get; set; }
 
-    public int MaxPlayersLimit
-    {
-        get => _maxPlayersLimit;
-        set => _maxPlayersLimit = value;
-    }
-
-    public bool CanQueue
-    {
-        get => _canQueue;
-        set => _canQueue = value;
-    }
+    public int MaxPlayersLimit { get; set; }
 
     public GameModeModel CurrSelectedGameModeModel
     {
         get => _currSelectedGameModeModel ?? throw new InvalidOperationException();
         set => _currSelectedGameModeModel = value ?? throw new ArgumentNullException(nameof(value));
     }
-
-    public async void SetLobbyInfo()
-    {
-    } 
 }

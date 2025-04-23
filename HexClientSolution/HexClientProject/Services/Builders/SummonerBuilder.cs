@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using HexClienT.Models;
 using HexClientProject.Interfaces;
+using HexClientProject.Models;
 using HexClientProject.Services.Api;
 using HexClientProject.ViewModels;
 using Newtonsoft.Json;

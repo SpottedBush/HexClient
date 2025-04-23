@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HexClienT.Models;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 using HexClientProject.Services.Api;
@@ -38,7 +37,6 @@ namespace HexClientProject.Services.Builders
 
             lobbyInfoModel.NbPlayers = jsonObject["members"].Count();
             lobbyInfoModel.MaxPlayersLimit = jsonObject.gameConfig.maxLobbySize;
-            lobbyInfoModel.CanQueue = jsonObject.canStartActivity;
             lobbyInfoModel.CurrSelectedGameModeModel = new GameModeModel(GameModeModel.GetGameModeFromGameId(jsonObject.gameConfig.queueId));
             
             var sumPuuidList = new List<string>();

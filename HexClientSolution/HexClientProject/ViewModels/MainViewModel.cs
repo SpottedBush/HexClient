@@ -1,8 +1,6 @@
 using System;
 using Avalonia.Controls;
-using HexClientProject.Interfaces;
 using HexClientProject.Models;
-using HexClientProject.Services.Builders;
 using HexClientProject.Services.Providers;
 using HexClientProject.Views;
 using ReactiveUI;

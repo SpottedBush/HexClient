@@ -36,7 +36,7 @@ namespace HexClientProject.Services.Api
             return responseStr;
         }
 
-        public static async System.Threading.Tasks.Task<string> GetFriendRequestsIN()
+        public static async System.Threading.Tasks.Task<string> GetFriendRequestsIn()
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -49,14 +49,14 @@ namespace HexClientProject.Services.Api
             }
 
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(responseStr) ?? throw new InvalidOperationException();
-            Func<dynamic, bool> filterCondition = x => x.direction == "in";
+            bool FilterCondition(dynamic x) => x.direction == "in";
 
-            dynamic jsonResp = jsonObject.Filter(filterCondition);
+            dynamic jsonResp = jsonObject.Filter((Func<dynamic, bool>)FilterCondition);
 
-            return JsonConvert.SerializeObject(jsonObject);
+            return JsonConvert.SerializeObject(jsonResp);
         }
 
-        public static async System.Threading.Tasks.Task<string> GetFriendRequestsOUT()
+        public static async System.Threading.Tasks.Task<string> GetFriendRequestsOut()
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -69,11 +69,11 @@ namespace HexClientProject.Services.Api
             }
 
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(responseStr) ?? throw new InvalidOperationException();
-            Func<dynamic, bool> filterCondition = x => x.direction == "out";
+            bool FilterCondition(dynamic x) => x.direction == "out";
 
-            dynamic jsonResp = jsonObject.Filter(filterCondition);
+            dynamic jsonResp = jsonObject.Filter((Func<dynamic, bool>)FilterCondition);
 
-            return JsonConvert.SerializeObject(jsonObject);
+            return JsonConvert.SerializeObject(jsonResp);
         }
 
         public static async System.Threading.Tasks.Task<bool> SendFriendRequest(string gameName, string gameTag)
@@ -88,7 +88,6 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot send friend request to" + gameName + "#" + gameTag + " - Return code: " + response.StatusCode + " | " + responseStr);
-                return false;
             }
 
             return true;
@@ -104,7 +103,6 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot accept friend request: " + requestId + " - Return code: " + response.StatusCode + " | " + responseStr);
-                return false;
             }
 
             return true;
@@ -120,7 +118,6 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot reject friend request: " + requestId + " - Return code: " + response.StatusCode + " | " + responseStr);
-                return false;
             }
 
             return true;

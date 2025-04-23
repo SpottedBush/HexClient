@@ -5,8 +5,8 @@ namespace HexClientProject.Models;
 
 public class GameModeModel
 {
-    private static readonly List<string> GameModes = ["qp", "sd", "f", "pt", "t"];
-    private static readonly List<string> GameDescrs =
+    private static readonly List<string> GameModes = ["Qp", "Sd", "F", "Pt", "T"];
+    private static readonly List<string> GameDescriptions =
         ["Quick Play", "Ranked Solo/Duo", "Ranked Flex", "Practice Tool", "Tutorial"];
     private static readonly List<int> GameIconIds = [0, 1, 2, 3, 4];
     private static readonly List<string> GameModeIds = ["490", "420", "440", "0", "2000"];
@@ -46,7 +46,7 @@ public class GameModeModel
         {
             int index = GameModes.IndexOf(gameModeName);
             _gameModeName = gameModeName;
-            _gameModeDescription = GameDescrs[index];
+            _gameModeDescription = GameDescriptions[index];
             _gameModeIconId = GameIconIds[index];
             _gameModeId = GameModeIds[index];
         }

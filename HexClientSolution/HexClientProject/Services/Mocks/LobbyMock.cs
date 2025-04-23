@@ -1,4 +1,3 @@
-using HexClienT.Models;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 
@@ -15,7 +14,6 @@ public class LobbyMock : ILobbyService
             HostName = "TouDansLTrou",
             NbPlayers = 1, 
             MaxPlayersLimit = 5,
-            CanQueue = true,
             // CurrSelectedGameModeModel = new GameModeModel("RANKED_SOLO_5x5"),
             LeaderName = "TouDansLTrou",
             Summoners = [StateManager.Instance.SummonerInfo,

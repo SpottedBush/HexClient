@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using HexClienT.Models;
+using HexClientProject.Models;
 
 namespace HexClientProject.Interfaces;
 

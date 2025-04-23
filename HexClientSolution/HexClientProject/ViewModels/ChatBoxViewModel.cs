@@ -17,22 +17,22 @@ public class ChatBoxViewModel : ReactiveObject
 
     private ObservableCollection<MessageModel> Messages { get; } = new();
 
-    public ObservableCollection<ChatScope> Scopes { get; } = new()
-    {
+    public ObservableCollection<ChatScope> Scopes { get; } =
+    [
         ChatScope.Global,
         ChatScope.Party,
         ChatScope.Whisper,
-        ChatScope.Guild,
-        // ChatScope.System // Not supposed to chat with the system right ?
-    };
-    public ObservableCollection<string> FilteringScopes { get; } = new()
-    {
+        ChatScope.Guild
+        // ChatScope.System // Not supposed to chat with the system, right?
+    ];
+    public ObservableCollection<string> FilteringScopes { get; } =
+    [
         "Global",
         "Party",
         "Whisper",
         "Guild",
         "System"
-    };
+    ];
     
     private ChatScope _selectedScope = ChatScope.Global;
     public ChatScope SelectedScope
@@ -124,11 +124,13 @@ public class ChatBoxViewModel : ReactiveObject
 
     public ObservableCollection<MessageModel> FilteredMessages { get; } = new();
 
-    private void ApplyFilter()
+    private void ApplyFilter(bool applyToOneMessage = false)
     {
-        FilteredMessages.Clear();
+        if (!applyToOneMessage)
+            FilteredMessages.Clear();
 
-        IEnumerable<MessageModel> filtered = Messages;
+        IEnumerable<MessageModel> filtered = Messages.Where( // Removes muted Users
+            messageModel => _stateManager.MutedUsernames.All(mutedUser=> messageModel.Sender != mutedUser));
         switch (SelectedFilter)
         {
             case "Global":
@@ -159,7 +161,10 @@ public class ChatBoxViewModel : ReactiveObject
     {
         SelectedFilter = username;
         FilteredMessages.Clear();
-        var filtered = Messages.Where(msg =>
+        IEnumerable<MessageModel> filtered = Messages.Where( // Removes muted Users
+            messageModel => _stateManager.MutedUsernames.All(mutedUser=> messageModel.Sender != mutedUser));
+        
+        filtered = filtered.Where(msg =>
             (msg.Scope == ChatScope.System) || (msg.Scope == ChatScope.Whisper &&
                                                 (
                                                     (msg.Sender == username && msg.WhisperingTo ==
@@ -193,7 +198,7 @@ public class ChatBoxViewModel : ReactiveObject
     {
         if (e.Action == NotifyCollectionChangedAction.Add)
         {
-            ApplyFilter(); // Display Messages each time a new message is added
+            ApplyFilter(applyToOneMessage:true); // Display the new message
         }
     }
     public ReactiveCommand<Unit, Unit> SendMessageCommand { get; }
@@ -228,6 +233,7 @@ public class ChatBoxViewModel : ReactiveObject
             ChatScope msgScope = SelectedScope;
             if (isWhisper)
                 msgScope = ChatScope.Whisper;
+            // TODO : ApiProvider.SocialService.SendMessage
             Messages.Add(new MessageModel
             {
                 Sender = _stateManager.SummonerInfo.GameName,

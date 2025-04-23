@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
-using HexClienT.Models;
 using HexClientProject.Models;
 
 namespace HexClientProject.ViewModels;

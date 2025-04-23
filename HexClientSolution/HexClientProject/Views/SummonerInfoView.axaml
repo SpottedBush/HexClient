@@ -12,8 +12,10 @@
                  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
         
         <!-- Rectangle -->
-        <Rectangle Width="80" Height="30" Fill="LightGray"
+        <Rectangle Width="120" Height="30" Fill="Gray"
                    HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0"/>
-        <TextBlock Text="{Binding SummonerName}"></TextBlock>
+        <TextBlock Text="{Binding SummonerName}"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" />
+            
     </Grid>
 </UserControl>

@@ -28,6 +28,34 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Background="Transparent" PointerPressed="OnFriendClicked" Padding="5">
+                            <Border.ContextFlyout>
+                                <Flyout Placement="Right">
+                                    <StackPanel Width="150">
+                                        <Button Content="View profile"
+                                                Command="{Binding ParentViewModel.WhisperToCommand}" 
+                                                CommandParameter="{Binding .}"
+                                                Click="Popup_Click"/>
+                                        <Button Content="Message"
+                                                Command="{Binding ParentViewModel.WhisperToCommand}" 
+                                                CommandParameter="{Binding .}"
+                                                Click="Popup_Click"/>
+                                        <Button Content="Invite to your party"
+                                                Command="{Binding ParentViewModel.InviteToLobbyCommand}" 
+                                                CommandParameter="{Binding .}"
+                                                Click="Popup_Click"/>
+                                        <Button Content="Remove Friend"
+                                                Command="{Binding ParentViewModel.RemoveFriendCommand}" 
+                                                CommandParameter="{Binding .}"
+                                                Click="Popup_Click"/>
+                                        <Button Content="Block"
+                                                Command="{Binding ParentViewModel.BlockFriendCommand}" 
+                                                CommandParameter="{Binding .}"
+                                                Click="Popup_Click"/>
+                                    </StackPanel>
+                                </Flyout>
+                            </Border.ContextFlyout>
+
+                            <!-- Friend Info -->
                             <StackPanel>
                                 <TextBlock Text="{Binding Username}" FontWeight="Bold"/>
                                 <Grid ColumnDefinitions="Auto,*,Auto">

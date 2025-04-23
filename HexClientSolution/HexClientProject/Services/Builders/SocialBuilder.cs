@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HexClienT.Models;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 using HexClientProject.Services.Api;
@@ -81,6 +80,26 @@ namespace HexClientProject.Services.Builders
         }
 
         public bool RemoveFriend(string usernameToRemove)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool PostInviteToLobby(FriendModel friend)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool BlockFriend(string usernameToBlock)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UnblockFriend(string usernameToBlock)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendMessage(MessageModel message)
         {
             throw new NotImplementedException();
         }

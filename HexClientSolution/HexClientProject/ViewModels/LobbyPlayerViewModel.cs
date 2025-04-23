@@ -1,7 +1,6 @@
 using System;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using CommunityToolkit.Mvvm.ComponentModel;
 using HexClientProject.Models;
 using ReactiveUI;
 
@@ -16,13 +15,13 @@ namespace HexClientProject.ViewModels
             set => this.RaiseAndSetIfChanged(ref _playerId, value);
         }
 
-        private string _displayText;
+        private string _displayText = null!;
         public string DisplayText
         {
             get => _displayText;
             set => this.RaiseAndSetIfChanged(ref _displayText, value);
         }
-        private Bitmap _roleIcon1;
+        private Bitmap _roleIcon1 = null!;
 
         public Bitmap RoleIcon1
         {
@@ -30,7 +29,7 @@ namespace HexClientProject.ViewModels
             set => this.RaiseAndSetIfChanged(ref _roleIcon1, value);
         }
 
-        private Bitmap _roleIcon2;
+        private Bitmap _roleIcon2 = null!;
         public Bitmap RoleIcon2
         {
             get => _roleIcon2;
@@ -39,7 +38,7 @@ namespace HexClientProject.ViewModels
 
         public LobbyPlayerViewModel(int playerId)
         {
-            if (playerId >= StateManager.Instance.LobbyInfo.Summoners!.Count)
+            if (playerId >= StateManager.Instance.LobbyInfo.Summoners.Count)
                 return;
             PlayerId = playerId;
 

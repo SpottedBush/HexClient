@@ -10,7 +10,7 @@ namespace HexClientProject.Views
             InitializeComponent();
             DataContext = new MainWindowViewModel();
             var screen = Screens.Primary;
-            Width = screen.Bounds.Width;
+            Width = screen!.Bounds.Width;
             Height = screen.Bounds.Height;
         }
     }

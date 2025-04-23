@@ -1,5 +1,3 @@
-using System;
-using System.Windows.Input;
 using ReactiveUI;
 using System.Reactive;
 using HexClientProject.Models;

@@ -35,11 +35,6 @@ namespace HexClientProject.Services.Api
             return true;
         }
 
-        public static async void CreateCustomLobby()
-        {
-
-        }
-
         // TOTEST
         public static async System.Threading.Tasks.Task<bool> SetPrefPositions(string pos1, string pos2)
         {
@@ -122,7 +117,7 @@ namespace HexClientProject.Services.Api
             return true;
         }
 
-        // /!\ Need to store intation ids
+        // /!\ Need to store invitation ids
         public static async System.Threading.Tasks.Task<string> GetLobbyInvitations()
         {
             ILeagueClient api = await LeagueClient.Connect();
@@ -173,10 +168,10 @@ namespace HexClientProject.Services.Api
             return true;
         }
 
-        public static async void IsLobbyOpen(string invitationId)
-        {
-        }
-
-
+        // public static async void IsLobbyOpen(string invitationId)
+        // {
+        //     
+        // }
+        
     }
 }

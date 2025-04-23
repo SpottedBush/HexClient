@@ -3,5 +3,5 @@
              x:Class="HexClientProject.Views.DraftView"
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
              x:DataType="vm:DraftViewModel">
-    
+    <TextBlock Text="DRAFT VIEW!" />
 </UserControl>

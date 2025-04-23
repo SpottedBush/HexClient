@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
-using HexClienT.Models;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 

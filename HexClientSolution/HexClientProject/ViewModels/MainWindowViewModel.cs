@@ -11,32 +11,29 @@ namespace HexClientProject.ViewModels
     {
         private readonly StateManager _stateManager = StateManager.Instance;
 
-        private UserControl? _currentView;
-        public UserControl? CurrentView
-        {
-            get => _currentView;
-            set => this.RaiseAndSetIfChanged(ref _currentView, value);
-        }
+        public UserControl CurrentView => _stateManager.CurrView;
 
         public ReactiveCommand<Unit, Unit> OpenLocalMainView { get; }
         public ReactiveCommand<Unit, Unit> OpenOnlineMainView { get; }
 
         public MainWindowViewModel()
         {
+            this.WhenAnyValue(x => x._stateManager.CurrView)
+                .Subscribe(_ => this.RaisePropertyChanged(nameof(CurrentView)));
             // Show StartView initially
-            CurrentView = new StartView();
+            _stateManager.CurrView = new StartView();
 
-            OpenLocalMainView = ReactiveCommand.Create(OpenMainView(false));
+            OpenLocalMainView = ReactiveCommand.Create(() => OpenMainView(false)());
+            OpenOnlineMainView = ReactiveCommand.Create(() => OpenMainView(true)());
 
-            OpenOnlineMainView = ReactiveCommand.Create(OpenMainView(true));
         }
         Action OpenMainView(bool isOnline)
         {
             return () =>
             {
                 _stateManager.IsOnlineMode = isOnline;
-            var mainViewModel = new MainViewModel();
-            CurrentView = new MainView { DataContext = mainViewModel };
+                var mainViewModel = new MainViewModel();
+                _stateManager.CurrView = new MainView { DataContext = mainViewModel };
             };
         }
     }

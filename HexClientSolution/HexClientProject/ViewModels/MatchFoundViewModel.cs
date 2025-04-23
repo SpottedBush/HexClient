@@ -22,15 +22,13 @@ public class MatchFoundViewModel : ReactiveObject
     public bool IsActionDone
     {
         get => _isActionDone;
-        set => this.RaiseAndSetIfChanged(ref _isActionDone, value);
+        private set => this.RaiseAndSetIfChanged(ref _isActionDone, value);
     }
 
-    private bool _isMatchAccepted;
-
     public Action? CloseMatchFoundPopUpRequest { get; set; }
-    public Action? OnRefuseOrTimeoutMatchRequested { get; set; }
-    public Action? OnAcceptMatchRequested { get; set; }
-    public Action? OnCancelMatchRequested { get; set; }
+    public Action? OnRefuseOrTimeoutMatchRequested { get; init; }
+    public Action? OnAcceptMatchRequested { get; init; }
+    public Action? OnCancelMatchRequested { get; init; }
 
     public ReactiveCommand<Unit, Unit> AcceptMatchCommand { get; }
     public ReactiveCommand<Unit, Unit> RefuseMatchCommand { get; }
@@ -76,7 +74,6 @@ public class MatchFoundViewModel : ReactiveObject
     {
         StopTimer();
         IsActionDone = true;
-        _isMatchAccepted = true;
 
         if (_stateManager.IsOnlineMode)
         {
@@ -90,7 +87,6 @@ public class MatchFoundViewModel : ReactiveObject
     {
         StopTimer();
         IsActionDone = true;
-        _isMatchAccepted = false;
 
         OnRefuseOrTimeoutMatchRequested?.Invoke();
         CloseMatchFoundPopUpRequest?.Invoke();

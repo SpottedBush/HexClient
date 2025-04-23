@@ -1,24 +1,18 @@
 using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 
-
-namespace HexClienT.Models;
+namespace HexClientProject.Models;
 
 public class SummonerInfoModel
 {
     
-    private string _puuid;
-    private string _gameName;
-    private string _tagLine;
-    private int _rankId;
-    private int _divisionId;
-    private int _lp;
-    private string _region;
+    private string _puuid = null!;
+    private string _gameName = null!;
+    private string _tagLine = null!;
     public int RankId { get; set; }
     public int DivisionId { get; set; }
     public int Lp { get; set; }
-    public string Region { get; set; }
+    public string Region { get; set; } = null!;
+
     public string Puuid
     {
         get => _puuid;

@@ -36,6 +36,7 @@
       <UpToDateCheckInput Remove="tmpHexClient\Views\GameModeSelectionView.axaml" />
       <UpToDateCheckInput Remove="tmpHexClient\Views\MainView.axaml" />
       <UpToDateCheckInput Remove="tmpHexClient\Views\MainWindow.axaml" />
+      <UpToDateCheckInput Remove="Themes\Generic.axaml" />
     </ItemGroup>
 
     <ItemGroup>

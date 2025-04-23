@@ -1,22 +1,20 @@
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Reactive;
 using System.Windows.Input;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using HexClientProject.Models;
 using HexClientProject.Views;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels
 {
-    public partial class LobbyViewModel : ReactiveObject
+    public class LobbyViewModel : ReactiveObject
     {
         private readonly StateManager _stateManager = StateManager.Instance;
         private readonly DispatcherTimer _timer;
@@ -31,21 +29,21 @@ namespace HexClientProject.ViewModels
         public ICommand AssignRole2Command { get; set; }
 
         // Summoners Info related properties
-        private string _gameModeName = string.Empty;
+        private string _gameModeName;
         public string GameModeName
         {
             get => _gameModeName;
             set => this.RaiseAndSetIfChanged(ref _gameModeName, value);
         }
 
-        private string _lobbyName = string.Empty;
+        private string _lobbyName;
         public string LobbyName
         {
             get => _lobbyName;
             set => this.RaiseAndSetIfChanged(ref _lobbyName, value);
         }
 
-        private string _summonerName = string.Empty;
+        private string _summonerName;
         public string SummonerName
         {
             get => _summonerName;
@@ -67,14 +65,14 @@ namespace HexClientProject.ViewModels
             }
         }
 
-        private string _summonerRank = string.Empty;
+        private string _summonerRank;
         public string SummonerRank
         {
             get => _summonerRank;
             set => this.RaiseAndSetIfChanged(ref _summonerRank, value);
         }
 
-        private string _summonerDivision = string.Empty;
+        private string _summonerDivision;
         public string SummonerDivision
         {
             get => _summonerDivision;
@@ -143,7 +141,7 @@ namespace HexClientProject.ViewModels
             set => this.RaiseAndSetIfChanged(ref _isTimerEnabled, value);
         }
 
-        public bool IsPopupVisible { get; set; } = false;
+        public bool IsPopupVisible { get; set; }
 
         private void StartQueue()
         {
@@ -167,7 +165,7 @@ namespace HexClientProject.ViewModels
 
         private void AcceptMatch()
         {
-            // _stateManager.LeftPanelContent = new DraftView(); // Switch the view
+            _stateManager.CurrView = new DraftView(); // Switch the view
             _timer.Stop();
         }
 
@@ -192,7 +190,7 @@ namespace HexClientProject.ViewModels
             };
             _timer.Tick += TimerTick;
             
-            for (int i = 1; i < _stateManager.LobbyInfo.Summoners!.Count; i++) // Skipping curr player
+            for (int i = 1; i < _stateManager.LobbyInfo.Summoners.Count; i++) // Skipping curr player
             {
                 Summoners.Add(new LobbyPlayerViewModel(i));
             }
@@ -235,7 +233,7 @@ namespace HexClientProject.ViewModels
             });
         }
 
-        private async void TimerTick(object? sender, EventArgs e)
+        private void TimerTick(object? sender, EventArgs e)
         {
             _secondsElapsed++;
             TimerDisplay = TimeSpan.FromSeconds(_secondsElapsed).ToString(@"mm\:ss");
@@ -263,9 +261,9 @@ namespace HexClientProject.ViewModels
                 matchFoundWindow.Close();
             };
             _matchFoundVm.Start();
-            matchFoundWindow.ShowDialog(App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop
+            matchFoundWindow.ShowDialog((Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop
                 ? desktop.MainWindow
-                : null);
+                : null)!);
         }
 
     }

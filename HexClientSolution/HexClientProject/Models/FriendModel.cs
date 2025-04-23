@@ -1,5 +1,4 @@
-using System.Collections.ObjectModel;
-using HexClienT.Models;
+using System;
 using HexClientProject.ViewModels;
 
 namespace HexClientProject.Models
@@ -7,7 +6,7 @@ namespace HexClientProject.Models
     public class FriendModel: SummonerInfoModel
     {
         public int IconId { get; set; }
-        public required string? Username { get; set; }
+        public required string Username { get; set; } = String.Empty;
         public required string Status { get; set; }
         public new int RankId { get; init; }
         public string RankDisplay { get; set; }
@@ -16,8 +15,7 @@ namespace HexClientProject.Models
         public int Level { get; set; }
 
         public bool IsOnline { get; set; }
-        public ObservableCollection<MessageModel> ChatMessages { get; set; } = new();
-
+        public FriendsListViewModel? ParentViewModel { get; set; }
         public FriendModel()
         {
             RankDisplay = SummonerInfoViewModel.RankStrings[RankId] + " " + SummonerInfoViewModel.RankDivisions[DivisionId];
