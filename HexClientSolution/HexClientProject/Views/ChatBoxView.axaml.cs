@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using HexClientProject.Models;
 using HexClientProject.ViewModels;
 

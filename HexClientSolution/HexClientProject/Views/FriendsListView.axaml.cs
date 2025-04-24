@@ -4,6 +4,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using HexClientProject.Models;
+using HexClientProject.Utils;
 using HexClientProject.ViewModels;
 
 namespace HexClientProject.Views
@@ -19,38 +20,34 @@ namespace HexClientProject.Views
         {
             if (!e.GetCurrentPoint(null).Properties.IsLeftButtonPressed) return;
             if (sender is not Border { DataContext: FriendModel friend }) return;
-            if (DataContext is FriendsListViewModel vm)
+            if (DataContext is FriendsListViewModel)
             {
-                vm.WhisperTo(friend.Username);
+                SocialUtils.WhisperTo(friend.Username);
             }
         }
         private void TextBox_OnKeyDown(object? sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key != Key.Enter) return;
+            if (DataContext is FriendsListViewModel vm)
             {
-                if (DataContext is FriendsListViewModel vm)
-                {
-                    vm.AddFriendCommand.Execute().Subscribe();
-                }
+                vm.AddFriendCommand.Execute().Subscribe();
             }
         }
         
         private void Popup_Click(object? sender, RoutedEventArgs e)
         {
-            if (sender is Control control)
+            if (sender is not Control control) return;
+            // Walk up the visual tree to find the control that owns the flyout
+            var parent = control;
+            while (parent != null)
             {
-                // Walk up the visual tree to find the control that owns the flyout
-                var parent = control;
-                while (parent != null)
+                var flyout = FlyoutBase.GetAttachedFlyout(parent);
+                if (flyout != null)
                 {
-                    var flyout = FlyoutBase.GetAttachedFlyout(parent);
-                    if (flyout != null)
-                    {
-                        flyout.Hide();
-                        break;
-                    }
-                    parent = parent.Parent as Control;
+                    flyout.Hide();
+                    break;
                 }
+                parent = parent.Parent as Control;
             }
         }
 

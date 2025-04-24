@@ -32,7 +32,7 @@
                                 <Flyout Placement="Right">
                                     <StackPanel Width="150">
                                         <Button Content="View profile"
-                                                Command="{Binding ParentViewModel.WhisperToCommand}" 
+                                                Command="{Binding ParentViewModel.ViewProfileCommand}" 
                                                 CommandParameter="{Binding .}"
                                                 Click="Popup_Click"/>
                                         <Button Content="Message"

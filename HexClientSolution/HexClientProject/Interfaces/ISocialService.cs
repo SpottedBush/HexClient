@@ -8,6 +8,7 @@ public interface ISocialService
     FriendModel? GetFriendModel(string puuid);
     List<FriendModel> GetFriendModelList();
     public List<string> GetMutedUserList();
+    bool ViewProfile(string username); // TODO: Change the return type to "ProfileViewModel" or some stuff like this.
     bool AddFriend(string newFriendUsername);
     bool RemoveFriend(string usernameToRemove);
     bool PostInviteToLobby(FriendModel friend);
