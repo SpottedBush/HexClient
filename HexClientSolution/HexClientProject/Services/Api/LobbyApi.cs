@@ -54,7 +54,7 @@ namespace HexClientProject.Services.Api
         }
 
         // TOTEST
-        public static async System.Threading.Tasks.Task<bool> SendLobbyInvitation(long summonerIdToInvite)
+        public static async System.Threading.Tasks.Task<bool> SendLobbyInvitation(string summonerIdToInvite)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -70,7 +70,7 @@ namespace HexClientProject.Services.Api
         }
 
         // TOTEST
-        public static async System.Threading.Tasks.Task<bool> RevokeLobbyInvitation(long summonerIdToRevoke)
+        public static async System.Threading.Tasks.Task<bool> RevokeLobbyInvitation(string summonerIdToRevoke)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -86,7 +86,7 @@ namespace HexClientProject.Services.Api
         }
 
         // TOTEST
-        public static async System.Threading.Tasks.Task<bool> KickPlayerFromLobby(long summonerIdToKick)
+        public static async System.Threading.Tasks.Task<bool> KickPlayerFromLobby(string summonerIdToKick)
         {
             ILeagueClient api = await LeagueClient.Connect();
 
@@ -102,7 +102,7 @@ namespace HexClientProject.Services.Api
         }
 
         // TOTEST
-        public static async System.Threading.Tasks.Task<bool> PromotePlayer(long summonerIdToPromote)
+        public static async System.Threading.Tasks.Task<bool> PromotePlayer(string summonerIdToPromote)
         {
             ILeagueClient api = await LeagueClient.Connect();
 

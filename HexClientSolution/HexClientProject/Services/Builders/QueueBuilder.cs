@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading;
+using HexClientProject.Interfaces;
 using HexClientProject.Services.Api;
 using Newtonsoft.Json;
 
 namespace HexClientProject.Services.Builders
 {
-    public class QueueBuilder
+    public class QueueBuilder : IQueueService
     {
         public bool IsReadyCheckStatusReady()
         {

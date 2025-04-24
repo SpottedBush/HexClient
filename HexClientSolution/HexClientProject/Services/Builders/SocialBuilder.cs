@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 using HexClientProject.Services.Api;
@@ -38,6 +39,21 @@ namespace HexClientProject.Services.Builders
             }
             return null;
         }
+
+        public string GetFriendPuuidFromName(string friendUserName)
+        {
+            string response = SocialApi.GetFriends().Result;
+            dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
+            foreach (var friend in jsonObject)
+            {
+                if (friend.gameName + "#" + friend.gameTag == friendUserName)
+                {
+                    return friend.puuid;
+                }
+            }
+            return "";
+        }
+
         public List<FriendModel> GetFriendModelList()
         {
             int count = 0;
@@ -81,27 +97,106 @@ namespace HexClientProject.Services.Builders
 
         public bool AddFriend(string newFriendUsername)
         {
-            throw new NotImplementedException();
+            string[] nameAndTag = newFriendUsername.Split('#');
+            
+            if (nameAndTag.Length != 2)
+            {
+                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
+                return false;
+            }
+            string name = nameAndTag[0];
+            string tag = nameAndTag[1];
+
+            return SocialApi.SendFriendRequest(name, tag).Result;
         }
 
         public bool RemoveFriend(string usernameToRemove)
         {
-            throw new NotImplementedException();
+            string puuid = GetFriendPuuidFromName(usernameToRemove);
+            if (string.IsNullOrEmpty(puuid))
+            {
+                return false;
+                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
+            }
+            return SocialApi.RemoveFriend(puuid).Result;
         }
 
         public bool PostInviteToLobby(FriendModel friend)
         {
-            throw new NotImplementedException();
+            if (friend == null)
+            {
+                return false;
+                throw new ArgumentNullException(nameof(friend), "Friend model cannot be null.");
+            }
+            if (string.IsNullOrEmpty(friend.Puuid))
+            {
+                return false;
+                throw new ArgumentException("Friend model must have a valid Puuid.");
+            }
+            return LobbyApi.SendLobbyInvitation(friend.Puuid).Result;
+        }
+
+        public List<SummonerInfoModel> GetBlockedPlayers()
+        {
+            string response = SocialApi.GetBlockedPlayer().Result;
+            dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
+
+            if (string.IsNullOrEmpty(response))
+            {
+                return new List<SummonerInfoModel>();
+                throw new Exception("Get blocked players: Json error");
+            }
+
+            List<SummonerInfoModel> blockedPlayers = new List<SummonerInfoModel>();
+            foreach (var player in jsonObject)
+            {
+                blockedPlayers.Add(new SummonerInfoModel
+                {
+                    Puuid = player.puuid,
+                    SummonerId = player.summonerId,
+                    GameName = player.gameName,
+                    ProfileIconId = player.icon,
+                    TagLine = player.gameTag,
+                });
+            }
+
+            return blockedPlayers;
         }
 
         public bool BlockFriend(string usernameToBlock)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(usernameToBlock))
+            {
+                return false;
+                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
+            }
+
+            string puuid = GetFriendPuuidFromName(usernameToBlock);
+            if (string.IsNullOrEmpty(puuid))
+            {
+                return false;
+                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
+            }
+
+            return SocialApi.BlockPlayer(puuid).Result;
         }
 
-        public bool UnblockFriend(string usernameToBlock)
+        public bool UnblockFriend(string usernameToUnblock)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(usernameToUnblock))
+            {
+                return false;
+                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
+            }
+
+            string puuid = GetFriendPuuidFromName(usernameToUnblock);
+            if (string.IsNullOrEmpty(puuid))
+            {
+                return false;
+                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
+            }
+
+            return SocialApi.UnblockPlayer(puuid).Result;
         }
 
         public bool MuteUser(string usernameToMute)

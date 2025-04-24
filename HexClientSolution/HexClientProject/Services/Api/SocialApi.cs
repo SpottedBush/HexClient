@@ -122,5 +122,64 @@ namespace HexClientProject.Services.Api
 
             return true;
         }
+
+        public static async System.Threading.Tasks.Task<bool> RemoveFriend(string summonerIdToRemove)
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Delete, "lol-chat/v1/friends/" + summonerIdToRemove);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot remove friend: " + summonerIdToRemove + " - Return code: " + response.StatusCode);
+                return false;
+            }
+            return true;
+        }
+
+        public static async System.Threading.Tasks.Task<bool> BlockPlayer(string summonerIdToBlock)
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            var body = new { puuid = summonerIdToBlock };
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-chat/v1/blocked-players/", body);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot block player: " + summonerIdToBlock + " - Return code: " + response.StatusCode);
+                return false;
+            }
+            return true;
+        }
+
+        public static async System.Threading.Tasks.Task<bool> UnblockPlayer(string summonerIdToUnblock)
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Delete, "lol-chat/v1/blocked-players/" + summonerIdToUnblock);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot unblock player: " + summonerIdToUnblock + " - Return code: " + response.StatusCode);
+                return false;
+            }
+            return true;
+        }
+
+        public static async System.Threading.Tasks.Task<string> GetBlockedPlayer()
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-chat/v1/blocked-players/");
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot get all blocked player: " + " - Return code: " + response.StatusCode + " | " + responseStr);
+                return "";
+            }
+            return responseStr;
+        }
     }
 }
