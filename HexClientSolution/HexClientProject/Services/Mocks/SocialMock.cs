@@ -33,7 +33,12 @@ public class SocialMock : ISocialService
     {
         return MockMutedUsers;
     }
-    
+
+    public bool ViewProfile(string username)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public bool AddFriend(string newFriendUsername)
     {
         FriendModel friend = new FriendModel
@@ -86,7 +91,7 @@ public class SocialMock : ISocialService
     }
     public void SendMessage(MessageModel message)
     {
-        throw new System.NotImplementedException();
+        _stateManager.ChatBoxViewModel.Messages.Add(message);
     }
     
     

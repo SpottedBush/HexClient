@@ -95,6 +95,11 @@ namespace HexClientProject.Services.Builders
             throw new NotImplementedException();
         }
 
+        public bool ViewProfile(string username)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddFriend(string newFriendUsername)
         {
             string[] nameAndTag = newFriendUsername.Split('#');

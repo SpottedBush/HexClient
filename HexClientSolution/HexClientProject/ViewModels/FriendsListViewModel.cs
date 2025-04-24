@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Reactive;
 using HexClientProject.Models;
 using HexClientProject.Services.Providers;
+using HexClientProject.Utils;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels;
@@ -10,6 +11,7 @@ public class FriendsListViewModel : ViewModelBase
 {
     private readonly StateManager _stateManager = StateManager.Instance;
     public ObservableCollection<FriendModel> Friends => _stateManager.Friends;
+    public ReactiveCommand<FriendModel, Unit> ViewProfileCommand { get; }
     public ReactiveCommand<Unit, Unit> AddFriendCommand { get; }
     public ReactiveCommand<FriendModel, Unit> RemoveFriendCommand { get; }
     public ReactiveCommand<FriendModel, Unit> BlockFriendCommand { get; }
@@ -32,85 +34,21 @@ public class FriendsListViewModel : ViewModelBase
     
     public FriendsListViewModel()
     {
+        _stateManager.FriendsListViewModel = this;
         NewFriendUsername = string.Empty;
         AddFriendCommand = ReactiveCommand.Create(AddFriend);
-        RemoveFriendCommand = ReactiveCommand.Create<FriendModel>(friend => RemoveFriend(friend.Username));
-        BlockFriendCommand = ReactiveCommand.Create<FriendModel>(friend => BlockFriend(friend.Username));
-        MuteUserCommand = ReactiveCommand.Create<FriendModel>(friend => MuteUser(friend.Username));
-        WhisperToCommand = ReactiveCommand.Create<FriendModel>(friend => WhisperTo(friend.Username));
+        ViewProfileCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.ViewProfile(friend.Username));
+        RemoveFriendCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.RemoveFriend(friend.Username));
+        BlockFriendCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.BlockFriend(friend.Username));
+        MuteUserCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.MuteUser(friend.Username));
+        WhisperToCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.WhisperTo(friend.Username));
         InviteToLobbyCommand = ReactiveCommand.Create<FriendModel>(friend => ApiProvider.SocialService.PostInviteToLobby(friend));
-        LoadFriends();
-    }
-
-    private void LoadFriendsAndMutedUsers()
-    {
-        LoadFriends();
-        LoadMutedUsers();
-    }
-    
-    private void LoadMutedUsers()
-    {
-        var mutedUserList = ApiProvider.SocialService.GetMutedUserList();
-        _stateManager.MutedUsernames.Clear();
-        foreach (var friend in mutedUserList)
-        {
-            _stateManager.MutedUsernames.Add(friend);
-        }
-    }
-    
-    private void LoadFriends()
-    {
-        var newFriends = ApiProvider.SocialService.GetFriendModelList();
-        _stateManager.Friends.Clear();
-        foreach (var friend in newFriends)
-        {
-            friend.ParentViewModel = this;
-            _stateManager.Friends.Add(friend);
-        }
+        SocialUtils.LoadFriends();
     }
 
     private void AddFriend()
     {
-        if (NewFriendUsername == string.Empty)
-            return;
-        bool success = ApiProvider.SocialService.AddFriend(NewFriendUsername);
-        if (success)
-            LoadFriends();
+        SocialUtils.AddFriend(NewFriendUsername);
         NewFriendUsername = string.Empty; // Clear the textbox
-    }
-    private void RemoveFriend(string username)
-    {
-        bool success = ApiProvider.SocialService.RemoveFriend(username);
-        if (success)
-            LoadFriends();
-    }
-
-    private void MuteUser(string username)
-    {
-        bool success = ApiProvider.SocialService.MuteUser(username);
-        if (success)
-            LoadMutedUsers();
-    }
-    
-    private void BlockFriend(string username)
-    {
-        bool success = ApiProvider.SocialService.BlockFriend(username);
-        if (success)
-            LoadFriendsAndMutedUsers();
-    }
-
-    private void UnblockFriend(string username)
-    {
-        bool success = ApiProvider.SocialService.UnblockFriend(username);
-        if (success)
-            LoadMutedUsers();
-    }
-    
-    public void WhisperTo(string username)
-    {
-        _stateManager.ChatBoxViewModel.SelectedScope = ChatScope.Whisper;
-        _stateManager.ChatBoxViewModel.SelectedWhisperTarget = username;
-        _stateManager.ChatBoxViewModel.MessageInput = $"/mp <{username}> ";
-        _stateManager.ChatBoxViewModel.ApplyFilterToWhisper(username);
     }
 }

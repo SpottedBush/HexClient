@@ -27,6 +27,7 @@ namespace HexClientProject.Models
         public ObservableCollection<FriendModel> Friends { get; } = new();
         public Collection<string> MutedUsernames { get; } = new();
         public ChatBoxViewModel ChatBoxViewModel { get; set; } = null!;
+        public FriendsListViewModel FriendsListViewModel { get; set; } = null!;
 
         private static StateManager? _instance;
 

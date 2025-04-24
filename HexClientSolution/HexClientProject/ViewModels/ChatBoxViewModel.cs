@@ -7,6 +7,7 @@ using System.Reactive;
 using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using HexClientProject.Models;
+using HexClientProject.Services.Providers;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels;
@@ -15,8 +16,7 @@ public class ChatBoxViewModel : ReactiveObject
 {
     private readonly StateManager _stateManager = StateManager.Instance;
 
-    private ObservableCollection<MessageModel> Messages { get; } = new();
-
+    public ObservableCollection<MessageModel> Messages { get; } = new();
     public ObservableCollection<ChatScope> Scopes { get; } =
     [
         ChatScope.Global,
@@ -124,11 +124,25 @@ public class ChatBoxViewModel : ReactiveObject
 
     public ObservableCollection<MessageModel> FilteredMessages { get; } = new();
 
-    private void ApplyFilter(bool applyToOneMessage = false)
+    private void ApplyFilterToLastMessage()
     {
-        if (!applyToOneMessage)
-            FilteredMessages.Clear();
-
+        var lastMessage = Messages.LastOrDefault();
+        // Message exists and is not in the mutedUsers
+        if (lastMessage != null && !_stateManager.MutedUsernames.Contains(lastMessage.Sender))
+        {
+            // Message is not whisper, then SelectedFilter must correspond to the Scope.
+            if (lastMessage.Scope != ChatScope.Whisper && lastMessage.Scope.ToString() != SelectedFilter) return;
+            // Message is whisper, then SelectedFilter must correspond to a username related to the message.
+            if (lastMessage.Scope == ChatScope.Whisper && 
+                lastMessage.Sender != SelectedFilter && lastMessage.WhisperingTo != SelectedFilter) return;
+            
+            FilteredMessages.Add(lastMessage);
+        }
+    }
+    
+    private void ApplyFilter()
+    {
+        FilteredMessages.Clear();
         IEnumerable<MessageModel> filtered = Messages.Where( // Removes muted Users
             messageModel => _stateManager.MutedUsernames.All(mutedUser=> messageModel.Sender != mutedUser));
         switch (SelectedFilter)
@@ -198,7 +212,7 @@ public class ChatBoxViewModel : ReactiveObject
     {
         if (e.Action == NotifyCollectionChangedAction.Add)
         {
-            ApplyFilter(applyToOneMessage:true); // Display the new message
+            ApplyFilterToLastMessage(); // Display the new message
         }
     }
     public ReactiveCommand<Unit, Unit> SendMessageCommand { get; }
@@ -233,8 +247,7 @@ public class ChatBoxViewModel : ReactiveObject
             ChatScope msgScope = SelectedScope;
             if (isWhisper)
                 msgScope = ChatScope.Whisper;
-            // TODO : ApiProvider.SocialService.SendMessage
-            Messages.Add(new MessageModel
+            ApiProvider.SocialService.SendMessage(new MessageModel
             {
                 Sender = _stateManager.SummonerInfo.GameName,
                 Content = MessageInput,
@@ -245,12 +258,26 @@ public class ChatBoxViewModel : ReactiveObject
             MessageInput = string.Empty;
             ApplyFilter();
         });
+        Messages.Add(new MessageModel
+        {
+            Sender = "System",
+            Content = "test1",
+            Scope = ChatScope.System,
+            Timestamp = DateTime.Now
+        });
+        Messages.Add(new MessageModel
+        {
+            Sender = "ouistiti",
+            Content = "test2",
+            Scope = ChatScope.Global,
+            Timestamp = DateTime.Now
+        });
     }
 
     private void SendSystemMessage(string message)
     {
         message = "[" + message + "]";
-        Messages.Add(new MessageModel
+        ApiProvider.SocialService.SendMessage(new MessageModel
         {
             Sender = "System",
             Content = message,
