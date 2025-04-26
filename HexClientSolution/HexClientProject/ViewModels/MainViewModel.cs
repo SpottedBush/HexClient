@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using HexClientProject.Models;
 using HexClientProject.Services.Providers;
+using HexClientProject.StateManagers;
 using HexClientProject.Views;
 using ReactiveUI;
 

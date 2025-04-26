@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
+using HexClientProject.StateManagers;
 using HexClientProject.Views;
 
 namespace HexClientProject.Services.Mocks;
 
 public class SocialMock : ISocialService
 {
+    private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance; 
     private readonly StateManager _stateManager = StateManager.Instance; 
     private static readonly List<FriendModel> MockFriends =
     [
@@ -43,7 +45,7 @@ public class SocialMock : ISocialService
     {
         if (!newFriendGamerTag.Contains("#"))
         {
-            _stateManager.ChatBoxViewModel.SendSystemMessage("Tag line is missing, cannot add friend.");
+            _socialStateManager.ChatBoxViewModel.SendSystemMessage("Tag line is missing, cannot add friend.");
             return false;
         }
         var parts = newFriendGamerTag.Split('#');
@@ -100,7 +102,7 @@ public class SocialMock : ISocialService
     }
     public void SendMessage(MessageModel message)
     {
-        _stateManager.ChatBoxViewModel.Messages.Add(message);
+        _socialStateManager.ChatBoxViewModel.Messages.Add(message);
     }
     
     

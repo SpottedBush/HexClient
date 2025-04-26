@@ -4,21 +4,22 @@ using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using Avalonia.Input;
 using HexClientProject.Models;
+using HexClientProject.StateManagers;
 using HexClientProject.ViewModels;
 
 namespace HexClientProject.Views
 {
     public partial class ChatBoxView : UserControl
     {
-        private readonly StateManager _stateManager = StateManager.Instance;
+        private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance;
         private readonly ChatBoxViewModel _chatBoxViewModel;
         public ChatBoxView()
         {
             InitializeComponent();
             _chatBoxViewModel = new ChatBoxViewModel();
             DataContext = _chatBoxViewModel;
-            _stateManager.ChatBoxViewModel = _chatBoxViewModel;
-            _chatBoxViewModel.FilteredMessages.CollectionChanged += (s, e) =>
+            _socialStateManager.ChatBoxViewModel = _chatBoxViewModel;
+            _chatBoxViewModel.FilteredMessages.CollectionChanged += (_, e) =>
             {
                 if (e.Action == NotifyCollectionChangedAction.Add && ChatListBox.Items.Count > 0)
                 {
@@ -30,10 +31,9 @@ namespace HexClientProject.Views
         private void OnScopeClicked(object sender, PointerPressedEventArgs e)
         {
             var button = sender as Button;
-            if (button == null || button.Content == null) return;
-            var scope = button.Content;
+            var scope = button?.Content;
             if (scope == null) return;
-            _stateManager.ChatBoxViewModel.SelectedScope = ChatScopeExtensions.StringToScopeConverter(button.Content.ToString()!);
+            _socialStateManager.ChatBoxViewModel.SelectedScope = ChatScopeExtensions.StringToScopeConverter(button!.Content!.ToString()!);
         }
         private void MessageInput_KeyDown(object? sender, KeyEventArgs e)
         {
@@ -46,8 +46,8 @@ namespace HexClientProject.Views
             
             if (e.Key == Key.Tab)
             {
-                var currentScope = _stateManager.ChatBoxViewModel.SelectedScope;
-                _stateManager.ChatBoxViewModel.SelectedScope =
+                var currentScope = _socialStateManager.ChatBoxViewModel.SelectedScope;
+                _socialStateManager.ChatBoxViewModel.SelectedScope =
                     ChatScopeExtensions.IntToScopeConverter(
                         (ChatScopeExtensions.ScopeToIntConverter(currentScope) + 1) % 4);
                 if (currentScope == ChatScope.Party)

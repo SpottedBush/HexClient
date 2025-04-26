@@ -1,44 +1,40 @@
 ﻿using System.Collections.ObjectModel;
 using Avalonia.Controls;
+using HexClientProject.Models;
 using HexClientProject.ViewModels;
 using ReactiveUI;
 
-namespace HexClientProject.Models
+namespace HexClientProject.StateManagers;
+
+public class StateManager : ReactiveObject
 {
-    public class StateManager : ReactiveObject
+    private UserControl _leftPanelContent = null!;
+    public UserControl LeftPanelContent
     {
-        private UserControl _leftPanelContent = null!;
-        public UserControl LeftPanelContent
-        {
-            get => _leftPanelContent;
-            set => this.RaiseAndSetIfChanged(ref _leftPanelContent, value);
-        }
+        get => _leftPanelContent;
+        set => this.RaiseAndSetIfChanged(ref _leftPanelContent, value);
+    }
         
-        private UserControl _currView = null!;
-        public UserControl CurrView
+    private UserControl _currView = null!;
+    public UserControl CurrView
+    {
+        get => _currView;
+        set => this.RaiseAndSetIfChanged(ref _currView, value);
+    }
+
+    public bool IsOnlineMode;
+    public LobbyInfoModel LobbyInfo { get; set; } = null!;
+    public SummonerInfoModel SummonerInfo { get; set; } = null!;
+
+    private static StateManager? _instance;
+
+    // Public property to access the single instance
+    public static StateManager Instance
+    {
+        get
         {
-            get => _currView;
-            set => this.RaiseAndSetIfChanged(ref _currView, value);
-        }
-
-        public bool IsOnlineMode;
-        public LobbyInfoModel LobbyInfo { get; set; } = null!;
-        public SummonerInfoModel SummonerInfo { get; set; } = null!;
-        public ObservableCollection<FriendModel> Friends { get; } = new();
-        public Collection<string> MutedUsernames { get; } = new();
-        public ChatBoxViewModel ChatBoxViewModel { get; set; } = null!;
-        public FriendsListViewModel FriendsListViewModel { get; set; } = null!;
-
-        private static StateManager? _instance;
-
-        // Public property to access the single instance
-        public static StateManager Instance
-        {
-            get
-            {
-                _instance ??= new StateManager();
-                return _instance;
-            }
+            _instance ??= new StateManager();
+            return _instance;
         }
     }
 }

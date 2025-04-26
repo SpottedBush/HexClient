@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Reactive;
 using HexClientProject.Models;
 using HexClientProject.Services.Providers;
+using HexClientProject.StateManagers;
 using HexClientProject.Utils;
 using ReactiveUI;
 
@@ -10,7 +11,8 @@ namespace HexClientProject.ViewModels;
 public class FriendsListViewModel : ViewModelBase
 {
     private readonly StateManager _stateManager = StateManager.Instance;
-    public ObservableCollection<FriendModel> Friends => _stateManager.Friends;
+    private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance;
+    public ObservableCollection<FriendModel> Friends => _socialStateManager.Friends;
     public ReactiveCommand<FriendModel, Unit> ViewProfileCommand { get; }
     public ReactiveCommand<Unit, Unit> AddFriendCommand { get; }
     public ReactiveCommand<FriendModel, Unit> RemoveFriendCommand { get; }
@@ -34,7 +36,7 @@ public class FriendsListViewModel : ViewModelBase
     
     public FriendsListViewModel()
     {
-        _stateManager.FriendsListViewModel = this;
+        _socialStateManager.FriendsListViewModel = this;
         NewFriendUsername = string.Empty;
         AddFriendCommand = ReactiveCommand.Create(AddFriend);
         ViewProfileCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.ViewProfile(friend.GameNameTag));

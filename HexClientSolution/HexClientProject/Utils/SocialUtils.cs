@@ -2,12 +2,15 @@
 
 using HexClientProject.Models;
 using HexClientProject.Services.Providers;
+using HexClientProject.StateManagers;
 
 namespace HexClientProject.Utils;
 
 public static class SocialUtils
 {
     private static readonly StateManager StateManager = StateManager.Instance;
+    private static readonly SocialStateManager SocialStateManager = SocialStateManager.Instance; 
+
     private static void LoadFriendsAndMutedUsers()
     {
         LoadFriends();
@@ -17,21 +20,21 @@ public static class SocialUtils
     private static void LoadMutedUsers()
     {
         var mutedUserList = ApiProvider.SocialService.GetMutedUserList();
-        StateManager.MutedUsernames.Clear();
+        SocialStateManager.MutedUsernames.Clear();
         foreach (var friend in mutedUserList)
         {
-            StateManager.MutedUsernames.Add(friend);
+            SocialStateManager.MutedUsernames.Add(friend);
         }
     }
 
     public static void LoadFriends()
     {
         var newFriends = ApiProvider.SocialService.GetFriendModelList();
-        StateManager.Friends.Clear();
+        SocialStateManager.Friends.Clear();
         foreach (var friend in newFriends)
         {
-            friend.ParentViewModel = StateManager.FriendsListViewModel;
-            StateManager.Friends.Add(friend);
+            friend.ParentViewModel = SocialStateManager.FriendsListViewModel;
+            SocialStateManager.Friends.Add(friend);
         }
     }
 
@@ -81,10 +84,10 @@ public static class SocialUtils
     
     public static void WhisperTo(string gameNameTag, bool changeFilteringScope = true)
     {
-        StateManager.ChatBoxViewModel.SelectedWhisperTarget = gameNameTag;
-        StateManager.ChatBoxViewModel.MessageInput = $"/mp <{gameNameTag}> ";
+        SocialStateManager.ChatBoxViewModel.SelectedWhisperTarget = gameNameTag;
+        SocialStateManager.ChatBoxViewModel.MessageInput = $"/mp <{gameNameTag}> ";
         if (!changeFilteringScope) return;
-        StateManager.ChatBoxViewModel.SelectedScope = ChatScope.Whisper;
-        StateManager.ChatBoxViewModel.ApplyFilterToWhisper(gameNameTag);
+        SocialStateManager.ChatBoxViewModel.SelectedScope = ChatScope.Whisper;
+        SocialStateManager.ChatBoxViewModel.ApplyFilterToWhisper(gameNameTag);
     }
 }

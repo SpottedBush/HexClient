@@ -9,6 +9,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
 using HexClientProject.Models;
+using HexClientProject.StateManagers;
 using HexClientProject.Views;
 using ReactiveUI;
 

@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using HexClientProject.Models;
 using HexClientProject.Services.Providers;
+using HexClientProject.StateManagers;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels;
@@ -15,6 +16,8 @@ namespace HexClientProject.ViewModels;
 public class ChatBoxViewModel : ReactiveObject
 {
     private readonly StateManager _stateManager = StateManager.Instance;
+    private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance; 
+
 
     public ObservableCollection<MessageModel> Messages { get; } = new();
     public ObservableCollection<ChatScope> Scopes { get; } =
@@ -128,7 +131,7 @@ public class ChatBoxViewModel : ReactiveObject
     {
         var lastMessage = Messages.LastOrDefault();
         // Message exists and is not in the mutedUsers
-        if (lastMessage != null && !_stateManager.MutedUsernames.Contains(lastMessage.Sender))
+        if (lastMessage != null && !_socialStateManager.MutedUsernames.Contains(lastMessage.Sender))
         {
             if (lastMessage.Scope == ChatScope.System)
             {
@@ -148,7 +151,7 @@ public class ChatBoxViewModel : ReactiveObject
     {
         FilteredMessages.Clear();
         IEnumerable<MessageModel> filtered = Messages.Where( // Removes muted Users
-            messageModel => _stateManager.MutedUsernames.All(mutedUser=> messageModel.Sender != mutedUser));
+            messageModel => _socialStateManager.MutedUsernames.All(mutedUser=> messageModel.Sender != mutedUser));
         switch (SelectedFilter)
         {
             case "Global":
@@ -180,7 +183,7 @@ public class ChatBoxViewModel : ReactiveObject
         SelectedFilter = gameNameTag;
         FilteredMessages.Clear();
         IEnumerable<MessageModel> filtered = Messages.Where( // Removes muted Users
-            messageModel => _stateManager.MutedUsernames.All(mutedUser=> messageModel.Sender != mutedUser));
+            messageModel => _socialStateManager.MutedUsernames.All(mutedUser=> messageModel.Sender != mutedUser));
         
         filtered = filtered.Where(msg =>
             (msg.Scope == ChatScope.System) || (msg.Scope == ChatScope.Whisper &&
@@ -235,7 +238,7 @@ public class ChatBoxViewModel : ReactiveObject
                 return;
             }
             if (SelectedScope == ChatScope.Whisper && (!isWhisper ||
-                                                       _stateManager.Friends.FirstOrDefault(f =>
+                                                       _socialStateManager.Friends.FirstOrDefault(f =>
                                                            f.GameNameTag == SelectedWhisperTarget) == null))
             {
                 if (!isWhisper)

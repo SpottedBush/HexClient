@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using ReactiveUI;
 using System.Reactive;
 using HexClientProject.Models;
+using HexClientProject.StateManagers;
 using HexClientProject.Views;
 
 namespace HexClientProject.ViewModels

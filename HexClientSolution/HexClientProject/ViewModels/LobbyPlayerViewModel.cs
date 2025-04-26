@@ -2,6 +2,7 @@ using System;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using HexClientProject.Models;
+using HexClientProject.StateManagers;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels
