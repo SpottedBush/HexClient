@@ -39,7 +39,7 @@ public class RuneManager
         return League.MakeApiRequest(HttpMethod.Delete, "lol-perks/v1/page/" + id).Result.StatusCode == HttpStatusCode.OK;
     }
 
-    public AddRuneResult AddRunePage(RunePage page)
+    public AddRuneResult AddRunePage(RunePage? page)
     {
         HttpResponseMessage result = League.MakeApiRequest(HttpMethod.Post, "lol-perks/v1/pages", page).Result;
         if (result.StatusCode != HttpStatusCode.OK && JsonConvert.DeserializeObject<Error>(result.Content.ReadAsStringAsync().Result).Message.Equals("Max pages reached"))

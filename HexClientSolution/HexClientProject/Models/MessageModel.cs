@@ -12,6 +12,7 @@ using ReactiveUI;
 namespace HexClientProject.Models;
 public class MessageModel
 {
+    public required string GameNameTag { get; init; }
     public required string Sender { get; init; }
     public required string Content { get; init; }
     public DateTime Timestamp { get; init; }
@@ -51,15 +52,15 @@ public class MessageModel
                             {
                                 Children =
                                 {
-                                    new Button { Content = "View Profile", Command = ReactiveCommand.Create(() => SocialUtils.ViewProfile(Sender)) },
+                                    new Button { Content = "View Profile", Command = ReactiveCommand.Create(() => SocialUtils.ViewProfile(GameNameTag)) },
                                     new Button { Content = "Invite to Party", Command = ReactiveCommand.Create(() =>
-                                        ApiProvider.SocialService.PostInviteToLobby(ApiProvider.SocialService.GetFriendModel(Sender)!)) },
+                                        ApiProvider.SocialService.PostInviteToLobby(ApiProvider.SocialService.GetFriendModel(GameNameTag)!)) },
                                     new Button { Content = "Add Friend", Command = ReactiveCommand.Create(() => 
-                                        SocialUtils.AddFriend(Sender))},
+                                        SocialUtils.AddFriend(GameNameTag))},
                                     new Button { Content = "Mute", Command = ReactiveCommand.Create(()=>
-                                        SocialUtils.MuteUser(Sender)) },
+                                        SocialUtils.MuteUser(GameNameTag)) },
                                     new Button { Content = "Block", Command = ReactiveCommand.Create(()=>
-                                        SocialUtils.BlockFriend(Sender)) }
+                                        SocialUtils.BlockFriend(GameNameTag)) }
                                 }
                             }
                         };
@@ -71,7 +72,7 @@ public class MessageModel
                 else if (e.GetCurrentPoint(clickableText).Properties.IsLeftButtonPressed)
                 {
                     if (Sender != StateManager.Instance.SummonerInfo.GameName && Sender != "System")
-                        SocialUtils.WhisperTo(Sender, changeFilteringScope:false);
+                        SocialUtils.WhisperTo(GameNameTag, changeFilteringScope:false);
                 }
             };
 

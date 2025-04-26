@@ -14,7 +14,7 @@ public static class SocialUtils
         LoadMutedUsers();
     }
 
-    public static void LoadMutedUsers()
+    private static void LoadMutedUsers()
     {
         var mutedUserList = ApiProvider.SocialService.GetMutedUserList();
         StateManager.MutedUsernames.Clear();

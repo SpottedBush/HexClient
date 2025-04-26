@@ -249,6 +249,7 @@ public class ChatBoxViewModel : ReactiveObject
                 msgScope = ChatScope.Whisper;
             ApiProvider.SocialService.SendMessage(new MessageModel
             {
+                GameNameTag = _stateManager.SummonerInfo.GameNameTag,
                 Sender = _stateManager.SummonerInfo.GameName,
                 Content = MessageInput,
                 Scope = msgScope,
@@ -260,6 +261,7 @@ public class ChatBoxViewModel : ReactiveObject
         });
         Messages.Add(new MessageModel
         {
+            GameNameTag = "System",
             Sender = "System",
             Content = "test1",
             Scope = ChatScope.System,
@@ -267,6 +269,7 @@ public class ChatBoxViewModel : ReactiveObject
         });
         Messages.Add(new MessageModel
         {
+            GameNameTag = "ouistiti#EUWW",
             Sender = "ouistiti",
             Content = "test2",
             Scope = ChatScope.Global,
@@ -279,6 +282,7 @@ public class ChatBoxViewModel : ReactiveObject
         message = "[" + message + "]";
         ApiProvider.SocialService.SendMessage(new MessageModel
         {
+            GameNameTag = "System",
             Sender = "System",
             Content = message,
             Scope = ChatScope.System,

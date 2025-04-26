@@ -142,44 +142,29 @@ public class LeagueClient : ILeagueClient
         return httpClient;
     }
 
-    public async Task<HttpResponseMessage> MakeApiRequest(HttpMethod method, string endpoint, object data = null)
+    public async Task<HttpResponseMessage> MakeApiRequest(HttpMethod method, string endpoint, object? data = null)
     {
         string content = ((data == null) ? "" : JsonConvert.SerializeObject(data));
-        if (method == HttpMethod.Get)
+        return method switch
         {
-            return await httpClient.GetAsync(endpoint);
-        }
-        else if (method == HttpMethod.Post)
-        {
-            return await httpClient.PostAsync(endpoint, new StringContent(content, Encoding.UTF8, "application/json"));
-        }
-        else if (method == HttpMethod.Put)
-        {
-            return await httpClient.PutAsync(endpoint, new StringContent(content, Encoding.UTF8, "application/json"));
-        }
-        else if (method == HttpMethod.Delete)
-        {
-            return await httpClient.DeleteAsync(endpoint);
-        }
-        else
-        {
-            throw new Exception("Unsupported HTTP method");
-        }
+            HttpMethod.Get => await httpClient.GetAsync(endpoint),
+            HttpMethod.Post => await httpClient.PostAsync(endpoint,
+                new StringContent(content, Encoding.UTF8, "application/json")),
+            HttpMethod.Put => await httpClient.PutAsync(endpoint,
+                new StringContent(content, Encoding.UTF8, "application/json")),
+            HttpMethod.Delete => await httpClient.DeleteAsync(endpoint),
+            _ => throw new Exception("Unsupported HTTP method")
+        };
     }
 
 
-    public async Task<T> MakeApiRequestAs<T>(HttpMethod method, string endpoint, object data = null)
+    public async Task<T> MakeApiRequestAs<T>(HttpMethod method, string endpoint, object? data = null)
     {
-        return JsonConvert.DeserializeObject<T>(await (await MakeApiRequest(method, endpoint, data)).Content.ReadAsStringAsync());
+        return JsonConvert.DeserializeObject<T>(await (await MakeApiRequest(method, endpoint, data)).Content.ReadAsStringAsync())!;
     }
 
     public Summoners GetSummonersModule()
     {
-        if (Summoners == null)
-        {
-            Summoners = new Summoners(this);
-        }
-
         return Summoners;
     }
 }

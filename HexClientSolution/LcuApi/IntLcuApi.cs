@@ -10,7 +10,7 @@ public interface ILeagueClient
 
     HttpClient GetHttpClient();
 
-    Task<HttpResponseMessage> MakeApiRequest(HttpMethod method, string endpoint, object data = null);
+    Task<HttpResponseMessage> MakeApiRequest(HttpMethod method, string endpoint, object? data = null!);
 
-    Task<T> MakeApiRequestAs<T>(HttpMethod method, string endpoint, object data = null);
+    Task<T> MakeApiRequestAs<T>(HttpMethod method, string endpoint, object? data = null!);
 }

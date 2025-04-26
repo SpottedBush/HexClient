@@ -27,6 +27,8 @@ public class SummonerInfoModel
         set => _gameName = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    public string GameNameTag => _gameName + _tagLine;
+
     public int ProfileIconId { get; set; }
 
     public string TagLine
