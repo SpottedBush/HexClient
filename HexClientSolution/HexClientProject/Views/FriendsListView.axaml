@@ -61,7 +61,7 @@
 
                             <!-- Friend Info -->
                             <StackPanel>
-                                <TextBlock Text="{Binding Username}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding GameName}" FontWeight="Bold"/>
                                 <Grid ColumnDefinitions="Auto,*,Auto">
                                     <TextBlock Text="Status:" Grid.Column="0" Margin="0,0,5,0"/>
                                     <TextBlock Text="{Binding Status}" Grid.Column="1"/>

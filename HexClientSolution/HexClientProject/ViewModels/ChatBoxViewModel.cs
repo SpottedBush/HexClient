@@ -103,14 +103,14 @@ public class ChatBoxViewModel : ReactiveObject
     }
 
     private string? _selectedWhisperTarget;
-    public string? SelectedWhisperTarget
+    public string? SelectedWhisperTarget // GameNameTag
     {
         get => _selectedWhisperTarget;
         set => this.RaiseAndSetIfChanged(ref _selectedWhisperTarget, value);
     }
     private string _selectedFilter = "Global";
 
-    public string SelectedFilter
+    public string SelectedFilter // if Whisper => GameNameTag
     {
         get => _selectedFilter;
         set
@@ -130,12 +130,16 @@ public class ChatBoxViewModel : ReactiveObject
         // Message exists and is not in the mutedUsers
         if (lastMessage != null && !_stateManager.MutedUsernames.Contains(lastMessage.Sender))
         {
+            if (lastMessage.Scope == ChatScope.System)
+            {
+                FilteredMessages.Add(lastMessage);
+                return;
+            }
             // Message is not whisper, then SelectedFilter must correspond to the Scope.
             if (lastMessage.Scope != ChatScope.Whisper && lastMessage.Scope.ToString() != SelectedFilter) return;
             // Message is whisper, then SelectedFilter must correspond to a username related to the message.
             if (lastMessage.Scope == ChatScope.Whisper && 
                 lastMessage.Sender != SelectedFilter && lastMessage.WhisperingTo != SelectedFilter) return;
-            
             FilteredMessages.Add(lastMessage);
         }
     }
@@ -171,9 +175,9 @@ public class ChatBoxViewModel : ReactiveObject
             FilteredMessages.Add(msg);
     }
     
-    public void ApplyFilterToWhisper(string username)
+    public void ApplyFilterToWhisper(string gameNameTag)
     {
-        SelectedFilter = username;
+        SelectedFilter = gameNameTag;
         FilteredMessages.Clear();
         IEnumerable<MessageModel> filtered = Messages.Where( // Removes muted Users
             messageModel => _stateManager.MutedUsernames.All(mutedUser=> messageModel.Sender != mutedUser));
@@ -181,10 +185,10 @@ public class ChatBoxViewModel : ReactiveObject
         filtered = filtered.Where(msg =>
             (msg.Scope == ChatScope.System) || (msg.Scope == ChatScope.Whisper &&
                                                 (
-                                                    (msg.Sender == username && msg.WhisperingTo ==
+                                                    (msg.Sender == gameNameTag && msg.WhisperingTo ==
                                                         _stateManager.SummonerInfo.GameName)
                                                     || msg.Sender == _stateManager.SummonerInfo.GameName &&
-                                                    msg.WhisperingTo == username)));
+                                                    msg.WhisperingTo == gameNameTag)));
         foreach (var msg in filtered)
         {
             FilteredMessages.Add(msg);
@@ -232,7 +236,7 @@ public class ChatBoxViewModel : ReactiveObject
             }
             if (SelectedScope == ChatScope.Whisper && (!isWhisper ||
                                                        _stateManager.Friends.FirstOrDefault(f =>
-                                                           f.Username == SelectedWhisperTarget) == null))
+                                                           f.GameNameTag == SelectedWhisperTarget) == null))
             {
                 if (!isWhisper)
                     SendSystemMessage("Please enter a proper whisper command. Usage: /mp <username>");
@@ -249,8 +253,7 @@ public class ChatBoxViewModel : ReactiveObject
                 msgScope = ChatScope.Whisper;
             ApiProvider.SocialService.SendMessage(new MessageModel
             {
-                GameNameTag = _stateManager.SummonerInfo.GameNameTag,
-                Sender = _stateManager.SummonerInfo.GameName,
+                Sender = _stateManager.SummonerInfo.GameNameTag,
                 Content = MessageInput,
                 Scope = msgScope,
                 Timestamp = DateTime.Now,
@@ -261,32 +264,23 @@ public class ChatBoxViewModel : ReactiveObject
         });
         Messages.Add(new MessageModel
         {
-            GameNameTag = "System",
-            Sender = "System",
-            Content = "test1",
-            Scope = ChatScope.System,
-            Timestamp = DateTime.Now
-        });
-        Messages.Add(new MessageModel
-        {
-            GameNameTag = "ouistiti#EUWW",
-            Sender = "ouistiti",
+            Sender = "ouistiti#EUWW",
             Content = "test2",
             Scope = ChatScope.Global,
             Timestamp = DateTime.Now
         });
     }
 
-    private void SendSystemMessage(string message)
+    public void SendSystemMessage(string message)
     {
         message = "[" + message + "]";
         ApiProvider.SocialService.SendMessage(new MessageModel
         {
-            GameNameTag = "System",
             Sender = "System",
             Content = message,
             Scope = ChatScope.System,
             Timestamp = DateTime.Now
         });
+        ApplyFilterToLastMessage();
     }
 }

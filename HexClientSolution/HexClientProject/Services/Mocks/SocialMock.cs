@@ -11,17 +11,17 @@ public class SocialMock : ISocialService
     private readonly StateManager _stateManager = StateManager.Instance; 
     private static readonly List<FriendModel> MockFriends =
     [
-        new() { Username = "AhriBot", Status = "Coucou les zamis", RankId = 1, DivisionId = 2 },
-        new() { Username = "HerMain", Status = "J'aime beaucoup les", RankId = 1, DivisionId = 2 },
-        new() { Username = "HisRiven", Status = "RIVEN OTP", RankId = 1, DivisionId = 2 }
+        new() { GameName = "AhriBot", TagLine = "EUW", Status = "Coucou les zamis", RankId = 1, DivisionId = 2 },
+        new() { GameName = "HerMain", TagLine = "SINJ", Status = "J'aime beaucoup les", RankId = 1, DivisionId = 2 },
+        new() { GameName = "HisRiven", TagLine = "CRINGE", Status = "RIVEN OTP", RankId = 1, DivisionId = 2 }
     ];
 
     private static readonly List<string> MockMutedUsers =
-    ["Dushyanth", "Jidiano"];
+    ["Dushyanth#EUW", "Jidiano#TRIQUE"];
     
     public FriendModel? GetFriendModel(string puuid)
     {
-        return MockFriends.FirstOrDefault(f => f.Username == puuid);
+        return MockFriends.FirstOrDefault(f => f.Puuid == puuid);
     }
     
     public List<FriendModel> GetFriendModelList()
@@ -39,23 +39,32 @@ public class SocialMock : ISocialService
         throw new System.NotImplementedException();
     }
 
-    public bool AddFriend(string newFriendUsername)
+    public bool AddFriend(string newFriendGamerTag)
     {
+        if (!newFriendGamerTag.Contains("#"))
+        {
+            _stateManager.ChatBoxViewModel.SendSystemMessage("Tag line is missing, cannot add friend.");
+            return false;
+        }
+        var parts = newFriendGamerTag.Split('#');
+        string newFriendUsername = parts[0];
+        string newFriendTag = parts[1];
         FriendModel friend = new FriendModel
         {
-            Username = newFriendUsername,
+            GameName = newFriendUsername,
+            TagLine = newFriendTag,
             Status = "RIVEN OTP",
             RankId = 1,
             DivisionId = 2
         };
-        if (MockFriends.Any(f => f.Username == friend.Username)) return false; // If the friend does not already exist
+        if (MockFriends.Any(f => f.GameNameTag == friend.GameNameTag)) return false; // If the friend does not already exist
         MockFriends.Add(friend);
         return true;
     }
 
-    public bool RemoveFriend(string usernameToRemove)
+    public bool RemoveFriend(string gameNameTagToRemove)
     {
-        var existing = MockFriends.FirstOrDefault(f => f.Username == usernameToRemove);
+        var existing = MockFriends.FirstOrDefault(f => f.GameNameTag == gameNameTagToRemove);
         if (existing == null) return false;
         MockFriends.Remove(existing);
         return true;
@@ -71,22 +80,22 @@ public class SocialMock : ISocialService
         return true;
     }
 
-    public bool BlockFriend(string usernameToBlock)
+    public bool BlockFriend(string gameNameTagToBlock)
     {
-        if (MockMutedUsers.Contains(usernameToBlock)) return false; // Already blocked
-        MockMutedUsers.Add(usernameToBlock);
-        return RemoveFriend(usernameToBlock);
+        if (MockMutedUsers.Contains(gameNameTagToBlock)) return false; // Already blocked
+        MockMutedUsers.Add(gameNameTagToBlock);
+        return RemoveFriend(gameNameTagToBlock);
     }
 
-    public bool UnblockFriend(string usernameToBlock)
+    public bool UnblockFriend(string gameNameTagToBlock)
     {
-        return MockMutedUsers.Remove(usernameToBlock);
+        return MockMutedUsers.Remove(gameNameTagToBlock);
     }
 
-    public bool MuteUser(string usernameToMute)
+    public bool MuteUser(string gameNameTagToMute)
     {
-        if (MockMutedUsers.Contains(usernameToMute)) return false;
-        MockMutedUsers.Add(usernameToMute);
+        if (MockMutedUsers.Contains(gameNameTagToMute)) return false;
+        MockMutedUsers.Add(gameNameTagToMute);
         return true;
     }
     public void SendMessage(MessageModel message)

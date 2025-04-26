@@ -22,7 +22,7 @@ namespace HexClientProject.Views
             if (sender is not Border { DataContext: FriendModel friend }) return;
             if (DataContext is FriendsListViewModel)
             {
-                SocialUtils.WhisperTo(friend.Username);
+                SocialUtils.WhisperTo(friend.GameNameTag);
             }
         }
         private void TextBox_OnKeyDown(object? sender, KeyEventArgs e)

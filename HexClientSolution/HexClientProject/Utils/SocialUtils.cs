@@ -35,56 +35,56 @@ public static class SocialUtils
         }
     }
 
-    public static void ViewProfile(string username)
+    public static void ViewProfile(string gameNameTag)
     {
-        if (username == string.Empty)
+        if (gameNameTag == string.Empty)
             return;
-        ApiProvider.SocialService.ViewProfile(username);
+        ApiProvider.SocialService.ViewProfile(gameNameTag);
     }
 
-    public static void AddFriend(string username)
+    public static void AddFriend(string gameNameTag)
     {
-        if (username == string.Empty)
+        if (gameNameTag == string.Empty)
             return;
-        bool success = ApiProvider.SocialService.AddFriend(username);
+        bool success = ApiProvider.SocialService.AddFriend(gameNameTag);
         if (success)
             LoadFriends();
     }
 
-    public static void RemoveFriend(string username)
+    public static void RemoveFriend(string gameNameTag)
     {
-        bool success = ApiProvider.SocialService.RemoveFriend(username);
+        bool success = ApiProvider.SocialService.RemoveFriend(gameNameTag);
         if (success)
             LoadFriends();
     }
 
-    public static void MuteUser(string username)
+    public static void MuteUser(string gameNameTag)
     {
-        bool success = ApiProvider.SocialService.MuteUser(username);
+        bool success = ApiProvider.SocialService.MuteUser(gameNameTag);
         if (success)
             LoadMutedUsers();
     }
 
-    public static void BlockFriend(string username)
+    public static void BlockFriend(string gameNameTag)
     {
-        bool success = ApiProvider.SocialService.BlockFriend(username);
+        bool success = ApiProvider.SocialService.BlockFriend(gameNameTag);
         if (success)
             LoadFriendsAndMutedUsers();
     }
 
-    private static void UnblockFriend(string username)
+    private static void UnblockFriend(string gameNameTag)
     {
-        bool success = ApiProvider.SocialService.UnblockFriend(username);
+        bool success = ApiProvider.SocialService.UnblockFriend(gameNameTag);
         if (success)
             LoadMutedUsers();
     }
     
-    public static void WhisperTo(string username, bool changeFilteringScope = true)
+    public static void WhisperTo(string gameNameTag, bool changeFilteringScope = true)
     {
-        StateManager.ChatBoxViewModel.SelectedWhisperTarget = username;
-        StateManager.ChatBoxViewModel.MessageInput = $"/mp <{username}> ";
+        StateManager.ChatBoxViewModel.SelectedWhisperTarget = gameNameTag;
+        StateManager.ChatBoxViewModel.MessageInput = $"/mp <{gameNameTag}> ";
         if (!changeFilteringScope) return;
         StateManager.ChatBoxViewModel.SelectedScope = ChatScope.Whisper;
-        StateManager.ChatBoxViewModel.ApplyFilterToWhisper(username);
+        StateManager.ChatBoxViewModel.ApplyFilterToWhisper(gameNameTag);
     }
 }

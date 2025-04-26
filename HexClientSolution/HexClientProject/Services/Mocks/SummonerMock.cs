@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 
@@ -7,12 +6,27 @@ namespace HexClientProject.Services.Mocks;
 
 public class SummonerMock : ISummonerService
 {
-    private static readonly List<SummonerInfoModel> MockSummoners = new()
-    {
+    private static readonly List<SummonerInfoModel> MockSummoners =
+    [
         new SummonerInfoModel
         {
             SummonerId = 015205,
             GameName = "AhriBotSum",
+            TagLine = "EUW",
+            SummonerLevel = 31,
+            XpSinceLastLevel = 2000,
+            XpUntilNextLevel = 4000,
+            RankId = 1,
+            DivisionId = 2,
+            Lp = 47,
+            Region = "EUW"
+        },
+
+        new SummonerInfoModel
+        {
+            SummonerId = 015205,
+            GameName = "HerMainSum",
+            TagLine = "SINJ",
             SummonerLevel = 31,
             XpSinceLastLevel = 2000,
             XpUntilNextLevel = 4000,
@@ -24,18 +38,8 @@ public class SummonerMock : ISummonerService
         new SummonerInfoModel
         {
             SummonerId = 015205,
-            GameName = "HerMainSum",
-            SummonerLevel = 31,
-            XpSinceLastLevel = 2000,
-            XpUntilNextLevel = 4000,
-            RankId = 1,
-            DivisionId = 2,
-            Lp = 47,
-            Region = "EUW"
-        },new SummonerInfoModel
-        {
-            SummonerId = 015205,
             GameName = "HisRivenSum",
+            TagLine = "CRINGE",
             SummonerLevel = 31,
             XpSinceLastLevel = 2000,
             XpUntilNextLevel = 4000,
@@ -43,8 +47,9 @@ public class SummonerMock : ISummonerService
             DivisionId = 2,
             Lp = 47,
             Region = "EUW"
-        },
-    };
+        }
+
+    ];
     public SummonerInfoModel GetCurrentSummonerInfoModel()
     {
         return new SummonerInfoModel
@@ -52,8 +57,8 @@ public class SummonerMock : ISummonerService
             Puuid = "2e63341a-e627-48ac-bb1a-9d56e2e9cc4f",
             SummonerId = 015205,
             GameName = "TouDansLTrou",
-            ProfileIconId = 1,
             TagLine = "CACA",
+            ProfileIconId = 1,
             SummonerLevel = 31,
             XpSinceLastLevel = 2000,
             XpUntilNextLevel = 4000,
@@ -71,8 +76,8 @@ public class SummonerMock : ISummonerService
             Puuid = puuid,
             SummonerId = 015205,
             GameName = "Benjamin",
-            ProfileIconId = 1,
             TagLine = "SINJ",
+            ProfileIconId = 1,
             SummonerLevel = 31,
             XpSinceLastLevel = 2000,
             XpUntilNextLevel = 4000,

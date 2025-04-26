@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 using HexClientProject.Services.Api;
@@ -12,7 +13,6 @@ namespace HexClientProject.Services.Builders
     {
         public SummonerInfoModel GetCurrentSummonerInfoModel()
         {
-            SummonerInfoModel summonerInfoModel = new SummonerInfoModel();
 
             string responseSi = SummonerApi.GetCurrentSummonerInfos().Result;
             dynamic jsonObjectSi = JsonConvert.DeserializeObject<dynamic>(responseSi)
@@ -29,19 +29,21 @@ namespace HexClientProject.Services.Builders
 
             bool FilterCondition(dynamic x) => x.queueType == "RANKED_SOLO_5x5";
             dynamic queueStatsList = jsonObjectSiR!.Filter((Func<dynamic, bool>)FilterCondition);
-
-            summonerInfoModel.Puuid = jsonObjectSi!.puuid;
-            summonerInfoModel.SummonerId = jsonObjectSi.summonerId;
-            summonerInfoModel.GameName = jsonObjectSi.gameName;
-            summonerInfoModel.ProfileIconId = jsonObjectSi.profileIconId;
-            summonerInfoModel.TagLine = jsonObjectSi.tagLine;
-            summonerInfoModel.SummonerLevel = jsonObjectSi.summonerLevel;
-            summonerInfoModel.XpSinceLastLevel = jsonObjectSi.xpSinceLastLevel;
-            summonerInfoModel.XpUntilNextLevel = jsonObjectSi.xpUntilNextLevel;
-            summonerInfoModel.RankId = SummonerInfoViewModel.RankStrings.Find(queueStatsList[0].tier);
-            summonerInfoModel.DivisionId = SummonerInfoViewModel.RankDivisions.Find(queueStatsList[0].division);
-            summonerInfoModel.Lp = queueStatsList[0].leaguePoints;
-            // summonerInfoModel.Region = jsonObjectSi.region;
+            SummonerInfoModel summonerInfoModel = new SummonerInfoModel
+            {
+                Puuid = jsonObjectSi!.puuid,
+                SummonerId = jsonObjectSi.summonerId,
+                GameName = jsonObjectSi.gameName,
+                ProfileIconId = jsonObjectSi.profileIconId,
+                TagLine = jsonObjectSi.tagLine,
+                SummonerLevel = jsonObjectSi.summonerLevel,
+                XpSinceLastLevel = jsonObjectSi.xpSinceLastLevel,
+                XpUntilNextLevel = jsonObjectSi.xpUntilNextLevel,
+                RankId = SummonerInfoViewModel.RankStrings.Find(queueStatsList[0].tier),
+                DivisionId = SummonerInfoViewModel.RankDivisions.Find(queueStatsList[0].division),
+                Lp = queueStatsList[0].leaguePoints
+                // summonerInfoModel.Region = jsonObjectSi.region;
+            };
 
             return summonerInfoModel;
         }
@@ -49,7 +51,6 @@ namespace HexClientProject.Services.Builders
 
         public SummonerInfoModel GetSummonerInfoModel(string puuid)
         {
-            SummonerInfoModel summonerInfoModel = new SummonerInfoModel();
             string responseSi = SummonerApi.GetSummonerInfos(puuid).Result;
             dynamic? jsonObjectSi = JsonConvert.DeserializeObject<dynamic>(responseSi);
 
@@ -64,33 +65,28 @@ namespace HexClientProject.Services.Builders
             bool FilterCondition(dynamic x) => x.queueType == "RANKED_SOLO_5x5";
             dynamic queueStatsList = jsonObjectSiR!.Filter((Func<dynamic, bool>)FilterCondition);
 
-            summonerInfoModel.Puuid = jsonObjectSi!.puuid;
-            summonerInfoModel.SummonerId = jsonObjectSi.summonerId;
-            summonerInfoModel.GameName = jsonObjectSi.gameName;
-            summonerInfoModel.ProfileIconId = jsonObjectSi.profileIconId;
-            summonerInfoModel.TagLine = jsonObjectSi.tagLine;
-            summonerInfoModel.SummonerLevel = jsonObjectSi.summonerLevel;
-            summonerInfoModel.XpSinceLastLevel = jsonObjectSi.xpSinceLastLevel;
-            summonerInfoModel.XpUntilNextLevel = jsonObjectSi.xpUntilNextLevel;
-            summonerInfoModel.RankId = SummonerInfoViewModel.RankStrings.Find(queueStatsList[0].tier);
-            summonerInfoModel.DivisionId = SummonerInfoViewModel.RankDivisions.Find(queueStatsList[0].division);
-            summonerInfoModel.Lp = queueStatsList[0].leaguePoints;
-            // summonerInfoModel.Region = jsonObjectSi.region;
-
+            SummonerInfoModel summonerInfoModel = new SummonerInfoModel
+            {
+                Puuid = jsonObjectSi!.puuid,
+                SummonerId = jsonObjectSi.summonerId,
+                GameName = jsonObjectSi.gameName,
+                ProfileIconId = jsonObjectSi.profileIconId,
+                TagLine = jsonObjectSi.tagLine,
+                SummonerLevel = jsonObjectSi.summonerLevel,
+                XpSinceLastLevel = jsonObjectSi.xpSinceLastLevel,
+                XpUntilNextLevel = jsonObjectSi.xpUntilNextLevel,
+                RankId = SummonerInfoViewModel.RankStrings.Find(queueStatsList[0].tier),
+                DivisionId = SummonerInfoViewModel.RankDivisions.Find(queueStatsList[0].division),
+                Lp = queueStatsList[0].leaguePoints
+                // summonerInfoModel.Region = jsonObjectSi.region;
+            };
             return summonerInfoModel;
         }
 
         public List<SummonerInfoModel> GetSummonerInfoList(List<string> puuidList)
         {
-            List<SummonerInfoModel> summonerInfoModelList = new List<SummonerInfoModel>();
-
-            foreach (string puuid in puuidList)
-            {
-                var summonerInfoModel = GetSummonerInfoModel(puuid);
-
-                summonerInfoModelList.Add(summonerInfoModel);
-            }
-            
+            List<SummonerInfoModel> summonerInfoModelList = [];
+            summonerInfoModelList.AddRange(puuidList.Select(GetSummonerInfoModel));
             return summonerInfoModelList;
         }
     }
