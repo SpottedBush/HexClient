@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using HexClientProject.Models;
 using HexClientProject.StateManagers;
 using HexClientProject.ViewModels;
 
@@ -13,11 +12,11 @@ namespace HexClientProject.Controls
 
             var vm = new LobbyPlayerViewModel(playerId);
 
-            var stateManager = StateManager.Instance;
+            GlobalStateManager globalStateManager = GlobalStateManager.Instance;
 
-            if (playerId > stateManager.LobbyInfo.Summoners!.Count || playerId == 0)
+            if (playerId > globalStateManager.LobbyInfo.Summoners.Count || playerId == 0)
                 return;
-            var currSummoner = stateManager.LobbyInfo.Summoners[playerId];
+            var currSummoner = globalStateManager.LobbyInfo.Summoners[playerId];
             string summonerName = currSummoner.GameName;
             int summonerLevel = currSummoner.SummonerLevel;
             string summonerRank = SummonerInfoViewModel.RankStrings[currSummoner.RankId];
@@ -30,7 +29,7 @@ namespace HexClientProject.Controls
         public LobbyPlayerControl()
         {
             InitializeComponent();
-            var lobbyPlayerControl = new LobbyPlayerControl(StateManager.Instance.LobbyInfo.NbPlayers - 1);
+            var lobbyPlayerControl = new LobbyPlayerControl(GlobalStateManager.Instance.LobbyInfo.NbPlayers - 1);
         }
     }
 }

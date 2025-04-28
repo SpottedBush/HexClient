@@ -1,6 +1,5 @@
 using System;
 using Avalonia.Controls;
-using HexClientProject.Models;
 using HexClientProject.Services.Providers;
 using HexClientProject.StateManagers;
 using HexClientProject.Views;
@@ -9,13 +8,14 @@ using ReactiveUI;
 namespace HexClientProject.ViewModels;
 
 public class MainViewModel : ReactiveObject{
-    private readonly StateManager _stateManager = StateManager.Instance;
-    public UserControl LeftPanelContent => _stateManager.LeftPanelContent;
+    private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
+    private readonly ViewStateManager _viewStateManager = ViewStateManager.Instance;
+    public UserControl LeftPanelContent => _viewStateManager.LeftPanelContent;
     public MainViewModel()
     {
-        this.WhenAnyValue(x => x._stateManager.LeftPanelContent)
+        this.WhenAnyValue(x => x._viewStateManager.LeftPanelContent)
             .Subscribe(_ => this.RaisePropertyChanged(nameof(LeftPanelContent)));
-        _stateManager.SummonerInfo = ApiProvider.SummonerService.GetCurrentSummonerInfoModel();
-        _stateManager.LeftPanelContent = new GameModeSelectionView(this);
+        _globalStateManager.SummonerInfo = ApiProvider.SummonerService.GetCurrentSummonerInfoModel();
+        _viewStateManager.LeftPanelContent = new GameModeSelectionView(this);
     }
 }

@@ -9,8 +9,9 @@ namespace HexClientProject.Services.Mocks;
 
 public class SocialMock : ISocialService
 {
+    private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
+    private readonly ViewStateManager _viewStateManager = ViewStateManager.Instance;
     private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance; 
-    private readonly StateManager _stateManager = StateManager.Instance; 
     private static readonly List<FriendModel> MockFriends =
     [
         new() { GameName = "AhriBot", TagLine = "EUW", Status = "Coucou les zamis", RankId = 1, DivisionId = 2 },
@@ -74,11 +75,11 @@ public class SocialMock : ISocialService
 
     public bool PostInviteToLobby(FriendModel friend)
     {
-        if (_stateManager.LeftPanelContent is not LobbyView)
+        if (_viewStateManager.LeftPanelContent is not LobbyView)
             return false;
-        if (_stateManager.LobbyInfo.NbPlayers == _stateManager.LobbyInfo.MaxPlayersLimit)
+        if (_globalStateManager.LobbyInfo.NbPlayers == _globalStateManager.LobbyInfo.MaxPlayersLimit)
             return false;
-        _stateManager.LobbyInfo.Summoners.Add(friend);
+        _globalStateManager.LobbyInfo.Summoners.Add(friend);
         return true;
     }
 

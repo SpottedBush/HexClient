@@ -9,8 +9,8 @@ public partial class SummonerInfoViewModel : ObservableObject
 {
     public static readonly List<string> RankStrings = ["Iron", "Bronze", "Silver", "Gold", "Platinum", "Emerald", "Diamond", "Master", "GrandMaster", "Challenger"];
     public static readonly List<string> RankDivisions = ["IV", "III", "II", "I"];
-    private readonly StateManager _stateManager = StateManager.Instance;
-    private SummonerInfoModel Summoner => _stateManager.SummonerInfo;
+    private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
+    private SummonerInfoModel Summoner => _globalStateManager.SummonerInfo;
     [ObservableProperty]
     private string _summonerName;
     [ObservableProperty]

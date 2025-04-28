@@ -43,7 +43,7 @@ public class MessageModel
             {
                 if (e.GetCurrentPoint(clickableText).Properties.IsRightButtonPressed)
                 {
-                    if (Sender == StateManager.Instance.SummonerInfo.GameName || Sender == "System") return;
+                    if (Sender == GlobalStateManager.Instance.SummonerInfo.GameName || Sender == "System") return;
                     var flyout = new Flyout
                     {
                         Placement = PlacementMode.Bottom,
@@ -69,7 +69,7 @@ public class MessageModel
                 }
                 else if (e.GetCurrentPoint(clickableText).Properties.IsLeftButtonPressed)
                 {
-                    if (Sender != StateManager.Instance.SummonerInfo.GameName && Sender != "System")
+                    if (Sender != GlobalStateManager.Instance.SummonerInfo.GameName && Sender != "System")
                         SocialUtils.WhisperTo(Sender, changeFilteringScope:false);
                 }
             };

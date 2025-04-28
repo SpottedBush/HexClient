@@ -9,7 +9,9 @@ namespace HexClientProject.ViewModels;
 
 public class GameModeSelectionViewModel : ReactiveObject
 {
-    private readonly StateManager _stateManager = StateManager.Instance;
+    private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
+
+    private readonly ViewStateManager _viewStateManager = ViewStateManager.Instance;
     public ReactiveCommand<object, Unit> SwitchToLobby { get; }
 
     public GameModeSelectionViewModel(MainViewModel mainViewModel)
@@ -18,11 +20,11 @@ public class GameModeSelectionViewModel : ReactiveObject
         {
             if (param is string gameModeName)
             {
-                _stateManager.LobbyInfo = ApiProvider.LobbyService.CreateLobbyInfoModel(); // API PROVIDER
-                _stateManager.LobbyInfo.CurrSelectedGameModeModel = new GameModeModel(gameModeName);
+                _globalStateManager.LobbyInfo = ApiProvider.LobbyService.CreateLobbyInfoModel(); // API PROVIDER
+                _globalStateManager.LobbyInfo.CurrSelectedGameModeModel = new GameModeModel(gameModeName);
             }
 
-            _stateManager.LeftPanelContent = new LobbyView(mainViewModel); // Switch the view
+            _viewStateManager.LeftPanelContent = new LobbyView(mainViewModel); // Switch the view
         });
     }
 }

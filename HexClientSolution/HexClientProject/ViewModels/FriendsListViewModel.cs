@@ -10,7 +10,7 @@ namespace HexClientProject.ViewModels;
 
 public class FriendsListViewModel : ViewModelBase
 {
-    private readonly StateManager _stateManager = StateManager.Instance;
+    private readonly ViewStateManager _viewStateManager = ViewStateManager.Instance;
     private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance;
     public ObservableCollection<FriendModel> Friends => _socialStateManager.Friends;
     public ReactiveCommand<FriendModel, Unit> ViewProfileCommand { get; }

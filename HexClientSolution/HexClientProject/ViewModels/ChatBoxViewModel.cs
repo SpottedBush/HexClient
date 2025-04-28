@@ -15,7 +15,7 @@ namespace HexClientProject.ViewModels;
 
 public class ChatBoxViewModel : ReactiveObject
 {
-    private readonly StateManager _stateManager = StateManager.Instance;
+    private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
     private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance; 
 
 
@@ -125,7 +125,7 @@ public class ChatBoxViewModel : ReactiveObject
         }
     }
 
-    public ObservableCollection<MessageModel> FilteredMessages { get; } = new();
+    public ObservableCollection<MessageModel> FilteredMessages { get; } = [];
 
     private void ApplyFilterToLastMessage()
     {
@@ -189,8 +189,8 @@ public class ChatBoxViewModel : ReactiveObject
             (msg.Scope == ChatScope.System) || (msg.Scope == ChatScope.Whisper &&
                                                 (
                                                     (msg.Sender == gameNameTag && msg.WhisperingTo ==
-                                                        _stateManager.SummonerInfo.GameName)
-                                                    || msg.Sender == _stateManager.SummonerInfo.GameName &&
+                                                        _globalStateManager.SummonerInfo.GameName)
+                                                    || msg.Sender == _globalStateManager.SummonerInfo.GameName &&
                                                     msg.WhisperingTo == gameNameTag)));
         foreach (var msg in filtered)
         {
@@ -256,7 +256,7 @@ public class ChatBoxViewModel : ReactiveObject
                 msgScope = ChatScope.Whisper;
             ApiProvider.SocialService.SendMessage(new MessageModel
             {
-                Sender = _stateManager.SummonerInfo.GameNameTag,
+                Sender = _globalStateManager.SummonerInfo.GameNameTag,
                 Content = MessageInput,
                 Scope = msgScope,
                 Timestamp = DateTime.Now,
@@ -284,6 +284,5 @@ public class ChatBoxViewModel : ReactiveObject
             Scope = ChatScope.System,
             Timestamp = DateTime.Now
         });
-        ApplyFilterToLastMessage();
     }
 }

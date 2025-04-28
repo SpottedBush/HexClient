@@ -2,14 +2,14 @@ using System;
 using Avalonia.Threading;
 using ReactiveUI;
 using System.Reactive;
-using HexClientProject.Models;
 using HexClientProject.StateManagers;
 
 namespace HexClientProject.ViewModels;
 
 public class MatchFoundViewModel : ReactiveObject
 {
-    private readonly StateManager _stateManager = StateManager.Instance;
+    private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
+
     private readonly DispatcherTimer _timer;
 
     private double _timeLeft;
@@ -76,7 +76,7 @@ public class MatchFoundViewModel : ReactiveObject
         StopTimer();
         IsActionDone = true;
 
-        if (_stateManager.IsOnlineMode)
+        if (_globalStateManager.IsOnlineMode)
         {
             OnCancelMatchRequested?.Invoke(); // Assume server will notify if match fails
         }

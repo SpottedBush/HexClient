@@ -1,7 +1,6 @@
 using System;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using HexClientProject.Models;
 using HexClientProject.StateManagers;
 using ReactiveUI;
 
@@ -39,11 +38,11 @@ namespace HexClientProject.ViewModels
 
         public LobbyPlayerViewModel(int playerId)
         {
-            if (playerId >= StateManager.Instance.LobbyInfo.Summoners.Count)
+            if (playerId >= GlobalStateManager.Instance.LobbyInfo.Summoners.Count)
                 return;
             PlayerId = playerId;
 
-            var summoner = StateManager.Instance.LobbyInfo.Summoners[playerId];
+            var summoner = GlobalStateManager.Instance.LobbyInfo.Summoners[playerId];
             DisplayText = $"{summoner.GameName} (Level {summoner.SummonerLevel}) " +
                           $"Rank: {SummonerInfoViewModel.RankStrings[summoner.RankId]} " +
                           $"{SummonerInfoViewModel.RankDivisions[summoner.DivisionId]}";

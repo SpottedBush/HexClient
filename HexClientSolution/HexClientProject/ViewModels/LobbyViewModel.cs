@@ -8,7 +8,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
-using HexClientProject.Models;
 using HexClientProject.StateManagers;
 using HexClientProject.Views;
 using ReactiveUI;
@@ -17,7 +16,9 @@ namespace HexClientProject.ViewModels
 {
     public class LobbyViewModel : ReactiveObject
     {
-        private readonly StateManager _stateManager = StateManager.Instance;
+        private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
+        private readonly ViewStateManager _viewStateManager = ViewStateManager.Instance;
+
         private readonly DispatcherTimer _timer;
         private int _secondsElapsed;
         private readonly MatchFoundViewModel _matchFoundVm;
@@ -166,7 +167,7 @@ namespace HexClientProject.ViewModels
 
         private void AcceptMatch()
         {
-            _stateManager.CurrView = new DraftView(); // Switch the view
+            _viewStateManager.CurrView = new DraftView(); // Switch the view
             _timer.Stop();
         }
 
@@ -191,18 +192,18 @@ namespace HexClientProject.ViewModels
             };
             _timer.Tick += TimerTick;
             
-            for (int i = 1; i < _stateManager.LobbyInfo.Summoners.Count; i++) // Skipping curr player
+            for (int i = 1; i < _globalStateManager.LobbyInfo.Summoners.Count; i++) // Skipping curr player
             {
                 Summoners.Add(new LobbyPlayerViewModel(i));
             }
 
-            _gameModeName = _stateManager.LobbyInfo.CurrSelectedGameModeModel.GameModeDescription;
-            _lobbyName = _stateManager.LobbyInfo.LobbyName;
-            _summonerName = _stateManager.SummonerInfo.GameName;
-            _summonerLevel = _stateManager.SummonerInfo.SummonerLevel;
-            _summonerRank = SummonerInfoViewModel.RankStrings[_stateManager.SummonerInfo.RankId];
-            _summonerDivision = SummonerInfoViewModel.RankDivisions[_stateManager.SummonerInfo.RankId];
-            ReturnToGameModeCommand = ReactiveCommand.Create(() => { _stateManager.LeftPanelContent = new GameModeSelectionView(mainViewModel);});
+            _gameModeName = _globalStateManager.LobbyInfo.CurrSelectedGameModeModel.GameModeDescription;
+            _lobbyName = _globalStateManager.LobbyInfo.LobbyName;
+            _summonerName = _globalStateManager.SummonerInfo.GameName;
+            _summonerLevel = _globalStateManager.SummonerInfo.SummonerLevel;
+            _summonerRank = SummonerInfoViewModel.RankStrings[_globalStateManager.SummonerInfo.RankId];
+            _summonerDivision = SummonerInfoViewModel.RankDivisions[_globalStateManager.SummonerInfo.RankId];
+            ReturnToGameModeCommand = ReactiveCommand.Create(() => { _viewStateManager.LeftPanelContent = new GameModeSelectionView(mainViewModel);});
             StartQueueCommand = ReactiveCommand.Create(StartQueue);
             LeaveQueueCommand = ReactiveCommand.Create(LeaveQueue);
             AssignRole1Command = ReactiveCommand.Create<string>(role =>
@@ -238,7 +239,7 @@ namespace HexClientProject.ViewModels
         {
             _secondsElapsed++;
             TimerDisplay = TimeSpan.FromSeconds(_secondsElapsed).ToString(@"mm\:ss");
-            if (_stateManager.IsOnlineMode)
+            if (_globalStateManager.IsOnlineMode)
             {
                 // TODO LOUIS: Get Match found signal if online mode
             }

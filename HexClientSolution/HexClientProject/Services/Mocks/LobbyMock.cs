@@ -17,7 +17,7 @@ public class LobbyMock : ILobbyService
             MaxPlayersLimit = 5,
             // CurrSelectedGameModeModel = new GameModeModel("RANKED_SOLO_5x5"),
             LeaderName = "TouDansLTrou",
-            Summoners = [StateManager.Instance.SummonerInfo,
+            Summoners = [GlobalStateManager.Instance.SummonerInfo,
                 new SummonerInfoModel
                 {
                     Puuid = "2e63341a-e627-48ac-bb1a-9d56e2e9cc4f",

@@ -7,11 +7,6 @@ namespace HexClientProject.StateManagers;
 
 public class SocialStateManager : ReactiveObject
 {
-    public ObservableCollection<FriendModel> Friends { get; } = new();
-    public Collection<string> MutedUsernames { get; } = new();
-    public ChatBoxViewModel ChatBoxViewModel { get; set; } = null!;
-    public FriendsListViewModel FriendsListViewModel { get; set; } = null!;
-
     private static SocialStateManager? _instance;
     // Public property to access the single instance
     public static SocialStateManager Instance
@@ -22,4 +17,9 @@ public class SocialStateManager : ReactiveObject
             return _instance;
         }
     }
+    public ObservableCollection<FriendModel> Friends { get; } = [];
+    public Collection<string> MutedUsernames { get; } = [];
+    public ChatBoxViewModel ChatBoxViewModel { get; set; } = null!;
+    public FriendsListViewModel FriendsListViewModel { get; set; } = null!;
+
 }
