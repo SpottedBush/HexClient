@@ -11,13 +11,12 @@ using HexClientProject.Services.Providers;
 using HexClientProject.StateManagers;
 using ReactiveUI;
 
-namespace HexClientProject.ViewModels;
+namespace HexClientProject.ViewModels.SideBar;
 
 public class ChatBoxViewModel : ReactiveObject
 {
     private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
     private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance; 
-
 
     public ObservableCollection<MessageModel> Messages { get; } = new();
     public ObservableCollection<ChatScope> Scopes { get; } =

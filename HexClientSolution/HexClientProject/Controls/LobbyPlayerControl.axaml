@@ -2,8 +2,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="clr-namespace:HexClientProject.ViewModels"
+    xmlns:lobbyPhase="clr-namespace:HexClientProject.ViewModels.LobbyPhase"
     x:Class="HexClientProject.Controls.LobbyPlayerControl"
-    x:DataType="vm:LobbyPlayerViewModel">
+    x:DataType="lobbyPhase:LobbyPlayerViewModel">
 
     <StackPanel Orientation="Horizontal" Spacing="10">
         <!-- <Image Source="{Binding RoleIcon1}" Width="24" Height="24"/> -->

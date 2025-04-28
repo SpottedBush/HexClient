@@ -6,6 +6,7 @@ using Avalonia.Input;
 using HexClientProject.Models;
 using HexClientProject.StateManagers;
 using HexClientProject.ViewModels;
+using HexClientProject.ViewModels.SideBar;
 
 namespace HexClientProject.Views
 {

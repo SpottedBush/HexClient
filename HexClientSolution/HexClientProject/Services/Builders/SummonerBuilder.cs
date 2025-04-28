@@ -6,6 +6,7 @@ using HexClientProject.Models;
 using HexClientProject.Services.Api;
 using HexClientProject.ViewModels;
 using Newtonsoft.Json;
+using SummonerInfoViewModel = HexClientProject.ViewModels.SideBar.SummonerInfoViewModel;
 
 namespace HexClientProject.Services.Builders
 {

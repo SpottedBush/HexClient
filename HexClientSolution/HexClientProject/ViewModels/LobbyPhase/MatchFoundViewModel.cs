@@ -1,10 +1,10 @@
 using System;
-using Avalonia.Threading;
-using ReactiveUI;
 using System.Reactive;
+using Avalonia.Threading;
 using HexClientProject.StateManagers;
+using ReactiveUI;
 
-namespace HexClientProject.ViewModels;
+namespace HexClientProject.ViewModels.LobbyPhase;
 
 public class MatchFoundViewModel : ReactiveObject
 {

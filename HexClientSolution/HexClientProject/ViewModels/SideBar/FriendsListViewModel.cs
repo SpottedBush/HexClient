@@ -6,11 +6,10 @@ using HexClientProject.StateManagers;
 using HexClientProject.Utils;
 using ReactiveUI;
 
-namespace HexClientProject.ViewModels;
+namespace HexClientProject.ViewModels.SideBar;
 
-public class FriendsListViewModel : ViewModelBase
+public class FriendsListViewModel : ReactiveObject
 {
-    private readonly ViewStateManager _viewStateManager = ViewStateManager.Instance;
     private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance;
     public ObservableCollection<FriendModel> Friends => _socialStateManager.Friends;
     public ReactiveCommand<FriendModel, Unit> ViewProfileCommand { get; }

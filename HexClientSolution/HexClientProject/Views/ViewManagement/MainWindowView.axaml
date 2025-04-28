@@ -1,8 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="HexClientProject.Views.MainWindow"
+        x:Class="HexClientProject.Views.ViewManagement.MainWindowView"
         xmlns:vm="clr-namespace:HexClientProject.ViewModels"
-        x:DataType="vm:MainWindowViewModel"
+        xmlns:viewManagement="clr-namespace:HexClientProject.ViewModels.ViewManagement"
+        x:DataType="viewManagement:MainWindowViewModel"
         Title="HexClient">
     <Grid>
         <ContentControl Content="{Binding CurrentView}"/>

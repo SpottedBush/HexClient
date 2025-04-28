@@ -1,6 +1,8 @@
 using Avalonia.Controls;
 using HexClientProject.StateManagers;
 using HexClientProject.ViewModels;
+using HexClientProject.ViewModels.LobbyPhase;
+using SummonerInfoViewModel = HexClientProject.ViewModels.SideBar.SummonerInfoViewModel;
 
 namespace HexClientProject.Controls
 {

@@ -3,7 +3,8 @@
              x:Class="HexClientProject.Views.LobbyView"
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
              xmlns:controls="clr-namespace:HexClientProject.Controls"
-             x:DataType="vm:LobbyViewModel">
+             xmlns:lobbyPhase="clr-namespace:HexClientProject.ViewModels.LobbyPhase"
+             x:DataType="lobbyPhase:LobbyViewModel">
     <Grid Background="Black" Margin="10" ColumnDefinitions="*">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -120,7 +121,7 @@
                 <!-- ItemsControl will instantiate a LobbyPlayerControl for each ViewModel -->
                 <ItemsControl ItemsSource="{Binding Summoners}">
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="vm:LobbyPlayerViewModel">
+                        <DataTemplate x:DataType="lobbyPhase:LobbyPlayerViewModel">
                             <controls:LobbyPlayerControl/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

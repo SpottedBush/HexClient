@@ -5,7 +5,7 @@ using HexClientProject.StateManagers;
 using HexClientProject.Views;
 using ReactiveUI;
 
-namespace HexClientProject.ViewModels;
+namespace HexClientProject.ViewModels.ViewManagement;
 
 public class MainViewModel : ReactiveObject{
     private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;

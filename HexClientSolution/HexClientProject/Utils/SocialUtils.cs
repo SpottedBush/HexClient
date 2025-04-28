@@ -1,5 +1,6 @@
 
 
+using System.Collections.ObjectModel;
 using HexClientProject.Models;
 using HexClientProject.Services.Providers;
 using HexClientProject.StateManagers;
@@ -8,7 +9,6 @@ namespace HexClientProject.Utils;
 
 public static class SocialUtils
 {
-    private static readonly ViewStateManager ViewStateManager = ViewStateManager.Instance;
     private static readonly SocialStateManager SocialStateManager = SocialStateManager.Instance; 
 
     private static void LoadFriendsAndMutedUsers()

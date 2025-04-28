@@ -1,5 +1,6 @@
 using System;
 using HexClientProject.ViewModels;
+using HexClientProject.ViewModels.SideBar;
 
 namespace HexClientProject.Models
 {

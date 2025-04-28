@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using HexClientProject.ViewModels;
+using HexClientProject.ViewModels.LobbyPhase;
 
 namespace HexClientProject.Views
 {

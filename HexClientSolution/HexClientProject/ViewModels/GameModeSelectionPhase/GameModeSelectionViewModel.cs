@@ -1,11 +1,12 @@
-using ReactiveUI;
 using System.Reactive;
 using HexClientProject.Models;
 using HexClientProject.Services.Providers;
 using HexClientProject.StateManagers;
+using HexClientProject.ViewModels.ViewManagement;
 using HexClientProject.Views;
+using ReactiveUI;
 
-namespace HexClientProject.ViewModels;
+namespace HexClientProject.ViewModels.GameModeSelectionPhase;
 
 public class GameModeSelectionViewModel : ReactiveObject
 {

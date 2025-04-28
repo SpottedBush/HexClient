@@ -1,7 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HexClientProject.Views.DraftView"
-             xmlns:vm="clr-namespace:HexClientProject.ViewModels"
-             x:DataType="vm:DraftViewModel">
+             xmlns:draftPhase="clr-namespace:HexClientProject.ViewModels.DraftPhase"
+             x:DataType="draftPhase:DraftViewModel">
     <TextBlock Text="DRAFT VIEW!" />
 </UserControl>

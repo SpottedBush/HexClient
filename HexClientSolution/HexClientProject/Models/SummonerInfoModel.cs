@@ -1,5 +1,6 @@
 using System;
 using HexClientProject.ViewModels;
+using SummonerInfoViewModel = HexClientProject.ViewModels.SideBar.SummonerInfoViewModel;
 
 namespace HexClientProject.Models;
 

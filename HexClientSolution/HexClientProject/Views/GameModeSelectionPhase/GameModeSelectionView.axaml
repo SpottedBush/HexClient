@@ -1,8 +1,9 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
+             xmlns:gameModeSelectionPhase="clr-namespace:HexClientProject.ViewModels.GameModeSelectionPhase"
              x:Class="HexClientProject.Views.GameModeSelectionView"
-             x:DataType="vm:GameModeSelectionViewModel">
+             x:DataType="gameModeSelectionPhase:GameModeSelectionViewModel">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock Text="Gamemode selection:" FontSize="16" Margin="10"/>

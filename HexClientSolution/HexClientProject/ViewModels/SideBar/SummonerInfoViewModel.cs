@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using HexClientProject.Models;
 using HexClientProject.StateManagers;
 
-namespace HexClientProject.ViewModels;
+namespace HexClientProject.ViewModels.SideBar;
 
 public partial class SummonerInfoViewModel : ObservableObject
 {
