@@ -13,6 +13,7 @@ using ReactiveUI;
 namespace HexClientProject.Models;
 public class MessageModel
 {
+    private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance;
     public required string Sender { get; init; }
     public required string Content { get; init; }
     public DateTime Timestamp { get; init; }
@@ -55,11 +56,11 @@ public class MessageModel
                                 new Button { Content = "Invite to Party", Command = ReactiveCommand.Create(() =>
                                     ApiProvider.SocialService.PostInviteToLobby(ApiProvider.SocialService.GetFriendModel(Sender)!)) },
                                 new Button { Content = "Add Friend", Command = ReactiveCommand.Create(() => 
-                                    SocialUtils.AddFriend(Sender))},
+                                    _socialStateManager.AddFriend(Sender))},
                                 new Button { Content = "Mute", Command = ReactiveCommand.Create(()=>
-                                    SocialUtils.MuteUser(Sender)) },
+                                    _socialStateManager.MuteUser(Sender)) },
                                 new Button { Content = "Block", Command = ReactiveCommand.Create(()=>
-                                    SocialUtils.BlockFriend(Sender)) }
+                                    _socialStateManager.BlockFriend(Sender)) }
                             }
                         }
                     };
@@ -70,7 +71,7 @@ public class MessageModel
                 else if (e.GetCurrentPoint(clickableText).Properties.IsLeftButtonPressed)
                 {
                     if (Sender != GlobalStateManager.Instance.SummonerInfo.GameName && Sender != "System")
-                        SocialUtils.WhisperTo(Sender, changeFilteringScope:false);
+                        _socialStateManager.ChatBoxViewModel.WhisperTo(Sender, changeFilteringScope:false);
                 }
             };
 

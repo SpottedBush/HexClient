@@ -39,17 +39,17 @@ public class FriendsListViewModel : ReactiveObject
         NewFriendUsername = string.Empty;
         AddFriendCommand = ReactiveCommand.Create(AddFriend);
         ViewProfileCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.ViewProfile(friend.GameNameTag));
-        RemoveFriendCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.RemoveFriend(friend.GameNameTag));
-        BlockFriendCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.BlockFriend(friend.GameNameTag));
-        MuteUserCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.MuteUser(friend.GameNameTag));
-        WhisperToCommand = ReactiveCommand.Create<FriendModel>(friend => SocialUtils.WhisperTo(friend.GameNameTag));
+        RemoveFriendCommand = ReactiveCommand.Create<FriendModel>(friend => _socialStateManager.RemoveFriend(friend.GameNameTag));
+        BlockFriendCommand = ReactiveCommand.Create<FriendModel>(friend => _socialStateManager.BlockFriend(friend.GameNameTag));
+        MuteUserCommand = ReactiveCommand.Create<FriendModel>(friend => _socialStateManager.MuteUser(friend.GameNameTag));
+        WhisperToCommand = ReactiveCommand.Create<FriendModel>(friend => _socialStateManager.ChatBoxViewModel.WhisperTo(friend.GameNameTag));
         InviteToLobbyCommand = ReactiveCommand.Create<FriendModel>(friend => ApiProvider.SocialService.PostInviteToLobby(friend));
-        SocialUtils.LoadFriends();
+        _socialStateManager.LoadFriends();
     }
 
     private void AddFriend()
     {
-        SocialUtils.AddFriend(NewFriendUsername);
+        _socialStateManager.AddFriend(NewFriendUsername);
         NewFriendUsername = string.Empty; // Clear the textbox
     }
 }

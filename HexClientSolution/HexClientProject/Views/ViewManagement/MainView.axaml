@@ -4,7 +4,8 @@
              x:DataType="viewManagement:MainViewModel"
              xmlns:views="clr-namespace:HexClientProject.Views"
              xmlns:viewModels="clr-namespace:HexClientProject.ViewModels"
-             xmlns:viewManagement="clr-namespace:HexClientProject.ViewModels.ViewManagement">
+             xmlns:viewManagement="clr-namespace:HexClientProject.ViewModels.ViewManagement"
+             xmlns:sideBar="clr-namespace:HexClientProject.Views.SideBar">
     
     <Grid ColumnDefinitions="3*,1*">
         <!-- Left Panel (Dynamic) -->
@@ -16,7 +17,7 @@
         <!-- Right Panel -->
         <Grid Grid.Column="1" Margin="10" RowDefinitions="Auto,*,Auto">
             <views:SummonerInfoView Grid.Row="0" />
-            <views:FriendsListView Grid.Row="1" />
+            <sideBar:FriendsListView Grid.Row="1" />
             <views:ChatBoxView Grid.Row="2" />
         </Grid>
     </Grid>

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewModels="clr-namespace:HexClientProject.ViewModels"
     xmlns:sideBar="clr-namespace:HexClientProject.ViewModels.SideBar"
-    x:Class="HexClientProject.Views.FriendsListView"
+    x:Class="HexClientProject.Views.SideBar.FriendsListView"
     x:DataType="sideBar:FriendsListViewModel">
 
     <StackPanel Margin="20" Spacing="10">

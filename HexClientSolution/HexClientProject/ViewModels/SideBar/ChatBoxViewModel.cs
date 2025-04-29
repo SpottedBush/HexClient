@@ -76,7 +76,7 @@ public class ChatBoxViewModel : ReactiveObject
                 case "r":
                     // SelectedScope = ChatScope.Whisper;
                     messageToAdd = Regex.Replace(MessageInput, "^/r", "");
-                    MessageInput = $"/mp <{SelectedWhisperTarget}>" + messageToAdd; 
+                    MessageInput = $"/mp <{_selectedWhisperTarget}>" + messageToAdd; 
                     textBox.CaretIndex = textBox.Text!.Length;
                     changedScope = true;
                     break;
@@ -105,11 +105,7 @@ public class ChatBoxViewModel : ReactiveObject
     }
 
     private string? _selectedWhisperTarget;
-    public string? SelectedWhisperTarget // GameNameTag
-    {
-        get => _selectedWhisperTarget;
-        set => this.RaiseAndSetIfChanged(ref _selectedWhisperTarget, value);
-    }
+    
     private string _selectedFilter = "Global";
 
     public string SelectedFilter // if Whisper => GameNameTag
@@ -177,7 +173,7 @@ public class ChatBoxViewModel : ReactiveObject
             FilteredMessages.Add(msg);
     }
     
-    public void ApplyFilterToWhisper(string gameNameTag)
+    private void ApplyFilterToWhisper(string gameNameTag)
     {
         SelectedFilter = gameNameTag;
         FilteredMessages.Clear();
@@ -201,14 +197,14 @@ public class ChatBoxViewModel : ReactiveObject
         var match = Regex.Match(input, @"^/mp\s+<([^>\s]+)>\s*(.*)");
         if (match.Success)
         {
-            SelectedWhisperTarget = match.Groups[1].Value;
+            _selectedWhisperTarget = match.Groups[1].Value;
             MessageInput = match.Groups[2].Value;
             return true;
         }
 
         if (Regex.Match(input, @"^/mp\s+<>").Success)
         {
-            SelectedWhisperTarget = "";
+            _selectedWhisperTarget = "";
         }
         MessageInput = input;
         return false;
@@ -231,22 +227,22 @@ public class ChatBoxViewModel : ReactiveObject
             if (string.IsNullOrWhiteSpace(MessageInput))
                 return;
             bool isWhisper = ParseWhisper(MessageInput); // Extract the whisper target only if Whisper Scope is selected else set to empty
-            if (isWhisper && string.IsNullOrWhiteSpace(SelectedWhisperTarget))
+            if (isWhisper && string.IsNullOrWhiteSpace(_selectedWhisperTarget))
             {
                 SendSystemMessage("Please enter a username.");
                 return;
             }
             if (SelectedScope == ChatScope.Whisper && (!isWhisper ||
                                                        _socialStateManager.Friends.FirstOrDefault(f =>
-                                                           f.GameNameTag == SelectedWhisperTarget) == null))
+                                                           f.GameNameTag == _selectedWhisperTarget) == null))
             {
                 if (!isWhisper)
                     SendSystemMessage("Please enter a proper whisper command. Usage: /mp <username>");
                 else
-                    SendSystemMessage(string.IsNullOrWhiteSpace(SelectedWhisperTarget)
+                    SendSystemMessage(string.IsNullOrWhiteSpace(_selectedWhisperTarget)
                         ? "Please enter a username."
-                        : $"Username: {SelectedWhisperTarget} not found.");
-                MessageInput = $"/mp <{SelectedWhisperTarget}> ";
+                        : $"Username: {_selectedWhisperTarget} not found.");
+                MessageInput = $"/mp <{_selectedWhisperTarget}> ";
                 return;
             }
             MessageInput = Regex.Replace(MessageInput, @"^/(g|p|mp\s+<>) ", "");
@@ -259,14 +255,14 @@ public class ChatBoxViewModel : ReactiveObject
                 Content = MessageInput,
                 Scope = msgScope,
                 Timestamp = DateTime.Now,
-                WhisperingTo = SelectedWhisperTarget
+                WhisperingTo = _selectedWhisperTarget
             });
             MessageInput = string.Empty;
             ApplyFilter();
         });
         Messages.Add(new MessageModel
         {
-            Sender = "ouistiti#EUWW",
+            Sender = "oui#EUW",
             Content = "test2",
             Scope = ChatScope.Global,
             Timestamp = DateTime.Now
@@ -283,5 +279,13 @@ public class ChatBoxViewModel : ReactiveObject
             Scope = ChatScope.System,
             Timestamp = DateTime.Now
         });
+    }
+    public void WhisperTo(string gameNameTag, bool changeFilteringScope = true)
+    {
+        _selectedWhisperTarget = gameNameTag;
+        MessageInput = $"/mp <{gameNameTag}> ";
+        if (!changeFilteringScope) return;
+        SelectedScope = ChatScope.Whisper;
+        ApplyFilterToWhisper(gameNameTag);
     }
 }
