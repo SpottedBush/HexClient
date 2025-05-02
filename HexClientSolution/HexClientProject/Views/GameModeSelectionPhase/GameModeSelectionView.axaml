@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:HexClientProject.ViewModels"
              xmlns:gameModeSelectionPhase="clr-namespace:HexClientProject.ViewModels.GameModeSelectionPhase"
-             x:Class="HexClientProject.Views.GameModeSelectionView"
+             x:Class="HexClientProject.Views.GameModeSelectionPhase.GameModeSelectionView"
              x:DataType="gameModeSelectionPhase:GameModeSelectionViewModel">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">

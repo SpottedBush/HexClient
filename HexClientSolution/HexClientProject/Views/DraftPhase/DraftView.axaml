@@ -1,16 +1,21 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:views="clr-namespace:HexClientProject.Views"
              xmlns:sideBar="clr-namespace:HexClientProject.Views.SideBar"
-             x:Class="HexClientProject.Views.DraftPhase.DraftView">
+             xmlns:draftPhase="clr-namespace:HexClientProject.ViewModels.DraftPhase"
+             x:Class="HexClientProject.Views.DraftPhase.DraftView"
+             x:DataType="draftPhase:DraftViewModel">
 
-  <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="2*,5*,2*">
+  <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="2*,5*,2.5*">
 
     <!-- Game Info -->
     <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="0,10">
-      <TextBlock Text="Gamemode Name" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-      <TextBlock Text="Time Left : (in seconds)" FontSize="14" HorizontalAlignment="Center"/>
-      <ProgressBar Width="400" Height="20" Margin="0,5" Minimum="0" Maximum="100" Value="50"/>
+      <TextBlock Text="{Binding GameModeName}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+      <TextBlock Text="{Binding DisplayTimer}" FontSize="14" HorizontalAlignment="Center"/>
+      <ProgressBar Minimum="2" Maximum="{Binding DurationOfCurrentPhase}"
+                   Value="{Binding TimeLeft}"
+                   IsIndeterminate="False"
+                   Width="200"
+                   Height="20"/>
     </StackPanel>
 
     <!-- Runes + Spells -->

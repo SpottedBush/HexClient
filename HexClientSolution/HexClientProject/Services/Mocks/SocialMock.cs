@@ -4,6 +4,7 @@ using HexClientProject.Interfaces;
 using HexClientProject.Models;
 using HexClientProject.StateManagers;
 using HexClientProject.Views;
+using LobbyView = HexClientProject.Views.LobbyPhase.LobbyView;
 
 namespace HexClientProject.Services.Mocks;
 

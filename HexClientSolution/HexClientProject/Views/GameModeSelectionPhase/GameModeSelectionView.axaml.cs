@@ -1,18 +1,14 @@
 using Avalonia.Controls;
-using Avalonia.Interactivity;
-using HexClientProject.Models;
-using HexClientProject.ViewModels;
 using HexClientProject.ViewModels.GameModeSelectionPhase;
-using HexClientProject.ViewModels.ViewManagement;
 
-namespace HexClientProject.Views
+namespace HexClientProject.Views.GameModeSelectionPhase
 {
     public partial class GameModeSelectionView : UserControl
     {
-        public GameModeSelectionView(MainViewModel mainViewModel)
+        public GameModeSelectionView()
         {
             InitializeComponent();
-            DataContext = new GameModeSelectionViewModel(mainViewModel);
+            DataContext = new GameModeSelectionViewModel();
         }
     }
 }

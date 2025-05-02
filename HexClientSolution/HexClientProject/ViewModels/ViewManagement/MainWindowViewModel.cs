@@ -3,6 +3,7 @@ using System.Reactive;
 using Avalonia.Controls;
 using HexClientProject.StateManagers;
 using HexClientProject.Views;
+using HexClientProject.Views.DraftPhase;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels.ViewManagement;
@@ -22,8 +23,8 @@ public class MainWindowViewModel : ReactiveObject
             .Subscribe(_ => this.RaisePropertyChanged(nameof(CurrentView)));
         // Show StartView initially
         _viewStateManager.CurrView = new StartView();
-        // _viewStateManager.CurrView = new DraftView(); // TO REMOVE
-
+        // _viewStateManager.CurrView = new DraftView(); // TO REMOVE DEV PURPOSE ONLY
+        // GlobalStateManager.Instance.IsOnlineMode = false; // TO REMOVE DEV PURPOSE ONLY
         OpenLocalMainView = ReactiveCommand.Create(() => OpenMainView(false)());
         OpenOnlineMainView = ReactiveCommand.Create(() => OpenMainView(true)());
 

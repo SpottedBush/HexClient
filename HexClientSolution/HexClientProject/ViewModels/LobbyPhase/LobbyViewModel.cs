@@ -14,6 +14,7 @@ using HexClientProject.Views;
 using HexClientProject.Views.Rune;
 using ReactiveUI;
 using DraftView = HexClientProject.Views.DraftPhase.DraftView;
+using GameModeSelectionView = HexClientProject.Views.GameModeSelectionPhase.GameModeSelectionView;
 
 namespace HexClientProject.ViewModels.LobbyPhase;
 
@@ -179,7 +180,7 @@ public class LobbyViewModel : ReactiveObject
         _timer.Start();
     }
 
-    public LobbyViewModel(MainViewModel mainViewModel)
+    public LobbyViewModel()
     {
         _matchFoundVm = new MatchFoundViewModel
         {
@@ -206,7 +207,7 @@ public class LobbyViewModel : ReactiveObject
         _summonerLevel = _globalStateManager.SummonerInfo.SummonerLevel;
         _summonerRank = SideBar.SummonerInfoViewModel.RankStrings[_globalStateManager.SummonerInfo.RankId];
         _summonerDivision = SideBar.SummonerInfoViewModel.RankDivisions[_globalStateManager.SummonerInfo.RankId];
-        ReturnToGameModeCommand = ReactiveCommand.Create(() => { _viewStateManager.LeftPanelContent = new GameModeSelectionView(mainViewModel);});
+        ReturnToGameModeCommand = ReactiveCommand.Create(() => { _viewStateManager.LeftPanelContent = new GameModeSelectionView();});
         StartQueueCommand = ReactiveCommand.Create(StartQueue);
         LeaveQueueCommand = ReactiveCommand.Create(LeaveQueue);
         AssignRole1Command = ReactiveCommand.Create<string>(role =>

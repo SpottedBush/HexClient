@@ -2,8 +2,8 @@ using System;
 using Avalonia.Controls;
 using HexClientProject.Services.Providers;
 using HexClientProject.StateManagers;
-using HexClientProject.Views;
 using ReactiveUI;
+using GameModeSelectionView = HexClientProject.Views.GameModeSelectionPhase.GameModeSelectionView;
 
 namespace HexClientProject.ViewModels.ViewManagement;
 
@@ -16,6 +16,6 @@ public class MainViewModel : ReactiveObject{
         this.WhenAnyValue(x => x._viewStateManager.LeftPanelContent)
             .Subscribe(_ => this.RaisePropertyChanged(nameof(LeftPanelContent)));
         _globalStateManager.SummonerInfo = ApiProvider.SummonerService.GetCurrentSummonerInfoModel();
-        _viewStateManager.LeftPanelContent = new GameModeSelectionView(this);
+        _viewStateManager.LeftPanelContent = new GameModeSelectionView();
     }
 }

@@ -1,39 +1,31 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using HexClientProject.ViewModels;
 using HexClientProject.ViewModels.LobbyPhase;
 using HexClientProject.ViewModels.ViewManagement;
 
-namespace HexClientProject.Views
+namespace HexClientProject.Views.LobbyPhase
 {
     public partial class LobbyView : UserControl
     {
         
-        
-        public LobbyView(MainViewModel mainViewModel)
+        public LobbyView()
         {
             InitializeComponent();
-            DataContext = new LobbyViewModel(mainViewModel);
+            DataContext = new LobbyViewModel();
         }
 
         private void ShowRoleMenu1(object sender, RoutedEventArgs e)
         {
-            var button = sender as Control;
-            if (RoleMenu1 != null && button != null)
-            {
-                RoleMenu1.PlacementTarget = button;
-                RoleMenu1.Open();
-            }
+            if (RoleMenu1 == null || sender is not Control button) return;
+            RoleMenu1.PlacementTarget = button;
+            RoleMenu1.Open();
         }
 
         private void ShowRoleMenu2(object sender, RoutedEventArgs e)
         {
-            var button = sender as Control;
-            if (RoleMenu2 != null && button != null)
-            {
-                RoleMenu2.PlacementTarget = button;
-                RoleMenu2.Open();
-            }
+            if (RoleMenu2 == null || sender is not Control button) return;
+            RoleMenu2.PlacementTarget = button;
+            RoleMenu2.Open();
         }
     }
 }
