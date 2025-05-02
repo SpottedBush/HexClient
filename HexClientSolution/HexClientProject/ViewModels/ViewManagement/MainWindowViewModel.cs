@@ -22,6 +22,7 @@ public class MainWindowViewModel : ReactiveObject
             .Subscribe(_ => this.RaisePropertyChanged(nameof(CurrentView)));
         // Show StartView initially
         _viewStateManager.CurrView = new StartView();
+        // _viewStateManager.CurrView = new DraftView(); // TO REMOVE
 
         OpenLocalMainView = ReactiveCommand.Create(() => OpenMainView(false)());
         OpenOnlineMainView = ReactiveCommand.Create(() => OpenMainView(true)());

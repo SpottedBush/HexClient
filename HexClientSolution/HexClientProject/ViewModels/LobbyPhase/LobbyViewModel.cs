@@ -11,6 +11,7 @@ using Avalonia.Threading;
 using HexClientProject.StateManagers;
 using HexClientProject.ViewModels.ViewManagement;
 using HexClientProject.Views;
+using HexClientProject.Views.Rune;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels.LobbyPhase;

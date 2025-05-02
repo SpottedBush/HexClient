@@ -3,15 +3,13 @@
              x:Class="HexClientProject.Views.MainView"
              x:DataType="viewManagement:MainViewModel"
              xmlns:views="clr-namespace:HexClientProject.Views"
-             xmlns:viewModels="clr-namespace:HexClientProject.ViewModels"
              xmlns:viewManagement="clr-namespace:HexClientProject.ViewModels.ViewManagement"
              xmlns:sideBar="clr-namespace:HexClientProject.Views.SideBar">
     
     <Grid ColumnDefinitions="3*,1*">
         <!-- Left Panel (Dynamic) -->
         <ContentControl Grid.Column="0" Content="{Binding LeftPanelContent}"/>
-
-    
+        
         <Border Grid.Column="1" Background="Gray" Width="10" HorizontalAlignment="Left"/>
 
         <!-- Right Panel -->

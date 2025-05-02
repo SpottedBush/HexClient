@@ -1,7 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="HexClientProject.Views.ViewManagement.MainWindowView"
-        xmlns:vm="clr-namespace:HexClientProject.ViewModels"
         xmlns:viewManagement="clr-namespace:HexClientProject.ViewModels.ViewManagement"
         x:DataType="viewManagement:MainWindowViewModel"
         Title="HexClient">
