@@ -17,6 +17,7 @@ public class ScopeToColorConverter : IValueConverter
                 "Party" => Brushes.Green,
                 "Whisper" => Brushes.MediumPurple,
                 "Guild" => Brushes.Lime,
+                "Draft" => Brushes.Orange,
                 "System" => Brushes.Red,
                 _ => Brushes.MediumPurple // Default, corresponds to conversations with friends
             },
@@ -26,6 +27,7 @@ public class ScopeToColorConverter : IValueConverter
                 ChatScope.Party => Brushes.Green,
                 ChatScope.Whisper => Brushes.MediumPurple,
                 ChatScope.Guild => Brushes.Lime,
+                ChatScope.Draft => Brushes.Orange,
                 ChatScope.System => Brushes.Red,
                 _ => Brushes.White
             },

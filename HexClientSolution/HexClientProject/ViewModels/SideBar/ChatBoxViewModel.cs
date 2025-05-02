@@ -17,14 +17,15 @@ public class ChatBoxViewModel : ReactiveObject
 {
     private readonly GlobalStateManager _globalStateManager = GlobalStateManager.Instance;
     private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance; 
-
+    
     public ObservableCollection<MessageModel> Messages { get; } = new();
     public ObservableCollection<ChatScope> Scopes { get; } =
     [
         ChatScope.Global,
         ChatScope.Party,
         ChatScope.Whisper,
-        ChatScope.Guild
+        ChatScope.Guild,
+        ChatScope.Draft
         // ChatScope.System // Not supposed to chat with the system, right?
     ];
     public ObservableCollection<string> FilteringScopes { get; } =
@@ -33,6 +34,7 @@ public class ChatBoxViewModel : ReactiveObject
         "Party",
         "Whisper",
         "Guild",
+        "Draft",
         "System"
     ];
     
@@ -48,12 +50,12 @@ public class ChatBoxViewModel : ReactiveObject
         if (string.IsNullOrEmpty(textBox.Text))
             return false;
         bool changedScope = false;
-        string pattern = @"^/(g|p|mp$|r|all)\b";
+        string pattern = @"^/(g|p|mp$|r|all|l)\b";
 
         var match = Regex.Match(MessageInput, pattern);
         if (match.Success)
         {
-            string channel = match.Groups[1].Value; // "g", "p", "mp", "all"
+            string channel = match.Groups[1].Value; // "g", "p", "mp", "all", "l"
             switch (channel)
             {
                 case "g":
@@ -82,6 +84,11 @@ public class ChatBoxViewModel : ReactiveObject
                     break;
                 case "all":
                     SelectedScope = ChatScope.Global;
+                    textBox.CaretIndex = textBox.Text!.Length;
+                    changedScope = true;
+                    break;
+                case "l":
+                    SelectedScope = ChatScope.Draft;
                     textBox.CaretIndex = textBox.Text!.Length;
                     changedScope = true;
                     break;
@@ -160,6 +167,9 @@ public class ChatBoxViewModel : ReactiveObject
             case "Guild":
                 filtered = filtered.Where(msg => msg.Scope is ChatScope.Guild or ChatScope.System);
                 break;
+            case "Draft":
+                filtered = filtered.Where(msg => msg.Scope is ChatScope.Draft or ChatScope.System);
+                break;
             case "System":
                 filtered = filtered.Where(msg => msg.Scope is ChatScope.System);
                 break;
@@ -226,6 +236,11 @@ public class ChatBoxViewModel : ReactiveObject
         {
             if (string.IsNullOrWhiteSpace(MessageInput))
                 return;
+            if (!_globalStateManager.IsInDraft && SelectedScope == ChatScope.Draft)
+            {
+                SendSystemMessage("You must be in a draft lobby to use this channel.");
+                return;
+            }
             bool isWhisper = ParseWhisper(MessageInput); // Extract the whisper target only if Whisper Scope is selected else set to empty
             if (isWhisper && string.IsNullOrWhiteSpace(_selectedWhisperTarget))
             {

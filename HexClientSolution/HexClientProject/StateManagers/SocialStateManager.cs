@@ -21,7 +21,7 @@ public class SocialStateManager : ReactiveObject
     }
     public ObservableCollection<FriendModel> Friends { get; } = [];
     public Collection<string> MutedUsernames { get; } = [];
-    public ChatBoxViewModel ChatBoxViewModel { get; set; } = null!;
+    public ChatBoxViewModel? ChatBoxViewModel { get; set; } = null;
     public FriendsListViewModel FriendsListViewModel { get; set; } = null!;
     private void LoadFriendsAndMutedUsers()
     {

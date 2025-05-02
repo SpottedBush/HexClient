@@ -17,6 +17,7 @@ public class GlobalStateManager : ReactiveObject
         }
     }
     public bool IsOnlineMode;
+    public bool IsInDraft = false;
     public LobbyInfoModel LobbyInfo { get; set; } = null!;
     public SummonerInfoModel SummonerInfo { get; set; } = null!;
 }

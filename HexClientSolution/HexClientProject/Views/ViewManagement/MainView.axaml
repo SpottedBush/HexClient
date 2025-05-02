@@ -16,7 +16,7 @@
         <Grid Grid.Column="1" Margin="10" RowDefinitions="Auto,*,Auto">
             <views:SummonerInfoView Grid.Row="0" />
             <sideBar:FriendsListView Grid.Row="1" />
-            <views:ChatBoxView Grid.Row="2" />
+            <sideBar:ChatBoxView Grid.Row="2" />
         </Grid>
     </Grid>
 </UserControl>

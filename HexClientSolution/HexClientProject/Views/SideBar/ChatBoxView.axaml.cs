@@ -5,19 +5,19 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using HexClientProject.Models;
 using HexClientProject.StateManagers;
-using HexClientProject.ViewModels;
 using HexClientProject.ViewModels.SideBar;
 
-namespace HexClientProject.Views
+namespace HexClientProject.Views.SideBar
 {
     public partial class ChatBoxView : UserControl
     {
         private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance;
-        private readonly ChatBoxViewModel _chatBoxViewModel;
+        private readonly ChatBoxViewModel? _chatBoxViewModel;
         public ChatBoxView()
         {
             InitializeComponent();
-            _chatBoxViewModel = new ChatBoxViewModel();
+            // Get the chatBox VM if already existing
+            _chatBoxViewModel = _socialStateManager.ChatBoxViewModel ?? new ChatBoxViewModel();
             DataContext = _chatBoxViewModel;
             _socialStateManager.ChatBoxViewModel = _chatBoxViewModel;
             _chatBoxViewModel.FilteredMessages.CollectionChanged += (_, e) =>
@@ -50,7 +50,7 @@ namespace HexClientProject.Views
                 var currentScope = _socialStateManager.ChatBoxViewModel.SelectedScope;
                 _socialStateManager.ChatBoxViewModel.SelectedScope =
                     ChatScopeExtensions.IntToScopeConverter(
-                        (ChatScopeExtensions.ScopeToIntConverter(currentScope) + 1) % 4);
+                        (ChatScopeExtensions.ScopeToIntConverter(currentScope) + 1) % 5);
                 if (currentScope == ChatScope.Party)
                 {
                     _chatBoxViewModel.MessageInput = "/mp <> " + textbox.Text?.Trim();

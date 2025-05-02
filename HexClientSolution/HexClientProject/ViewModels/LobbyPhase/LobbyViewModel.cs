@@ -13,6 +13,7 @@ using HexClientProject.ViewModels.ViewManagement;
 using HexClientProject.Views;
 using HexClientProject.Views.Rune;
 using ReactiveUI;
+using DraftView = HexClientProject.Views.DraftPhase.DraftView;
 
 namespace HexClientProject.ViewModels.LobbyPhase;
 
