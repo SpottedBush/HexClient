@@ -21,10 +21,15 @@ public class LcuWebSocketService : LcuApi.LeagueClient
 
     public static LcuWebSocketService Instance()
     {
-        return _instance ??= new LcuWebSocketService();
+        // If already instantiated
+        if (_instance != null) return _instance;
+        
+        _instance = new LcuWebSocketService();
+        _ = _instance.ConnectAsync();
+        return _instance;
     }
 
-    public async Task ConnectAsync()
+    private async Task ConnectAsync()
     {
         if (_webSocket.State == WebSocketState.Open) return;
 
