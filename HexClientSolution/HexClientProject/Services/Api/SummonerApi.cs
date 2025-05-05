@@ -1,4 +1,5 @@
 ﻿using System;
+using HexClientProject.Services.Providers;
 using LcuApi;
 
 namespace HexClientProject.Services.Api
@@ -7,7 +8,7 @@ namespace HexClientProject.Services.Api
     {
         public static async System.Threading.Tasks.Task<string> GetCurrentSummonerInfos()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-summoner/v1/current-summoner");
             string responseStr = await response.Content.ReadAsStringAsync();
 
@@ -20,7 +21,7 @@ namespace HexClientProject.Services.Api
 
         public static async System.Threading.Tasks.Task<string> GetSummonerInfos(string puuid)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-summoner/v2/summoners/puuid/" + puuid);
             string responseStr = await response.Content.ReadAsStringAsync();
 
@@ -33,7 +34,7 @@ namespace HexClientProject.Services.Api
 
         public static async System.Threading.Tasks.Task<string> GetSummonerRankedInfos(string summonerPuuid)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-ranked/v1/ranked-stats/" + summonerPuuid);
             string responseStr = await response.Content.ReadAsStringAsync();
 

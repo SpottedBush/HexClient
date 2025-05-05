@@ -1,5 +1,6 @@
 ﻿using System;
 using HexClientProject.Models;
+using HexClientProject.Services.Providers;
 using LcuApi;
 
 namespace HexClientProject.Services.Api
@@ -9,7 +10,7 @@ namespace HexClientProject.Services.Api
         // TOTEST
         public static async System.Threading.Tasks.Task<string> GetLobbyInfos()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-lobby/v2/lobby");
             string responseStr = await response.Content.ReadAsStringAsync();
 
@@ -22,7 +23,7 @@ namespace HexClientProject.Services.Api
 
         public static async System.Threading.Tasks.Task<bool> CreateLobby(string gameId)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             var body = new { queueId = gameId };
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/lobby/", body);
             string responseStr = await response.Content.ReadAsStringAsync();
@@ -38,7 +39,7 @@ namespace HexClientProject.Services.Api
         // TOTEST
         public static async System.Threading.Tasks.Task<bool> SetPrefPositions(string pos1, string pos2)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
 
             var body = new { firstPreference = pos1, secondPreference = pos2 };
 
@@ -56,7 +57,7 @@ namespace HexClientProject.Services.Api
         // TOTEST
         public static async System.Threading.Tasks.Task<bool> SendLobbyInvitation(string summonerIdToInvite)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
 
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/lobby/members/" + summonerIdToInvite + "/grant-invite");
             string responseStr = await response.Content.ReadAsStringAsync();
@@ -72,7 +73,7 @@ namespace HexClientProject.Services.Api
         // TOTEST
         public static async System.Threading.Tasks.Task<bool> RevokeLobbyInvitation(string summonerIdToRevoke)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
 
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/lobby/members/" + summonerIdToRevoke + "/revoke-invite");
             string responseStr = await response.Content.ReadAsStringAsync();
@@ -88,7 +89,7 @@ namespace HexClientProject.Services.Api
         // TOTEST
         public static async System.Threading.Tasks.Task<bool> KickPlayerFromLobby(string summonerIdToKick)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
 
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/lobby/members/" + summonerIdToKick + "/kick");
             string responseStr = await response.Content.ReadAsStringAsync();
@@ -104,7 +105,7 @@ namespace HexClientProject.Services.Api
         // TOTEST
         public static async System.Threading.Tasks.Task<bool> PromotePlayer(string summonerIdToPromote)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
 
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/lobby/members/" + summonerIdToPromote + "/promote");
             string responseStr = await response.Content.ReadAsStringAsync();
@@ -120,7 +121,7 @@ namespace HexClientProject.Services.Api
         // /!\ Need to store invitation ids
         public static async System.Threading.Tasks.Task<string> GetLobbyInvitations()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
 
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-lobby/v2/received-invitations");
             string responseStr = await response.Content.ReadAsStringAsync();
@@ -137,7 +138,7 @@ namespace HexClientProject.Services.Api
         // /!\ Need to store invitation ids
         public static async System.Threading.Tasks.Task<bool> AcceptLobbyInvitation(string invitationId)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
 
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/received-invitations/" + invitationId + "/accept");
             string responseStr = await response.Content.ReadAsStringAsync();
@@ -155,7 +156,7 @@ namespace HexClientProject.Services.Api
         // /!\ Need to store invitation ids
         public static async System.Threading.Tasks.Task<bool> RejectLobbyInvitation(string invitationId)
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
 
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/received-invitations/" + invitationId + "/decline");
             string responseStr = await response.Content.ReadAsStringAsync();
