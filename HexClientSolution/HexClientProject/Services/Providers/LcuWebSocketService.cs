@@ -9,10 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace HexClientProject.Services.Providers;
-public class LcuWebSocketService
+public class LcuWebSocketService : LcuApi.LeagueClient
 {
     private static LcuWebSocketService? _instance;
-    private static readonly Lock Lock = new();
 
     private readonly ClientWebSocket _webSocket = new();
     private readonly CancellationTokenSource _cts = new();
@@ -20,18 +19,9 @@ public class LcuWebSocketService
     private readonly Uri _uri;
     private readonly string _auth;
 
-    private LcuWebSocketService(string socketUri, string base64Auth)
+    public static LcuWebSocketService Instance()
     {
-        _uri = new Uri(socketUri);
-        _auth = base64Auth;
-    }
-
-    public static LcuWebSocketService Instance(string socketUri, string base64Auth)
-    {
-        lock (Lock)
-        {
-            return _instance ??= new LcuWebSocketService(socketUri, base64Auth);
-        }
+        return _instance ??= new LcuWebSocketService();
     }
 
     public async Task ConnectAsync()
