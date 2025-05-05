@@ -26,13 +26,13 @@ public class SummonerProfile
     public int AccountId { get; set; }
 
     [JsonProperty("displayName")]
-    public string DisplayName { get; set; }
+    public string? DisplayName { get; set; }
 
     [JsonProperty("internalName")]
-    public string InternalName { get; set; }
+    public string? InternalName { get; set; }
 
     [JsonProperty("lastSeasonHighestRank")]
-    public string LastSeasonHighestRank { get; set; }
+    public string? LastSeasonHighestRank { get; set; }
 
     [JsonProperty("percentCompleteForNextLevel")]
     public int PercentCompleteForNextLevel { get; set; }
@@ -41,10 +41,10 @@ public class SummonerProfile
     public int ProfileIconId { get; set; }
 
     [JsonProperty("puuid")]
-    public string Puuid { get; set; }
+    public string? Puuid { get; set; }
 
     [JsonProperty("rerollPoints")]
-    public RerollPointsData RerollPoints { get; set; }
+    public RerollPointsData? RerollPoints { get; set; }
 
     [JsonProperty("summonerId")]
     public int SummonerId { get; set; }

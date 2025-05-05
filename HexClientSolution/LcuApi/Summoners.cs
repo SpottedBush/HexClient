@@ -1,30 +1,19 @@
-﻿using LcuApi;
+﻿namespace LcuApi;
 
-namespace LcuApi;
-
-public class Summoners
+public class Summoners(ILeagueClient league)
 {
-    private ILeagueClient League;
-
-    private const string endpointRoot = "/lol-summoner/v1/";
-
-    public Summoners(ILeagueClient league)
-    {
-        League = league;
-    }
-
     public bool IsNameAvailable(string name)
     {
-        return bool.Parse(League.MakeApiRequest(HttpMethod.Get, "/lol-summoner/v1/check-name-availability/" + name).Result.Content.ReadAsStringAsync().Result);
+        return bool.Parse(league.MakeApiRequest(HttpMethod.Get, "/lol-summoner/v1/check-name-availability/" + name).Result.Content.ReadAsStringAsync().Result);
     }
 
     public SummonerProfile GetCurrentSummoner()
     {
-        return League.MakeApiRequestAs<SummonerProfile>(HttpMethod.Get, "/lol-summoner/v1/current-summoner").Result;
+        return league.MakeApiRequestAs<SummonerProfile>(HttpMethod.Get, "/lol-summoner/v1/current-summoner").Result;
     }
 
     public SummonerProfile GetSummonerProfile(string name)
     {
-        return League.MakeApiRequestAs<SummonerProfile>(HttpMethod.Get, "/lol-summoner/v1/summoners/" + name).Result;
+        return league.MakeApiRequestAs<SummonerProfile>(HttpMethod.Get, "/lol-summoner/v1/summoners/" + name).Result;
     }
 }
