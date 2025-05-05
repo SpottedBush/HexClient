@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HexClientProject.Services.Providers;
 using LcuApi;
 using Newtonsoft.Json;
 
@@ -81,7 +82,7 @@ namespace HexClientProject.Services.Api
         {
             ILeagueClient api = await LeagueClient.Connect();
 
-            var body = new { gameName, gameTag };
+            var body = new { gameName = gameName, tagLine = gameTag };
 
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-chat/v2/friend-requests/", body);
             string responseStr = await response.Content.ReadAsStringAsync();
@@ -219,9 +220,23 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot get all blocked player: " + " - Return code: " + response.StatusCode + " | " + responseStr);
-                return "";
             }
             return responseStr;
+        }
+
+        public static async void SendMessageToPlayer(string summonerId, string convId, string message)
+        {
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
+
+            var body = new { body = message };
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-chat/v1/conversations/" + convId + "/messages", body);
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot get all blocked player: " + " - Return code: " + response.StatusCode + " | " + responseStr);
+            }
         }
     }
 }

@@ -206,5 +206,19 @@ namespace HexClientProject.Services.Builders
         {
             throw new NotImplementedException();
         }
+
+        public string GetConvIdFromName(string friendUserName)
+        {
+            //string response = SocialApi.GetFriends().Result;
+            //dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
+            //foreach (var friend in jsonObject)
+            //{
+            //    if (friend.gameName + "#" + friend.gameTag == friendUserName)
+            //    {
+            //        return friend.puuid;
+            //    }
+            //}
+            return "";
+        }
     }
 }
