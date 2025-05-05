@@ -1,0 +1,28 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lobbyPhase="clr-namespace:HexClientProject.ViewModels.LobbyPhase"
+    x:Class="HexClientProject.Views.MatchFoundView"
+    x:DataType="lobbyPhase:MatchFoundViewModel">
+
+    <StackPanel Spacing="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Match Found!" FontSize="24" HorizontalAlignment="Center"/>
+
+        <ProgressBar Minimum="2" Maximum="12"
+                     Value="{Binding TimeLeft}"
+                     IsIndeterminate="False"
+                     Width="200"
+                     Height="20"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+            <Button Content="Accept"
+                    Command="{Binding AcceptMatchCommand}"
+                    Width="100"
+                    IsEnabled="{Binding !IsActionDone}"/>
+            <Button Content="Refuse"
+                    Command="{Binding RefuseMatchCommand}"
+                    Width="100"
+                    IsEnabled="{Binding !IsActionDone}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

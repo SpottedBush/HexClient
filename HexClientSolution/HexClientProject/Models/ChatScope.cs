@@ -6,6 +6,7 @@ namespace HexClientProject.Models
         Party,
         Whisper,
         Guild,
+        Draft,
         System
     }
 
@@ -13,75 +14,55 @@ namespace HexClientProject.Models
     {
         public static ChatScope IntToScopeConverter(int scope)
         {
-            switch (scope)
+            return scope switch
             {
-                case 0:
-                    return ChatScope.Global;
-                case 1:
-                    return ChatScope.Party;
-                case 2:
-                    return ChatScope.Whisper;
-                case 3:
-                    return ChatScope.Guild;
-                case 4:
-                    return ChatScope.System;
-                default:
-                    return ChatScope.Global;
-            }
+                0 => ChatScope.Global,
+                1 => ChatScope.Party,
+                2 => ChatScope.Whisper,
+                3 => ChatScope.Guild,
+                4 => ChatScope.Draft,
+                5 => ChatScope.System,
+                _ => ChatScope.Global
+            };
         }
         public static int ScopeToIntConverter(ChatScope scope)
         {
-            switch (scope)
+            return scope switch
             {
-                case ChatScope.Global:
-                    return 0;
-                case ChatScope.Party:
-                    return 1;
-                case ChatScope.Whisper:
-                    return 2;
-                case ChatScope.Guild:
-                    return 3;
-                case ChatScope.System:
-                    return 4;
-                default:
-                    return -1;
-            }
+                ChatScope.Global => 0,
+                ChatScope.Party => 1,
+                ChatScope.Whisper => 2,
+                ChatScope.Guild => 3,
+                ChatScope.Draft => 4,
+                ChatScope.System => 5,
+                _ => -1
+            };
         }
         public static ChatScope StringToScopeConverter(string scopeString)
         {
-            switch (scopeString)
+            return scopeString switch
             {
-                case "Global":
-                    return ChatScope.Global;
-                case "Party":
-                    return ChatScope.Party;
-                case "Whisper":
-                    return ChatScope.Whisper;
-                case "Guild":
-                    return ChatScope.Guild;
-                case "System":
-                    return ChatScope.System;
-                default:
-                    return ChatScope.Global;
-            }
+                "Global" => ChatScope.Global,
+                "Party" => ChatScope.Party,
+                "Whisper" => ChatScope.Whisper,
+                "Guild" => ChatScope.Guild,
+                "Draft" => ChatScope.Draft,
+                "System" => ChatScope.System,
+                _ => ChatScope.Global
+            };
         }
         public static string ScopeToStringConverter(ChatScope scope)
         {
-            switch (scope)
+            return scope switch
             {
-                case ChatScope.Global:
-                    return "Global";
-                case ChatScope.Party:
-                    return "Party";
-                case ChatScope.Whisper:
-                    return "Whisper";
-                case ChatScope.Guild:
-                    return "Guild";
-                case ChatScope.System:
-                    return "System";
-                default:
-                    return "Global";
-            }
+                ChatScope.Global => "Global",
+                ChatScope.Party => "Party",
+                ChatScope.Whisper => "Whisper",
+                ChatScope.Guild => "Guild",
+                ChatScope.Draft => "Draft",
+                ChatScope.System => "System",
+                _ => "Global"
+            };
         }
     }
 }

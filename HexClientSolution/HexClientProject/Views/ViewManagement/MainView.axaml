@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HexClientProject.Views.MainView"
+             x:DataType="viewManagement:MainViewModel"
+             xmlns:views="clr-namespace:HexClientProject.Views"
+             xmlns:viewManagement="clr-namespace:HexClientProject.ViewModels.ViewManagement"
+             xmlns:sideBar="clr-namespace:HexClientProject.Views.SideBar">
+    
+    <Grid ColumnDefinitions="3*,1*">
+        <!-- Left Panel (Dynamic) -->
+        <ContentControl Grid.Column="0" Content="{Binding LeftPanelContent}"/>
+        
+        <Border Grid.Column="1" Background="Gray" Width="10" HorizontalAlignment="Left"/>
+
+        <!-- Right Panel -->
+        <Grid Grid.Column="1" Margin="10" RowDefinitions="Auto,*,Auto">
+            <views:SummonerInfoView Grid.Row="0" />
+            <sideBar:FriendsListView Grid.Row="1" />
+            <sideBar:ChatBoxView Grid.Row="2" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,10 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HexClientProject.Views.StartView"
+             xmlns:viewManagement="clr-namespace:HexClientProject.ViewModels.ViewManagement"
+             x:DataType="viewManagement:MainWindowViewModel">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Button Content="Open Local Mode" Command="{Binding OpenLocalMainView}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0  0 0 100"/>
+        <Button Content="Open Online Mode" Command="{Binding OpenOnlineMainView}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 100 0 0" />
+    </Grid>
+</UserControl>

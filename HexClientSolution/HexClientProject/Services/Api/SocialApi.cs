@@ -133,7 +133,6 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot remove friend: " + summonerIdToRemove + " - Return code: " + response.StatusCode);
-                return false;
             }
             return true;
         }
@@ -149,7 +148,6 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot block player: " + summonerIdToBlock + " - Return code: " + response.StatusCode);
-                return false;
             }
             return true;
         }
@@ -163,7 +161,6 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot unblock player: " + summonerIdToUnblock + " - Return code: " + response.StatusCode);
-                return false;
             }
             return true;
         }
@@ -178,7 +175,6 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot get all blocked player: " + " - Return code: " + response.StatusCode + " | " + responseStr);
-                return "";
             }
             return responseStr;
         }

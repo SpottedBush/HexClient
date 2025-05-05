@@ -1,18 +1,19 @@
 using HexClientProject.Interfaces;
-using HexClientProject.Models;
 using HexClientProject.Services.Builders;
 using HexClientProject.Services.Mocks;
+using HexClientProject.StateManagers;
 
 namespace HexClientProject.Services.Providers;
 
 public static class ApiProvider
 {
-    private static bool IsOnline => StateManager.Instance.IsOnlineMode;
+    private static bool IsOnline => GlobalStateManager.Instance.IsOnlineMode;
 
-    public static ILobbyService LobbyService;
-    public static ISummonerService SummonerService;
-
-    public static ISocialService SocialService;
+    public static readonly ILobbyService LobbyService;
+    public static readonly ISummonerService SummonerService;
+    public static readonly IQueueService QueueService;
+    public static readonly IRuneService RuneService;
+    public static readonly ISocialService SocialService;
     
     static ApiProvider()
     {
@@ -21,12 +22,16 @@ public static class ApiProvider
             LobbyService = new LobbyBuilder();
             SummonerService = new SummonerBuilder();
             SocialService = new SocialBuilder();
+            QueueService = new QueueBuilder();
+            RuneService = new RuneBuilder();
         }
         else // Mocking
         {
             SocialService = new SocialMock();
             LobbyService = new LobbyMock();
             SummonerService = new SummonerMock();
+            QueueService = new QueueMock();
+            RuneService = new RuneMock();
         }
     }
 }

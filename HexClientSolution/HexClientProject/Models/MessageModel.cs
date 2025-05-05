@@ -6,18 +6,20 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using HexClientProject.Converters;
 using HexClientProject.Services.Providers;
+using HexClientProject.StateManagers;
 using HexClientProject.Utils;
 using ReactiveUI;
 
 namespace HexClientProject.Models;
 public class MessageModel
 {
+    private readonly SocialStateManager _socialStateManager = SocialStateManager.Instance;
     public required string Sender { get; init; }
     public required string Content { get; init; }
     public DateTime Timestamp { get; init; }
     public ChatScope Scope { get; init; }
     public string? SenderIcon { get; init; } // Rank Icon
-    public string? WhisperingTo { get; init; }
+    public string? WhisperingTo { get; init; } // GameNameTag
 
     public TextBlock DisplayTextBlock
     {
@@ -38,40 +40,38 @@ public class MessageModel
                 Foreground = color,
                 Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.Hand)
             };
-            clickableText.PointerPressed += (sender, e) =>
+            clickableText.PointerPressed += (_, e) =>
             {
                 if (e.GetCurrentPoint(clickableText).Properties.IsRightButtonPressed)
                 {
-                    if (Sender != StateManager.Instance.SummonerInfo.GameName && Sender != "System")
+                    if (Sender == GlobalStateManager.Instance.SummonerInfo.GameName || Sender == "System") return;
+                    var flyout = new Flyout
                     {
-                        var flyout = new Flyout
+                        Placement = PlacementMode.Bottom,
+                        Content = new StackPanel
                         {
-                            Placement = PlacementMode.Bottom,
-                            Content = new StackPanel
+                            Children =
                             {
-                                Children =
-                                {
-                                    new Button { Content = "View Profile", Command = ReactiveCommand.Create(() => SocialUtils.ViewProfile(Sender)) },
-                                    new Button { Content = "Invite to Party", Command = ReactiveCommand.Create(() =>
-                                        ApiProvider.SocialService.PostInviteToLobby(ApiProvider.SocialService.GetFriendModel(Sender)!)) },
-                                    new Button { Content = "Add Friend", Command = ReactiveCommand.Create(() => 
-                                        SocialUtils.AddFriend(Sender))},
-                                    new Button { Content = "Mute", Command = ReactiveCommand.Create(()=>
-                                        SocialUtils.MuteUser(Sender)) },
-                                    new Button { Content = "Block", Command = ReactiveCommand.Create(()=>
-                                        SocialUtils.BlockFriend(Sender)) }
-                                }
+                                new Button { Content = "View Profile", Command = ReactiveCommand.Create(() => SocialUtils.ViewProfile(Sender)) },
+                                new Button { Content = "Invite to Party", Command = ReactiveCommand.Create(() =>
+                                    ApiProvider.SocialService.PostInviteToLobby(ApiProvider.SocialService.GetFriendModel(Sender)!)) },
+                                new Button { Content = "Add Friend", Command = ReactiveCommand.Create(() => 
+                                    _socialStateManager.AddFriend(Sender))},
+                                new Button { Content = "Mute", Command = ReactiveCommand.Create(()=>
+                                    _socialStateManager.MuteUser(Sender)) },
+                                new Button { Content = "Block", Command = ReactiveCommand.Create(()=>
+                                    _socialStateManager.BlockFriend(Sender)) }
                             }
-                        };
+                        }
+                    };
 
-                        FlyoutBase.SetAttachedFlyout(clickableText, flyout);
-                        flyout.ShowAt(clickableText);
-                    }
+                    FlyoutBase.SetAttachedFlyout(clickableText, flyout);
+                    flyout.ShowAt(clickableText);
                 }
                 else if (e.GetCurrentPoint(clickableText).Properties.IsLeftButtonPressed)
                 {
-                    if (Sender != StateManager.Instance.SummonerInfo.GameName && Sender != "System")
-                        SocialUtils.WhisperTo(Sender, changeFilteringScope:false);
+                    if (Sender != GlobalStateManager.Instance.SummonerInfo.GameName && Sender != "System")
+                        _socialStateManager.ChatBoxViewModel.WhisperTo(Sender, changeFilteringScope:false);
                 }
             };
 

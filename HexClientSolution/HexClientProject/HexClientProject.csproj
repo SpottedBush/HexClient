@@ -52,5 +52,45 @@
         <DependentUpon>LobbyPlayerControl.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Views\ViewManagement\MainWindowView.axaml.cs">
+        <DependentUpon>MainWindowView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ViewManagement\MainView.axaml.cs">
+        <DependentUpon>MainView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\GameModeSelection\StartView.axaml.cs">
+        <DependentUpon>StartView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\SideBar\ChatBoxView.axaml.cs">
+        <DependentUpon>ChatBoxView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\SideBar\FriendsListView.axaml.cs">
+        <DependentUpon>FriendsListView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\LobbyPhase\LobbyView.axaml.cs">
+        <DependentUpon>LobbyView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\DraftPhase\DraftView.axaml.cs">
+        <DependentUpon>DraftView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\GameModeSelection\GameModeSelectionView.axaml.cs">
+        <DependentUpon>GameModeSelectionView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\LobbyPhase\MatchFoundView.axaml.cs">
+        <DependentUpon>MatchFoundView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\SideBar\SummonerInfoView.axaml.cs">
+        <DependentUpon>SummonerInfoView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>
