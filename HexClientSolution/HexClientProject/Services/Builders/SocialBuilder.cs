@@ -133,7 +133,7 @@ namespace HexClientProject.Services.Builders
 
         public List<SummonerInfoModel> GetBlockedPlayers()
         {
-            string response = SocialApi.GetBlockedPlayer().Result;
+            string response = SocialApi.GetMutedPlayer().Result;
             dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
             if (string.IsNullOrEmpty(response))
@@ -180,6 +180,24 @@ namespace HexClientProject.Services.Builders
         }
 
         public bool MuteUser(string usernameToMute)
+        {
+            if (string.IsNullOrEmpty(usernameToMute)) 
+            {
+                return false;
+                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
+            }
+
+            string puuid = GetFriendPuuidFromName(usernameToMute);
+            if (string.IsNullOrEmpty(puuid))
+            {
+                return false;
+                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
+            }
+
+            return SocialApi.MutePlayer(puuid).Result;
+        }
+
+        public string GetMuteUser()
         {
             throw new NotImplementedException();
         }

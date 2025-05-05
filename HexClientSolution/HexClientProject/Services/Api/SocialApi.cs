@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using LcuApi;
 using Newtonsoft.Json;
 
@@ -174,6 +175,51 @@ namespace HexClientProject.Services.Api
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Err: Cannot get all blocked player: " + " - Return code: " + response.StatusCode + " | " + responseStr);
+            }
+            return responseStr;
+        }
+
+        public static async System.Threading.Tasks.Task<bool> MutePlayer(string summonerIdToMute)
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            var body = new { puuids = new List<string>(){ summonerIdToMute } };
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-chat/v1/player-mutes/", body);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot mute player: " + summonerIdToMute + " - Return code: " + response.StatusCode);
+                return false;
+            }
+            return true;
+        }
+
+        //public static async System.Threading.Tasks.Task<bool> UnmutePlayer(string summonerIdToUnmute)
+        //{
+        //    ILeagueClient api = await LeagueClient.Connect();
+
+        //    System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Delete, "lol-chat/v1/blocked-players/" + summonerIdToUnmute);
+
+        //    if (!response.IsSuccessStatusCode)
+        //    {
+        //        throw new Exception("Err: Cannot unblock player: " + summonerIdToUnmute + " - Return code: " + response.StatusCode);
+        //        return false;
+        //    }
+        //    return true;
+        //}
+
+        public static async System.Threading.Tasks.Task<string> GetMutedPlayer()
+        {
+            ILeagueClient api = await LeagueClient.Connect();
+
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-chat/v1/player-mutes/");
+            string responseStr = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Err: Cannot get all blocked player: " + " - Return code: " + response.StatusCode + " | " + responseStr);
+                return "";
             }
             return responseStr;
         }
