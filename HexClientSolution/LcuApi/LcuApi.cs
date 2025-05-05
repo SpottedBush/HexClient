@@ -24,7 +24,7 @@ public class LeagueClient : ILeagueClient
 
     public event LeagueClosedHandler LeagueClosed = null!;
 
-    private LeagueClient()
+    public LeagueClient()
     {
         _httpClient = new HttpClient(new HttpClientHandler
         {
