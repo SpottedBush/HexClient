@@ -8,7 +8,7 @@ public class SummonerMock : ISummonerService
 {
     private static readonly List<SummonerInfoModel> MockSummoners =
     [
-        new SummonerInfoModel
+        new()
         {
             SummonerId = 015205,
             GameName = "AhriBotSum",
@@ -22,7 +22,7 @@ public class SummonerMock : ISummonerService
             Region = "EUW"
         },
 
-        new SummonerInfoModel
+        new()
         {
             SummonerId = 015205,
             GameName = "HerMainSum",
@@ -35,7 +35,7 @@ public class SummonerMock : ISummonerService
             Lp = 47,
             Region = "EUW"
         },
-        new SummonerInfoModel
+        new()
         {
             SummonerId = 015205,
             GameName = "HisRivenSum",

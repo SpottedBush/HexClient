@@ -173,7 +173,6 @@ namespace HexClientProject.Services.Builders
             if (string.IsNullOrEmpty(usernameToUnblock))
             {
                 return false;
-                throw new ArgumentException("Invalid username format. Expected format: 'Name#Tag'.");
             }
 
             string puuid = GetFriendPuuidFromName(usernameToUnblock);

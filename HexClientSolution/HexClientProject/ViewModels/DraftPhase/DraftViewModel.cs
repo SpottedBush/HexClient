@@ -39,7 +39,7 @@ public class DraftViewModel : ReactiveObject
             Interval = TimeSpan.FromMilliseconds(25)
         };
         StartAllPhaseRoutine();
-        DisplayTimer = "Time left: " + _timeLeft;
+        _displayTimer = "Time left: " + _timeLeft;
     }
 
     private void StartAllPhaseRoutine()

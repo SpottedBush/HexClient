@@ -68,6 +68,11 @@ public class SocialMock : ISocialService
 
     public bool RemoveFriend(string gameNameTagToRemove)
     {
+        if (!gameNameTagToRemove.Contains('#'))
+        {
+            _socialStateManager.ChatBoxViewModel.SendSystemMessage("Tag line is missing, cannot add friend.");
+            return false;
+        }
         var existing = MockFriends.FirstOrDefault(f => f.GameNameTag == gameNameTagToRemove);
         if (existing == null) return false;
         MockFriends.Remove(existing);
