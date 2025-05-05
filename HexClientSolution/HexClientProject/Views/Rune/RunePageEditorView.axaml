@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:rune="clr-namespace:HexClientProject.ViewModels.Rune"
+             x:Class="HexClientProject.Views.Rune.RunePageEditorView"
+             x:DataType="rune:RunePageEditorViewModel">
+    <StackPanel Margin="16" Spacing="12">
+        <TextBox Text="{Binding RunePage.Name}" Watermark="Page Name"/>
+
+        <TextBlock Text="Primary Tree: {Binding RunePage.PrimaryTree.Name}"/>
+        <ItemsControl Items="{Binding RunePage.PrimaryTree.Slots}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Image Source="{Binding IconPath}" Width="32" Height="32"/>
+                        <TextBlock Text="Rune ID: {Binding SelectedRuneId}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Text="Secondary Tree: {Binding RunePage.SecondaryTree.Name}"/>
+        <ItemsControl Items="{Binding RunePage.SecondaryTree.Slots}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Image Source="{Binding IconPath}" Width="32" Height="32"/>
+                        <TextBlock Text="Rune ID: {Binding SelectedRuneId}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <Button Content="Save" Command="{Binding SaveCommand}"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

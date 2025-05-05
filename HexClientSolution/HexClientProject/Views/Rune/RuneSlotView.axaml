@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:rune="clr-namespace:HexClientProject.ViewModels.Rune"
+             xmlns:view="clr-namespace:HexClientProject.Views.Rune"
+             x:Class="HexClientProject.Views.Rune.RuneSlotView"
+             x:DataType="rune:RuneSlotViewModel">
+    <ItemsControl Items="{Binding Options}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <view:RuneOptionView/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

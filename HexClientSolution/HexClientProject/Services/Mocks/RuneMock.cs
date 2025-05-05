@@ -1,27 +1,33 @@
 using System.Collections.Generic;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
+using HexClientProject.Models.RuneSystem;
 
 namespace HexClientProject.Services.Mocks;
 
 public class RuneMock : IRuneService
 {
-    public void CreateRunePageModel()
+    public void CreateRunePage()
     {
         throw new System.NotImplementedException();
     }
 
-    public void ReadRunePageModel()
+    public void UpdateRunePage(int pageId)
     {
         throw new System.NotImplementedException();
     }
 
-    public void UpdateRunePageModel()
+    public void DeleteRunePage(int pageId)
     {
         throw new System.NotImplementedException();
     }
 
-    public void DeleteRunePageModel()
+    public void RenameRunePage(int pageId)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void GetPageInventory()
     {
         throw new System.NotImplementedException();
     }
