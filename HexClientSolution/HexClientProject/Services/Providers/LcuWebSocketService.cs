@@ -7,11 +7,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using LcuApi;
 
 namespace HexClientProject.Services.Providers;
-public class LcuWebSocketService : LcuApi.LeagueClient
+public class LcuWebSocketService
 {
-    private static LcuWebSocketService? _instance;
+    private static LcuApi.ILeagueClient? _instance;
 
     private readonly ClientWebSocket _webSocket = new();
     private readonly CancellationTokenSource _cts = new();
@@ -19,13 +20,12 @@ public class LcuWebSocketService : LcuApi.LeagueClient
     private readonly Uri _uri;
     private readonly string _auth;
 
-    public static LcuWebSocketService Instance()
+    public static async Task<LcuApi.ILeagueClient> Instance()
     {
         // If already instantiated
         if (_instance != null) return _instance;
-        
-        _instance = new LcuWebSocketService();
-        _ = _instance.ConnectAsync();
+
+        _instance = await LcuApi.LeagueClient.Connect();
         return _instance;
     }
 

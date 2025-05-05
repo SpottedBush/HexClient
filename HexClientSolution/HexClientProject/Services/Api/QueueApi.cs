@@ -1,4 +1,5 @@
 ﻿using System;
+using HexClientProject.Services.Providers;
 using LcuApi;
 
 namespace HexClientProject.Services.Api
@@ -7,7 +8,7 @@ namespace HexClientProject.Services.Api
     {
         public static async void StartQueue()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-lobby/v2/lobby/matchmaking/search/");
 
             if (!response.IsSuccessStatusCode)
@@ -18,7 +19,7 @@ namespace HexClientProject.Services.Api
 
         public static async void StopQueue()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Delete, "lol-lobby/v2/lobby/matchmaking/search/");
 
             if (!response.IsSuccessStatusCode)
@@ -29,7 +30,7 @@ namespace HexClientProject.Services.Api
 
         public static async System.Threading.Tasks.Task<string> GetQueueState()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-lobby/v2/lobby/matchmaking/search-state/");
             string responseStr = await response.Content.ReadAsStringAsync();
 
@@ -44,7 +45,7 @@ namespace HexClientProject.Services.Api
 
         public static async void AcceptQueueMatch()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-matchmaking/v1/ready-check/accept/");
 
             if (!response.IsSuccessStatusCode)
@@ -55,7 +56,7 @@ namespace HexClientProject.Services.Api
 
         public static async void DeclineQueueMatch()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Post, "lol-matchmaking/v1/ready-check/decline/");
 
             if (!response.IsSuccessStatusCode)
@@ -65,7 +66,7 @@ namespace HexClientProject.Services.Api
         }
         public static async System.Threading.Tasks.Task<string> GetReadyCheckStatus()
         {
-            ILeagueClient api = await LeagueClient.Connect();
+            ILeagueClient api = LcuWebSocketService.Instance().Result;
             System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-matchmaking/v1/ready-check");
             string responseStr = await response.Content.ReadAsStringAsync();
 
