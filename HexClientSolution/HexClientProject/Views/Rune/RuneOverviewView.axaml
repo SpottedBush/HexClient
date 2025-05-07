@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:HexClientProject.ViewModels.RuneSystem"
+             x:Class="HexClientProject.Views.Rune.RuneOverviewView"
+             x:DataType="vm:RuneOverviewViewModel">
+    
+    <StackPanel Spacing="10">
+        <TextBlock Text="Current Rune Page Overview" FontSize="18" FontWeight="Bold" />
+
+        <TextBlock Text="{Binding RunePage.PrimaryTreeName}" FontSize="14" />
+        <Image Source="{Binding RunePage.Keystone.IconPath}" Height="40" Width="40"/>
+        <TextBlock Text="{Binding RunePage.Keystone.Name}" />
+
+        <TextBlock Text="Primary Runes" FontWeight="Bold"/>
+        <ItemsControl ItemsSource="{Binding RunePage.PrimaryRunes}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Image Source="{Binding IconPath}" Height="30" Width="30"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Text="Secondary Runes" FontWeight="Bold"/>
+        <ItemsControl ItemsSource="{Binding RunePage.SecondaryRunes}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Image Source="{Binding IconPath}" Height="30" Width="30"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Text="Stat Perks" FontWeight="Bold"/>
+        <ItemsControl ItemsSource="{Binding RunePage.StatPerks}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Image Source="{Binding IconPath}" Height="30" Width="30"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>

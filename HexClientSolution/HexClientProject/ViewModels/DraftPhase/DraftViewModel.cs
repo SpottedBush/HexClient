@@ -44,7 +44,7 @@ public class DraftViewModel : ReactiveObject
 
     private void StartAllPhaseRoutine()
     {
-        Start(10); //Ban Phase
+        Start(1000); //Ban Phase
         // Wait
         // Pre-pick phase... (depends on the gameMode!)
     }

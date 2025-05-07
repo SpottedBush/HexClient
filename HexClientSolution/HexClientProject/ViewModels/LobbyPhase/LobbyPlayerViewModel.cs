@@ -1,7 +1,7 @@
-using System;
+using System.IO;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using HexClientProject.StateManagers;
+using HexClientProject.Utils;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels.LobbyPhase;
@@ -47,12 +47,12 @@ public class LobbyPlayerViewModel : ReactiveObject
                       $"Rank: {SideBar.SummonerInfoViewModel.RankStrings[summoner.RankId]} " +
                       $"{SideBar.SummonerInfoViewModel.RankDivisions[summoner.DivisionId]}";
 
-        RoleIcon1 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/none_icon.png")));
-        RoleIcon2 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/none_icon.png")));
+        RoleIcon1 = PathUtils.PathToBitMap("roles/none_icon.png");
+        RoleIcon2 = PathUtils.PathToBitMap("roles/none_icon.png");
     }
     public void SetPlayerRole(string role1, string role2)
     {
-        RoleIcon1 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role1}_icon.png")));
-        RoleIcon2 = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role2}_icon.png")));
+        RoleIcon1 = PathUtils.PathToBitMap($"roles/{role1}_icon.png");
+        RoleIcon2 = PathUtils.PathToBitMap($"roles/{role2}_icon.png");
     }
 }

@@ -1,14 +1,15 @@
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Reactive;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using Avalonia.Threading;
 using HexClientProject.StateManagers;
+using HexClientProject.Utils;
 using HexClientProject.Views;
 using ReactiveUI;
 using DraftView = HexClientProject.Views.DraftPhase.DraftView;
@@ -101,14 +102,14 @@ public class LobbyViewModel : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref _selectedRole2, value);
     }
 
-    private Bitmap _selectedRole1Image = new Bitmap(AssetLoader.Open(new Uri("avares://HexClientProject/Assets/roles/none_icon.png")));
+    private Bitmap _selectedRole1Image = PathUtils.PathToBitMap("roles/none_icon.png");
     public Bitmap SelectedRole1Image
     {
         get => _selectedRole1Image;
         set => this.RaiseAndSetIfChanged(ref _selectedRole1Image, value);
     }
 
-    private Bitmap _selectedRole2Image = new Bitmap(AssetLoader.Open(new Uri("avares://HexClientProject/Assets/roles/none_icon.png")));
+    private Bitmap _selectedRole2Image = PathUtils.PathToBitMap("roles/none_icon.png");
     public Bitmap SelectedRole2Image
     {
         get => _selectedRole2Image;
@@ -218,7 +219,7 @@ public class LobbyViewModel : ReactiveObject
             }
             else
                 SelectedRole1 = role;
-            SelectedRole1Image = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role}_icon.png")));
+            SelectedRole1Image = PathUtils.PathToBitMap($"roles/{role}_icon.png");
 
         });
 
@@ -232,7 +233,7 @@ public class LobbyViewModel : ReactiveObject
             }
             else
                 SelectedRole2 = role;
-            SelectedRole2Image = new Bitmap(AssetLoader.Open(new Uri($"avares://HexClientProject/Assets/roles/{role}_icon.png")));
+            SelectedRole2Image = PathUtils.PathToBitMap($"roles/{role}_icon.png");
                 
         });
     }

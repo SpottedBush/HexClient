@@ -13,8 +13,9 @@
         <Folder Include="Assets\roles\" />
         <AvaloniaResource Include="Assets\**" />
         <AvaloniaResource Include="Assets/**" />
+        <Folder Include="Assets\Runes\" />
         <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
-        
+        <Content Include="Assets\Runes\**\*.*" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
     <ItemGroup>
@@ -38,6 +39,14 @@
       <UpToDateCheckInput Remove="tmpHexClient\Views\MainView.axaml" />
       <UpToDateCheckInput Remove="tmpHexClient\Views\MainWindow.axaml" />
       <UpToDateCheckInput Remove="Themes\Generic.axaml" />
+      <UpToDateCheckInput Remove="Assets\perk-images\Styles\Inspiration\Kleptomancy\Kleptomancy.png" />
+      <UpToDateCheckInput Remove="Assets\perk-images\Styles\Domination\IngeniousHunter\IngeniousHunter.png" />
+      <UpToDateCheckInput Remove="Assets\perk-images\Styles\Domination\GhostPoro\GhostPoro.png" />
+      <UpToDateCheckInput Remove="Assets\perk-images\Styles\Domination\EyeballCollection\EyeballCollection.png" />
+      <UpToDateCheckInput Remove="Assets\perk-images\Styles\Domination\ZombieWard\ZombieWard.png" />
+      <UpToDateCheckInput Remove="Assets\perk-images\Styles\Domination\Predator\Predator.png" />
+      <UpToDateCheckInput Remove="Assets\perk-images\Styles\Resolve\IronSkin\IronSkin.png" />
+      <UpToDateCheckInput Remove="Assets\perk-images\Styles\Sorcery\Unflinching\Unflinching.png" />
     </ItemGroup>
 
     <ItemGroup>
