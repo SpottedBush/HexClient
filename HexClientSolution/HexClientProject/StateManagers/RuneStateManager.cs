@@ -14,20 +14,19 @@ public class RuneStateManager : ReactiveObject
     {
         get
         {
-            _instance ??= new RuneStateManager();
-            return _instance;
+            var currInstance = _instance ??= new RuneStateManager();
+            return currInstance;
         }
     }
-
     private ObservableCollection<RunePageModel> _runePages = new();
     public ObservableCollection<RunePageModel> RunePages
     {
         get => _runePages;
-        private set => this.RaiseAndSetIfChanged(ref _runePages, value);
+        set => this.RaiseAndSetIfChanged(ref _runePages, value);
     }
 
-    private RunePageModel? _selectedRunePage;
-    public RunePageModel? SelectedRunePage
+    private RunePageModel _selectedRunePage;
+    public RunePageModel SelectedRunePage
     {
         get => _selectedRunePage;
         set => this.RaiseAndSetIfChanged(ref _selectedRunePage, value);

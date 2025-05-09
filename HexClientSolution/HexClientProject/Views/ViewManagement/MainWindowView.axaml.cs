@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using HexClientProject.Models.RuneSystem;
 using HexClientProject.ViewModels;
 using HexClientProject.ViewModels.ViewManagement;
 
@@ -13,5 +14,6 @@ public partial class MainWindowView : Window
         var screen = Screens.Primary;
         Width = screen!.Bounds.Width;
         Height = screen.Bounds.Height;
+        _ = RuneLookupTableModel.Initialize();
     }
 }

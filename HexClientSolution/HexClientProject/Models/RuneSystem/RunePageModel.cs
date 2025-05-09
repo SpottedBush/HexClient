@@ -1,24 +1,40 @@
+using System;
 using System.Collections.Generic;
-using Avalonia.Media.Imaging;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Avalonia.Platform;
 
 namespace HexClientProject.Models.RuneSystem;
 
 public class RunePageModel
 {
-    public string PrimaryTreeName { get; set; }
-    public string SecondaryTreeName { get; set; }
+    public int MainTreeId { get; set; }
+    public int KeystoneId { get; set; }
+    public List<int> PrimaryRuneIds { get; set; }
+    public int SecondaryTreeId { get; set; }
+    public List<int> SecondaryRuneIds { get; set; }
+    public List<int> StatModsIds { get; set; }
 
-    public RuneModel Keystone { get; set; }
-    public List<RuneModel> PrimaryRunes { get; set; } = new();
-    public List<RuneModel> SecondaryRunes { get; set; } = new();
-    public List<RuneModel> StatPerks { get; set; } = new();
-}
+    public void SavePageToJson(string path)
+    {
+        var json = JsonSerializer.Serialize(this, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        });
+        File.WriteAllText(path, json);
+    }
 
-public class RuneModel
-{
-    public int Id { get; set; }
+    public static async Task<RunePageModel> LoadFromJsonAsync(Uri resourceUri)
+    {
+        var stream = AssetLoader.Open(resourceUri);
+        using var reader = new StreamReader(stream);
+        var json = await reader.ReadToEndAsync();
 
-    public string Name { get; set; } = string.Empty;
+        return JsonSerializer.Deserialize<RunePageModel>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        }) ?? throw new InvalidDataException("Failed to deserialize RunePageModel");
+    }
 
-    public Bitmap? IconPath { get; set; }
 }

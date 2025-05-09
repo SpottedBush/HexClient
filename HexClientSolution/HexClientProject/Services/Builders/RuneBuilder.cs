@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 using HexClientProject.Models.RuneSystem;
@@ -7,6 +8,11 @@ namespace HexClientProject.Services.Builders;
 
 public class RuneBuilder : IRuneService
 {
+    public Task<List<RuneTreeModel>> GetAllTrees()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void CreateRunePage()
     {
         throw new System.NotImplementedException();
@@ -32,7 +38,7 @@ public class RuneBuilder : IRuneService
         throw new System.NotImplementedException();
     }
 
-    public void LoadRunePages()
+    public Task LoadRunePages()
     {
         throw new System.NotImplementedException();
     }

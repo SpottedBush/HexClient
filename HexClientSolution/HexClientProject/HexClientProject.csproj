@@ -9,13 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Assets\ranks\" />
-        <Folder Include="Assets\roles\" />
-        <AvaloniaResource Include="Assets\**" />
-        <AvaloniaResource Include="Assets/**" />
-        <Folder Include="Assets\Runes\" />
+        <!-- Include all files under Assets as Avalonia resources -->
+        <AvaloniaResource Include="Assets\**\*" />
         <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
-        <Content Include="Assets\Runes\**\*.*" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
     <ItemGroup>
@@ -47,10 +43,6 @@
       <UpToDateCheckInput Remove="Assets\perk-images\Styles\Domination\Predator\Predator.png" />
       <UpToDateCheckInput Remove="Assets\perk-images\Styles\Resolve\IronSkin\IronSkin.png" />
       <UpToDateCheckInput Remove="Assets\perk-images\Styles\Sorcery\Unflinching\Unflinching.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\LcuApi\LcuApi.csproj" />
     </ItemGroup>
 
     <ItemGroup>
