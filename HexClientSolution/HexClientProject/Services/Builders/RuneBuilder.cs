@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using HexClientProject.Interfaces;
 using HexClientProject.Models;
 using HexClientProject.Models.RuneSystem;
@@ -12,6 +13,11 @@ namespace HexClientProject.Services.Builders;
 
 public class RuneBuilder : IRuneService
 {
+    public Task<List<RuneTreeModel>> GetAllTrees()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void CreateRunePage()
     {
         string response = RuneApi.AddPage().Result;
@@ -78,7 +84,7 @@ public class RuneBuilder : IRuneService
         RuneStateManager.Instance.OwnedPageCount = jsonObject.ownedPageCount;
     }
 
-    public void LoadRunePages()
+    public Task LoadRunePages()
     {
         RuneStateManager.Instance.RunePages.Clear();
 
@@ -94,6 +100,8 @@ public class RuneBuilder : IRuneService
             List<int> runeIds = r.selectedPerkIds;
             RuneStateManager.Instance.RunePages.Append(new RunePageModel(runeIds));
         }
+
+        return Task.CompletedTask;
     }
 
     public void SaveRunePages(IEnumerable<RunePageModel> pages)

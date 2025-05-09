@@ -1,73 +1,42 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Media.Imaging;
 using Tmds.DBus.Protocol;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Avalonia.Platform;
 
 namespace HexClientProject.Models.RuneSystem;
 
 public class RunePageModel
 {
-    public string PrimaryTreeName { get; set; }
-    public string SecondaryTreeName { get; set; }
-
-    public RuneModel Keystone { get; set; }
-    public List<RuneModel> PrimaryRunes { get; set; } = new();
-    public List<RuneModel> SecondaryRunes { get; set; } = new();
-    public List<RuneModel> StatPerks { get; set; } = new();
-
-
-    public RunePageModel(List<int> runeIds)
+    public int MainTreeId { get; set; }
+    public int KeystoneId { get; set; }
+    public List<int> PrimaryRuneIds { get; set; }
+    public int SecondaryTreeId { get; set; }
+    public List<int> SecondaryRuneIds { get; set; }
+    public List<int> StatModsIds { get; set; }
+    public void SavePageToJson(string path)
     {
-        for (int i = 0; i < runeIds.Count; i++)
+        var json = JsonSerializer.Serialize(this, new JsonSerializerOptions
         {
-            if (i == 0)
-            {
-                Keystone = new RuneModel { Id = runeIds[i] };
-            }
-            else if (i < 4)
-            {
-                PrimaryRunes.Add(new RuneModel { Id = runeIds[i] });
-            }
-            else if (i < 6)
-            {
-                SecondaryRunes.Add(new RuneModel { Id = runeIds[i] });
-            }
-            else
-            {
-                StatPerks.Add(new RuneModel { Id = runeIds[i] });
-            }
-        }
+            WriteIndented = true
+        });
+        File.WriteAllText(path, json);
     }
 
-    public List<int> GetAllRuneIds()
+    public static async Task<RunePageModel> LoadFromJsonAsync(Uri resourceUri)
     {
-        List<int> allRuneIds = new List<int> { };
-        allRuneIds.Append(Keystone.Id);
-        
-        foreach (RuneModel r in PrimaryRunes)
+        var stream = AssetLoader.Open(resourceUri);
+        using var reader = new StreamReader(stream);
+        var json = await reader.ReadToEndAsync();
+
+        return JsonSerializer.Deserialize<RunePageModel>(json, new JsonSerializerOptions
         {
-            allRuneIds.Append(r.Id);
-        }
+            PropertyNameCaseInsensitive = true
+        }) ?? throw new InvalidDataException("Failed to deserialize RunePageModel");
+    }
 
-        foreach (RuneModel r in SecondaryRunes)
-        {
-            allRuneIds.Append(r.Id);
-        }
-
-        foreach (RuneModel r in StatPerks)
-        {
-            allRuneIds.Append(r.Id);
-        }
-
-        return allRuneIds;
-    } 
-}
-
-public class RuneModel
-{
-    public int Id { get; set; }
-
-    public string Name { get; set; } = string.Empty;
-
-    public Bitmap? IconPath { get; set; }
 }

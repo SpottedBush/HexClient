@@ -1,8 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using HexClientProject.ViewModels;
-using HexClientProject.Views;
+using HexClientProject.StateManagers;
 using HexClientProject.Views.ViewManagement;
 
 namespace HexClientProject
@@ -13,7 +12,7 @@ namespace HexClientProject
         {
             AvaloniaXamlLoader.Load(this);
         }
-        public override void OnFrameworkInitializationCompleted()
+        public override async void OnFrameworkInitializationCompleted()
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {

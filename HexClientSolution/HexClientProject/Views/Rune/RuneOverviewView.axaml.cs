@@ -1,13 +1,17 @@
 using Avalonia.Controls;
 using HexClientProject.ViewModels.RuneSystem;
 
-namespace HexClientProject.Views.Rune;
-
-public partial class RuneOverviewView : UserControl
+namespace HexClientProject.Views.Rune
 {
-    public RuneOverviewView()
+    public partial class RuneOverviewView : UserControl
     {
-        InitializeComponent();
-        DataContext = new RuneOverviewViewModel();
+        public RuneOverviewView()
+        {
+            InitializeComponent();
+            DataContext = new RuneOverviewViewModel();
+        }
+
+        // Optional: Handle any events or commands like EditRunePage
+        // If using navigation or view switching, you may inject a navigation service or handle event here
     }
 }

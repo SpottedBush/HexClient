@@ -1,12 +1,22 @@
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using HexClientProject.Interfaces;
-using HexClientProject.Models;
 using HexClientProject.Models.RuneSystem;
+using HexClientProject.StateManagers;
+using HexClientProject.Utils;
 
 namespace HexClientProject.Services.Mocks;
 
 public class RuneMock : IRuneService
 {
+    private readonly RuneStateManager _runeStateManager = RuneStateManager.Instance;
+    public Task<List<RuneTreeModel>> GetAllTrees()
+    {
+        return JsonLoaderUtils.LoadRuneTreesFromJsonAsync(StaticAssetPaths.RuneTreesJson); 
+    }
+
     public void CreateRunePage()
     {
         throw new System.NotImplementedException();
@@ -32,9 +42,22 @@ public class RuneMock : IRuneService
         throw new System.NotImplementedException();
     }
 
-    public void LoadRunePages()
+    public async Task LoadRunePages()
     {
-        throw new System.NotImplementedException();
+        try
+        {
+            RunePageModel customRunePageModel = await RunePageModel.LoadFromJsonAsync(new Uri("avares://HexClientProject/Assets/json/mocks/userRunePage1_mock.json"));
+            _runeStateManager.RunePages =
+            [
+                customRunePageModel,
+                customRunePageModel
+            ];
+            _runeStateManager.SelectedRunePage = _runeStateManager.RunePages[0];
+        }
+        catch (Exception e)
+        {
+            throw; // TODO handle exception
+        }
     }
 
     public void SaveRunePages(IEnumerable<RunePageModel> pages)

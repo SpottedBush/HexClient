@@ -6,32 +6,33 @@
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
     
      <Application.Resources>
-        <x:String x:Key="AutofillIcon">/Assets/roles/autofill_icon.png</x:String>
-         <Bitmap x:Key="TopIcon">
-             <x:Arguments>
-                 <x:String>/Assets/roles/top_icon.png</x:String>
-             </x:Arguments>
-         </Bitmap>
-         <Bitmap x:Key="JglIcon">
-             <x:Arguments>
-                 <x:String>/Assets/roles/jungle_icon.png</x:String>
-             </x:Arguments>
-         </Bitmap>
-         <Bitmap x:Key="MidIcon">
-             <x:Arguments>
-                 <x:String>/Assets/roles/mid_icon.png</x:String>
-             </x:Arguments>
-         </Bitmap>
-         <Bitmap x:Key="AdcIcon">
-             <x:Arguments>
-                 <x:String>/Assets/roles/adc_icon.png</x:String>
-             </x:Arguments>
-         </Bitmap>
-         <Bitmap x:Key="SupportIcon">
-             <x:Arguments>
-                 <x:String>/Assets/roles/support_icon.png</x:String>
-             </x:Arguments>
-         </Bitmap>
+
+        <!-- <x:String x:Key="AutofillIcon">/Assets/roles/autofill_icon.png</x:String> -->
+        <!--  <Bitmap x:Key="TopIcon"> -->
+        <!--      <x:Arguments> -->
+        <!--          <x:String>/Assets/roles/top_icon.png</x:String> -->
+        <!--      </x:Arguments> -->
+        <!--  </Bitmap> -->
+        <!--  <Bitmap x:Key="JglIcon"> -->
+        <!--      <x:Arguments> -->
+        <!--          <x:String>/Assets/roles/jungle_icon.png</x:String> -->
+        <!--      </x:Arguments> -->
+        <!--  </Bitmap> -->
+        <!--  <Bitmap x:Key="MidIcon"> -->
+        <!--      <x:Arguments> -->
+        <!--          <x:String>/Assets/roles/mid_icon.png</x:String> -->
+        <!--      </x:Arguments> -->
+        <!--  </Bitmap> -->
+        <!--  <Bitmap x:Key="AdcIcon"> -->
+        <!--      <x:Arguments> -->
+        <!--          <x:String>/Assets/roles/adc_icon.png</x:String> -->
+        <!--      </x:Arguments> -->
+        <!--  </Bitmap> -->
+        <!--  <Bitmap x:Key="SupportIcon"> -->
+        <!--      <x:Arguments> -->
+        <!--          <x:String>/Assets/roles/support_icon.png</x:String> -->
+        <!--      </x:Arguments> -->
+        <!--  </Bitmap> -->
          <converters:ScopeToColorConverter x:Key="ScopeToColorConverter"/>
      </Application.Resources>
              
