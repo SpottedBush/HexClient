@@ -19,15 +19,15 @@ namespace HexClientProject.Services.Api
             return responseStr;
         }
 
-        public static async System.Threading.Tasks.Task<string> GetSummonerInfos(string puuid)
+        public static async System.Threading.Tasks.Task<string> GetSummonerInfos(string summonerPuuid)
         {
             ILeagueClient api = LcuWebSocketService.Instance().Result;
-            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-summoner/v2/summoners/puuid/" + puuid);
+            System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Get, "lol-summoner/v2/summoners/puuid/" + summonerPuuid);
             string responseStr = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception("Err: Cannot get the summoner: " + puuid + " - Return code: " + response.StatusCode + " | " + responseStr);
+                throw new Exception("Err: Cannot get the summoner: " + summonerPuuid + " - Return code: " + response.StatusCode + " | " + responseStr);
             }
             return responseStr;
         }

@@ -2,6 +2,7 @@ using HexClientProject.Services.Providers;
 using LcuApi;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HexClientProject.Services.Api;
@@ -81,11 +82,13 @@ public class RuneApi
         return responseStr;
     }
 
-    public static async Task<bool> UpdatePage(int pageId)
+    public static async Task<bool> UpdatePage(int pageId, List<int> selectedRunesId)
     {
         ILeagueClient api = LcuWebSocketService.Instance().Result;
 
-        System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Put, "lol-perks/v1/pages/" + pageId.ToString());
+        var body = new { id = pageId, selectedPerkIds = selectedRunesId };
+
+        System.Net.Http.HttpResponseMessage response = await api.MakeApiRequest(HttpMethod.Put, "lol-perks/v1/pages/" + pageId.ToString(), body);
         string responseStr = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)

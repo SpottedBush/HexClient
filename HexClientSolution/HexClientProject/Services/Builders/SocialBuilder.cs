@@ -55,6 +55,20 @@ namespace HexClientProject.Services.Builders
             return "";
         }
 
+        public string GetFriendSummonerIdFromName(string friendUserName)
+        {
+            string response = SocialApi.GetFriends().Result;
+            dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
+            foreach (var friend in jsonObject)
+            {
+                if (friend.gameName + "#" + friend.gameTag == friendUserName)
+                {
+                    return friend.summonerId;
+                }
+            }
+            return "";
+        }
+
         public List<FriendModel> GetFriendModelList()
         {
             int count = 0;
@@ -164,7 +178,7 @@ namespace HexClientProject.Services.Builders
                 return false;
             }
 
-            string puuid = GetFriendPuuidFromName(usernameToBlock);
+            string puuid = GetFriendSummonerIdFromName(usernameToBlock);
             return !string.IsNullOrEmpty(puuid) && SocialApi.BlockPlayer(puuid).Result;
         }
 
@@ -175,7 +189,7 @@ namespace HexClientProject.Services.Builders
                 return false;
             }
 
-            string puuid = GetFriendPuuidFromName(usernameToUnblock);
+            string puuid = GetFriendSummonerIdFromName(usernameToUnblock);
             return !string.IsNullOrEmpty(puuid) && SocialApi.UnblockPlayer(puuid).Result;
         }
 
