@@ -5,6 +5,7 @@ using Avalonia.Media.Imaging;
 using Tmds.DBus.Protocol;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Avalonia.Platform;
 
@@ -26,7 +27,13 @@ public class RunePageModel
         });
         File.WriteAllText(path, json);
     }
-
+    public static RunePageModel LoadFromJson(JsonObject json)
+    {
+        return json.Deserialize<RunePageModel>(new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        }) ?? throw new InvalidDataException("Failed to deserialize RunePageModel");
+    }    
     public static async Task<RunePageModel> LoadFromJsonAsync(Uri resourceUri)
     {
         var stream = AssetLoader.Open(resourceUri);

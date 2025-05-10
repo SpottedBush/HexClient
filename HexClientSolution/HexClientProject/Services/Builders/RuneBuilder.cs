@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HexClientProject.Interfaces;
-using HexClientProject.Models;
 using HexClientProject.Models.RuneSystem;
 using HexClientProject.Services.Api;
 using HexClientProject.StateManagers;
@@ -15,7 +14,7 @@ public class RuneBuilder : IRuneService
 {
     public Task<List<RuneTreeModel>> GetAllTrees()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public void CreateRunePage()
@@ -23,7 +22,7 @@ public class RuneBuilder : IRuneService
         string response = RuneApi.AddPage().Result;
         if (string.IsNullOrEmpty(response))
         {
-            throw new System.Exception("Failed to create rune page.");
+            throw new Exception("Failed to create rune page.");
         }
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
@@ -34,26 +33,25 @@ public class RuneBuilder : IRuneService
     {
         List<int> selectedRunes = [];
         RunePageModel runePage = RuneStateManager.Instance.RunePages[pageId];
-        selectedRunes.Append(runePage.Keystone.Id);
-
-        foreach (RuneModel r in runePage.PrimaryRunes)
+        selectedRunes = (List<int>)selectedRunes.Append(runePage.KeystoneId);
+        foreach (int id in runePage.PrimaryRuneIds)
         {
-            selectedRunes.Append(r.Id);
+            selectedRunes = (List<int>)selectedRunes.Append(id);
         }
 
-        foreach (RuneModel r in runePage.SecondaryRunes)
+        foreach (int id in runePage.SecondaryRuneIds)
         {
-            selectedRunes.Append(r.Id);
+            selectedRunes = (List<int>)selectedRunes.Append(id);
         }
 
-        foreach (RuneModel r in runePage.StatPerks)
+        foreach (int id in runePage.StatModsIds)
         {
-            selectedRunes.Append(r.Id);
+            selectedRunes = (List<int>)selectedRunes.Append(id);
         }
 
         if (!RuneApi.UpdatePage(pageId, selectedRunes).Result)
         {
-            throw new System.Exception("Failed to update rune page.");
+            throw new Exception("Failed to update rune page.");
         }
 
     }
@@ -62,13 +60,13 @@ public class RuneBuilder : IRuneService
     {
         if (!RuneApi.DeletePage(pageId).Result)
         {
-            throw new System.Exception("Failed to delete rune page.");
+            throw new Exception("Failed to delete rune page.");
         }
     }
 
-    public void RenameRunePage(int pageId)
+    public void RenameRunePage(int pageId, string newPageName)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public void GetPageInventory()
@@ -76,7 +74,7 @@ public class RuneBuilder : IRuneService
         string response = RuneApi.GetPagesInventory().Result;
         if (string.IsNullOrEmpty(response))
         {
-            throw new System.Exception("Failed to get pages inventory.");
+            throw new Exception("Failed to get pages inventory.");
         }
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
@@ -91,14 +89,14 @@ public class RuneBuilder : IRuneService
         string response = RuneApi.GetAllPages().Result;
         if (string.IsNullOrEmpty(response))
         {
-            throw new System.Exception("Failed to get all pages.");
+            throw new Exception("Failed to get all pages.");
         }
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
         foreach (var r in jsonObject)
         {
             List<int> runeIds = r.selectedPerkIds;
-            RuneStateManager.Instance.RunePages.Append(new RunePageModel(runeIds));
+            RuneStateManager.Instance.RunePages = RuneStateManager.Instance.RunePages.Append(new RunePageModel(runeIds));
         }
 
         return Task.CompletedTask;
@@ -106,6 +104,6 @@ public class RuneBuilder : IRuneService
 
     public void SaveRunePages(IEnumerable<RunePageModel> pages)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

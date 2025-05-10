@@ -32,7 +32,7 @@ public class RuneMock : IRuneService
         throw new System.NotImplementedException();
     }
 
-    public void RenameRunePage(int pageId)
+    public void RenameRunePage(int pageId, string newPageName)
     {
         throw new System.NotImplementedException();
     }
