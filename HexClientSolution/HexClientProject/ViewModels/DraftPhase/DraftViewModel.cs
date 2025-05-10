@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.Threading;
 using HexClientProject.StateManagers;
 using ReactiveUI;
@@ -30,6 +31,8 @@ public class DraftViewModel : ReactiveObject
         get => _displayTimer;
         set => this.RaiseAndSetIfChanged(ref _displayTimer, value);
     }
+    public List<string> LeftTeamPlayers { get; set; } = new(); // TODO: Change to a list of players
+    public List<string> RightTeamPlayers { get; set; } = new();
     public DraftViewModel()
     {
         _globalStateManager.IsInDraft = true;

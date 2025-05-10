@@ -7,11 +7,8 @@ namespace HexClientProject.Views.Rune
     {
         public RuneOverviewView()
         {
-            InitializeComponent();
             DataContext = new RuneOverviewViewModel();
+            InitializeComponent();
         }
-
-        // Optional: Handle any events or commands like EditRunePage
-        // If using navigation or view switching, you may inject a navigation service or handle event here
     }
 }

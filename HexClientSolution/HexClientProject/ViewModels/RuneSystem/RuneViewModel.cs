@@ -1,3 +1,5 @@
+using System;
+using Avalonia.Media.Imaging;
 using HexClientProject.Models.RuneSystem;
 using HexClientProject.Utils;
 using ReactiveUI;
@@ -6,7 +8,7 @@ namespace HexClientProject.ViewModels.RuneSystem;
 
 public class RuneViewModel : ReactiveObject
 {
-    public RuneModel Model { get; }
+    private RuneModel Model { get; }
 
     private bool _isSelected;
     public bool IsSelected
@@ -22,7 +24,7 @@ public class RuneViewModel : ReactiveObject
 
     public int Id => Model.Id;
     public string Name => Model.Name;
-    public Avalonia.Media.Imaging.Bitmap Icon => PathUtils.PathToBitMap(Model.IconPath);
+    public Bitmap Icon => PathUtils.PathToBitMap(Model.IconPath);
     public string LongDescription => Model.LongDescription;
     public string ShortDescription => Model.ShortDescription;
 }

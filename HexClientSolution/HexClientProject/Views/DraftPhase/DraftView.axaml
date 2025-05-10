@@ -1,113 +1,116 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:sideBar="clr-namespace:HexClientProject.Views.SideBar"
-             xmlns:draftPhase="clr-namespace:HexClientProject.ViewModels.DraftPhase"
              xmlns:rune="clr-namespace:HexClientProject.Views.Rune"
+             xmlns:draftPhase="clr-namespace:HexClientProject.ViewModels.DraftPhase"
              x:Class="HexClientProject.Views.DraftPhase.DraftView"
              x:DataType="draftPhase:DraftViewModel">
 
-  <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="2*,5*,2.5*">
+  <Grid ColumnDefinitions="2*,6*,2*" RowDefinitions="Auto,Auto,*,Auto">
 
-    <!-- Game Info -->
-    <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="0,10">
-      <TextBlock Text="{Binding GameModeName}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-      <TextBlock Text="{Binding DisplayTimer}" FontSize="14" HorizontalAlignment="Center"/>
-      <ProgressBar Minimum="2" Maximum="{Binding DurationOfCurrentPhase}"
-                   Value="{Binding TimeLeft}"
-                   IsIndeterminate="False"
-                   Width="200"
-                   Height="20"/>
+    <!-- Top Info Bar -->
+    <TextBlock Grid.ColumnSpan="3"
+               Text="Mode de jeu        Phase de ..."
+               FontSize="20"
+               HorizontalAlignment="Center"
+               Margin="0,10"/>
+
+    <!-- Left Team Info -->
+    <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="10" VerticalAlignment="Top">
+      <ItemsControl>
+        <ItemsControl.Items>
+          <StackPanel Margin="0,5" Orientation="Horizontal" Spacing="10">
+            <Ellipse Width="40" Height="40" Fill="Gray"/>
+            <StackPanel>
+              <TextBlock Text="Lane :" />
+              <TextBlock Text="Banned :" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center" Margin="10,0,0,0">
+              <Rectangle Width="20" Height="20" Fill="Gray"/>
+              <Rectangle Width="20" Height="20" Fill="Gray"/>
+            </StackPanel>
+          </StackPanel>
+          <!-- Repeat 5 times manually or via data-binding -->
+        </ItemsControl.Items>
+      </ItemsControl>
     </StackPanel>
 
-    <!-- Runes + Spells -->
-    <StackPanel Grid.Row="1" Grid.Column="0" Margin="10" HorizontalAlignment="Center">
-      <!-- Runes -->
-        <Border BorderBrush="Gray" BorderThickness="1" Height="800" Width="300" Background="Black">
-          <rune:RuneOverviewView VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        </Border>
-      <!-- Summoner Spells -->
-      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10" Spacing="10">
-        <Button Content="Sum Spell"/>
-        <Button Content="Sum Spell"/>
+    <!-- Champion Filters -->
+    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Spacing="5" Margin="0,5">
+      <ComboBox Width="100"/>
+      <Button Content="+ bannis" Width="80"/>
+      <Button Content="+ pris" Width="80"/>
+      <TextBox Width="200" Watermark="Chercher"/>
+    </StackPanel>
+
+    <!-- Champion Selection Grid -->
+    <Border Grid.Column="1" Grid.Row="2" Margin="10" BorderBrush="Gray" BorderThickness="1">
+      <UniformGrid Columns="6" Rows="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Rectangle Fill="LightGray" Margin="5"/>
+        <!-- Add more rectangle placeholders or data-bind champions -->
+      </UniformGrid>
+    </Border>
+
+    <!-- Right Team Info -->
+    <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Margin="10" VerticalAlignment="Top">
+      <ItemsControl>
+        <ItemsControl.Items>
+          <StackPanel Margin="0,5" Orientation="Horizontal" Spacing="10">
+            <Ellipse Width="40" Height="40" Fill="Gray"/>
+            <StackPanel>
+              <TextBlock Text="Lane :" />
+              <TextBlock Text="Banned :" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center" Margin="10,0,0,0">
+              <Rectangle Width="20" Height="20" Fill="Gray"/>
+              <Rectangle Width="20" Height="20" Fill="Gray"/>
+            </StackPanel>
+          </StackPanel>
+          <!-- Repeat 5 times manually or via data-binding -->
+        </ItemsControl.Items>
+      </ItemsControl>
+    </StackPanel>
+
+    <!-- Right Middle: Skins + Wards -->
+    <StackPanel Grid.Column="2" Grid.Row="2" Margin="0,5">
+      <TextBlock Text="Skins" FontWeight="Bold" Margin="5"/>
+      <StackPanel>
+        <Rectangle Fill="Gray" Height="30" Margin="5"/>
+        <Rectangle Fill="Gray" Height="30" Margin="5"/>
+        <Rectangle Fill="Gray" Height="30" Margin="5"/>
       </StackPanel>
+      <TextBlock Text="Wards" FontWeight="Bold" Margin="5"/>
+      <Rectangle Fill="Gray" Height="30" Margin="5"/>
     </StackPanel>
-    
-    <!-- Champion Selection -->
-    <StackPanel Grid.Row="1" Grid.Column="1" Margin="100" HorizontalAlignment="Stretch">
-      <!-- Filters -->
-      <WrapPanel HorizontalAlignment="Center">
-        <Button Content="Top"/>
-        <Button Content="Jungle"/>
-        <Button Content="Mid"/>
-        <Button Content="Adc"/>
-        <Button Content="Support"/>
-        <Button Content="Sort champions"/>
-        <TextBox Watermark="Search For a Champion..." Margin="0,2,0,0"/>
-      </WrapPanel>
 
-      <!-- Champion Selection Grid -->
-      <Border BorderBrush="Olive" BorderThickness="2" Margin="0,10">
-        <Grid Height="600" Background="LightGray"/>
-      </Border>
+    <!-- Bottom Panel: Spells, Runes, Timer, Chat -->
+    <Grid Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="3" ColumnDefinitions="2*,3*,3*,3*" Margin="10,5">
 
-      <!-- Validate -->
-      <Button Content="Lock in" Width="200" Height="80"
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              HorizontalContentAlignment="Center"
-              VerticalContentAlignment="Center"
-              Margin="10"/>
-    </StackPanel>
-    
-    <!-- Bans + Champions picked + Chatbox -->
-    <Grid Grid.Row="1" Grid.Column="2" Margin="1" RowDefinitions="Auto,*,*">
-  
-      <!-- Bans and Champion picked Section -->
-      <Grid Grid.Row="0" ColumnDefinitions="*,*,*" RowDefinitions="*,*" Margin="5">
-        <StackPanel Grid.Column="0" Grid.Row="0">
-          <Grid ColumnDefinitions="*,*,*,*,*">
-            <!-- Left bans -->
-            <Rectangle Grid.Column="0" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Rectangle Grid.Column="1" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Rectangle Grid.Column="2" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Rectangle Grid.Column="3" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Rectangle Grid.Column="4" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-          </Grid>
+      <!-- Spells and Runes -->
+      <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+        <!-- Spells -->
+        <StackPanel>
+          <TextBlock Text="Sorts" FontWeight="Bold"/>
+          <Rectangle Width="40" Height="40" Fill="Gray" Margin="5"/>
+          <Rectangle Width="40" Height="40" Fill="Gray" Margin="5"/>
         </StackPanel>
-        <Line Grid.Row="0" Grid.Column="1" />
-        <StackPanel Grid.Column="2" Grid.Row="0">
-          <Grid ColumnDefinitions="*,*,*,*,*">
-            <!-- Right bans -->
-            <Rectangle Grid.Column="0" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Rectangle Grid.Column="1" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Rectangle Grid.Column="2" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Rectangle Grid.Column="3" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Rectangle Grid.Column="4" Width="20" Height="20" Fill="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-          </Grid>
-        </StackPanel>
-        
-        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="5" Spacing="5">
-          <!-- Left picks -->
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-        </StackPanel>
-        <Line Grid.Row="1" Grid.Column="1"/>
-        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" Margin="5" Spacing="5">
-          <!-- Right picks -->
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-          <Ellipse Width="40" Height="40" Fill="LightGray"/>
-        </StackPanel>
-        </Grid>
-        <!-- Chatbox -->
-      <sideBar:ChatBoxView Grid.Row="2"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Center"/>
-      </Grid>
+        <!-- Runes -->
+        <rune:RuneOverviewView VerticalAlignment="Center" HorizontalAlignment="Center"/>
+      </StackPanel>
+
+      <!-- Timer -->
+      <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+        <TextBlock Text="{Binding DisplayTimer}" Margin="5"/>
+        <ProgressBar Width="150" Height="20" Value="{Binding TimeLeft}" Minimum="0" Maximum="100"/>
+      </StackPanel>
+
+      <!-- Confirm Button -->
+      <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+        <Button Content="Lock In" Width="150" Height="50"/>
+      </StackPanel>
+
+      <!-- Chatbox -->
+      <sideBar:ChatBoxView Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
+  </Grid>
 </UserControl>
