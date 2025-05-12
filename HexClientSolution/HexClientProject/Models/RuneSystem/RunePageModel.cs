@@ -13,12 +13,38 @@ namespace HexClientProject.Models.RuneSystem;
 
 public class RunePageModel
 {
+    public string pageName { get; set; } = string.Empty;
+    public int pageId { get; set; }
     public int MainTreeId { get; set; }
     public int KeystoneId { get; set; }
     public List<int> PrimaryRuneIds { get; set; }
     public int SecondaryTreeId { get; set; }
     public List<int> SecondaryRuneIds { get; set; }
     public List<int> StatModsIds { get; set; }
+
+    public RunePageModel(List<int> selectedRuneIdList)
+    {
+        for (int i = 0; i < selectedRuneIdList.Count; i++)
+        {
+            if (i == 0)
+            {
+                KeystoneId = selectedRuneIdList[i];
+            }
+            else if (i < 4)
+            {
+                PrimaryRuneIds.Add(selectedRuneIdList[i]);
+            }
+            else if (i < 6)
+            {
+                SecondaryRuneIds.Add(selectedRuneIdList[i]);
+            }
+            else
+            {
+                StatModsIds.Add(selectedRuneIdList[i]);
+            }
+        }
+    }
+
     public void SavePageToJson(string path)
     {
         var json = JsonSerializer.Serialize(this, new JsonSerializerOptions

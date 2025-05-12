@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using HexClientProject.Interfaces;
 using HexClientProject.Models.RuneSystem;
@@ -26,7 +27,7 @@ public class RuneBuilder : IRuneService
         }
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
-        // return jsonObject.id;
+        //RuneStateManager.Instance.RunePages.Append();
     }
 
     public void UpdateRunePage(int pageId)
@@ -96,7 +97,17 @@ public class RuneBuilder : IRuneService
         foreach (var r in jsonObject)
         {
             List<int> runeIds = r.selectedPerkIds;
-            RuneStateManager.Instance.RunePages = RuneStateManager.Instance.RunePages.Append(new RunePageModel(runeIds));
+            JsonObject newJsonObject = new JsonObject
+            {
+                ["mainTreeId"] = 8010,
+                ["keystoneId"] = runeIds[0],
+                ["primaryRuneIds"] = new JsonArray(runeIds.GetRange(1, 3).Select(id => JsonValue.Create(id)!).ToArray()),
+                ["secondaryTreeId"] = 8200,
+                ["secondaryRuneIds"] = new JsonArray(runeIds.GetRange(4, 2).Select(id => JsonValue.Create(id)!).ToArray()),
+                ["statModsIds"] = new JsonArray(runeIds.GetRange(6, 3).Select(id => JsonValue.Create(id)!).ToArray()),
+            };
+
+            RuneStateManager.Instance.RunePages.Add(new RunePageModel(runeIds));
         }
 
         return Task.CompletedTask;
