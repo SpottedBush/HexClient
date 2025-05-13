@@ -30,10 +30,10 @@ public class RuneBuilder : IRuneService
         //RuneStateManager.Instance.RunePages.Append();
     }
 
-    public void UpdateRunePage(int pageId)
+    public void SaveCurrentRunePage()
     {
         List<int> selectedRunes = [];
-        RunePageModel runePage = RuneStateManager.Instance.RunePages[pageId];
+        RunePageModel runePage = RuneStateManager.Instance.SelectedRunePage;
         selectedRunes = (List<int>)selectedRunes.Append(runePage.KeystoneId);
         foreach (int id in runePage.PrimaryRuneIds)
         {
@@ -50,11 +50,16 @@ public class RuneBuilder : IRuneService
             selectedRunes = (List<int>)selectedRunes.Append(id);
         }
 
-        if (!RuneApi.UpdatePage(pageId, selectedRunes).Result)
+        if (!RuneApi.UpdatePage(runePage.pageId, selectedRunes).Result)
         {
             throw new Exception("Failed to update rune page.");
         }
 
+    }
+
+    public void SelectCurrentRunePage(int pageId)
+    {
+        throw new NotImplementedException();
     }
 
     public void DeleteRunePage(int pageId)

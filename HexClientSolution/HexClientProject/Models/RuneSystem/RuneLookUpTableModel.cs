@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using HexClientProject.Services.Providers;
+using HexClientProject.Utils;
 
 namespace HexClientProject.Models.RuneSystem;
 
@@ -27,7 +28,7 @@ public static class RuneLookupTableModel
     {
         // Fill up _runePages and _selectedRunePage fields in the RuneStateManager
         await ApiProvider.RuneService.LoadRunePages(); 
-        var trees = await ApiProvider.RuneService.GetAllTrees(); 
+        var trees = await JsonLoaderUtils.LoadRuneTreesFromJsonAsync(StaticAssetPaths.RuneTreesJson); 
         Dispatcher.UIThread.Post(() =>
         {
             FillLookupTables(trees);
