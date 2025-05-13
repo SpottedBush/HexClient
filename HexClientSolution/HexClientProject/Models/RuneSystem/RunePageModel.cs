@@ -17,6 +17,12 @@ public class RunePageModel
     public List<int> SecondaryRuneIds { get; set; }
     public List<int> StatModsIds { get; set; }
 
+    
+    public RunePageModel(string pageName, int pageId)
+    {
+        PageName = pageName;
+        PageId = pageId;
+    }
     public RunePageModel(List<int> selectedRuneIdList)
     {
         PrimaryRuneIds = new List<int>();

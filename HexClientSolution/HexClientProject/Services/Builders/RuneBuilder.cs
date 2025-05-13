@@ -13,11 +13,6 @@ namespace HexClientProject.Services.Builders;
 
 public class RuneBuilder : IRuneService
 {
-    public Task<List<RuneTreeModel>> GetAllTrees()
-    {
-        throw new NotImplementedException();
-    }
-
     public void CreateRunePage()
     {
         string response = RuneApi.AddPage().Result;
@@ -25,31 +20,22 @@ public class RuneBuilder : IRuneService
         {
             throw new Exception("Failed to create rune page.");
         }
+        
+        // Get id and name of the new page created
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
-        //RuneStateManager.Instance.RunePages.Append();
+        RuneStateManager.Instance.RunePages.Add(new RunePageModel(jsonObject.id, jsonObject.name));
     }
 
     public void SaveCurrentRunePage()
     {
         List<int> selectedRunes = [];
         RunePageModel runePage = RuneStateManager.Instance.SelectedRunePage;
-        selectedRunes = (List<int>)selectedRunes.Append(runePage.KeystoneId);
-        foreach (int id in runePage.PrimaryRuneIds)
+        selectedRunes.Add(runePage.KeystoneId);
+        foreach (int id in runePage.PrimaryRuneIds.Concat(runePage.SecondaryRuneIds).Concat(runePage.StatModsIds))
         {
-            selectedRunes = (List<int>)selectedRunes.Append(id);
+            selectedRunes.Add(id);
         }
-
-        foreach (int id in runePage.SecondaryRuneIds)
-        {
-            selectedRunes = (List<int>)selectedRunes.Append(id);
-        }
-
-        foreach (int id in runePage.StatModsIds)
-        {
-            selectedRunes = (List<int>)selectedRunes.Append(id);
-        }
-
         if (!RuneApi.UpdatePage(runePage.PageId, selectedRunes).Result)
         {
             throw new Exception("Failed to update rune page.");
@@ -59,7 +45,10 @@ public class RuneBuilder : IRuneService
 
     public void SelectCurrentRunePage(int pageId)
     {
-        throw new NotImplementedException();
+        if (!RuneApi.SetCurrentPage(pageId).Result)
+        {
+            throw new Exception("Failed to set current rune page.");
+        }
     }
 
     public void DeleteRunePage(int pageId)
@@ -72,7 +61,10 @@ public class RuneBuilder : IRuneService
 
     public void RenameRunePage(int pageId, string newPageName)
     {
-        throw new NotImplementedException();
+        if (!RuneApi.RenamePage(pageId, newPageName).Result)
+        {
+            throw new Exception("Failed to rename rune page.");
+        }
     }
 
     public void GetPageInventory()
@@ -102,24 +94,9 @@ public class RuneBuilder : IRuneService
         foreach (var r in jsonObject)
         {
             List<int> runeIds = r.selectedPerkIds;
-            JsonObject newJsonObject = new JsonObject
-            {
-                ["mainTreeId"] = 8010,
-                ["keystoneId"] = runeIds[0],
-                ["primaryRuneIds"] = new JsonArray(runeIds.GetRange(1, 3).Select(id => JsonValue.Create(id)!).ToArray()),
-                ["secondaryTreeId"] = 8200,
-                ["secondaryRuneIds"] = new JsonArray(runeIds.GetRange(4, 2).Select(id => JsonValue.Create(id)!).ToArray()),
-                ["statModsIds"] = new JsonArray(runeIds.GetRange(6, 3).Select(id => JsonValue.Create(id)!).ToArray()),
-            };
-
             RuneStateManager.Instance.RunePages.Add(new RunePageModel(runeIds));
         }
 
         return Task.CompletedTask;
-    }
-
-    public void SaveRunePages(IEnumerable<RunePageModel> pages)
-    {
-        throw new NotImplementedException();
     }
 }

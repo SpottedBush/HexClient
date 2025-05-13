@@ -84,6 +84,11 @@ public class RuneApi
 
     public static async Task<bool> UpdatePage(int pageId, List<int> selectedRunesId)
     {
+        if (selectedRunesId.Count != 9)
+        {
+            return false;
+        } 
+
         ILeagueClient api = LcuWebSocketService.Instance().Result;
 
         var body = new { id = pageId, selectedPerkIds = selectedRunesId };
