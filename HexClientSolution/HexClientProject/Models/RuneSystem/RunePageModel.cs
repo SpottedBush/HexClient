@@ -1,20 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Avalonia.Media.Imaging;
-using Tmds.DBus.Protocol;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-using Avalonia.Platform;
 
 namespace HexClientProject.Models.RuneSystem;
 
 public class RunePageModel
 {
-    public string pageName { get; set; } = string.Empty;
-    public int pageId { get; set; }
+    public string PageName { get; set; } = string.Empty;
+    public int PageId { get; set; }
     public int MainTreeId { get; set; }
     public int KeystoneId { get; set; }
     public List<int> PrimaryRuneIds { get; set; }
@@ -24,6 +19,9 @@ public class RunePageModel
 
     public RunePageModel(List<int> selectedRuneIdList)
     {
+        PrimaryRuneIds = new List<int>();
+        SecondaryRuneIds = new List<int>();
+        StatModsIds = new List<int>();
         for (int i = 0; i < selectedRuneIdList.Count; i++)
         {
             if (i == 0)
@@ -45,6 +43,13 @@ public class RunePageModel
         }
     }
 
+    public RunePageModel()
+    {
+        PrimaryRuneIds = new List<int>();
+        SecondaryRuneIds = new List<int>();
+        StatModsIds = new List<int>();
+    }
+
     public void SavePageToJson(string path)
     {
         var json = JsonSerializer.Serialize(this, new JsonSerializerOptions
@@ -59,17 +64,5 @@ public class RunePageModel
         {
             PropertyNameCaseInsensitive = true
         }) ?? throw new InvalidDataException("Failed to deserialize RunePageModel");
-    }    
-    public static async Task<RunePageModel> LoadFromJsonAsync(Uri resourceUri)
-    {
-        var stream = AssetLoader.Open(resourceUri);
-        using var reader = new StreamReader(stream);
-        var json = await reader.ReadToEndAsync();
-
-        return JsonSerializer.Deserialize<RunePageModel>(json, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        }) ?? throw new InvalidDataException("Failed to deserialize RunePageModel");
     }
-
 }

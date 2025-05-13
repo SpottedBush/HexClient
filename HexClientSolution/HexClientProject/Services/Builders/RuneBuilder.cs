@@ -50,7 +50,7 @@ public class RuneBuilder : IRuneService
             selectedRunes = (List<int>)selectedRunes.Append(id);
         }
 
-        if (!RuneApi.UpdatePage(runePage.pageId, selectedRunes).Result)
+        if (!RuneApi.UpdatePage(runePage.PageId, selectedRunes).Result)
         {
             throw new Exception("Failed to update rune page.");
         }

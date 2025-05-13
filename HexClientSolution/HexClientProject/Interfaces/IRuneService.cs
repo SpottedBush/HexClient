@@ -11,7 +11,7 @@ public interface IRuneService
     /// <remarks>
     /// This method interacts with the LCU (Online Mode) to create a new rune page.
     /// If the creation process fails, an exception is thrown.
-    /// The created rune page is appended to the existing collection of rune pages and selected as the current page.
+    /// Note: This method requires a LoadRunePages() call to be made afterward.
     /// </remarks>
     /// <exception cref="Exception">
     /// Thrown if the creation of the rune page fails due to an invalid or empty server response.
