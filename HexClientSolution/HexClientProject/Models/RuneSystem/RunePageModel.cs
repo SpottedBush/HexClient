@@ -1,8 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-using System.Text.Json.Nodes;
 
 namespace HexClientProject.Models.RuneSystem;
 
@@ -17,12 +13,6 @@ public class RunePageModel
     public List<int> SecondaryRuneIds { get; set; }
     public List<int> StatModsIds { get; set; }
 
-    
-    public RunePageModel(string pageName, int pageId)
-    {
-        PageName = pageName;
-        PageId = pageId;
-    }
     public RunePageModel(List<int> selectedRuneIdList)
     {
         PrimaryRuneIds = new List<int>();
@@ -49,26 +39,11 @@ public class RunePageModel
         }
     }
 
+    // Creates an empty rune page, should only be used by CreateRunePage() in the RuneService
     public RunePageModel()
     {
         PrimaryRuneIds = new List<int>();
         SecondaryRuneIds = new List<int>();
         StatModsIds = new List<int>();
-    }
-
-    public void SavePageToJson(string path)
-    {
-        var json = JsonSerializer.Serialize(this, new JsonSerializerOptions
-        {
-            WriteIndented = true
-        });
-        File.WriteAllText(path, json);
-    }
-    public static RunePageModel LoadFromJson(JsonObject json)
-    {
-        return json.Deserialize<RunePageModel>(new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        }) ?? throw new InvalidDataException("Failed to deserialize RunePageModel");
     }
 }
