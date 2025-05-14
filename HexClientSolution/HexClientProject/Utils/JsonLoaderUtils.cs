@@ -41,4 +41,28 @@ public static class JsonLoaderUtils
             return new();
         }
     }
+
+    public static async Task<List<RuneModel>> LoadStatModsFromJsonAsync(string path)
+    {
+        var uri = new Uri(path);
+        if (!AssetLoader.Exists(uri))
+            throw new FileNotFoundException($"Stat Mod JSON not found: {path}");
+        
+        await using var stream = AssetLoader.Open(uri);
+        using var reader = new StreamReader(stream);
+        var json = await reader.ReadToEndAsync();
+        try
+        {
+            var statMods = JsonSerializer.Deserialize<List<RuneModel>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            }) ?? new();
+            return statMods;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"JSON deserialization failed: {ex.Message}");
+            return new();
+        }
+    }
 }

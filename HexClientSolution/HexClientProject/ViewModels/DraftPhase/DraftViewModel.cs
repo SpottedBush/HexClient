@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Avalonia.Threading;
 using HexClientProject.StateManagers;
+using HexClientProject.ViewModels.RuneSystem;
 using ReactiveUI;
 using LobbyView = HexClientProject.Views.LobbyPhase.LobbyView;
 
@@ -33,6 +34,16 @@ public class DraftViewModel : ReactiveObject
     }
     public List<string> LeftTeamPlayers { get; set; } = new(); // TODO: Change to a list of players
     public List<string> RightTeamPlayers { get; set; } = new();
+    public RuneEditorViewModel RuneEditorViewModel { get; } = new();
+    private bool _isEditorVisible;
+    public bool IsEditorVisible
+    {
+        get => _isEditorVisible;
+        set => this.RaiseAndSetIfChanged(ref _isEditorVisible, value);
+    }
+    public void ShowEditorOverlay() => IsEditorVisible = true;
+    public void HideEditorOverlay() => IsEditorVisible = false;
+    public RuneOverviewViewModel RuneOverviewViewModel { get; }
     public DraftViewModel()
     {
         _globalStateManager.IsInDraft = true;
@@ -43,6 +54,7 @@ public class DraftViewModel : ReactiveObject
         };
         StartAllPhaseRoutine();
         _displayTimer = "Time left: " + _timeLeft;
+        RuneOverviewViewModel = new RuneOverviewViewModel(this);
     }
 
     private void StartAllPhaseRoutine()

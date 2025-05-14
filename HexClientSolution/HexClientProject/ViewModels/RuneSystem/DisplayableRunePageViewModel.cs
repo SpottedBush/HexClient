@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HexClientProject.Models.RuneSystem;
@@ -7,6 +8,8 @@ namespace HexClientProject.ViewModels.RuneSystem;
 
 public class DisplayableRunePageViewModel : ReactiveObject
 {
+    public string PageName { get; }
+    public int PageId { get; }
     public RuneTreeViewModel MainTree { get; }
     public RuneTreeViewModel SecondaryTree { get; }
     public RuneViewModel Keystone { get; }
@@ -15,6 +18,8 @@ public class DisplayableRunePageViewModel : ReactiveObject
     public List<RuneViewModel> StatMods { get; }
 
     private DisplayableRunePageViewModel(
+        string pageName,
+        int pageId,
         RuneTreeViewModel mainTree,
         RuneTreeViewModel secondaryTree,
         RuneViewModel keystone,
@@ -22,6 +27,8 @@ public class DisplayableRunePageViewModel : ReactiveObject
         List<RuneViewModel> secondaryRunes,
         List<RuneViewModel> statMods)
     {
+        PageName = pageName;
+        PageId = pageId;
         MainTree = mainTree;
         SecondaryTree = secondaryTree;
         Keystone = keystone;
@@ -49,11 +56,11 @@ public class DisplayableRunePageViewModel : ReactiveObject
             .ToList();
 
         var statMods = model.StatModsIds
-            .Select(RuneLookupTableModel.GetRune)
+            .Select(RuneLookupTableModel.GetStatMod)
             .Where(r => r != null)
             .Select(r => new RuneViewModel(r!))
             .ToList();
 
-        return new DisplayableRunePageViewModel(mainTree, secondaryTree, keystone, primary, secondary, statMods);
+        return new DisplayableRunePageViewModel(model.PageName, model.PageId, mainTree, secondaryTree, keystone, primary, secondary, statMods);
     }
 }

@@ -40,7 +40,16 @@ public class RunePageModel
     }
 
     // Creates an empty rune page, should only be used by CreateRunePage() in the RuneService
-    public RunePageModel()
+    public RunePageModel(int pageId, string pageName)
+    {
+        PageId = pageId;
+        PageName = pageName;
+        PrimaryRuneIds = new List<int>();
+        SecondaryRuneIds = new List<int>();
+        StatModsIds = new List<int>();
+    }
+    
+    public RunePageModel() // Required for JSON deserialization
     {
         PrimaryRuneIds = new List<int>();
         SecondaryRuneIds = new List<int>();

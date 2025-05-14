@@ -9,6 +9,8 @@ public class RuneModel
     [JsonPropertyName("icon")]
     public string IconPath { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("shortDesc")]
     public string ShortDescription { get; set; } = string.Empty;
+    [JsonPropertyName("longDesc")]
     public string LongDescription { get; set; } = string.Empty;
 }

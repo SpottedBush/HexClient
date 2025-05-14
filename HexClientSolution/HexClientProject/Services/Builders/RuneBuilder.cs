@@ -24,7 +24,7 @@ public class RuneBuilder : IRuneService
         // Get id and name of the new page created
         dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(response) ?? throw new InvalidOperationException();
 
-        RuneStateManager.Instance.RunePages.Add(new RunePageModel(jsonObject.id, jsonObject.name));
+        RuneStateManager.Instance.RunePages.Add(new RunePageModel((int) jsonObject.id, (string)jsonObject.name));
     }
 
     public void SaveCurrentRunePage()

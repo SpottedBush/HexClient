@@ -95,7 +95,7 @@
           <Rectangle Width="40" Height="40" Fill="Gray" Margin="5"/>
         </StackPanel>
         <!-- Runes -->
-        <rune:RuneOverviewView VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <rune:RuneOverviewView VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding RuneOverviewViewModel}"/>
       </StackPanel>
 
       <!-- Timer -->

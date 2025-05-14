@@ -1,0 +1,51 @@
+[
+  {
+    "id": 5008,
+    "name": "Adaptive Force",
+    "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+    "shortDesc": "+9 Adaptive Force",
+    "longDesc": "Grants bonus attack damage or ability power, based on your champion."
+  },
+  {
+    "id": 5005,
+    "name": "Attack Speed",
+    "icon": "perk-images/StatMods/StatModsAttackSpeedIcon.png",
+    "shortDesc": "+10% Attack Speed",
+    "longDesc": "Grants bonus attack speed."
+  },
+  {
+    "id": 5007,
+    "name": "Ability Haste",
+    "icon": "perk-images/StatMods/StatModsCDRScalingIcon.png",
+    "shortDesc": "+8 Ability Haste",
+    "longDesc": "Grants cooldown reduction to your abilities."
+  },
+  {
+    "id": 5010,
+    "name": "Bonus Health (Scaling)",
+    "icon": "perk-images/StatMods/StatModsHealthScalingIcon.png",
+    "shortDesc": "+Health (scaling)",
+    "longDesc": "Gain health as you level up."
+  },
+  {
+    "id": 5001,
+    "name": "Bonus Health",
+    "icon": "perk-images/StatMods/StatModsHealthPlusIcon.png",
+    "shortDesc": "+15–90 Health",
+    "longDesc": "Grants bonus health scaling with level."
+  },
+  {
+    "id": 5011,
+    "name": "Armor",
+    "icon": "perk-images/StatMods/StatModsArmorIcon.png",
+    "shortDesc": "+6 Armor",
+    "longDesc": "Grants bonus armor."
+  },
+  {
+    "id": 5013,
+    "name": "Magic Resist",
+    "icon": "perk-images/StatMods/StatModsMagicResIcon.png",
+    "shortDesc": "+8 Magic Resist",
+    "longDesc": "Grants bonus magic resistance."
+  }
+]

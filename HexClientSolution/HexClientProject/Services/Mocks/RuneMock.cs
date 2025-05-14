@@ -17,7 +17,7 @@ public class RuneMock : IRuneService
 
     public void CreateRunePage()
     {
-        RunePageModel customRunePageModel = new RunePageModel();
+        RunePageModel customRunePageModel = new RunePageModel(1, "Custom Page");
         _runeStateManager.SelectedRunePage = customRunePageModel;
         _runeStateManager.RunePages = (ObservableCollection<RunePageModel>)_runeStateManager.RunePages.Append(customRunePageModel);
     }
@@ -74,10 +74,13 @@ public class RuneMock : IRuneService
         {
             PropertyNameCaseInsensitive = true
         }) ?? throw new InvalidDataException("Failed to deserialize RunePageModel");
+        RunePageModel custom2 = customRunePageModel;
+        customRunePageModel.PageName = "Custom Page";
+        custom2.PageName = "Custom Page 2";
         _runeStateManager.RunePages =
         [
             customRunePageModel,
-            customRunePageModel
+            custom2
         ];
         _runeStateManager.SelectedRunePage = _runeStateManager.RunePages[0];
     }

@@ -1,7 +1,8 @@
-using System;
+using System.Reactive;
+using HexClientProject.Services.Providers;
 using ReactiveUI;
-using HexClientProject.Models.RuneSystem;
 using HexClientProject.StateManagers;
+using HexClientProject.ViewModels.DraftPhase;
 
 namespace HexClientProject.ViewModels.RuneSystem;
 
@@ -14,11 +15,11 @@ public class RuneOverviewViewModel : ReactiveObject
         get => _displayPage;
         set => this.RaiseAndSetIfChanged(ref _displayPage, value);
     }
-
-    public RuneOverviewViewModel()
+    
+    public ReactiveCommand<Unit, Unit> OpenEditorCommand { get; }
+    public RuneOverviewViewModel(DraftViewModel parent)
     {
-        DisplayPage = DisplayableRunePageViewModel.Create(_runeStateManager.SelectedRunePage);
-        Console.WriteLine(DisplayPage.PrimaryRunes.Count);
-        Console.WriteLine(DisplayPage.SecondaryRunes.Count);
+        OpenEditorCommand = ReactiveCommand.Create(() => parent.ShowEditorOverlay());
+        _displayPage = DisplayableRunePageViewModel.Create(_runeStateManager.SelectedRunePage);
     }
 }

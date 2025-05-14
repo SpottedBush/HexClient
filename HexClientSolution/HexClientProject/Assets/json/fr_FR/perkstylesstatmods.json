@@ -1,0 +1,51 @@
+[
+  {
+    "id": 5008,
+    "name": "Force adaptative",
+    "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+    "shortDesc": "+9 Force adaptative",
+    "longDesc": "Octroie des dégâts d’attaque ou de la puissance selon votre champion."
+  },
+  {
+    "id": 5005,
+    "name": "Vitesse d'attaque",
+    "icon": "perk-images/StatMods/StatModsAttackSpeedIcon.png",
+    "shortDesc": "+10% Vitesse d'attaque",
+    "longDesc": "Augmente votre vitesse d'attaque de base."
+  },
+  {
+    "id": 5007,
+    "name": "Hâte de compétence",
+    "icon": "perk-images/StatMods/StatModsCDRScalingIcon.png",
+    "shortDesc": "+8 Hâte de compétence",
+    "longDesc": "Réduit le délai de récupération de vos compétences."
+  },
+  {
+    "id": 5010,
+    "name": "Santé bonus (évolutive)",
+    "icon": "perk-images/StatMods/StatModsHealthScalingIcon.png",
+    "shortDesc": "+ Santé (évolutive)",
+    "longDesc": "Octroie de la santé bonus qui augmente avec le niveau."
+  },
+  {
+    "id": 5001,
+    "name": "Santé bonus",
+    "icon": "perk-images/StatMods/StatModsHealthPlusIcon.png",
+    "shortDesc": "+15–90 Santé",
+    "longDesc": "Octroie de la santé bonus en fonction du niveau."
+  },
+  {
+    "id": 5011,
+    "name": "Armure",
+    "icon": "perk-images/StatMods/StatModsArmorIcon.png",
+    "shortDesc": "+6 Armure",
+    "longDesc": "Octroie de l'armure bonus."
+  },
+  {
+    "id": 5013,
+    "name": "Résistance magique",
+    "icon": "perk-images/StatMods/StatModsMagicResIcon.png",
+    "shortDesc": "+8 Résistance magique",
+    "longDesc": "Octroie de la résistance magique bonus."
+  }
+]

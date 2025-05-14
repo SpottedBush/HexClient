@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using HexClientProject.ViewModels.RuneSystem;
 
 namespace HexClientProject.Views.Rune
 {
@@ -7,7 +6,6 @@ namespace HexClientProject.Views.Rune
     {
         public RuneOverviewView()
         {
-            DataContext = new RuneOverviewViewModel();
             InitializeComponent();
         }
     }

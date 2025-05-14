@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using HexClientProject.Models.RuneSystem;
+using HexClientProject.Services.Providers;
 using ReactiveUI;
 
 namespace HexClientProject.StateManagers;
@@ -14,8 +14,8 @@ public class RuneStateManager : ReactiveObject
     {
         get
         {
-            var currInstance = _instance ??= new RuneStateManager();
-            return currInstance;
+            _instance ??= new RuneStateManager();
+            return _instance;
         }
     }
     private ObservableCollection<RunePageModel> _runePages = new();
@@ -34,24 +34,4 @@ public class RuneStateManager : ReactiveObject
 
     public int MaxPageCount;
     public int OwnedPageCount;
-    public void AddRunePage(RunePageModel page)
-    {
-        RunePages.Add(page);
-    }
-
-    public void RemoveRunePage(RunePageModel page)
-    {
-        RunePages.Remove(page);
-    }
-
-    public void LoadRunePages(IEnumerable<RunePageModel> pages)
-    {
-        RunePages = new ObservableCollection<RunePageModel>(pages);
-    }
-
-    public void UpdatePageInventoryCounts(int maxPageCount, int ownedPageCount)
-    {
-        MaxPageCount = maxPageCount;
-        OwnedPageCount = ownedPageCount;
-    }
 }

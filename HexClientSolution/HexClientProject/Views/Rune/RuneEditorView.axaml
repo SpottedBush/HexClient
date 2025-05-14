@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:HexClientProject.ViewModels.RuneSystem"
+             xmlns:converters="clr-namespace:HexClientProject.Converters"
+             x:Class="HexClientProject.Views.Rune.RuneEditorView"
+             x:DataType="vm:RuneEditorViewModel">
+    <Grid>
+        <!-- Semi-transparent overlay background -->
+        <Border Background="#AA000000"/>
+
+        <!-- Main Editor Panel -->
+        <Border Background="Black" CornerRadius="10" Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Spacing="20">
+
+                <!-- Header Controls -->
+                <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <!-- ComboBox or Editable TextBox -->
+                    <Grid>
+                        <ComboBox x:Name="PageSelector" Width="200" 
+                                  ItemsSource="{Binding RunePages}" 
+                                  SelectedItem="{Binding SelectedPage}"
+                                  IsVisible="{Binding IsRenaming, Converter={converters:InverseBoolConverter}}"/>
+                        <TextBox x:Name="RenameTextBox" Width="200" 
+                                 Text="{Binding SelectedPage.PageName}" 
+                                 IsVisible="{Binding IsRenaming}" 
+                                 KeyUp="OnRenameEnter"/>
+                    </Grid>
+
+                    <!-- Action Buttons -->
+                    <Button Content="Rename" Command="{Binding StartRenamingCommand}"/>
+                    <Button Content="+" Command="{Binding AddPageCommand}"/>
+                    <Button Content="-" Command="{Binding DeletePageCommand}"/>
+                    <Button Content="Save" Command="{Binding SavePageCommand}"/>
+                    <Button Content="Close" Command="{Binding CloseEditorCommand}"/>
+                </StackPanel>
+
+                <!-- Rune Selection Layout -->
+                <ScrollViewer>
+                    <StackPanel>
+                        <!-- Here replicate your DisplayPage layout:
+                             - Keystone
+                             - Primary Runes
+                             - Secondary Runes
+                             - StatMods
+                           Feel free to reuse your RuneOverviewView as a user control
+                           and bind it to the editable version of the page -->
+                        <!-- <ContentControl Content="{Binding EditablePageView}"/> -->
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -4,71 +4,93 @@
              x:Class="HexClientProject.Views.Rune.RuneOverviewView"
              x:DataType="vm:RuneOverviewViewModel">
 
-    <StackPanel Spacing="5">
-        <!-- Top Controls: Image, Config ComboBox, and Details Button -->
-        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="avares://HexClientProject/Assets/perk-images/Styles/RunesIcon.png"/>
-            <ComboBox Width="100" Margin="5"/>
-            <Button Content="Details" Width="60"/>
+            <ComboBox Width="100" Margin="5" ItemsSource="{Binding DisplayPage.PageName}"/>
+            <Button x:Name="EditButton" Content="Details" Width="60" Command="{Binding OpenEditorCommand}"/>
         </StackPanel>
         <Border BorderBrush="White" BorderThickness="1" Padding="10">
-            <Grid ColumnDefinitions="3*,1*" Margin="10">
-                <!-- Main Runes: Keystone, Primary, Secondary -->
+            <Grid ColumnDefinitions="*,Auto,*" Margin="10" VerticalAlignment="Center">
+                <!-- Left: Runes -->
                 <StackPanel Grid.Column="0" Margin="10,0" Spacing="10" DataContext="{Binding DisplayPage}">
-                    <!-- <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"> -->
-                        <!-- <Image Source="{Binding MainTree.Icon}" Width="20" Height="20"/> -->
-                        <!-- <Image Source="{Binding SecondaryTree.Icon}" Width="20" Height="20"/> -->
-                    <!-- </StackPanel> -->
-
                     <!-- Keystone -->
-                    <StackPanel HorizontalAlignment="Center">
-                        <Image Source="{Binding Keystone.Icon}" Width="40" Height="40"/>
-                    </StackPanel>
-
+                    <Image Source="{Binding Keystone.Icon}" Width="40" Height="40" HorizontalAlignment="Center">
+                        <ToolTip.Tip>
+                            <TextBlock>
+                                <Run FontWeight="Bold" Text="{Binding Keystone.Name}"/>
+                                <LineBreak/>
+                                <Run Text="{Binding Keystone.ParsedLongDesc}"/>
+                            </TextBlock>
+                        </ToolTip.Tip>
+                    </Image>
                     <!-- Primary Runes -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                        <ItemsControl ItemsSource="{Binding PrimaryRunes}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Icon}" Width="32" Height="32"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="10"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </StackPanel>
-
-                    <!-- Secondary Runes -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                        <ItemsControl ItemsSource="{Binding SecondaryRunes}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="vm:RuneViewModel">
-                                    <Image Source="{Binding Icon}" Width="32" Height="32"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="10"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </StackPanel>
-                </StackPanel>
-
-                <!-- Stat Perks -->
-                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Spacing="10" DataContext="{Binding DisplayPage}">
-                    <ItemsControl ItemsSource="{Binding StatMods}">
+                    <ItemsControl ItemsSource="{Binding PrimaryRunes}">
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="vm:RuneViewModel">
-                                <Image Source="{Binding Icon}" Width="28" Height="28"/>
+                            <DataTemplate>
+                                <Image Source="{Binding Icon}" Width="32" Height="32">
+                                    <ToolTip.Tip>
+                                        <TextBlock>
+                                            <Run FontWeight="Bold" Text="{Binding Name}"/>
+                                            <LineBreak/>
+                                            <Run Text="{Binding ParsedLongDesc}"/>
+                                        </TextBlock>
+                                    </ToolTip.Tip>
+                                </Image>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical" Spacing="10"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+
+                    <!-- Secondary Runes -->
+                    <ItemsControl ItemsSource="{Binding SecondaryRunes}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Icon}" Width="32" Height="32">
+                                    <ToolTip.Tip>
+                                        <TextBlock>
+                                            <Run FontWeight="Bold" Text="{Binding Name}"/>
+                                            <LineBreak/>
+                                            <Run Text="{Binding ParsedLongDesc}"/>
+                                        </TextBlock>
+                                    </ToolTip.Tip>
+                                </Image>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
+
+                <!-- Vertical Separator -->
+                <Border Grid.Column="1" Width="1" Background="Gray" Margin="10,0"/>
+
+                <!-- Right: Stat Mods -->
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding DisplayPage}">
+                    <ItemsControl ItemsSource="{Binding StatMods}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Icon}" Width="32" Height="32">
+                                    <ToolTip.Tip>
+                                        <TextBlock>
+                                            <Run FontWeight="Bold" Text="{Binding Name}"/>
+                                            <LineBreak/>
+                                            <Run Text="{Binding ParsedLongDesc}"/>
+                                        </TextBlock>
+                                    </ToolTip.Tip>
+                                </Image>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Spacing="10"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -76,4 +98,5 @@
             </Grid>
         </Border>
     </StackPanel>
+
 </UserControl>
