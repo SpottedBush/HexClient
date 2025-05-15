@@ -1,7 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia.Platform;
@@ -17,9 +15,17 @@ public class RuneMock : IRuneService
 
     public void CreateRunePage()
     {
-        RunePageModel customRunePageModel = new RunePageModel(1, "Custom Page");
-        _runeStateManager.SelectedRunePage = customRunePageModel;
-        _runeStateManager.RunePages = (ObservableCollection<RunePageModel>)_runeStateManager.RunePages.Append(customRunePageModel);
+        RunePageModel emptyRunePage = new RunePageModel(1, "2Empty Page")
+        {
+            MainTreeId = 8100,
+            SecondaryTreeId = 8300,
+            KeystoneId = -1,
+            PrimaryRuneIds = [-1, -1, -1],
+            SecondaryRuneIds = [-1, -1, -1],
+            StatModsIds = [-1, -1, -1]
+        };
+        _runeStateManager.SelectedRunePage = emptyRunePage;
+        _runeStateManager.RunePages.Add(emptyRunePage);
     }
 
     // There is nowhere to save the rune page to. Thus doing nothing, could eventually save it under JSON format locally
@@ -74,13 +80,20 @@ public class RuneMock : IRuneService
         {
             PropertyNameCaseInsensitive = true
         }) ?? throw new InvalidDataException("Failed to deserialize RunePageModel");
-        RunePageModel custom2 = customRunePageModel;
-        customRunePageModel.PageName = "Custom Page";
-        custom2.PageName = "Custom Page 2";
+        RunePageModel emptyRunePage = new RunePageModel(1, "Empty Page")
+        {
+            MainTreeId = 8100, // Domination
+            SecondaryTreeId = 8300, // Whimsy
+            KeystoneId = -1,
+            PrimaryRuneIds = [-1, -1, -1],
+            SecondaryRuneIds = [-1, -1, -1],
+            StatModsIds = [-1, -1, -1]
+        };
+
         _runeStateManager.RunePages =
         [
             customRunePageModel,
-            custom2
+            emptyRunePage
         ];
         _runeStateManager.SelectedRunePage = _runeStateManager.RunePages[0];
     }

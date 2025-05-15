@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -40,8 +41,18 @@ public static class RuneLookupTableModel
             FillTreeLookupTables(trees);
             FillStatModsLookupTables(statMods);
             RuneTrees = new ObservableCollection<RuneTreeModel>(trees);
+            RuneModel emptyRune = new RuneModel
+            {
+                Id = -1,
+                Key = string.Empty,
+                Name = "Empty",
+                IconPath = "perk-image/Styles/RunesIcon.png",
+                ShortDescription = string.Empty,
+                LongDescription = "None"
+            };
+            _runeById.Add(-1, emptyRune);
+            _statsModsById.Add(-1, emptyRune);
         });
-        
     }
 
     public static RuneModel? GetRune(int id) => _runeById.GetValueOrDefault(id);

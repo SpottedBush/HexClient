@@ -7,7 +7,16 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="avares://HexClientProject/Assets/perk-images/Styles/RunesIcon.png"/>
-            <ComboBox Width="100" Margin="5" ItemsSource="{Binding DisplayPage.PageName}"/>
+            <ComboBox Width="100"
+                      Margin="5"
+                      ItemsSource="{Binding RunePages}"
+                      SelectedItem="{Binding SelectedRunePage, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding PageName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button x:Name="EditButton" Content="Details" Width="60" Command="{Binding OpenEditorCommand}"/>
         </StackPanel>
         <Border BorderBrush="White" BorderThickness="1" Padding="10">

@@ -59,7 +59,6 @@ public class RuneEditorViewModel : ReactiveObject
         {
             if (string.IsNullOrWhiteSpace(RenameText)) return;
             ApiProvider.RuneService.RenameRunePage(SelectedPage.PageId, RenameText);
-            ApiProvider.RuneService.LoadRunePages();
             IsRenaming = false;
         });
 
