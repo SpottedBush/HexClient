@@ -19,9 +19,10 @@
                         <ComboBox x:Name="PageSelector" Width="200" 
                                   ItemsSource="{Binding RunePages}" 
                                   SelectedItem="{Binding SelectedPage}"
+                                  DisplayMemberBinding="{Binding PageName}"
                                   IsVisible="{Binding IsRenaming, Converter={converters:InverseBoolConverter}}"/>
                         <TextBox x:Name="RenameTextBox" Width="200" 
-                                 Text="{Binding SelectedPage.PageName}" 
+                                 Text="{Binding SelectedPage.PageName, Mode=TwoWay}" 
                                  IsVisible="{Binding IsRenaming}" 
                                  KeyUp="OnRenameEnter"/>
                     </Grid>

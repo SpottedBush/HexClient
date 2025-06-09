@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -46,21 +47,31 @@ public class RuneMock : IRuneService
 
     public void DeleteRunePage(int pageId)
     {
-        foreach (var runePage in _runeStateManager.RunePages)
+        for (int i = _runeStateManager.RunePages.Count - 1; i >= 0; i--)
         {
-            if (runePage.PageId == pageId)
+            if (_runeStateManager.RunePages[i].PageId == pageId)
             {
-                _runeStateManager.RunePages.Remove(runePage);
+                _runeStateManager.RunePages.RemoveAt(i);
             }
         }
+
+        if (_runeStateManager.RunePages.Count == 0)
+        {
+            Console.WriteLine("No rune pages found");
+            return;
+        }
+        _runeStateManager.SelectedRunePage = _runeStateManager.RunePages[0];
     }
+
 
     public void RenameRunePage(int pageId, string newPageName)
     {
         foreach (var runePage in _runeStateManager.RunePages)
         {
             if (runePage.PageId == pageId)
+            {
                 runePage.PageName = newPageName;
+            }
         }
     }
 
@@ -72,6 +83,11 @@ public class RuneMock : IRuneService
 
     public async Task LoadRunePages()
     {
+        if (_runeStateManager.RunePages.Count != 0) // Already initialized
+        {
+            _runeStateManager.RunePages = new ObservableCollection<RunePageModel>(_runeStateManager.RunePages);
+            return;
+        }
         Uri resourceUri = new Uri("avares://HexClientProject/Assets/json/mocks/userRunePage1_mock.json");
         var stream = AssetLoader.Open(resourceUri);
         using var reader = new StreamReader(stream);

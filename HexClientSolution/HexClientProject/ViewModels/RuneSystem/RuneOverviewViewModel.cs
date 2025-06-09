@@ -31,14 +31,15 @@ public class RuneOverviewViewModel : ReactiveObject
         OpenEditorCommand = ReactiveCommand.Create(parent.ShowEditorOverlay);
         ApiProvider.RuneService.CreateRunePage();
 
-        SelectedRunePage = RuneStateManager.Instance.SelectedRunePage;
+        _selectedRunePage = _runeStateManager.SelectedRunePage;
+        SelectedRunePage = _runeStateManager.SelectedRunePage;
 
         // Keep the RuneStateManager's SelectedRunePage in sync
         this.WhenAnyValue(x => x.SelectedRunePage)
             .Subscribe(selected =>
             {
                 DisplayPage = DisplayableRunePageViewModel.Create(selected);
-                RuneStateManager.Instance.SelectedRunePage = selected;
+                _runeStateManager.SelectedRunePage = selected;
             });
         _displayPage = DisplayableRunePageViewModel.Create(_runeStateManager.SelectedRunePage);
     }

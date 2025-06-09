@@ -14,10 +14,10 @@ public partial class RuneEditorView : UserControl
     
     private void OnRenameEnter(object? sender, KeyEventArgs e)
     {
-            
         var textbox = sender as TextBox;
         if (textbox == null) return;
-        if ((e.Key != Key.Tab && e.Key != Key.Enter) || DataContext is not RuneEditorViewModel vm) return;
+        if ((e.Key != Key.Tab && e.Key != Key.Enter && e.Key != Key.Escape) || DataContext is not RuneEditorViewModel vm) return;
+        if (e.Key == Key.Escape) vm.CancelRenameCommand.Execute().Subscribe();
         vm.ConfirmRenameCommand.Execute().Subscribe();
         e.Handled = true;
     }

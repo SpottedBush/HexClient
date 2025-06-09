@@ -55,6 +55,7 @@ public class DraftViewModel : ReactiveObject
         StartAllPhaseRoutine();
         _displayTimer = "Time left: " + _timeLeft;
         RuneOverviewViewModel = new RuneOverviewViewModel(this);
+        RuneEditorViewModel.CloseEditorRequested += HideEditorOverlay;
     }
 
     private void StartAllPhaseRoutine()
