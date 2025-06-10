@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using HexClientProject.ViewModels.RuneSystem;
+using HexClientProject.ViewModels.RuneSystem.RuneEditor;
 
 namespace HexClientProject.Views.Rune;
 

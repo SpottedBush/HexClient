@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Avalonia.Threading;
 using HexClientProject.StateManagers;
 using HexClientProject.ViewModels.RuneSystem;
+using HexClientProject.ViewModels.RuneSystem.RuneEditor;
 using ReactiveUI;
 using LobbyView = HexClientProject.Views.LobbyPhase.LobbyView;
 

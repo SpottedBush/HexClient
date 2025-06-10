@@ -16,6 +16,9 @@ public class RuneMock : IRuneService
 
     public void CreateRunePage()
     {
+        GetPageInventory();
+        // TODO: Add notification, full page inventory
+        if (_runeStateManager.OwnedPageCount >= _runeStateManager.MaxPageCount) return;
         RunePageModel emptyRunePage = new RunePageModel(1, "2Empty Page")
         {
             MainTreeId = 8100,
@@ -85,7 +88,7 @@ public class RuneMock : IRuneService
     {
         if (_runeStateManager.RunePages.Count != 0) // Already initialized
         {
-            _runeStateManager.RunePages = new ObservableCollection<RunePageModel>(_runeStateManager.RunePages);
+            // _runeStateManager.RunePages = new ObservableCollection<RunePageModel>(_runeStateManager.RunePages);
             return;
         }
         Uri resourceUri = new Uri("avares://HexClientProject/Assets/json/mocks/userRunePage1_mock.json");

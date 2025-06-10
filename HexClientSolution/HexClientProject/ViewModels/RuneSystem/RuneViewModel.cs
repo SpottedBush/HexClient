@@ -12,11 +12,18 @@ public class RuneViewModel(RuneModel model) : ReactiveObject
     private RuneModel Model { get; } = model;
 
     private bool _isSelected;
+    private DateTime _selectionTime = DateTime.MinValue;
     public bool IsSelected
     {
         get => _isSelected;
-        set => this.RaiseAndSetIfChanged(ref _isSelected, value);
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isSelected, value);
+            if (value)
+                _selectionTime = DateTime.Now;
+        }
     }
+    public DateTime SelectionTime => _selectionTime;
 
     public int Id => Model.Id;
     public string Name => Model.Name;
