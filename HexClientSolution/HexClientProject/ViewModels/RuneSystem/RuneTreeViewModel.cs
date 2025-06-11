@@ -13,6 +13,8 @@ public class RuneTreeViewModel : ReactiveObject
 
     public string Name => Model.Name;
     public string IconPath => Model.IconPath;
+    public bool IsSelected { get; set; } = false;
+    
     public Bitmap Icon => PathUtils.PathToBitMap(IconPath);
     public ObservableCollection<RuneSlotViewModel> Slots { get; }
     public RuneViewModel? Keystone => Slots.FirstOrDefault()?.SelectedRune;

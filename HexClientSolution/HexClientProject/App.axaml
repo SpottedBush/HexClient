@@ -34,6 +34,7 @@
         <!--      </x:Arguments> -->
         <!--  </Bitmap> -->
          <converters:ScopeToColorConverter x:Key="ScopeToColorConverter"/>
+        <converters:NullToBoolConverter x:Key="NullToBoolConverter"/>
      </Application.Resources>
              
     <Application.Styles>

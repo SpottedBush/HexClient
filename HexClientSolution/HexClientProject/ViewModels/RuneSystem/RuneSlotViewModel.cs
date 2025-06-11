@@ -1,10 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive;
-using System.Reactive.Linq;
 using HexClientProject.Models.RuneSystem;
-using HexClientProject.ViewModels.RuneSystem.RuneEditor;
 using ReactiveUI;
 
 namespace HexClientProject.ViewModels.RuneSystem;
@@ -13,6 +10,27 @@ public class RuneSlotViewModel : ReactiveObject
 {
     public ObservableCollection<RuneViewModel> Runes { get; }
 
+    private RuneViewModel? _selectedRune;
+    public RuneViewModel? SelectedRune
+    {
+        get => _selectedRune;
+        private set
+        {
+            if (value == null)
+            {
+                SelectedRuneDescription = string.Empty;
+            }
+
+            this.RaiseAndSetIfChanged(ref _selectedRune, value);
+        }
+    }
+
+    private string? _selectedRuneDescription;
+    public string? SelectedRuneDescription
+    {
+        get => _selectedRuneDescription;
+        private set => this.RaiseAndSetIfChanged(ref _selectedRuneDescription, value);
+    }
     public RuneSlotViewModel(RuneSlotModel model)
     {
         Runes = new ObservableCollection<RuneViewModel>(
@@ -22,14 +40,19 @@ public class RuneSlotViewModel : ReactiveObject
         foreach (var rune in Runes)
         {
             rune.WhenAnyValue(x => x.IsSelected)
-                .Where(isSelected => isSelected)
                 .Subscribe(_ => UpdateSelection(rune));
         }
     }
 
     private void UpdateSelection(RuneViewModel selected)
     {
-        if (!selected.IsSelected) return;
+        if (!selected.IsSelected)
+        {
+            // Check if any rune is still selected
+            if (!Runes.Any(r => r.IsSelected))
+                SelectedRune = null;
+            return;
+        }
         foreach (var rune in Runes)
         {
             if (rune != selected)
@@ -37,7 +60,7 @@ public class RuneSlotViewModel : ReactiveObject
                 rune.IsSelected = false;
             }
         }
+        SelectedRune = selected;
+        SelectedRuneDescription = selected.ParsedLongDesc;
     }
-
-    public RuneViewModel? SelectedRune => Runes.FirstOrDefault(r => r.IsSelected);
 }

@@ -20,7 +20,9 @@ public class RuneViewModel(RuneModel model) : ReactiveObject
         {
             this.RaiseAndSetIfChanged(ref _isSelected, value);
             if (value)
+            {
                 _selectionTime = DateTime.Now;
+            }
         }
     }
     public DateTime SelectionTime => _selectionTime;
@@ -29,7 +31,7 @@ public class RuneViewModel(RuneModel model) : ReactiveObject
     public string Name => Model.Name;
     public Bitmap Icon => PathUtils.PathToBitMap(Model.IconPath);
     public string LongDescription => Model.LongDescription;
-    public string ShortDescription => Model.ShortDescription;
+    public string ShortDescription => Model.ShortDescription; // Not in use yet.
     
     public string ParsedLongDesc => ConvertHtmlToFormattedText(LongDescription);
 

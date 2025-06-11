@@ -11,6 +11,6 @@ public class RuneTreeModel
     [JsonPropertyName("icon")]
     public string IconPath { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
-
+    public bool IsSelected { get; set; } = false;
     public List<RuneSlotModel> Slots { get; set; } = [];
 }

@@ -119,7 +119,7 @@
     <!-- Overlay editor -->
     <Border IsVisible="{Binding IsEditorVisible}" Background="#80000000">
       <Grid ColumnDefinitions="1.5*,7*,1.5*" RowDefinitions="1*,8*,1*">
-        <Border Grid.Column="1" Grid.Row="1" Background="White" CornerRadius="12" Padding="20">
+        <Border Grid.Column="1" Grid.Row="1" Background="#1E1E2E" CornerRadius="12" Padding="20" Width="910" Height="710">
           <rune:RuneEditorView DataContext="{Binding RuneEditorViewModel}" />
         </Border>
       </Grid>

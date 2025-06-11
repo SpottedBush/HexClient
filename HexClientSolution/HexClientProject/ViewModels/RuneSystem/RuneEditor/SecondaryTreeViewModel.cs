@@ -10,6 +10,9 @@ namespace HexClientProject.ViewModels.RuneSystem.RuneEditor;
 public class SecondaryTreeViewModel : ReactiveObject
 {
     public RuneTreeModel Model;
+    public string Name => Model.Name;
+    public bool IsSelected { get; set; } = false;
+    
     public ObservableCollection<RuneSlotViewModel> Slots { get; }
 
     public SecondaryTreeViewModel(RuneTreeModel model)

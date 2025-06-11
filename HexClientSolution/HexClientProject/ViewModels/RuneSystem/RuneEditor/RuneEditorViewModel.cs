@@ -1,6 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
+using System.Text;
 using HexClientProject.Models.RuneSystem;
 using HexClientProject.Services.Providers;
 using HexClientProject.StateManagers;
@@ -20,11 +24,52 @@ public class RuneEditorViewModel : ReactiveObject
         get => _selectedPage;
         set => this.RaiseAndSetIfChanged(ref _selectedPage, value);
     }
+
+    public ObservableCollection<RuneTreeViewModel> AvailableTrees
+    {
+        get
+        {
+            ObservableCollection<RuneTreeViewModel> availableTrees = new ObservableCollection<RuneTreeViewModel>();
+            foreach (var tree in RuneLookupTableModel.RuneTrees)
+            {
+                RuneTreeViewModel treeViewModel = new RuneTreeViewModel(tree);
+                // treeViewModel.WhenAnyValue(x => x.IsSelected)
+                //     .Subscribe(_ => UpdateSelection(treeViewModel, availableTrees));
+                availableTrees.Add(treeViewModel);
+            }
+            return availableTrees;
+        }
+    }
+
+    private ObservableCollection<RuneTreeViewModel> _availableSecondaryTrees = new();
+    public ObservableCollection<RuneTreeViewModel> AvailableSecondaryTrees
+    {
+        get => _availableSecondaryTrees;
+        private set => this.RaiseAndSetIfChanged(ref _availableSecondaryTrees, value);
+    }
+
+
     private RuneTreeViewModel? _primaryTree;
     public RuneTreeViewModel? PrimaryTree
     {
         get => _primaryTree;
-        set => this.RaiseAndSetIfChanged(ref _primaryTree, value);
+        private set
+        {
+            // Update backing field
+            this.RaiseAndSetIfChanged(ref _primaryTree, value);
+
+            // Filter out the selected primary tree
+            var filtered = RuneLookupTableModel.RuneTrees
+                .Where(tree => value == null || tree.Name != value.Name)
+                .ToList();
+
+            // Replace the contents of AvailableSecondaryTrees (to preserve bindings)
+            AvailableSecondaryTrees.Clear();
+            foreach (var tree in filtered)
+            {
+                AvailableSecondaryTrees.Add(new RuneTreeViewModel(tree));
+            }
+        }
     }
 
     private SecondaryTreeViewModel? _secondaryTree;
@@ -50,9 +95,10 @@ public class RuneEditorViewModel : ReactiveObject
     public ReactiveCommand<Unit, Unit> SavePageCommand { get; }
     public event Action? CloseEditorRequested;
     public ReactiveCommand<Unit, Unit> CloseEditorCommand { get; }
-
+    public StatPerksViewModel StatPerksViewModel { get; }
     public RuneEditorViewModel()
     {
+        StatPerksViewModel = new StatPerksViewModel();
         _selectedPage = _runeStateManager.SelectedRunePage;
         var mainTreeModel = RuneLookupTableModel.GetTree(SelectedPage.MainTreeId);
         if (mainTreeModel != null)
