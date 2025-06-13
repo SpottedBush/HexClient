@@ -44,9 +44,7 @@ HexClient was born from the desire to enhance the player experience by building 
 - **Unobtrusive**  
 - **Customizable**
 
-I love League of Legends and am not affiliated with Riot Games in any way. This is a **non-commercial, open-source project** and is created purely for learning and fun. We **do not condone cheating, data scraping beyond what Riot allows**, or any activity that would violate the [Riot Games Terms of Service](https://www.riotgames.com/en/terms-of-service). We want to be **transparent, respectful**, and **never want anyone to be banned** due to our launcher.
-
-Vincent – Project lead, MVVM architecture wizard, client optimisation
+We love League of Legends and am not affiliated with Riot Games in any way. This is a **non-commercial, open-source project** and is created purely for learning and fun. We **do not condone cheating, data scraping beyond what Riot allows**, or any activity that would violate the [Riot Games Terms of Service](https://www.riotgames.com/en/terms-of-service). We want to be **transparent, respectful**, and **never want anyone to be banned** due to our launcher.
 
 ---
 
