@@ -8,6 +8,7 @@ namespace HexClientProject.Views.Rune;
 
 public partial class RuneEditorView : UserControl
 {
+    public RuneEditorViewModel ViewModel => (RuneEditorViewModel)DataContext!;
     public RuneEditorView()
     {
         InitializeComponent();

@@ -14,7 +14,7 @@ public class RuneSlotViewModel : ReactiveObject
     public RuneViewModel? SelectedRune
     {
         get => _selectedRune;
-        private set
+        set
         {
             if (value == null)
             {

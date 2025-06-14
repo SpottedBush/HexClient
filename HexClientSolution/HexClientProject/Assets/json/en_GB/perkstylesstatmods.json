@@ -2,50 +2,57 @@
   {
     "id": 5008,
     "name": "Adaptive Force",
-    "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
-    "shortDesc": "+9 Adaptive Force",
-    "longDesc": "Grants bonus attack damage or ability power, based on your champion."
+    "tooltip": "\u003CscaleAD\u003E+@f2@ Attack Damage\u003C/scaleAD\u003E",
+    "shortDesc": "+9 \u003Clol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'\u003E\u003Cfont color='#48C4B7'\u003EAdaptive Force\u003C/font\u003E\u003C/lol-uikit-tooltipped-keyword\u003E",
+    "longDesc": "+9 \u003Clol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'\u003E\u003Cfont color='#48C4B7'\u003EAdaptive Force\u003C/font\u003E\u003C/lol-uikit-tooltipped-keyword\u003E",
+    "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png"
   },
   {
     "id": 5005,
     "name": "Attack Speed",
-    "icon": "perk-images/StatMods/StatModsAttackSpeedIcon.png",
+    "tooltip": "+10% Attack Speed",
     "shortDesc": "+10% Attack Speed",
-    "longDesc": "Grants bonus attack speed."
+    "longDesc": "+10% Attack Speed",
+    "icon": "perk-images/StatMods/StatModsAttackSpeedIcon.png"
   },
   {
     "id": 5007,
     "name": "Ability Haste",
-    "icon": "perk-images/StatMods/StatModsCDRScalingIcon.png",
-    "shortDesc": "+8 Ability Haste",
-    "longDesc": "Grants cooldown reduction to your abilities."
+    "tooltip": "\u003Cattention\u003E+8 Ability Haste\u003C/attention\u003E",
+    "shortDesc": "+8 \u003Clol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'\u003EAbility Haste\u003C/lol-uikit-tooltipped-keyword\u003E ",
+    "longDesc": "+8 \u003Clol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'\u003EAbility Haste\u003C/lol-uikit-tooltipped-keyword\u003E ",
+    "icon": "perk-images/StatMods/StatModsCDRScalingIcon.png"
   },
   {
     "id": 5001,
-    "name": "Bonus Health (Scaling)",
-    "icon": "perk-images/StatMods/StatModsHealthScalingIcon.png",
-    "shortDesc": "+Health (scaling)",
-    "longDesc": "Gain health as you level up."
+    "name": "Health Scaling",
+    "tooltip": "\u003CscaleHealth\u003E+@f1@ Health\u003C/scaleHealth\u003E (based on level)",
+    "shortDesc": "+10-180 Health (based on level)",
+    "longDesc": "+10-180 Health (based on level)",
+    "icon": "perk-images/StatMods/StatModsHealthPlusIcon.png"
   },
   {
     "id": 5011,
-    "name": "Bonus Health",
-    "icon": "perk-images/StatMods/StatModsHealthPlusIcon.png",
-    "shortDesc": "+15–90 Health",
-    "longDesc": "Grants bonus health scaling with level."
+    "name": "Health",
+    "tooltip": "\u003CscaleHealth\u003E+65 Health\u003C/scaleHealth\u003E",
+    "shortDesc": "+65 Health",
+    "longDesc": "+65 Health",
+    "icon": "perk-images/StatMods/StatModsHealthScalingIcon.png"
   },
   {
     "id": 5013,
-    "name": "Tenacity and slow resistance",
-    "icon": "perk-images/StatMods/StatModsTenacityIcon.png",
-    "shortDesc": "10% tenacity and slow resistance",
-    "longDesc": "Grants bonus tenacity and slow resistance."
+    "name": "Tenacity and Slow Resist",
+    "tooltip": "+10% Tenacity and Slow Resist",
+    "shortDesc": "+10% Tenacity and Slow Resist",
+    "longDesc": "+10% Tenacity and Slow Resist",
+    "icon": "perk-images/StatMods/StatModsTenacityIcon.png"
   },
   {
     "id": 5010,
-    "name": "Movement Speed",
-    "icon": "perk-images/StatMods/StatModsMovementSpeedIcon.png",
-    "shortDesc": "+2% bonus movement speed",
-    "longDesc": "Grants bonus movement speed."
+    "name": "Move Speed",
+    "tooltip": "\u003Cspeed\u003E+2% Move Speed\u003C/speed\u003E",
+    "shortDesc": "+2% \u003Clol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'\u003EMove Speed\u003C/lol-uikit-tooltipped-keyword\u003E",
+    "longDesc": "+2% \u003Clol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'\u003EMove Speed\u003C/lol-uikit-tooltipped-keyword\u003E",
+    "icon": "perk-images/StatMods/StatModsMovementSpeedIcon.png"
   }
 ]

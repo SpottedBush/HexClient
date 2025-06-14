@@ -4,9 +4,9 @@
              xmlns:converters="clr-namespace:HexClientProject.Converters"
              x:Class="HexClientProject.Views.Rune.RuneEditorView"
              x:DataType="vm:RuneEditorViewModel"
-             Width="900" Height="700">
-
-                    <Grid>
+             Width="900" Height="700"
+             x:Name="Root">
+    <Grid>
                         <!-- Main Editor Panel -->
                         <Border Background="#2B2B2B" CornerRadius="10" Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center" Width="900" Height="700">
                             <StackPanel Spacing="20">
@@ -44,7 +44,9 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <ToggleButton IsChecked="{Binding IsSelected, Mode=TwoWay}">
+                                    <ToggleButton 
+                                        IsChecked="{Binding IsPrimarySelected, Mode=TwoWay}"
+                                        ToolTip.Tip="{Binding Name}">
                                         <Image Source="{Binding Icon}" Width="48" Height="48"/>
                                     </ToggleButton>
                                 </DataTemplate>
@@ -65,7 +67,8 @@
                                                 </ItemsControl.ItemsPanel>
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <ToggleButton IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="8,0">
+                                                        <ToggleButton IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="8,0"
+                                                            ToolTip.Tip="{Binding Name}">
                                                             <Image Source="{Binding Icon}" Width="48" Height="48"/>
                                                         </ToggleButton>
                                                     </DataTemplate>
@@ -86,11 +89,23 @@
 
                     <!-- Secondary Tree Column -->
                     <StackPanel Grid.Column="2" Spacing="10">
-                        <!-- Tree Selector (excluding primary tree from list) -->
-                        <ComboBox Width="200"
-                                  ItemsSource="{Binding AvailableSecondaryTrees}" 
-                                  SelectedItem="{Binding SecondaryTree}"
-                                  DisplayMemberBinding="{Binding Name}" />
+                        <!-- Tree Selector -->
+                        <ItemsControl ItemsSource="{Binding AvailableSecondaryTrees}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton
+                                        IsChecked="{Binding IsSecondarySelected, Mode=TwoWay}"
+                                        ToolTip.Tip="{Binding Name}">
+                                        <Image Source="{Binding Icon}" Width="48" Height="48"/>
+                                    </ToggleButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
                         <!-- Secondary Tree Rune Slots -->
                         <ItemsControl ItemsSource="{Binding SecondaryTree.Slots}">
@@ -106,7 +121,8 @@
                                                 </ItemsControl.ItemsPanel>
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <ToggleButton IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="8,0">
+                                                        <ToggleButton IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="8,0"
+                                                                      ToolTip.Tip="{Binding Name}">
                                                             <Image Source="{Binding Icon}" Width="48" Height="48"/>
                                                         </ToggleButton>
                                                     </DataTemplate>
@@ -125,7 +141,7 @@
                         </ItemsControl>
 
                         <!-- Stat Perks (kept at bottom of right column) -->
-                        <StackPanel Margin="0,20,0,0" Spacing="10" VerticalAlignment="Bottom">
+                        <StackPanel Margin="0,0,0,30" Spacing="8" VerticalAlignment="Bottom">
                             <ItemsControl ItemsSource="{Binding StatPerksViewModel.Rows}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>

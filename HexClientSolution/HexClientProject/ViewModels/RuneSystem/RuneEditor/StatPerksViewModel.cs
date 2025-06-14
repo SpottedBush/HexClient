@@ -13,7 +13,7 @@ public class StatPerksViewModel : ReactiveObject
 
     public StatPerksViewModel()
     {
-        // Manually defined ID layout (3 rows of 3)
+        // Manually defined ID layout (3 rows of 3), it should be dynamic...
         var statModIds = new[]
         {
             new[] { 5008, 5005, 5007 },

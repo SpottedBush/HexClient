@@ -11,10 +11,26 @@ public class SecondaryTreeViewModel : ReactiveObject
 {
     public RuneTreeModel Model;
     public string Name => Model.Name;
-    public bool IsSelected { get; set; } = false;
-    
+    public int TreeId => Model.Id;
     public ObservableCollection<RuneSlotViewModel> Slots { get; }
 
+    public SecondaryTreeViewModel(RuneTreeViewModel viewModel)
+    {
+        Model = viewModel.Model;
+        var minorSlots = viewModel.Slots.Skip(1).Take(3).ToList();
+        Slots = new ObservableCollection<RuneSlotViewModel>(minorSlots);
+        foreach (var slot in Slots)
+        {
+            foreach (var rune in slot.Runes)
+            {
+                rune.WhenAnyValue(r => r.IsSelected)
+                    .Subscribe(_ =>
+                    {
+                        EnforceSelectionLimit();
+                    });
+            }
+        }
+    }
     public SecondaryTreeViewModel(RuneTreeModel model)
     {
         Model = model;
@@ -30,12 +46,10 @@ public class SecondaryTreeViewModel : ReactiveObject
             foreach (var rune in slot.Runes)
             {
                 rune.WhenAnyValue(r => r.IsSelected)
-                    .Where(isSelected => isSelected)
                     .Subscribe(_ =>
                     {
                         EnforceSelectionLimit();
                     });
-                rune.IsSelected = true;
             }
         }
     }
@@ -50,7 +64,7 @@ public class SecondaryTreeViewModel : ReactiveObject
 
         if (allSelected.Count <= 2) return;
         // Deselect the oldest selected rune
-        var toDeselect = allSelected.Last();
+        var toDeselect = allSelected[1];
         toDeselect.IsSelected = false;
     }
 }
