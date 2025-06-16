@@ -281,7 +281,7 @@ public class RuneEditorViewModel : ReactiveObject
         InitializeAvailableTrees();
         
         StatPerksViewModel = new StatPerksViewModel();
-        _selectedPage = _runeStateManager.SelectedRunePage;
+        SelectedPage = _runeStateManager.SelectedRunePage;
         var mainTreeModel = RuneLookupTableModel.GetTree(SelectedPage.MainTreeId);
         if (mainTreeModel != null)
         {
@@ -353,8 +353,8 @@ public class RuneEditorViewModel : ReactiveObject
         SavePageCommand = ReactiveCommand.Create(() =>
         {
             IsRenaming = false;
-            ApiProvider.RuneService.SaveCurrentRunePage();
-            ApiProvider.RuneService.LoadRunePages();
+            ApiProvider.RuneService.SaveRunePage(SelectedPage);
+            // ApiProvider.RuneService.LoadRunePages();
         });
 
         CloseEditorCommand = ReactiveCommand.Create(() =>

@@ -27,11 +27,12 @@ public class RuneBuilder : IRuneService
         RuneStateManager.Instance.RunePages.Add(new RunePageModel((int) jsonObject.id, (string)jsonObject.name));
     }
 
-    public void SaveCurrentRunePage()
+    public void SaveRunePage(RunePageModel runePage)
     {
-        List<int> selectedRunes = [];
-        RunePageModel runePage = RuneStateManager.Instance.SelectedRunePage;
-        selectedRunes.Add(runePage.KeystoneId);
+        List<int> selectedRunes =
+        [
+            runePage.KeystoneId
+        ];
         foreach (int id in runePage.PrimaryRuneIds.Concat(runePage.SecondaryRuneIds).Concat(runePage.StatModsIds))
         {
             selectedRunes.Add(id);

@@ -32,7 +32,6 @@ public class RuneOverviewViewModel : ReactiveObject
         ApiProvider.RuneService.CreateRunePage();
 
         _selectedRunePage = _runeStateManager.SelectedRunePage;
-        SelectedRunePage = _runeStateManager.SelectedRunePage;
 
         // Keep the RuneStateManager's SelectedRunePage in sync
         this.WhenAnyValue(x => x.SelectedRunePage)

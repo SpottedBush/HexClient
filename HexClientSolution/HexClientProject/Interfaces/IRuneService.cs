@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using HexClientProject.Models.RuneSystem;
 
 namespace HexClientProject.Interfaces;
 
@@ -35,7 +36,7 @@ public interface IRuneService
     /// <exception cref="InvalidOperationException">
     /// Thrown if the server response is invalid or cannot be processed.
     /// </exception>
-    public void SaveCurrentRunePage();
+    public void SaveRunePage(RunePageModel runePage);
 
     /// <summary>
     /// Sets the specified rune page as the currently selected rune page.

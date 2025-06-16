@@ -46,7 +46,6 @@ public class DraftViewModel : ReactiveObject
             if (value)
             {
                 RuneEditorViewModel.SelectRunesFromPage(RuneStateManager.Instance.SelectedRunePage);
-                
             }
             this.RaiseAndSetIfChanged(ref _isEditorVisible, value);
         }

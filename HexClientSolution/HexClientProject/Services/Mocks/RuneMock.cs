@@ -33,8 +33,29 @@ public class RuneMock : IRuneService
     }
 
     // There is nowhere to save the rune page to. Thus doing nothing, could eventually save it under JSON format locally
-    public void SaveCurrentRunePage()
+    public void SaveRunePage(RunePageModel page)
     {
+        _runeStateManager.SelectedRunePage = page;
+        var jsonData = new
+        {
+            PageName = page.PageName,
+            PageId = page.PageId,
+            mainTreeId = page.MainTreeId,
+            keystoneId = page.KeystoneId,
+            primaryRuneIds = page.PrimaryRuneIds,
+            secondaryTreeId = page.SecondaryTreeId,
+            secondaryRuneIds = page.SecondaryRuneIds,
+            statModsIds = page.StatModsIds
+        };
+
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true // makes it pretty-printed
+        };
+
+        // string jsonString = JsonSerializer.Serialize(jsonData, options);
+        // string filePath = AppContext.BaseDirectory + "Assets/json/mocks/userRunePage1_mock.json";
+        // File.WriteAllText(filePath, jsonString);
     }
 
     public void SelectCurrentRunePage(int pageId)
