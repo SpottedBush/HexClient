@@ -21,11 +21,7 @@ public class RuneEditorViewModel : ReactiveObject
     public RunePageModel SelectedPage
     {
         get => _selectedPage;
-        set
-        {
-            SelectRunesFromPage(value);
-            this.RaiseAndSetIfChanged(ref _selectedPage, value);
-        }
+        set => this.RaiseAndSetIfChanged(ref _selectedPage, value);
     }
 
     public ObservableCollection<RuneTreeViewModel> AvailableTrees { get; } = new();
@@ -69,7 +65,6 @@ public class RuneEditorViewModel : ReactiveObject
             if (defaultTree != null)
                 defaultTree.IsPrimarySelected = true;
         }
-
         return;
 
         void OnSelectedTree(RuneTreeViewModel? mainTree = null, RuneTreeViewModel? secondaryTree = null)
@@ -163,7 +158,7 @@ public class RuneEditorViewModel : ReactiveObject
         }
     }
 
-    private void SelectRunesFromPage(RunePageModel page)
+    public void SelectRunesFromPage(RunePageModel page)
     {
         // Updating Main Tree
         RuneTreeModel treeModel = RuneLookupTableModel.GetTree(page.MainTreeId)!;
@@ -207,6 +202,8 @@ public class RuneEditorViewModel : ReactiveObject
                 statMod.IsSelected = page.StatModsIds[i] == statMod.Id;
             }
         }
+
+        SelectedPage = page;
     }
     
     private void SelectMainTree(RuneTreeModel mainTree)
@@ -248,7 +245,7 @@ public class RuneEditorViewModel : ReactiveObject
     }
     
     
-    private ObservableCollection<RuneTreeViewModel> _availableSecondaryTrees = new();
+    private ObservableCollection<RuneTreeViewModel> _availableSecondaryTrees = [];
     public ObservableCollection<RuneTreeViewModel> AvailableSecondaryTrees
     {
         get => _availableSecondaryTrees;
@@ -309,6 +306,7 @@ public class RuneEditorViewModel : ReactiveObject
                 if (model != null)
                     SecondaryTree = new SecondaryTreeViewModel(model);
             });
+        SelectRunesFromPage(_runeStateManager.SelectedRunePage);
         
         
         StartRenamingCommand = ReactiveCommand.Create(() =>

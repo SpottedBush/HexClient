@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive.Linq;
 using HexClientProject.Models.RuneSystem;
 using ReactiveUI;
 
@@ -9,14 +8,14 @@ namespace HexClientProject.ViewModels.RuneSystem.RuneEditor;
 
 public class SecondaryTreeViewModel : ReactiveObject
 {
-    public RuneTreeModel Model;
-    public string Name => Model.Name;
-    public int TreeId => Model.Id;
+    private readonly RuneTreeModel _model;
+    public string Name => _model.Name;
+    public int TreeId => _model.Id;
     public ObservableCollection<RuneSlotViewModel> Slots { get; }
 
     public SecondaryTreeViewModel(RuneTreeViewModel viewModel)
     {
-        Model = viewModel.Model;
+        _model = viewModel.Model;
         var minorSlots = viewModel.Slots.Skip(1).Take(3).ToList();
         Slots = new ObservableCollection<RuneSlotViewModel>(minorSlots);
         foreach (var slot in Slots)
@@ -33,7 +32,7 @@ public class SecondaryTreeViewModel : ReactiveObject
     }
     public SecondaryTreeViewModel(RuneTreeModel model)
     {
-        Model = model;
+        _model = model;
 
         // Only keep the 3 minor rune slots (ignore keystone)
         var minorSlots = model.Slots.Skip(1).Take(3).ToList();

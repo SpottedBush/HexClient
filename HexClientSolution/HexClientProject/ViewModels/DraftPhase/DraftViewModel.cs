@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Avalonia.Threading;
+using HexClientProject.Services.Providers;
 using HexClientProject.StateManagers;
 using HexClientProject.ViewModels.RuneSystem;
 using HexClientProject.ViewModels.RuneSystem.RuneEditor;
@@ -40,8 +41,17 @@ public class DraftViewModel : ReactiveObject
     public bool IsEditorVisible
     {
         get => _isEditorVisible;
-        set => this.RaiseAndSetIfChanged(ref _isEditorVisible, value);
+        set
+        {
+            if (value)
+            {
+                RuneEditorViewModel.SelectRunesFromPage(RuneStateManager.Instance.SelectedRunePage);
+                
+            }
+            this.RaiseAndSetIfChanged(ref _isEditorVisible, value);
+        }
     }
+
     public void ShowEditorOverlay() => IsEditorVisible = true;
     public void HideEditorOverlay() => IsEditorVisible = false;
     public RuneOverviewViewModel RuneOverviewViewModel { get; }
